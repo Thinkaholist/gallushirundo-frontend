@@ -34,6 +34,16 @@ export default function HomePage({ data }) {
           ))}
         </ul>
         <hr />
+        <h2>News</h2>
+        <ul>
+          {data.posts.edges.map((post) => (
+            <li key={post.node._id}>
+              <Link to={`/post/${post.node.slug.current}`}>
+                {post.node.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </Container>
     </>
   );
@@ -58,6 +68,17 @@ export const query = graphql`
       }
     }
     events: allSanityEvent {
+      edges {
+        node {
+          _id
+          title
+          slug {
+            current
+          }
+        }
+      }
+    }
+    posts: allSanityPost {
       edges {
         node {
           _id
