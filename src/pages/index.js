@@ -1,21 +1,10 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
-import getYouTubeID from 'get-youtube-id';
-import YouTube from 'react-youtube';
 
 const Container = styled.div`
   max-width: 1100px;
   margin: 0 auto;
-`;
-
-const Editorial = styled.div`
-  margin: 1rem 0;
-
-  code {
-    font-size: 20px;
-    background-color: yellow;
-  }
 `;
 
 export default function HomePage({ data }) {
@@ -36,6 +25,15 @@ export default function HomePage({ data }) {
           ))}
         </div>
         <hr />
+        <h2>Events</h2>
+        <ul>
+          {data.events.edges.map((ev) => (
+            <li key={ev.node._id}>
+              <Link to={`/event/${ev.node.slug.current}`}>{ev.node.title}</Link>
+            </li>
+          ))}
+        </ul>
+        <hr />
       </Container>
     </>
   );
@@ -53,6 +51,17 @@ export const query = graphql`
         node {
           _id
           name
+          slug {
+            current
+          }
+        }
+      }
+    }
+    events: allSanityEvent {
+      edges {
+        node {
+          _id
+          title
           slug {
             current
           }

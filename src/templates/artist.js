@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import getYouTubeID from 'get-youtube-id';
 import YouTube from 'react-youtube';
