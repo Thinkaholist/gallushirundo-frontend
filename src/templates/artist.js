@@ -67,6 +67,11 @@ export const query = graphql`
 `;
 
 export default function SingleArtist(props) {
+  const spotifyArtistId = props.data.artist.socialLinks?.spotify
+    ?.split('/')[4]
+    .split('?')[0];
+  const embedUrl = `https://open.spotify.com/embed/artist/${spotifyArtistId}`;
+
   return (
     <>
       <Container>
@@ -177,6 +182,23 @@ export default function SingleArtist(props) {
               Website
             </a>
           </div>
+          <Editorial>
+            <code>Ha van Spotify link, akkor a Spotify Artist beágyazva:</code>
+          </Editorial>
+          {props.data.artist.socialLinks.spotify && (
+            <>
+              <iframe
+                title='Spotify Album Embed'
+                src={embedUrl}
+                width='100%'
+                // height={props.node.compactView ? '80' : '380'}
+                height='380'
+                frameBorder='0'
+                allowtransparency='true'
+                allow='encrypted-media'
+              ></iframe>
+            </>
+          )}
           <Editorial>
             <code>Press Kit (.zip)</code>
           </Editorial>
