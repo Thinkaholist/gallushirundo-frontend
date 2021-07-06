@@ -21,6 +21,7 @@ export const query = graphql`
         website
       }
       artists {
+        _id
         name
         slug {
           current
@@ -42,7 +43,7 @@ export default function SingleEvent(props) {
       <h3>Related artist(s):</h3>
       <ul>
         {props.data.event.artists.map((artist) => (
-          <li>
+          <li key={artist._id}>
             <Link to={`/artist/${artist.slug.current}`}>{artist.name}</Link>
           </li>
         ))}

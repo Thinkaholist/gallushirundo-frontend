@@ -19,7 +19,10 @@ export default function HomePage({ data }) {
         <h2>Artists</h2>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           {data.artists.edges.map((artist) => (
-            <Link to={`/artist/${artist.node.slug.current}`}>
+            <Link
+              key={artist.node._id}
+              to={`/artist/${artist.node.slug.current}`}
+            >
               {artist.node.name}
             </Link>
           ))}

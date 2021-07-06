@@ -1,5 +1,8 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
+import usePromise from 'react-use-promise';
+import { client } from '../client';
+import PortableText from '@sanity/block-content-to-react';
 
 export const query = graphql`
   query ($slug: String!) {
@@ -20,6 +23,48 @@ export const query = graphql`
 `;
 
 export default function SinglePost(props) {
+  const slug = props.data.post.slug.current;
+
+  const query = `*[slug.current == $slug][0]{
+    ...,
+    body[]{
+      ...,
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          ...,
+          "doc": {
+            "slug": @.reference->slug,
+            "type": @.reference->_type,
+          },
+        }
+      }
+    }
+  }`;
+
+  const serializers = {
+    marks: {
+      internalLink: ({ children, mark }) => (
+        <Link to={`/${mark?.doc?.type}/${mark?.doc?.slug?.current}`}>
+          {children}
+        </Link>
+      ),
+    },
+  };
+
+  const [result, error, state] = usePromise(
+    () => client.fetch(query, { slug }),
+    []
+  );
+
+  if (error) {
+    return console.error(state);
+  }
+
+  if (state !== 'resolved') {
+    return <h2>Loading...</h2>;
+  }
+
   return (
     <>
       <h1>{props.data.post.title}</h1>
@@ -34,7 +79,12 @@ export default function SinglePost(props) {
         </div>
       )} */}
       <hr />
-      <pre>{JSON.stringify(props.data.post, null, 4)}</pre>
+      <PortableText blocks={result.body} serializers={serializers} />
+      <hr />
+      <pre>{JSON.stringify(props.data.post, null, 2)}</pre>
+      <hr />
+      <h2>Result</h2>
+      <pre>{JSON.stringify(result, null, 2)}</pre>
     </>
   );
 }
