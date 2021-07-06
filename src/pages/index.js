@@ -6,6 +6,7 @@ export default function HomePage({ data }) {
     <>
       <h1>{data.siteSettings.title}</h1>
       <p>{data.siteSettings.description}</p>
+      <hr />
     </>
   );
 }
