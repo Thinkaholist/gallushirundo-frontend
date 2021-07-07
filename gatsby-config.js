@@ -24,5 +24,13 @@ module.exports = {
       },
       __key: 'images',
     },
+    {
+      resolve: 'gatsby-plugin-global-context',
+      options: {
+        context: {
+          rightNow: new Date().toISOString(),
+        },
+      },
+    },
   ],
 };

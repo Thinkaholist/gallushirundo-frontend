@@ -10,7 +10,7 @@ export default function ArtistsPage({ data }) {
         <hr />
         <ul>
           {data.allSanityArtist.edges.map(({ node }) => (
-            <li>
+            <li key={node._id}>
               <Link to={`/artist/${node.slug.current}`}>{node.name}</Link>
             </li>
           ))}

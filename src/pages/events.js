@@ -10,7 +10,7 @@ export default function EventsPage({ data }) {
         <hr />
         <ul>
           {data.allSanityEvent.edges.map(({ node }) => (
-            <li>
+            <li key={node._id}>
               <div>
                 <Link to={`/event/${node.slug.current}`}>{node.title}</Link>
                 <p>{node.date}</p>

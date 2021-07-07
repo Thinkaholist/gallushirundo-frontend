@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import Layout from '../components/Layout';
+import { DateTime } from 'luxon';
 
 export default function NewsPage({ data }) {
   return (
@@ -10,9 +11,14 @@ export default function NewsPage({ data }) {
         <hr />
         <ul>
           {data.allSanityPost.edges.map(({ node }) => (
-            <li>
+            <li key={node._id}>
               <div>
                 <Link to={`/post/${node.slug.current}`}>{node.title}</Link>
+                <p>
+                  {DateTime.fromISO(node.publishedDate).toFormat(
+                    'kkkk.LL.dd - T'
+                  )}
+                </p>
               </div>
             </li>
           ))}
@@ -23,12 +29,16 @@ export default function NewsPage({ data }) {
 }
 
 export const query = graphql`
-  query {
-    allSanityPost {
+  query ($rightNow: Date!) {
+    allSanityPost(
+      sort: { fields: publishedDate, order: DESC }
+      filter: { publishedDate: { lte: $rightNow } }
+    ) {
       edges {
         node {
           _id
           title
+          publishedDate
           slug {
             current
           }

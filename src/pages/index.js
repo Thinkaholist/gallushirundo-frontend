@@ -66,7 +66,7 @@ export default function HomePage({ data }) {
 }
 
 export const query = graphql`
-  query {
+  query ($rightNow: Date!) {
     siteSettings: sanitySiteSettings(_id: { eq: "siteSettings" }) {
       _id
       title
@@ -94,11 +94,15 @@ export const query = graphql`
         }
       }
     }
-    posts: allSanityPost {
+    posts: allSanityPost(
+      sort: { fields: publishedDate, order: DESC }
+      filter: { publishedDate: { lte: $rightNow } }
+    ) {
       edges {
         node {
           _id
           title
+          publishedDate
           slug {
             current
           }
