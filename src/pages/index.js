@@ -9,6 +9,7 @@ const Container = styled.div`
 
 export default function HomePage({ data }) {
   console.log(data);
+
   return (
     <>
       <Container>

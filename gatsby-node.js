@@ -37,8 +37,6 @@ module.exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  console.log('--gatsby-node RES--', res);
-
   res.data.allSanityArtist.edges.forEach((edge) => {
     createPage({
       component: artistTemplate,

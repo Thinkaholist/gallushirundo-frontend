@@ -191,7 +191,6 @@ export default function SingleArtist(props) {
                 title='Spotify Album Embed'
                 src={embedUrl}
                 width='100%'
-                // height={props.node.compactView ? '80' : '380'}
                 height='380'
                 frameBorder='0'
                 allowtransparency='true'
