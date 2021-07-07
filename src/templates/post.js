@@ -63,7 +63,13 @@ export default function SinglePost(props) {
   }
 
   if (state !== 'resolved') {
-    return <h2>Loading...</h2>;
+    return (
+      <>
+        <Layout>
+          <h2>Loading...</h2>
+        </Layout>
+      </>
+    );
   }
 
   return (
