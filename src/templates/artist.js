@@ -10,7 +10,7 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-const Editorial = styled.div`
+export const Editorial = styled.div`
   margin: 1rem 0;
 
   code {

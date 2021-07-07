@@ -4,6 +4,7 @@ import usePromise from 'react-use-promise';
 import { client } from '../client';
 import PortableText from '@sanity/block-content-to-react';
 import Layout from '../components/Layout';
+import { Editorial } from './artist';
 
 export const query = graphql`
   query ($slug: String!) {
@@ -66,7 +67,7 @@ export default function SinglePost(props) {
     return (
       <>
         <Layout>
-          <h2>Loading...</h2>
+          <h3>Loading...</h3>
         </Layout>
       </>
     );
@@ -75,7 +76,13 @@ export default function SinglePost(props) {
   return (
     <>
       <Layout>
+        <Editorial>
+          <code>Title</code>
+        </Editorial>
         <h1>{props.data.post.title}</h1>
+        <Editorial>
+          <code>Excerpt</code>
+        </Editorial>
         <p>{props.data.post.excerpt}</p>
         {/* {props.data.post.featuredImage && (
         <div>
@@ -87,6 +94,9 @@ export default function SinglePost(props) {
         </div>
       )} */}
         <hr />
+        <Editorial>
+          <code>Body</code>
+        </Editorial>
         <PortableText blocks={result.body} serializers={serializers} />
       </Layout>
     </>
