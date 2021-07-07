@@ -82,11 +82,6 @@ export default function SinglePost(props) {
       )} */}
         <hr />
         <PortableText blocks={result.body} serializers={serializers} />
-        <hr />
-        <pre>{JSON.stringify(props.data.post, null, 2)}</pre>
-        <hr />
-        <h2>Result</h2>
-        <pre>{JSON.stringify(result, null, 2)}</pre>
       </Layout>
     </>
   );
