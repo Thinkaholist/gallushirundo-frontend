@@ -119,6 +119,16 @@ export default function SingleArtist(props) {
             </Editorial>
             <h2>{props.data.artist.name}</h2>
             <Editorial>
+              <code>Logo</code>
+            </Editorial>
+            <div>
+              <img
+                src={props.data.artist.logo.asset.url}
+                alt={props.data.artist.name}
+                style={{ maxWidth: '30%' }}
+              />
+            </div>
+            <Editorial>
               <code>Featured image</code>
             </Editorial>
             {props.data.artist.featuredImage && (
