@@ -12,6 +12,20 @@ export default function HomePage({ data }) {
     <>
       <Container>
         <h1>{data.siteSettings.title}</h1>
+        <ul>
+          <li>
+            <Link to='/artists'>Artists</Link>
+          </li>
+          <li>
+            <Link to='/posts'>News</Link>
+          </li>
+          <li>
+            <Link to='/events'>Events</Link>
+          </li>
+          <li>
+            <Link to='/contact'>Contact</Link>
+          </li>
+        </ul>
         <p>{data.siteSettings.description}</p>
 
         <hr />
