@@ -62,6 +62,11 @@ export const query = graphql`
         _id
         name
         website
+        logo {
+          asset {
+            url
+          }
+        }
       }
       pressKit {
         asset {
@@ -260,17 +265,32 @@ export default function SingleArtist(props) {
               <code>Agencies</code>
             </Editorial>
             {props.data.artist.agencies && (
-              <ul>
+              <ul style={{ listStyleType: 'none', display: 'flex' }}>
                 {props.data.artist.agencies.map((agency) => (
-                  <li key={agency._id}>
-                    <a
-                      href={agency.website}
-                      target='_blank'
-                      rel='noopener noreferrer'
+                  <a
+                    key={agency._id}
+                    href={agency.website}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    <li
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        border: '1px solid',
+                        borderRadius: 5,
+                        padding: 6,
+                      }}
                     >
-                      {agency.name}
-                    </a>
-                  </li>
+                      <img
+                        style={{ display: 'block', width: 50 }}
+                        src={agency.logo.asset.url}
+                        alt={agency.name}
+                      />
+                      <p>{agency.name}</p>
+                    </li>
+                  </a>
                 ))}
               </ul>
             )}

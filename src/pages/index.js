@@ -3,7 +3,7 @@ import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  max-width: 1100px;
+  max-width: 900px;
   margin: 0 auto;
 `;
 
