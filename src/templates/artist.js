@@ -26,6 +26,7 @@ export const query = graphql`
       slug {
         current
       }
+      bio
       logo {
         asset {
           url
@@ -56,10 +57,29 @@ export const query = graphql`
         spotify
         website
       }
+      agencies {
+        name
+        website
+      }
       pressKit {
         asset {
           originalFilename
           url
+        }
+      }
+    }
+    events: allSanityEvent(sort: { fields: date, order: ASC }) {
+      edges {
+        node {
+          _id
+          title
+          slug {
+            current
+          }
+          artists {
+            _id
+            name
+          }
         }
       }
     }
@@ -71,6 +91,21 @@ export default function SingleArtist(props) {
     ?.split('/')[4]
     .split('?')[0];
   const embedUrl = `https://open.spotify.com/embed/artist/${spotifyArtistId}`;
+
+  const bio = props.data.artist.bio
+    ?.split('\n')
+    .map((p, i) => <p key={i}>{p}</p>);
+
+  // const eventsArtistIds = props.data.events.edges.map((ev) => {
+  //   const ids = ev.artists.map((artist) => artist._id);
+  //   return ids;
+  // });
+
+  // const artistEvents = props.data.events.edges.filter((ev) =>
+  //   ev.node.slug.current.includes('bohemian')
+  // );
+  // console.log('--EVENTS--', artistEvents);
+  // console.log('--eventsArtistIds--', eventsArtistIds);
 
   return (
     <>
@@ -91,6 +126,14 @@ export default function SingleArtist(props) {
                 style={{ width: '100%' }}
               />
             </div>
+          )}
+          <Editorial>
+            <code>Bio</code>
+          </Editorial>
+          {props.data.artist.bio && (
+            <>
+              <div>{bio}</div>
+            </>
           )}
           <Editorial>
             <code>Image Gallery</code>
@@ -197,6 +240,24 @@ export default function SingleArtist(props) {
                 allow='encrypted-media'
               ></iframe>
             </>
+          )}
+          <Editorial>
+            <code>Agencies</code>
+          </Editorial>
+          {props.data.artist.agencies && (
+            <ul>
+              {props.data.artist.agencies.map((agency) => (
+                <li>
+                  <a
+                    href={agency.website}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {agency.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
           )}
           <Editorial>
             <code>Press Kit (.zip)</code>
