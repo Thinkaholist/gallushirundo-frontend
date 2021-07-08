@@ -30,34 +30,16 @@ export const query = graphql`
         }
       }
       excerpt
+      _rawBody(resolveReferences: { maxDepth: 4 })
     }
   }
 `;
 
 export default function SinglePost(props) {
-  const slug = props.data.post.slug.current;
-
-  const query = `*[slug.current == $slug][0]{
-    ...,
-    body[]{
-      ...,
-      markDefs[]{
-        ...,
-        _type == "internalLink" => {
-          ...,
-          "doc": {
-            "slug": @.reference->slug,
-            "type": @.reference->_type,
-          },
-        }
-      }
-    }
-  }`;
-
   const serializers = {
     marks: {
-      internalLink: ({ children, mark }) => (
-        <Link to={`/${mark?.doc?.type}/${mark?.doc?.slug?.current}`}>
+      internalLink: ({ mark, children }) => (
+        <Link to={`/${mark.reference._type}/${mark.reference.slug.current}`}>
           {children}
         </Link>
       ),
@@ -140,25 +122,6 @@ export default function SinglePost(props) {
     },
   };
 
-  const [result, error, state] = usePromise(
-    () => client.fetch(query, { slug }),
-    []
-  );
-
-  if (error) {
-    return console.error(state);
-  }
-
-  if (state !== 'resolved') {
-    return (
-      <>
-        <Layout>
-          <h3>Loading...</h3>
-        </Layout>
-      </>
-    );
-  }
-
   return (
     <>
       <Layout>
@@ -174,7 +137,10 @@ export default function SinglePost(props) {
         <Editorial>
           <code>Body</code>
         </Editorial>
-        <PortableText blocks={result.body} serializers={serializers} />
+        <PortableText
+          blocks={props.data.post._rawBody}
+          serializers={serializers}
+        />
       </Layout>
     </>
   );
