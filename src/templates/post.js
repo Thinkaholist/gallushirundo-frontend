@@ -1,13 +1,18 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
-import usePromise from 'react-use-promise';
-import { client } from '../client';
 import PortableText from '@sanity/block-content-to-react';
 import Layout from '../components/Layout';
 import { Editorial } from './artist';
 import YouTube from 'react-youtube';
 import getYoutubeId from 'get-youtube-id';
 import urlBuilder from '@sanity/image-url';
+import {
+  FaFacebookSquare as FacebookIcon,
+  FaInstagram,
+  FaSpotify,
+  FaYoutube,
+  FaGlobe,
+} from 'react-icons/fa';
 
 function urlFor(source) {
   return urlBuilder({
@@ -116,6 +121,116 @@ export default function SinglePost(props) {
                 </small>
               </div>
             )}
+          </>
+        );
+      },
+      eventEmbed: (props) => {
+        return (
+          <>
+            <article style={{ border: '1px solid', padding: 15 }}>
+              <Link to={`/event/${props.node.event.slug.current}`}>
+                <h3>{props.node.event.title}</h3>
+              </Link>
+              <p>{props.node.event.location}</p>
+              <p>{props.node.event.date}</p>
+              <a
+                href={props.node.event.mainEvent.website}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {props.node.event.mainEvent.name}
+              </a>
+            </article>
+          </>
+        );
+      },
+      postEmbed: (props) => {
+        return (
+          <>
+            <article
+              style={{
+                backgroundColor: '#F0F2F5',
+                padding: 15,
+                borderRadius: 4,
+              }}
+            >
+              <Link to={`/post/${props.node.post.slug.current}`}>
+                <h3>{props.node.post.title}</h3>
+              </Link>
+              <p>{props.node.post.excerpt}</p>
+            </article>
+          </>
+        );
+      },
+      artistEmbed: ({ node: { artist } }) => {
+        return (
+          <>
+            <article
+              style={{
+                display: 'flex',
+                gap: '2rem',
+                border: '1px solid',
+                padding: 15,
+              }}
+            >
+              <div style={{ width: 140 }}>
+                <img
+                  src={urlFor(artist.logo.asset)}
+                  alt={`Logo of ${artist.name}`}
+                  style={{ width: '100%' }}
+                />
+              </div>
+              <div>
+                <Link to={`/artist/${artist.slug.current}`}>
+                  <h3 style={{ margin: 0 }}>{artist.name}</h3>
+                </Link>
+                {artist.socialLinks.facebook && (
+                  <a
+                    href={artist.socialLinks.facebook}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <FacebookIcon color='rebeccapurple' size={30} />
+                  </a>
+                )}
+                {artist.socialLinks.instagram && (
+                  <a
+                    href={artist.socialLinks.instagram}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <FaInstagram color='rebeccapurple' size={30} />
+                  </a>
+                )}
+                {artist.socialLinks.spotify && (
+                  <a
+                    href={artist.socialLinks.spotify}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <FaSpotify color='rebeccapurple' size={30} />
+                  </a>
+                )}
+                {artist.socialLinks.youtube && (
+                  <a
+                    href={artist.socialLinks.youtube}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <FaYoutube color='rebeccapurple' size={30} />
+                  </a>
+                )}
+                {artist.socialLinks.website && (
+                  <a
+                    href={artist.socialLinks.website}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <FaGlobe color='rebeccapurple' size={30} />
+                  </a>
+                )}
+              </div>
+            </article>
           </>
         );
       },
