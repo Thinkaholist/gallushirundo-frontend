@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
+import SubscribeForm from './SubscribeForm';
 
 const Nav = styled.div`
   background-color: rebeccapurple;
@@ -27,6 +28,9 @@ export default function Layout({ children }) {
         </div>
       </Nav>
       <Container>{children}</Container>
+      <footer>
+        <SubscribeForm />
+      </footer>
     </>
   );
 }
