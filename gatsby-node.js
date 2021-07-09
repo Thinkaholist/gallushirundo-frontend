@@ -5,6 +5,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
   const artistTemplate = path.resolve(`./src/templates/artist.js`);
   const eventTemplate = path.resolve(`./src/templates/event.js`);
   const postTemplate = path.resolve(`./src/templates/post.js`);
+  const categoryTemplate = path.resolve(`./src/templates/category.js`);
   const res = await graphql(`
     query {
       allSanityArtist {
@@ -31,6 +32,15 @@ module.exports.createPages = async ({ graphql, actions }) => {
             slug {
               current
             }
+          }
+        }
+      }
+      allSanityCategory {
+        nodes {
+          name
+          description
+          slug {
+            current
           }
         }
       }
@@ -63,6 +73,16 @@ module.exports.createPages = async ({ graphql, actions }) => {
       path: `/post/${edge.node.slug.current}`,
       context: {
         slug: edge.node.slug.current,
+      },
+    });
+  });
+
+  res.data.allSanityCategory.nodes.forEach((cat) => {
+    createPage({
+      component: categoryTemplate,
+      path: `/category/${cat.slug.current}`,
+      context: {
+        slug: cat.slug.current,
       },
     });
   });

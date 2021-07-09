@@ -58,6 +58,11 @@ export default function HomePage({ data }) {
               <Link to={`/post/${post.node.slug.current}`}>
                 {post.node.title}
               </Link>
+              <br />
+              <br />
+              <Link to={`/category/${post.node.category.slug.current}`}>
+                {post.node.category.name}
+              </Link>
               <p>
                 {DateTime.fromISO(post.node.publishedDate).toFormat(
                   'kkkk.LL.dd - T'
@@ -112,6 +117,13 @@ export const query = graphql`
           publishedDate
           slug {
             current
+          }
+          category {
+            _id
+            name
+            slug {
+              current
+            }
           }
         }
       }

@@ -14,6 +14,11 @@ export default function NewsPage({ data }) {
             <li key={node._id}>
               <div>
                 <Link to={`/post/${node.slug.current}`}>{node.title}</Link>
+                <br />
+                <br />
+                <Link to={`/category/${node.category.slug.current}`}>
+                  {node.category.name}
+                </Link>
                 <p>
                   {DateTime.fromISO(node.publishedDate).toFormat(
                     'kkkk.LL.dd - T'
@@ -41,6 +46,13 @@ export const query = graphql`
           publishedDate
           slug {
             current
+          }
+          category {
+            _id
+            name
+            slug {
+              current
+            }
           }
         }
       }
