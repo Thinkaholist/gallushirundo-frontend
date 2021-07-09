@@ -17,7 +17,7 @@ export default function HomePage({ data }) {
             <Link to='/artists'>Artists</Link>
           </li>
           <li>
-            <Link to='/posts'>News</Link>
+            <Link to='/news'>News</Link>
           </li>
           <li>
             <Link to='/events'>Events</Link>
