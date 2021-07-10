@@ -230,7 +230,24 @@ export default function SinglePost(props) {
             />
           </div>
         )}
-        <h1>{props.data.post.title}</h1>
+        <h1>
+          {props.data.post.title}
+          <Link to={`/category/${props.data.post.category.slug.current}`}>
+            <span
+              style={{
+                marginLeft: 20,
+                fontSize: 15,
+                border: '1px solid peachpuff',
+                borderRadius: 4,
+                padding: 4,
+                backgroundColor: 'peachpuff',
+                color: 'blue',
+              }}
+            >
+              {props.data.post.category.name}
+            </span>
+          </Link>
+        </h1>
         <p>{props.data.post.excerpt}</p>
         <hr />
         <PortableText
@@ -257,6 +274,13 @@ export const query = graphql`
       }
       excerpt
       _rawBody(resolveReferences: { maxDepth: 4 })
+      category {
+        _id
+        name
+        slug {
+          current
+        }
+      }
     }
   }
 `;
