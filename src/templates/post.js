@@ -21,25 +21,6 @@ function urlFor(source) {
   }).image(source);
 }
 
-export const query = graphql`
-  query ($slug: String!) {
-    post: sanityPost(slug: { current: { eq: $slug } }) {
-      _id
-      title
-      slug {
-        current
-      }
-      featuredImage {
-        asset {
-          url
-        }
-      }
-      excerpt
-      _rawBody(resolveReferences: { maxDepth: 4 })
-    }
-  }
-`;
-
 export default function SinglePost(props) {
   const serializers = {
     marks: {
@@ -240,18 +221,18 @@ export default function SinglePost(props) {
   return (
     <>
       <Layout>
-        <Editorial>
-          <code>Title</code>
-        </Editorial>
+        {props.data.post.featuredImage && (
+          <div>
+            <img
+              src={props.data.post.featuredImage.asset.url}
+              alt={props.data.post.featuredImage.asset.altText}
+              style={{ width: '100%' }}
+            />
+          </div>
+        )}
         <h1>{props.data.post.title}</h1>
-        <Editorial>
-          <code>Excerpt</code>
-        </Editorial>
         <p>{props.data.post.excerpt}</p>
         <hr />
-        <Editorial>
-          <code>Body</code>
-        </Editorial>
         <PortableText
           blocks={props.data.post._rawBody}
           serializers={serializers}
@@ -260,3 +241,22 @@ export default function SinglePost(props) {
     </>
   );
 }
+
+export const query = graphql`
+  query ($slug: String!) {
+    post: sanityPost(slug: { current: { eq: $slug } }) {
+      _id
+      title
+      slug {
+        current
+      }
+      featuredImage {
+        asset {
+          url
+        }
+      }
+      excerpt
+      _rawBody(resolveReferences: { maxDepth: 4 })
+    }
+  }
+`;

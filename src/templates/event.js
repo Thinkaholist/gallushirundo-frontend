@@ -41,6 +41,15 @@ export default function SingleEvent(props) {
   return (
     <>
       <Layout>
+        {props.data.event.cover && (
+          <div>
+            <img
+              src={props.data.event.cover.asset.url}
+              alt={props.data.event.cover.asset.altText}
+              style={{ width: '100%' }}
+            />
+          </div>
+        )}
         <h1>{props.data.event.title}</h1>
         <h3>Related artist(s):</h3>
         <ul>
@@ -61,15 +70,6 @@ export default function SingleEvent(props) {
             {props.data.event.mainEvent.name}
           </a>
         </h3>
-        {props.data.event.cover && (
-          <div>
-            <img
-              src={props.data.event.cover.asset.url}
-              alt={props.data.event.cover.asset.altText}
-              style={{ width: '100%' }}
-            />
-          </div>
-        )}
       </Layout>
     </>
   );
