@@ -224,8 +224,8 @@ export default function SinglePost(props) {
         {props.data.post.featuredImage && (
           <div>
             <img
-              src={props.data.post.featuredImage.asset.url}
-              alt={props.data.post.featuredImage.asset.altText}
+              src={props.data.post?.featuredImage?.asset?.url}
+              alt={props.data.post?.featuredImage?.asset?.altText}
               style={{ width: '100%' }}
             />
           </div>
