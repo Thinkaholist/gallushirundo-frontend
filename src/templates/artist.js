@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import getYouTubeID from 'get-youtube-id';
 import YouTube from 'react-youtube';
 import Layout from '../components/Layout';
+import { FaPlay } from 'react-icons/fa';
 
 const Container = styled.div`
   max-width: 1100px;
@@ -94,6 +95,7 @@ export const query = graphql`
 `;
 
 export default function SingleArtist(props) {
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
   const spotifyArtistId = props.data.artist.socialLinks?.spotify
     ?.split('/')[4]
     .split('?')[0];
@@ -113,6 +115,10 @@ export default function SingleArtist(props) {
   // );
   // console.log('--EVENTS--', artistEvents);
   // console.log('--eventsArtistIds--', eventsArtistIds);
+
+  function showVideo() {
+    setIsVideoVisible(!isVideoVisible);
+  }
 
   return (
     <>
@@ -173,17 +179,49 @@ export default function SingleArtist(props) {
               <code>Featured video</code>
             </Editorial>
             {props.data.artist.featuredVideo && (
-              <YouTube
-                videoId={getYouTubeID(props.data.artist.featuredVideo.url)}
-                opts={{
-                  height: '480',
-                  width: '100%',
-                  playerVars: {
-                    // https://developers.google.com/youtube/player_parameters
-                    autoplay: 0,
-                  },
-                }}
-              />
+              <div style={{ position: 'relative', lineHeight: 1 }}>
+                {!isVideoVisible ? (
+                  <>
+                    <img
+                      src={`https://img.youtube.com/vi/${getYouTubeID(
+                        props.data.artist.featuredVideo.url
+                      )}/maxresdefault.jpg`}
+                      alt='video thumbnail'
+                      style={{ width: '100%' }}
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        backgroundColor: '#fff',
+                        padding: 15,
+                        borderRadius: '50%',
+                        width: 30,
+                        height: 30,
+                        display: 'grid',
+                        placeItems: 'center',
+                      }}
+                      onClick={showVideo}
+                    >
+                      <FaPlay size={20} />
+                    </div>
+                  </>
+                ) : (
+                  <YouTube
+                    videoId={getYouTubeID(props.data.artist.featuredVideo.url)}
+                    opts={{
+                      height: 'auto',
+                      width: '100%',
+                      playerVars: {
+                        // https://developers.google.com/youtube/player_parameters
+                        autoplay: 0,
+                      },
+                    }}
+                  />
+                )}
+              </div>
             )}
             <Editorial>
               <code>Video Gallery</code>

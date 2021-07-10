@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import addToMailchimp from 'gatsby-plugin-mailchimp';
 
 export default function SubscribeForm() {
+  const [saving, setSaving] = useState(false);
   const [state, setState] = useState({
     email: '',
     errorMessage: '',
@@ -20,7 +21,9 @@ export default function SubscribeForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setSaving(true);
     const result = await addToMailchimp(state.email);
+    setSaving(false);
     console.log(result);
     if (result.result === 'success') {
       setState({
@@ -63,16 +66,17 @@ export default function SubscribeForm() {
             <label>
               <span>Newsletter: </span>
               <input
+                disabled={saving}
                 type='email'
                 name='email'
-                placeholder='Enter Email Address...'
+                placeholder='Email...'
                 value={state.email}
                 onChange={handleInputChange}
               />
             </label>
           </div>
-          <button className='button' type='submit'>
-            Subscribe
+          <button className='button' type='submit' disabled={saving}>
+            {saving ? `Saving...` : `Subscribe`}
           </button>
         </form>
       )}
