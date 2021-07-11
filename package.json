@@ -24,6 +24,7 @@
     "gatsby-plugin-global-context": "^1.0.0",
     "gatsby-plugin-image": "^1.8.0",
     "gatsby-plugin-mailchimp": "^5.2.2",
+    "gatsby-plugin-sanity-image": "^0.6.0",
     "gatsby-plugin-sharp": "^3.8.0",
     "gatsby-plugin-styled-components": "^4.8.0",
     "gatsby-source-filesystem": "^3.8.0",

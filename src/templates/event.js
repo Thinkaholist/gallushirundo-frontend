@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import Layout from '../components/Layout';
+import Img from 'gatsby-plugin-sanity-image';
 
 export const query = graphql`
   query ($slug: String!) {
@@ -13,8 +14,9 @@ export const query = graphql`
       date
       location
       cover {
-        asset {
-          url
+        altText
+        image {
+          ...ImageWithPreview
         }
       }
       mainEvent {
@@ -42,11 +44,12 @@ export default function SingleEvent(props) {
     <>
       <Layout>
         {props.data.event.cover && (
-          <div>
-            <img
-              src={props.data.event.cover.asset.url}
-              alt={props.data.event.cover.asset.altText}
-              style={{ width: '100%' }}
+          <div style={{ height: 400 }}>
+            <Img
+              {...props.data.event.cover.image}
+              alt={props.data.event.cover.altText}
+              width={800}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           </div>
         )}

@@ -5,6 +5,7 @@ import getYouTubeID from 'get-youtube-id';
 import YouTube from 'react-youtube';
 import Layout from '../components/Layout';
 import { FaPlay } from 'react-icons/fa';
+import Img from 'gatsby-plugin-sanity-image';
 
 const Container = styled.div`
   max-width: 1100px;
@@ -17,80 +18,6 @@ export const Editorial = styled.div`
   code {
     font-size: 20px;
     background-color: yellow;
-  }
-`;
-
-export const query = graphql`
-  query details($slug: String!) {
-    artist: sanityArtist(slug: { current: { eq: $slug } }) {
-      _id
-      name
-      slug {
-        current
-      }
-      bio
-      logo {
-        asset {
-          url
-        }
-      }
-      featuredImage {
-        asset {
-          url
-        }
-      }
-      imageGallery {
-        asset {
-          url
-        }
-      }
-      featuredVideo {
-        title
-        url
-      }
-      videoGallery {
-        title
-        url
-      }
-      socialLinks {
-        facebook
-        instagram
-        youtube
-        spotify
-        website
-      }
-      agencies {
-        _id
-        name
-        website
-        logo {
-          asset {
-            url
-          }
-        }
-      }
-      pressKit {
-        asset {
-          originalFilename
-          url
-        }
-      }
-    }
-    events: allSanityEvent(sort: { fields: date, order: ASC }) {
-      edges {
-        node {
-          _id
-          title
-          slug {
-            current
-          }
-          artists {
-            _id
-            name
-          }
-        }
-      }
-    }
   }
 `;
 
@@ -120,6 +47,12 @@ export default function SingleArtist(props) {
     setIsVideoVisible(!isVideoVisible);
   }
 
+  console.log(
+    `https://img.youtube.com/vi/${getYouTubeID(
+      props.data.artist.featuredVideo.url
+    )}/maxresdefault.jpg`
+  );
+
   return (
     <>
       <Layout>
@@ -133,10 +66,11 @@ export default function SingleArtist(props) {
               <code>Logo</code>
             </Editorial>
             <div>
-              <img
-                src={props.data.artist.logo.asset.url}
-                alt={props.data.artist.name}
-                style={{ maxWidth: '30%' }}
+              <Img
+                {...props.data.artist.logo}
+                width={300}
+                alt={`band logo`}
+                style={{ width: '30%' }}
               />
             </div>
             <Editorial>
@@ -144,10 +78,11 @@ export default function SingleArtist(props) {
             </Editorial>
             {props.data.artist.featuredImage && (
               <div>
-                <img
-                  src={props.data.artist.featuredImage.asset.url}
-                  alt={props.data.artist.name}
-                  style={{ width: '100%' }}
+                <Img
+                  {...props.data.artist?.featuredImage?.image}
+                  width={800}
+                  alt={props.data.artist.featuredImage.altText}
+                  style={{ width: '100%', objectFit: 'cover' }}
                 />
               </div>
             )}
@@ -164,11 +99,12 @@ export default function SingleArtist(props) {
             </Editorial>
             {props.data.artist.imageGallery && (
               <div style={{ display: 'flex', gap: '0.5rem' }}>
-                {props.data.artist.imageGallery.map((image, i) => (
+                {props.data.artist.imageGallery.map(({ image, altText }, i) => (
                   <div key={i}>
-                    <img
-                      src={image.asset.url}
-                      alt='pic'
+                    <Img
+                      {...image}
+                      alt={altText}
+                      width={300}
                       style={{ width: '100%' }}
                     />
                   </div>
@@ -348,3 +284,77 @@ export default function SingleArtist(props) {
     </>
   );
 }
+
+export const query = graphql`
+  query details($slug: String!) {
+    artist: sanityArtist(slug: { current: { eq: $slug } }) {
+      _id
+      name
+      slug {
+        current
+      }
+      bio
+      logo {
+        ...ImageWithPreview
+      }
+      featuredImage {
+        altText
+        image {
+          ...ImageWithPreview
+        }
+      }
+      imageGallery {
+        altText
+        image {
+          ...ImageWithPreview
+        }
+      }
+      featuredVideo {
+        title
+        url
+      }
+      videoGallery {
+        title
+        url
+      }
+      socialLinks {
+        facebook
+        instagram
+        youtube
+        spotify
+        website
+      }
+      agencies {
+        _id
+        name
+        website
+        logo {
+          asset {
+            url
+          }
+        }
+      }
+      pressKit {
+        asset {
+          originalFilename
+          url
+        }
+      }
+    }
+    events: allSanityEvent(sort: { fields: date, order: ASC }) {
+      edges {
+        node {
+          _id
+          title
+          slug {
+            current
+          }
+          artists {
+            _id
+            name
+          }
+        }
+      }
+    }
+  }
+`;

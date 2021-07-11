@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import PortableText from '@sanity/block-content-to-react';
 import Layout from '../components/Layout';
-import { Editorial } from './artist';
 import YouTube from 'react-youtube';
 import getYoutubeId from 'get-youtube-id';
 import urlBuilder from '@sanity/image-url';
@@ -12,7 +11,9 @@ import {
   FaSpotify,
   FaYoutube,
   FaGlobe,
+  FaExternalLinkAlt,
 } from 'react-icons/fa';
+import Img from 'gatsby-plugin-sanity-image';
 
 function urlFor(source) {
   return urlBuilder({
@@ -29,6 +30,18 @@ export default function SinglePost(props) {
           {children}
         </Link>
       ),
+      externalLink: ({ children, mark }) => {
+        return (
+          <>
+            <a href={mark.url} target='_blank' rel='noopener noreferrer'>
+              {children}{' '}
+              <span>
+                <FaExternalLinkAlt size={12} />
+              </span>
+            </a>
+          </>
+        );
+      },
     },
     types: {
       spotifyAlbum: (props) => {
@@ -89,9 +102,10 @@ export default function SinglePost(props) {
         return (
           <>
             <div>
-              <img
-                src={urlFor(imageEmbed.asset)}
+              <Img
+                {...imageEmbed}
                 alt={imageEmbed.altText}
+                width={500}
                 style={{ width: '100%' }}
               />
             </div>
@@ -268,8 +282,10 @@ export const query = graphql`
         current
       }
       featuredImage {
-        asset {
-          url
+        image {
+          asset {
+            url
+          }
         }
       }
       excerpt

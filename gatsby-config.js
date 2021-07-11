@@ -42,5 +42,13 @@ module.exports = {
         endpoint: process.env.MAILCHIMP_ENDPOINT,
       },
     },
+    {
+      resolve: 'gatsby-plugin-sanity-image',
+      options: {
+        // Sanity project info (required)
+        projectId: 'q7xlgfk0',
+        dataset: 'production',
+      },
+    },
   ],
 };
