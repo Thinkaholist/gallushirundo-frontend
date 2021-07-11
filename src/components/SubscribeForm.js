@@ -72,6 +72,16 @@ export default function SubscribeForm() {
                 placeholder='Email...'
                 value={state.email}
                 onChange={handleInputChange}
+                style={{
+                  padding: '0.5em',
+                  lineHeight: 1,
+                  borderRadius: 3,
+                  width: '30%',
+                  border: '0 solid #cad1dc',
+                  backgroundColor: '#f1f3f6',
+                  borderWidth: 1,
+                  fontSize: 18,
+                }}
               />
             </label>
           </div>

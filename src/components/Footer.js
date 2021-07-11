@@ -4,8 +4,10 @@ import SubscribeForm from './SubscribeForm';
 
 const FooterStyles = styled.footer`
   padding: 20px 0;
-  background-color: peachpuff;
   margin-top: auto;
+  border-top: 1px solid;
+  margin-left: 1rem;
+  margin-right: 1rem;
 `;
 
 export default function Footer() {
