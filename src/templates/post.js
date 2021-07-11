@@ -13,6 +13,7 @@ import {
   FaExternalLinkAlt,
 } from 'react-icons/fa';
 import Img from 'gatsby-plugin-sanity-image';
+import { ContainerStyles } from '../styles/ContainerStyles';
 
 function urlFor(source) {
   return urlBuilder({
@@ -233,39 +234,41 @@ export default function SinglePost(props) {
 
   return (
     <>
-      {props.data.post.featuredImage && (
-        <div>
-          <img
-            src={props.data.post?.featuredImage?.asset?.url}
-            alt={props.data.post?.featuredImage?.asset?.altText}
-            style={{ width: '100%' }}
-          />
-        </div>
-      )}
-      <h1>
-        {props.data.post.title}
-        <Link to={`/category/${props.data.post.category.slug.current}`}>
-          <span
-            style={{
-              marginLeft: 20,
-              fontSize: 15,
-              border: '1px solid peachpuff',
-              borderRadius: 4,
-              padding: 4,
-              backgroundColor: 'peachpuff',
-              color: 'blue',
-            }}
-          >
-            {props.data.post.category.name}
-          </span>
-        </Link>
-      </h1>
-      <p>{props.data.post.excerpt}</p>
-      <hr />
-      <PortableText
-        blocks={props.data.post._rawBody}
-        serializers={serializers}
-      />
+      <ContainerStyles>
+        {props.data.post.featuredImage && (
+          <div>
+            <img
+              src={props.data.post?.featuredImage?.asset?.url}
+              alt={props.data.post?.featuredImage?.asset?.altText}
+              style={{ width: '100%' }}
+            />
+          </div>
+        )}
+        <h1>
+          {props.data.post.title}
+          <Link to={`/category/${props.data.post.category.slug.current}`}>
+            <span
+              style={{
+                marginLeft: 20,
+                fontSize: 15,
+                border: '1px solid peachpuff',
+                borderRadius: 4,
+                padding: 4,
+                backgroundColor: 'peachpuff',
+                color: 'blue',
+              }}
+            >
+              {props.data.post.category.name}
+            </span>
+          </Link>
+        </h1>
+        <p>{props.data.post.excerpt}</p>
+        <hr />
+        <PortableText
+          blocks={props.data.post._rawBody}
+          serializers={serializers}
+        />
+      </ContainerStyles>
     </>
   );
 }
