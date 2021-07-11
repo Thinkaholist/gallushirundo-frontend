@@ -47,12 +47,6 @@ export default function SingleArtist(props) {
     setIsVideoVisible(!isVideoVisible);
   }
 
-  console.log(
-    `https://img.youtube.com/vi/${getYouTubeID(
-      props.data.artist.featuredVideo.url
-    )}/maxresdefault.jpg`
-  );
-
   return (
     <>
       <Layout>
