@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'gatsby';
 import GlobalStyles from '../styles/GlobalStyles';
 import Footer from './Footer';
+import { ContainerStyles } from '../styles/ContainerStyles';
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,9 +27,11 @@ export default function Layout({ children }) {
       <Wrapper>
         <GlobalStyles />
         <Nav>
-          <div style={{ color: '#fff' }}>
-            <Link to='/'>HOME</Link>
-          </div>
+          <ContainerStyles>
+            <div style={{ color: '#fff' }}>
+              <Link to='/'>HOME</Link>
+            </div>
+          </ContainerStyles>
         </Nav>
         <div>{children}</div>
         <Footer />

@@ -42,12 +42,12 @@ export default function SingleEvent(props) {
   return (
     <>
       {props.data.event.cover && (
-        <div style={{ height: 400 }}>
+        <div>
           <Img
             {...props.data.event.cover.image}
             alt={props.data.event.cover.altText}
-            width={800}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            width={1200}
+            style={{ width: '100%' }}
           />
         </div>
       )}

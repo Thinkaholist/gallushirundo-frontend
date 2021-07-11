@@ -5,11 +5,7 @@ import getYouTubeID from 'get-youtube-id';
 import YouTube from 'react-youtube';
 import { FaPlay } from 'react-icons/fa';
 import Img from 'gatsby-plugin-sanity-image';
-
-const Container = styled.div`
-  max-width: 1100px;
-  margin: 0 auto;
-`;
+import { ContainerStyles } from '../styles/ContainerStyles';
 
 export default function SingleArtist(props) {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
@@ -39,8 +35,8 @@ export default function SingleArtist(props) {
 
   return (
     <>
-      <Container>
-        <div style={{ border: '1px solid', padding: '1rem' }}>
+      <ContainerStyles>
+        <div>
           <h2>{props.data.artist.name}</h2>
           <div>
             <Img
@@ -227,7 +223,7 @@ export default function SingleArtist(props) {
             </a>
           )}
         </div>
-      </Container>
+      </ContainerStyles>
     </>
   );
 }

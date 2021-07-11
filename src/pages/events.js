@@ -1,21 +1,24 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
+import { ContainerStyles } from '../styles/ContainerStyles';
 
 export default function EventsPage({ data }) {
   return (
     <>
-      <h1>Events</h1>
-      <hr />
-      <ul>
-        {data.allSanityEvent.edges.map(({ node }) => (
-          <li key={node._id}>
-            <div>
-              <Link to={`/event/${node.slug.current}`}>{node.title}</Link>
-              <p>{node.date}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <ContainerStyles>
+        <h1>Events</h1>
+        <hr />
+        <ul>
+          {data.allSanityEvent.edges.map(({ node }) => (
+            <li key={node._id}>
+              <div>
+                <Link to={`/event/${node.slug.current}`}>{node.title}</Link>
+                <p>{node.date}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </ContainerStyles>
     </>
   );
 }

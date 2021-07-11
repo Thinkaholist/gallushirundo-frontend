@@ -1,9 +1,12 @@
 import React from 'react';
+import { ContainerStyles } from '../styles/ContainerStyles';
 
 export default function ContactPage() {
   return (
     <>
-      <h1>Contact</h1>
+      <ContainerStyles>
+        <h1>Contact</h1>
+      </ContainerStyles>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SubscribeForm from './SubscribeForm';
+import { ContainerStyles } from '../styles/ContainerStyles';
 
 const FooterStyles = styled.footer`
   padding: 20px 0;
@@ -14,7 +15,9 @@ export default function Footer() {
   return (
     <>
       <FooterStyles>
-        <SubscribeForm />
+        <ContainerStyles>
+          <SubscribeForm />
+        </ContainerStyles>
       </FooterStyles>
     </>
   );
