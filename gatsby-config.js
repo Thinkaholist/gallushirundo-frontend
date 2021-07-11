@@ -50,5 +50,17 @@ module.exports = {
         dataset: 'production',
       },
     },
+    {
+      resolve: `@slixites/gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Rubik\:300,400,400i,500,600,700`],
+        display: 'swap',
+        preconnect: true,
+        attributes: {
+          rel: 'stylesheet preload prefetch',
+          as: 'style',
+        },
+      },
+    },
   ],
 };

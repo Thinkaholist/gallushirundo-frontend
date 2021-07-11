@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import PortableText from '@sanity/block-content-to-react';
-import Layout from '../components/Layout';
 import YouTube from 'react-youtube';
 import getYoutubeId from 'get-youtube-id';
 import urlBuilder from '@sanity/image-url';
@@ -234,41 +233,39 @@ export default function SinglePost(props) {
 
   return (
     <>
-      <Layout>
-        {props.data.post.featuredImage && (
-          <div>
-            <img
-              src={props.data.post?.featuredImage?.asset?.url}
-              alt={props.data.post?.featuredImage?.asset?.altText}
-              style={{ width: '100%' }}
-            />
-          </div>
-        )}
-        <h1>
-          {props.data.post.title}
-          <Link to={`/category/${props.data.post.category.slug.current}`}>
-            <span
-              style={{
-                marginLeft: 20,
-                fontSize: 15,
-                border: '1px solid peachpuff',
-                borderRadius: 4,
-                padding: 4,
-                backgroundColor: 'peachpuff',
-                color: 'blue',
-              }}
-            >
-              {props.data.post.category.name}
-            </span>
-          </Link>
-        </h1>
-        <p>{props.data.post.excerpt}</p>
-        <hr />
-        <PortableText
-          blocks={props.data.post._rawBody}
-          serializers={serializers}
-        />
-      </Layout>
+      {props.data.post.featuredImage && (
+        <div>
+          <img
+            src={props.data.post?.featuredImage?.asset?.url}
+            alt={props.data.post?.featuredImage?.asset?.altText}
+            style={{ width: '100%' }}
+          />
+        </div>
+      )}
+      <h1>
+        {props.data.post.title}
+        <Link to={`/category/${props.data.post.category.slug.current}`}>
+          <span
+            style={{
+              marginLeft: 20,
+              fontSize: 15,
+              border: '1px solid peachpuff',
+              borderRadius: 4,
+              padding: 4,
+              backgroundColor: 'peachpuff',
+              color: 'blue',
+            }}
+          >
+            {props.data.post.category.name}
+          </span>
+        </Link>
+      </h1>
+      <p>{props.data.post.excerpt}</p>
+      <hr />
+      <PortableText
+        blocks={props.data.post._rawBody}
+        serializers={serializers}
+      />
     </>
   );
 }

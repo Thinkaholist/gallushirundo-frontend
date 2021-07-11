@@ -1,12 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
-import SubscribeForm from './SubscribeForm';
+import GlobalStyles from '../styles/GlobalStyles';
+import Footer from './Footer';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+`;
 
 const Nav = styled.div`
   background-color: rebeccapurple;
-  padding: 10px;
-  margin-bottom: 1rem;
+  padding: 10px 0;
 
   a {
     text-decoration: none;
@@ -14,23 +20,19 @@ const Nav = styled.div`
   }
 `;
 
-const Container = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
-`;
-
 export default function Layout({ children }) {
   return (
     <>
-      <Nav>
-        <div style={{ color: '#fff' }}>
-          <Link to='/'>HOME</Link>
-        </div>
-      </Nav>
-      <Container>{children}</Container>
-      <footer>
-        <SubscribeForm />
-      </footer>
+      <Wrapper>
+        <GlobalStyles />
+        <Nav>
+          <div style={{ color: '#fff' }}>
+            <Link to='/'>HOME</Link>
+          </div>
+        </Nav>
+        <div>{children}</div>
+        <Footer />
+      </Wrapper>
     </>
   );
 }
