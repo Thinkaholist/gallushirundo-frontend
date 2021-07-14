@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
+import { DateTime } from 'luxon';
 import { ContainerStyles } from '../styles/ContainerStyles';
 
 export const query = graphql`
@@ -42,7 +43,11 @@ export default function SingleCategory(props) {
             <Link to={`/post/${post.node.slug.current}`}>
               <h3>{post.node.title}</h3>
             </Link>
-            <p>{post.node.publishedDate}</p>
+            <p>
+              {DateTime.fromISO(post.node.publishedDate).toFormat(
+                'kkkk.LL.dd - T'
+              )}
+            </p>
           </article>
         ))}
       </ContainerStyles>
