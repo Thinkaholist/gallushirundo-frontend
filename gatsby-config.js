@@ -53,7 +53,7 @@ module.exports = {
     {
       resolve: `@slixites/gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`Roboto Mono\:300,400,400i,500,600,700`],
+        fonts: [`IBM Plex Sans\:300,400,400i,500,600,700`],
         display: 'swap',
         preconnect: true,
         attributes: {
