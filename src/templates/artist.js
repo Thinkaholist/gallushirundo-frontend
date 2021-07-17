@@ -135,7 +135,7 @@ export default function SingleArtist(props) {
               ))}
             </div>
           )}
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <a
               href={props.data.artist.socialLinks.facebook}
               target='_blank'
