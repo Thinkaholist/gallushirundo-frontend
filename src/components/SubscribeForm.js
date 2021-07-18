@@ -34,6 +34,7 @@ export default function SubscribeForm() {
       });
     } else {
       setState({ ...state, errorMessage: result.msg });
+      setTimeout(() => setState({ ...state, errorMessage: '' }), 6000);
     }
   }
 

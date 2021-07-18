@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { graphql, Link } from 'gatsby';
 import PortableText from '@sanity/block-content-to-react';
 import YouTube from 'react-youtube';
@@ -21,6 +22,17 @@ function urlFor(source) {
     dataset: 'production',
   }).image(source);
 }
+
+const Headline = styled.h1`
+  font-weight: 400;
+`;
+
+const SubHeadline = styled.h2`
+  font-weight: 400;
+  font-family: IBM Plex Mono;
+  font-style: italic;
+  font-size: ${30 / 16}rem;
+`;
 
 export default function SinglePost(props) {
   const serializers = {
@@ -244,7 +256,7 @@ export default function SinglePost(props) {
             />
           </div>
         )}
-        <h1>
+        <Headline>
           {props.data.post.title}
           <Link to={`/category/${props.data.post.category.slug.current}`}>
             <span
@@ -261,8 +273,8 @@ export default function SinglePost(props) {
               {props.data.post.category.name}
             </span>
           </Link>
-        </h1>
-        <p>{props.data.post.excerpt}</p>
+        </Headline>
+        <SubHeadline>{props.data.post.excerpt}</SubHeadline>
         <hr />
         <PortableText
           blocks={props.data.post._rawBody}

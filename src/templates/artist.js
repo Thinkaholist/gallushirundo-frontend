@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { graphql } from 'gatsby';
-import styled from 'styled-components';
 import getYouTubeID from 'get-youtube-id';
 import YouTube from 'react-youtube';
 import { FaPlay } from 'react-icons/fa';
@@ -101,6 +100,8 @@ export default function SingleArtist(props) {
                       placeItems: 'center',
                     }}
                     onClick={showVideo}
+                    role='button'
+                    tabIndex={0}
                   >
                     <FaPlay size={20} />
                   </div>

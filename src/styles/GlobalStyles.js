@@ -55,6 +55,10 @@ const GlobalStyles = createGlobalStyle`
     height: 100%;
   }
 
+  html {
+    overflow-y: scroll;
+  }
+
   body {
     font-family: 'IBM Plex Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     color: #333;

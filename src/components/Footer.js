@@ -9,6 +9,7 @@ const FooterStyles = styled.footer`
   border-top: 1px solid;
   margin-left: 1rem;
   margin-right: 1rem;
+  background-color: #f2f2f2;
 `;
 
 export default function Footer() {
