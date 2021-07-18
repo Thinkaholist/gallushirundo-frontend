@@ -56,8 +56,9 @@ export default function SubscribeForm() {
               color: '#fff',
               padding: 10,
               marginBottom: '1.5rem',
-              width: 450,
+              width: 300,
               borderRadius: 4,
+              fontSize: 16,
             }}
             dangerouslySetInnerHTML={{ __html: state.successMessage }}
           />
@@ -74,8 +75,9 @@ export default function SubscribeForm() {
                 color: '#fff',
                 padding: 10,
                 marginBottom: '1.5rem',
-                width: 320,
+                width: 300,
                 borderRadius: 4,
+                fontSize: 16,
               }}
               dangerouslySetInnerHTML={{ __html: state.errorMessage }}
             />
