@@ -81,6 +81,7 @@ const GlobalStyles = createGlobalStyle`
   button, input {
     font-family: 'FormaDJRTextRegular','IBM Plex Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;;
   }
+
   h1 {
     font-size: ${40 / 16}rem;
     font-weight: 400;
@@ -90,6 +91,12 @@ const GlobalStyles = createGlobalStyle`
     font-size: ${30 / 16}rem;
     font-weight: 400;
 
+  }
+
+  @media(max-width: 756){
+    html {
+      font-size: 10px;
+    }
   }
 `;
 
