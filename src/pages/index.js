@@ -7,8 +7,7 @@ export default function HomePage({ data }) {
   return (
     <>
       <ContainerStyles>
-        <h1>{data.siteSettings.title}</h1>
-        <ul>
+        <ul style={{ marginTop: '1.5rem' }}>
           <li>
             <Link to='/artists'>Artists</Link>
           </li>

@@ -93,6 +93,14 @@ const GlobalStyles = createGlobalStyle`
 
   }
 
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: revert;
+    }
+    color: #A31C18;
+  }
+
   @media(max-width: 756){
     html {
       font-size: 10px;
