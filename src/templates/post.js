@@ -25,6 +25,8 @@ function urlFor(source) {
 
 const Headline = styled.h1`
   font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 2rem;
 `;
 
 const SubHeadline = styled.h2`
