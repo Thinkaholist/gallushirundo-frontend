@@ -28,9 +28,6 @@ const Headline = styled.h1`
 `;
 
 const SubHeadline = styled.h2`
-  font-weight: 400;
-  font-family: IBM Plex Mono;
-  font-style: italic;
   font-size: ${30 / 16}rem;
 `;
 

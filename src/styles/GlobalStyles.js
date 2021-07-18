@@ -1,4 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
+import formaDJRTextRegular from '../assets/fonts/FormaDJRText-Regular.otf';
+import formaDJRTextBold from '../assets/fonts/FormaDJRText-Bold.otf';
 
 const GlobalStyles = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -50,6 +52,16 @@ const GlobalStyles = createGlobalStyle`
     border-spacing: 0;
   }
   /* END of CSS reset */
+
+  @font-face {
+    font-family: FormaDJRTextRegular;
+    src: url(${formaDJRTextRegular});
+  }
+
+  @font-face {
+    font-family: FormaDJRTextBold;
+    src: url(${formaDJRTextBold});
+  }
   
   html, body, #___gatsby, #gatsby-focus-wrapper {
     height: 100%;
@@ -60,23 +72,23 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font-family: 'IBM Plex Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-    color: #333;
+    font-family: 'FormaDJRTextRegular','IBM Plex Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    color: #2E2E2E;
     line-height: 1.625;
     font-size: ${20 / 16}rem;
   }
 
   button, input {
-    font-family: 'IBM Plex Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;;
+    font-family: 'FormaDJRTextRegular','IBM Plex Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;;
   }
   h1 {
     font-size: ${40 / 16}rem;
-    font-weight: 600;
+    font-weight: 400;
   }
   
   h2 {
     font-size: ${30 / 16}rem;
-    font-weight: 600;
+    font-weight: 400;
 
   }
 `;
