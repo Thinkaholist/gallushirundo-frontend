@@ -55,26 +55,23 @@ const GlobalStyles = createGlobalStyle`
     height: 100%;
   }
 
-  html {
-    font-size: 20px;
-  }
-
   body {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-family: 'IBM Plex Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     color: #333;
     line-height: 1.625;
+    font-size: ${20 / 16}rem;
   }
 
   button, input {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;;
+    font-family: 'IBM Plex Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;;
   }
   h1 {
-    font-size: 2rem;
+    font-size: ${40 / 16}rem;
     font-weight: 600;
   }
   
   h2 {
-    font-size: 1.5rem;
+    font-size: ${30 / 16}rem;
     font-weight: 600;
 
   }

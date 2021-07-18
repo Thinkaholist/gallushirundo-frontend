@@ -50,48 +50,70 @@ export default function SubscribeForm() {
     <>
       {state.successMessage ? (
         <>
-          <div dangerouslySetInnerHTML={{ __html: state.successMessage }} />
+          <div
+            style={{
+              backgroundColor: '#16a085',
+              color: '#fff',
+              padding: 10,
+              marginBottom: '1.5rem',
+              width: 450,
+              borderRadius: 4,
+            }}
+            dangerouslySetInnerHTML={{ __html: state.successMessage }}
+          />
           <a href='#0' onClick={resetForm}>
             add more?
           </a>
         </>
       ) : (
-        <form
-          name='subscribeForm'
-          method='POST'
-          id='subscribe-form'
-          onSubmit={handleSubmit}
-        >
-          <div>
-            <label>
-              <span>Newsletter: </span>
-              <input
-                disabled={saving}
-                type='email'
-                name='email'
-                placeholder='Email...'
-                value={state.email}
-                onChange={handleInputChange}
-                style={{
-                  padding: '0.5em',
-                  lineHeight: 1,
-                  borderRadius: 3,
-                  width: '30%',
-                  border: '0 solid #cad1dc',
-                  backgroundColor: '#f1f3f6',
-                  borderWidth: 1,
-                  fontSize: 18,
-                }}
-              />
-            </label>
-          </div>
-          <button className='button' type='submit' disabled={saving}>
-            {saving ? `Saving...` : `Subscribe`}
-          </button>
-        </form>
-      )}
-      {state.errorMessage && (
-        <div dangerouslySetInnerHTML={{ __html: state.errorMessage }} />
+        <>
+          {state.errorMessage && (
+            <div
+              style={{
+                backgroundColor: 'rgba(211,84,0, 0.8)',
+                color: '#fff',
+                padding: 10,
+                marginBottom: '1.5rem',
+                width: 320,
+                borderRadius: 4,
+              }}
+              dangerouslySetInnerHTML={{ __html: state.errorMessage }}
+            />
+          )}
+          <form
+            name='subscribeForm'
+            method='POST'
+            id='subscribe-form'
+            onSubmit={handleSubmit}
+          >
+            <div>
+              <label>
+                <span>Newsletter: </span>
+                <input
+                  disabled={saving}
+                  type='email'
+                  name='email'
+                  placeholder='Email...'
+                  value={state.email}
+                  onChange={handleInputChange}
+                  style={{
+                    padding: '0.5em',
+                    lineHeight: 1,
+                    borderRadius: 3,
+                    width: '30%',
+                    border: '0 solid #cad1dc',
+                    backgroundColor: '#f1f3f6',
+                    borderWidth: 1,
+                    fontSize: 18,
+                  }}
+                />
+              </label>
+            </div>
+            <button className='button' type='submit' disabled={saving}>
+              {saving ? `Saving...` : `Subscribe`}
+            </button>
+          </form>
+        </>
       )}
     </>
   );
