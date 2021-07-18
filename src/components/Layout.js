@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const Nav = styled.div`
-  background-color: rebeccapurple;
+  background-color: #ff101e;
   padding: 10px 0;
 
   a {

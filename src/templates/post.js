@@ -196,7 +196,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FacebookIcon color='rebeccapurple' size={30} />
+                    <FacebookIcon color='#FF101E' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.instagram && (
@@ -205,7 +205,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaInstagram color='rebeccapurple' size={30} />
+                    <FaInstagram color='#FF101E' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.spotify && (
@@ -214,7 +214,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaSpotify color='rebeccapurple' size={30} />
+                    <FaSpotify color='#FF101E' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.youtube && (
@@ -223,7 +223,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaYoutube color='rebeccapurple' size={30} />
+                    <FaYoutube color='#FF101E' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.website && (
@@ -232,7 +232,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaGlobe color='rebeccapurple' size={30} />
+                    <FaGlobe color='#FF101E' size={30} />
                   </a>
                 )}
               </div>
