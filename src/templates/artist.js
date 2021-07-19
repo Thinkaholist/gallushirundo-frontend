@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import getYouTubeID from 'get-youtube-id';
 import YouTube from 'react-youtube';
 import { FaPlay } from 'react-icons/fa';
@@ -17,16 +17,14 @@ export default function SingleArtist(props) {
     ?.split('\n')
     .map((p, i) => <p key={i}>{p}</p>);
 
-  // const eventsArtistIds = props.data.events.edges.map((ev) => {
-  //   const ids = ev.artists.map((artist) => artist._id);
-  //   return ids;
-  // });
+  const filteredEvents = props.data.events.edges.filter(({ node }) => {
+    // const artistsIds = node.artists.map((artist) => artist._id);
+    // console.log('artistsIds', artistsIds);
+    return props.data.artist._id === node.artists[0]._id;
+  });
 
-  // const artistEvents = props.data.events.edges.filter((ev) =>
-  //   ev.node.slug.current.includes('bohemian')
-  // );
-  // console.log('--EVENTS--', artistEvents);
-  // console.log('--eventsArtistIds--', eventsArtistIds);
+  console.log('--events--', props.data.events.edges);
+  console.log('--filteredEvents--', filteredEvents);
 
   function showVideo() {
     setIsVideoVisible(!isVideoVisible);
@@ -135,6 +133,22 @@ export default function SingleArtist(props) {
                 </div>
               ))}
             </div>
+          )}
+          {filteredEvents && (
+            <>
+              <section style={{ marginBottom: '1rem' }}>
+                <h2>Upcoming Events</h2>
+                {filteredEvents.map(({ node }) => (
+                  <div key={node._id}>
+                    <h3>
+                      <Link to={`/event/${node.slug.current}`}>
+                        {node.title}
+                      </Link>
+                    </h3>
+                  </div>
+                ))}
+              </section>
+            </>
           )}
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <a
