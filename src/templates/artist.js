@@ -13,6 +13,7 @@ export default function SingleArtist(props) {
     ?.split('/')[4]
     .split('?')[0];
   const embedUrl = `https://open.spotify.com/embed/artist/${spotifyArtistId}`;
+  const { previous, next } = props.data;
 
   const bio = props.data.artist.bio
     ?.split('\n')
@@ -30,6 +31,8 @@ export default function SingleArtist(props) {
   function showVideo() {
     setIsVideoVisible(!isVideoVisible);
   }
+
+  console.log(props.data);
 
   return (
     <>
@@ -246,13 +249,40 @@ export default function SingleArtist(props) {
             </a>
           )}
         </div>
+        <nav>
+          <ul
+            style={{
+              display: `flex`,
+              flexWrap: `wrap`,
+              justifyContent: `space-between`,
+              listStyle: `none`,
+              padding: 0,
+              marginTop: '2rem',
+            }}
+          >
+            <li>
+              {previous && (
+                <Link to={`/artist/${previous.slug.current}`} rel='prev'>
+                  ← {previous.name}
+                </Link>
+              )}
+            </li>
+            <li>
+              {next && (
+                <Link to={`/artist/${next.slug.current}`} rel='next'>
+                  {next.name} →
+                </Link>
+              )}
+            </li>
+          </ul>
+        </nav>
       </ContainerStyles>
     </>
   );
 }
 
 export const query = graphql`
-  query details($slug: String!) {
+  query details($slug: String!, $previousSlug: String, $nextSlug: String) {
     artist: sanityArtist(slug: { current: { eq: $slug } }) {
       _id
       name
@@ -306,6 +336,18 @@ export const query = graphql`
           url
         }
       }
+    }
+    previous: sanityArtist(slug: { current: { eq: $previousSlug } }) {
+      slug {
+        current
+      }
+      name
+    }
+    next: sanityArtist(slug: { current: { eq: $nextSlug } }) {
+      slug {
+        current
+      }
+      name
     }
     events: allSanityEvent(sort: { fields: date, order: ASC }) {
       edges {

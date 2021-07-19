@@ -9,11 +9,9 @@ module.exports.createPages = async ({ graphql, actions }) => {
   const res = await graphql(`
     query {
       allSanityArtist {
-        edges {
-          node {
-            slug {
-              current
-            }
+        nodes {
+          slug {
+            current
           }
         }
       }
@@ -47,12 +45,20 @@ module.exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  res.data.allSanityArtist.edges.forEach((edge) => {
+  const artists = res.data.allSanityArtist.nodes;
+
+  artists.forEach((artist, index) => {
+    const previousSlug = index === 0 ? null : artists[index - 1].slug.current;
+    const nextSlug =
+      index === artists.length - 1 ? null : artists[index + 1].slug.current;
+
     createPage({
       component: artistTemplate,
-      path: `/artist/${edge.node.slug.current}`,
+      path: `/artist/${artist.slug.current}`,
       context: {
-        slug: edge.node.slug.current,
+        slug: artist.slug.current,
+        previousSlug,
+        nextSlug,
       },
     });
   });
