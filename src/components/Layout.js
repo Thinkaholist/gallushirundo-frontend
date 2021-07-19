@@ -77,7 +77,7 @@ export default function Layout({ children }) {
                 <Link to='/'>{siteSettings.title}</Link>
               </h1>
               <MenuItems
-                style={{ marginLeft: 'auto', display: 'flex', gap: 80 }}
+                style={{ marginLeft: 'auto', display: 'flex', gap: 60 }}
               >
                 <li>
                   <Link to={`/news`}>News</Link>
