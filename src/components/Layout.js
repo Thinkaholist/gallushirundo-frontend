@@ -30,7 +30,6 @@ const MenuItems = styled.ul`
     text-decoration: none;
   }
   a[aria-current='page'] {
-    font-family: FormaDJRTextBold;
     border-bottom: 2px solid;
   }
 `;
