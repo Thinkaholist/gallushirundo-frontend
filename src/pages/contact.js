@@ -6,6 +6,7 @@ export default function ContactPage() {
     <>
       <ContainerStyles>
         <h1>Contact</h1>
+        <hr />
       </ContainerStyles>
     </>
   );
