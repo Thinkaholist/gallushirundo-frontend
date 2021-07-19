@@ -15,6 +15,7 @@ import {
 } from 'react-icons/fa';
 import Img from 'gatsby-plugin-sanity-image';
 import { ContainerStyles } from '../styles/ContainerStyles';
+import { ContentStyles } from '../styles/ContentStyles';
 
 function urlFor(source) {
   return urlBuilder({
@@ -280,7 +281,7 @@ export default function SinglePost(props) {
   return (
     <>
       <ContainerStyles>
-        <div style={{ maxWidth: 700 }}>
+        <ContentStyles>
           {props.data.post.featuredImage && (
             <div>
               <img
@@ -315,7 +316,7 @@ export default function SinglePost(props) {
               serializers={serializers}
             />
           </PortableTextStyles>
-        </div>
+        </ContentStyles>
       </ContainerStyles>
     </>
   );

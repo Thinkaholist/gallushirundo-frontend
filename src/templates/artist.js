@@ -5,6 +5,7 @@ import YouTube from 'react-youtube';
 import { FaPlay } from 'react-icons/fa';
 import Img from 'gatsby-plugin-sanity-image';
 import { ContainerStyles } from '../styles/ContainerStyles';
+import { ContentStyles } from '../styles/ContentStyles';
 
 export default function SingleArtist(props) {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
@@ -34,17 +35,9 @@ export default function SingleArtist(props) {
     <>
       <ContainerStyles>
         <div>
-          <h2>{props.data.artist.name}</h2>
-          <div>
-            <Img
-              {...props.data.artist.logo}
-              width={300}
-              alt={`band logo`}
-              style={{ width: '30%' }}
-            />
-          </div>
+          {/* <h2>{props.data.artist.name}</h2> */}
           {props.data.artist.featuredImage && (
-            <div>
+            <div style={{ marginTop: 40 }}>
               <Img
                 {...props.data.artist?.featuredImage?.image}
                 width={800}
@@ -53,28 +46,26 @@ export default function SingleArtist(props) {
               />
             </div>
           )}
-          {props.data.artist.bio && (
-            <>
-              <div>{bio}</div>
-            </>
-          )}
-          {props.data.artist.imageGallery && (
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              {props.data.artist.imageGallery.map(({ image, altText }, i) => (
-                <div key={i}>
-                  <Img
-                    {...image}
-                    alt={altText}
-                    width={300}
-                    style={{ width: '100%' }}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+          <div
+            style={{ display: 'grid', placeItems: 'center', margin: '40px 0' }}
+          >
+            <Img
+              {...props.data.artist.logo}
+              width={300}
+              alt={`band logo`}
+              style={{ width: 200 }}
+            />
+          </div>
+          <ContentStyles margin={`0 auto`}>
+            {props.data.artist.bio && (
+              <>
+                <div style={{ marginBottom: 40 }}>{bio}</div>
+              </>
+            )}
+          </ContentStyles>
           {props.data.artist.featuredVideo && (
             <div style={{ position: 'relative', lineHeight: 1 }}>
-              {!isVideoVisible ? (
+              {/* {!isVideoVisible ? (
                 <>
                   <img
                     src={`https://img.youtube.com/vi/${getYouTubeID(
@@ -116,11 +107,28 @@ export default function SingleArtist(props) {
                     },
                   }}
                 />
-              )}
+              )} */}
+              <YouTube
+                videoId={getYouTubeID(props.data.artist.featuredVideo.url)}
+                opts={{
+                  height: '480px',
+                  width: '100%',
+                  playerVars: {
+                    // https://developers.google.com/youtube/player_parameters
+                    autoplay: 0,
+                  },
+                }}
+              />
             </div>
           )}
           {props.data.artist.videoGallery && (
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <div
+              style={{
+                display: 'flex',
+                gap: '0.5rem',
+                justifyContent: 'center',
+              }}
+            >
               {props.data.artist.videoGallery.map((video, i) => (
                 <div key={i}>
                   <YouTube
@@ -134,7 +142,7 @@ export default function SingleArtist(props) {
               ))}
             </div>
           )}
-          {filteredEvents.length && (
+          {filteredEvents.length > 0 && (
             <>
               <section style={{ marginBottom: '1rem' }}>
                 <h2>Upcoming Events</h2>
