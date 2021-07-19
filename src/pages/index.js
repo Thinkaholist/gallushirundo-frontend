@@ -7,23 +7,7 @@ export default function HomePage({ data }) {
   return (
     <>
       <ContainerStyles>
-        <ul style={{ marginTop: '1.5rem' }}>
-          <li>
-            <Link to='/artists'>Artists</Link>
-          </li>
-          <li>
-            <Link to='/news'>News</Link>
-          </li>
-          <li>
-            <Link to='/events'>Events</Link>
-          </li>
-          <li>
-            <Link to='/contact'>Contact</Link>
-          </li>
-        </ul>
-        <p>{data.siteSettings.description}</p>
-
-        <hr />
+        <hr style={{ marginTop: '1.5rem' }} />
         <h2>Artists</h2>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           {data.artists.edges.map((artist) => (

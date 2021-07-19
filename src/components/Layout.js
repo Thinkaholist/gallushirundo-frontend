@@ -24,6 +24,17 @@ const Nav = styled.div`
   }
 `;
 
+const MenuItems = styled.ul`
+  font-family: FormaDJRTextRegular;
+  a:hover {
+    text-decoration: none;
+  }
+  a[aria-current='page'] {
+    font-family: FormaDJRTextBold;
+    border-bottom: 2px solid;
+  }
+`;
+
 export default function Layout({ children }) {
   const { siteSettings } = useStaticQuery(graphql`
     query {
@@ -52,7 +63,9 @@ export default function Layout({ children }) {
               <h1>
                 <Link to='/'>{siteSettings.title}</Link>
               </h1>
-              <ul style={{ marginLeft: 'auto', display: 'flex', gap: 132 }}>
+              <MenuItems
+                style={{ marginLeft: 'auto', display: 'flex', gap: 132 }}
+              >
                 <li>
                   <Link to={`/news`}>News</Link>
                 </li>
@@ -65,7 +78,7 @@ export default function Layout({ children }) {
                 <li>
                   <Link to={`/contact`}>Contact</Link>
                 </li>
-              </ul>
+              </MenuItems>
             </div>
           </ContainerStyles>
         </Nav>
