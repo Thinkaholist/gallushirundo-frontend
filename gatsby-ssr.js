@@ -5,7 +5,7 @@ export function wrapPageElement({ element, props }) {
   return <Layout {...props}>{element}</Layout>;
 }
 
-export const onClientEntry = async () => {
+export const onInitialClientRender = async () => {
   if (typeof IntersectionObserver === 'undefined') {
     await import('intersection-observer');
   }
