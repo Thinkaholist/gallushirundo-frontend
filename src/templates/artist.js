@@ -134,7 +134,7 @@ export default function SingleArtist(props) {
               ))}
             </div>
           )}
-          {filteredEvents && (
+          {filteredEvents.length && (
             <>
               <section style={{ marginBottom: '1rem' }}>
                 <h2>Upcoming Events</h2>
