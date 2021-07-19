@@ -249,6 +249,7 @@ export default function SingleArtist(props) {
             </a>
           )}
         </div>
+        <h2 style={{ marginTop: '2rem', textAlign: 'center' }}>Listen more!</h2>
         <nav>
           <ul
             style={{
@@ -257,7 +258,7 @@ export default function SingleArtist(props) {
               justifyContent: `space-between`,
               listStyle: `none`,
               padding: 0,
-              marginTop: '2rem',
+              marginTop: '1rem',
             }}
           >
             <li>
