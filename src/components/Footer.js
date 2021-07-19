@@ -9,7 +9,7 @@ const FooterStyles = styled.footer`
   border-top: 1px solid;
   /* margin-left: 1rem;
   margin-right: 1rem; */
-  background-color: #ff101e;
+  background-color: #b5965c;
   color: #fff;
 `;
 
