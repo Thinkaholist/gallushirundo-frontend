@@ -45,16 +45,24 @@ export default function Layout({ children }) {
                 textTransform: 'uppercase',
                 fontFamily: 'FormaDJRTextBold',
                 color: '#ff101e',
+                display: 'flex',
+                alignItems: 'baseline',
               }}
             >
               <h1>
                 <Link to='/'>{siteSettings.title}</Link>
               </h1>
-              <ul>
+              <ul style={{ marginLeft: 'auto', display: 'flex', gap: 132 }}>
                 <li>
                   <Link to={`/news`}>News</Link>
+                </li>
+                <li>
                   <Link to={`/events`}>Events</Link>
+                </li>
+                <li>
                   <Link to={`/artists`}>Artists</Link>
+                </li>
+                <li>
                   <Link to={`/contact`}>Contact</Link>
                 </li>
               </ul>
