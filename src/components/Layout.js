@@ -26,10 +26,15 @@ const Nav = styled.div`
 
 const MenuItems = styled.ul`
   font-family: FormaDJRTextRegular;
+  li {
+    padding: 0 2px;
+  }
+
   a:hover {
     text-decoration: none;
   }
   a[aria-current='page'] {
+    font-family: FormaDJRTextBold;
     border-bottom: 2px solid;
   }
 `;
