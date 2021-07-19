@@ -33,13 +33,21 @@ const SubHeadline = styled.h2`
   font-size: ${30 / 16}rem;
 `;
 
+const InternalLink = styled(Link)`
+  background-color: #ff101e;
+  color: #fff;
+  padding: 1px 2px;
+`;
+
 export default function SinglePost(props) {
   const serializers = {
     marks: {
       internalLink: ({ mark, children }) => (
-        <Link to={`/${mark.reference._type}/${mark.reference.slug.current}`}>
+        <InternalLink
+          to={`/${mark.reference._type}/${mark.reference.slug.current}`}
+        >
           {children}
-        </Link>
+        </InternalLink>
       ),
       externalLink: ({ children, mark }) => {
         return (
