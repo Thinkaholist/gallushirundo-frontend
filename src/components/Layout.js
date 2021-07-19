@@ -24,6 +24,8 @@ const Nav = styled.div`
   }
 `;
 
+const Logo = styled.h1``;
+
 export default function Layout({ children }) {
   const { siteSettings } = useStaticQuery(graphql`
     query {
@@ -47,7 +49,9 @@ export default function Layout({ children }) {
                 color: '#ff101e',
               }}
             >
-              <Link to='/'>{siteSettings.title}</Link>
+              <Logo>
+                <Link to='/'>{siteSettings.title}</Link>
+              </Logo>
             </div>
           </ContainerStyles>
         </Nav>
