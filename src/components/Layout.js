@@ -57,7 +57,7 @@ export default function Layout({ children }) {
                 fontFamily: 'FormaDJRTextBold',
                 color: '#ff101e',
                 display: 'flex',
-                alignItems: 'baseline',
+                alignItems: 'center',
               }}
             >
               <h1>
