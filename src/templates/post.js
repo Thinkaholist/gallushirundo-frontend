@@ -26,17 +26,43 @@ function urlFor(source) {
 const Headline = styled.h1`
   font-weight: 400;
   line-height: 1.2;
-  margin-bottom: 2rem;
+  margin-bottom: ${40 / 16}rem;
 `;
 
 const SubHeadline = styled.h2`
   font-size: ${30 / 16}rem;
+  margin-bottom: ${40 / 16}rem;
+  line-height: 1.4;
 `;
 
 const InternalLink = styled(Link)`
   background-color: #ff101e;
   color: #fff;
   padding: 1px 2px;
+`;
+
+const CategoryLink = styled(Link)`
+  color: #ff101e;
+
+  span a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  span:hover {
+    background-color: #ff101e;
+    color: #fff;
+  }
+`;
+
+const PortableTextStyles = styled.div`
+  line-height: 1.625;
+  p:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+  /* a[href^='http'] {
+    color: rebeccapurple;
+  } */
 `;
 
 export default function SinglePost(props) {
@@ -254,39 +280,42 @@ export default function SinglePost(props) {
   return (
     <>
       <ContainerStyles>
-        {props.data.post.featuredImage && (
-          <div>
-            <img
-              src={props.data.post?.featuredImage?.asset?.url}
-              alt={props.data.post?.featuredImage?.asset?.altText}
-              style={{ width: '100%' }}
-            />
-          </div>
-        )}
-        <Headline>
-          {props.data.post.title}
-          <Link to={`/category/${props.data.post.category.slug.current}`}>
-            <span
-              style={{
-                marginLeft: 20,
-                fontSize: 15,
-                border: '1px solid peachpuff',
-                borderRadius: 4,
-                padding: 4,
-                backgroundColor: 'peachpuff',
-                color: 'blue',
-              }}
+        <div style={{ maxWidth: 700 }}>
+          {props.data.post.featuredImage && (
+            <div>
+              <img
+                src={props.data.post?.featuredImage?.asset?.url}
+                alt={props.data.post?.featuredImage?.asset?.altText}
+                style={{ width: '100%' }}
+              />
+            </div>
+          )}
+          <Headline>
+            {props.data.post.title}{' '}
+            <CategoryLink
+              to={`/category/${props.data.post.category.slug.current}`}
             >
-              {props.data.post.category.name}
-            </span>
-          </Link>
-        </Headline>
-        <SubHeadline>{props.data.post.excerpt}</SubHeadline>
-        <hr />
-        <PortableText
-          blocks={props.data.post._rawBody}
-          serializers={serializers}
-        />
+              <span
+                style={{
+                  fontSize: 15,
+                  borderRadius: 4,
+                  padding: 4,
+                }}
+              >
+                #{props.data.post.category.name}
+              </span>
+            </CategoryLink>
+          </Headline>
+
+          <SubHeadline>{props.data.post.excerpt}</SubHeadline>
+
+          <PortableTextStyles>
+            <PortableText
+              blocks={props.data.post._rawBody}
+              serializers={serializers}
+            />
+          </PortableTextStyles>
+        </div>
       </ContainerStyles>
     </>
   );

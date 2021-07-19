@@ -14,6 +14,10 @@ const Wrapper = styled.div`
 const Nav = styled.div`
   background-color: transparent;
   padding: 10px 0;
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; */
 
   a {
     text-decoration: none;
@@ -30,12 +34,17 @@ const MenuItems = styled.ul`
     padding: 0 2px;
   }
 
+  a {
+    letter-spacing: 1px;
+  }
+
   a:hover {
     text-decoration: none;
   }
   a[aria-current='page'] {
-    /* font-family: FormaDJRTextBold; */
+    font-family: FormaDJRTextBold;
     border-bottom: 2px solid;
+    letter-spacing: 0;
   }
 `;
 
@@ -68,7 +77,7 @@ export default function Layout({ children }) {
                 <Link to='/'>{siteSettings.title}</Link>
               </h1>
               <MenuItems
-                style={{ marginLeft: 'auto', display: 'flex', gap: 132 }}
+                style={{ marginLeft: 'auto', display: 'flex', gap: 80 }}
               >
                 <li>
                   <Link to={`/news`}>News</Link>
@@ -86,7 +95,7 @@ export default function Layout({ children }) {
             </div>
           </ContainerStyles>
         </Nav>
-        <div style={{ marginBottom: '1rem' }}>{children}</div>
+        <div style={{ marginBottom: 40 }}>{children}</div>
         <Footer />
       </Wrapper>
     </>
