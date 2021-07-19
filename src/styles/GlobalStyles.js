@@ -69,6 +69,7 @@ const GlobalStyles = createGlobalStyle`
 
   html {
     overflow-y: scroll;
+    box-sizing: border-box;
   }
 
   body {
