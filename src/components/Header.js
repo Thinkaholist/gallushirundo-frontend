@@ -26,20 +26,17 @@ const HeaderStyles = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  transition: all 500ms ease;
+  transition: all 300ms ease;
 
   h1 {
     font-size: ${(p) =>
       p.styles.backgroundColor === 'transparent' ? '40px' : '30px'};
-    transition: font-size 500ms ease;
+    transition: font-size 300ms ease;
   }
 
   a {
     text-decoration: none;
     color: inherit;
-    &:hover {
-      text-decoration: revert;
-    }
   }
 `;
 
@@ -53,9 +50,6 @@ const MenuItems = styled.ul`
     letter-spacing: 1px;
   }
 
-  a:hover {
-    text-decoration: none;
-  }
   a[aria-current='page'] {
     font-family: FormaDJRTextBold;
     border-bottom: 2px solid;
