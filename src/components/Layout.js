@@ -16,7 +16,7 @@ export default function Layout({ children }) {
       <Wrapper>
         <GlobalStyles />
         <Header />
-        <div style={{ marginBottom: 40, marginTop: '10rem' }}>{children}</div>
+        <div style={{ marginBottom: 40, marginTop: '8rem' }}>{children}</div>
         <Footer />
       </Wrapper>
     </>

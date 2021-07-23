@@ -11,13 +11,13 @@ const HeroImage = styled.div`
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  margin-top: -10rem;
+  margin-top: -8rem;
 `;
 
 export default function HomePage({ data }) {
   return (
     <>
-      <HeroImage>Hero Image</HeroImage>
+      <HeroImage />
       <ContainerStyles>
         <h2>Artists</h2>
         <div style={{ display: 'flex', gap: '0.5rem' }}>

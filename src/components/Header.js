@@ -17,23 +17,25 @@ function getHeaderTextColor() {
 
 const HeaderStyles = styled.header`
   background-color: ${(p) => p.styles.backgroundColor};
+  /* Fallback until there is no Browser */
   color: #fff;
   color: ${(p) =>
     p.styles.backgroundColor === 'transparent'
       ? getHeaderTextColor()
       : 'var(--color-white)'};
-  padding: ${(p) => p.styles.padding};
+  /* padding: ${(p) => p.styles.padding}; */
+  padding: 15px 0;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  transition: all 300ms ease;
+  transition: all 400ms ease;
 
-  h1 {
+  /* h1 {
     font-size: ${(p) =>
-      p.styles.backgroundColor === 'transparent' ? '40px' : '30px'};
-    transition: font-size 300ms ease;
-  }
+    p.styles.backgroundColor === 'transparent' ? '40px' : '30px'};
+    transition: font-size 500ms ease;
+  } */
 
   a {
     text-decoration: none;
@@ -79,7 +81,7 @@ export default function Header() {
 
   function handleScroll() {
     const currentScroll = window.scrollY;
-    if (currentScroll > 60) {
+    if (currentScroll > 50) {
       setHeaderStyles({
         ...headerStyles,
         backgroundColor: 'var(--color-red)',
