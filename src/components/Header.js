@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { Link, useStaticQuery, graphql } from 'gatsby';
 import { ContainerStyles } from '../styles/ContainerStyles';
 
+const isBrowser = typeof window !== 'undefined';
+
 function getHeaderTextColor() {
-  if (window !== undefined) {
+  if (isBrowser) {
     if (window.location.pathname === '/') {
       return 'var(--color-white)';
     } else {
