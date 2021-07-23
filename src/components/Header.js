@@ -97,8 +97,6 @@ export default function Header() {
     }
   }
 
-  console.log('location', window.location);
-
   return (
     <>
       <HeaderStyles styles={headerStyles}>
