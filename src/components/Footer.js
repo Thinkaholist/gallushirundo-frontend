@@ -10,7 +10,7 @@ const FooterStyles = styled.footer`
   /* margin-left: 1rem;
   margin-right: 1rem; */
   background-color: #7eaac2;
-  color: #fff;
+  color: var(--color-white);
 `;
 
 export default function Footer() {

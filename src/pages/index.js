@@ -2,12 +2,23 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { DateTime } from 'luxon';
 import { ContainerStyles } from '../styles/ContainerStyles';
+import styled from 'styled-components';
+
+const HeroImage = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-image: url('https://static.euronews.com/articles/stories/05/42/38/88/1440x810_cmsv2_6e94f611-cc4a-59b4-a57e-d7b9fe7336c8-5423888.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin-top: -10rem;
+`;
 
 export default function HomePage({ data }) {
   return (
     <>
+      <HeroImage>Hero Image</HeroImage>
       <ContainerStyles>
-        <hr style={{ marginTop: '1.5rem' }} />
         <h2>Artists</h2>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           {data.artists.edges.map((artist) => (

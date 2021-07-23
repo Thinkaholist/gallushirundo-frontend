@@ -54,7 +54,7 @@ export default function SubscribeForm() {
           <div
             style={{
               backgroundColor: '#16a085',
-              color: '#fff',
+              color: 'var(--color-white)',
               padding: 10,
               marginBottom: '1.5rem',
               width: 300,
@@ -73,7 +73,7 @@ export default function SubscribeForm() {
             <div
               style={{
                 backgroundColor: 'rgba(211,84,0, 0.8)',
-                color: '#fff',
+                color: 'var(--color-white)',
                 padding: 10,
                 marginBottom: '1.5rem',
                 width: 300,

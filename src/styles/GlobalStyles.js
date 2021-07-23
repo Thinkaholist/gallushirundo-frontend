@@ -70,6 +70,8 @@ const GlobalStyles = createGlobalStyle`
   html {
     overflow-y: scroll;
     box-sizing: border-box;
+    --color-red: #ff101e;
+    --color-white: #fff;
   }
 
   body {

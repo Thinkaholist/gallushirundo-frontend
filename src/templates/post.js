@@ -37,13 +37,13 @@ const SubHeadline = styled.h2`
 `;
 
 const InternalLink = styled(Link)`
-  background-color: #ff101e;
-  color: #fff;
+  background-color: var(--color-red);
+  color: var(--color-white);
   padding: 1px 2px;
 `;
 
 const CategoryLink = styled(Link)`
-  color: #ff101e;
+  color: var(--color-red);
 
   span a {
     color: inherit;
@@ -51,8 +51,8 @@ const CategoryLink = styled(Link)`
   }
 
   span:hover {
-    background-color: #ff101e;
-    color: #fff;
+    background-color: var(--color-red);
+    color: var(--color-white);
   }
 `;
 
@@ -231,7 +231,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FacebookIcon color='#FF101E' size={30} />
+                    <FacebookIcon color='var(--color-red)' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.instagram && (
@@ -240,7 +240,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaInstagram color='#FF101E' size={30} />
+                    <FaInstagram color='var(--color-red)' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.spotify && (
@@ -249,7 +249,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaSpotify color='#FF101E' size={30} />
+                    <FaSpotify color='var(--color-red)' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.youtube && (
@@ -258,7 +258,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaYoutube color='#FF101E' size={30} />
+                    <FaYoutube color='var(--color-red)' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.website && (
@@ -267,7 +267,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaGlobe color='#FF101E' size={30} />
+                    <FaGlobe color='var(--color-red)' size={30} />
                   </a>
                 )}
               </div>

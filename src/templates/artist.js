@@ -83,7 +83,7 @@ export default function SingleArtist(props) {
                       top: '50%',
                       left: '50%',
                       transform: 'translate(-50%, -50%)',
-                      backgroundColor: '#fff',
+                      backgroundColor: 'var(--color-white)',
                       padding: 15,
                       borderRadius: '50%',
                       width: 30,
