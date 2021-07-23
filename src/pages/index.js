@@ -72,6 +72,17 @@ export const query = graphql`
       title
       description
     }
+    homePage: sanityHomePage(_id: { eq: "homePage" }) {
+      headerText
+      heroImage {
+        altText
+        image {
+          asset {
+            url
+          }
+        }
+      }
+    }
     artists: allSanityArtist {
       edges {
         node {
