@@ -24,7 +24,7 @@ const HeaderStyles = styled.header`
       ? getHeaderTextColor()
       : 'var(--color-white)'};
   /* padding: ${(p) => p.styles.padding}; */
-  padding: 15px 0;
+  padding: 10px 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -81,17 +81,17 @@ export default function Header() {
 
   function handleScroll() {
     const currentScroll = window.scrollY;
-    if (currentScroll > 50) {
+    if (currentScroll > 40) {
       setHeaderStyles({
         ...headerStyles,
         backgroundColor: 'var(--color-red)',
-        padding: '5px 0',
+        // padding: '5px 0',
       });
     } else {
       setHeaderStyles({
         ...headerStyles,
         backgroundColor: 'transparent',
-        padding: '15px 0',
+        // padding: '15px 0',
       });
     }
   }
