@@ -17,6 +17,7 @@ function getHeaderTextColor() {
 
 const HeaderStyles = styled.header`
   background-color: ${(p) => p.styles.backgroundColor};
+  color: #fff;
   color: ${(p) =>
     p.styles.backgroundColor === 'transparent'
       ? getHeaderTextColor()
