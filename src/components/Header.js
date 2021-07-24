@@ -25,6 +25,7 @@ const HeaderStyles = styled.header`
       : 'var(--color-white)'};
   /* padding: ${(p) => p.styles.padding}; */
   padding: 10px 0;
+  box-shadow: ${(p) => p.styles.boxShadow};
   position: fixed;
   top: 0;
   left: 0;
@@ -86,6 +87,7 @@ export default function Header() {
         ...headerStyles,
         backgroundColor: 'var(--color-red)',
         // padding: '5px 0',
+        boxShadow: '0 1px 3px rgba(57, 63, 72, 0.2);',
       });
     } else {
       setHeaderStyles({
