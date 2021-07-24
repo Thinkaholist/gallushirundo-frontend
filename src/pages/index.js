@@ -14,52 +14,104 @@ const HeroImage = styled.div`
   margin-top: -8rem;
 `;
 
+const HeroText = styled.div`
+  color: var(--color-white);
+  font-size: ${30 / 16}rem;
+  line-height: 1.5;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: ${160 / 16}rem;
+  max-width: 790px;
+
+  p {
+    margin-bottom: ${148 / 16}rem;
+  }
+`;
+
+const NewsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: ${23 / 16}rem;
+  margin: ${40 / 16}rem 0;
+
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+`;
+
+const NewsPreview = styled.article`
+  background-color: darkgoldenrod;
+  width: 400px;
+  border-radius: 28px;
+  padding: 34px 26px;
+  color: var(--color-white);
+  /* -webkit-text-stroke: 1px black; */
+  background: ${(p) => `url(${p.background})`};
+  background-position: center;
+  background-size: cover;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  transition: all 200ms;
+  .title {
+    font-size: ${24 / 16}rem;
+    text-transform: uppercase;
+    max-width: 80%;
+    line-height: 1.3;
+
+    span {
+      background-color: var(--color-red);
+    }
+  }
+
+  .date {
+    font-size: ${22 / 16}rem;
+    -webkit-text-stroke: 1px black;
+    font-family: FormaDJRTextBold;
+  }
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    transform: scale(1.01);
+  }
+`;
+
 export default function HomePage({ data }) {
+  const latestNews = data.posts.edges;
+
+  console.log(data);
+
   return (
     <>
-      <HeroImage />
+      <HeroImage>
+        <ContainerStyles>
+          <HeroText>
+            <p>{data.homePage.headerText}</p>
+          </HeroText>
+        </ContainerStyles>
+      </HeroImage>
       <ContainerStyles>
-        <h2>Artists</h2>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
-          {data.artists.edges.map((artist) => (
-            <Link
-              key={artist.node._id}
-              to={`/artist/${artist.node.slug.current}`}
-            >
-              {artist.node.name}
+        <NewsWrapper>
+          {latestNews.map(({ node }) => (
+            <Link key={node._id} to={`/post/${node.slug.current}`}>
+              <NewsPreview background={node.featuredImage.image.asset.url}>
+                <p className='date'>
+                  {DateTime.fromISO(node.publishedDate).toFormat('kkkk.LL.dd')}
+                </p>
+                <p className='title'>
+                  <span>{node.title}</span>
+                </p>
+              </NewsPreview>
             </Link>
           ))}
-        </div>
-        <hr />
-        <h2>Events</h2>
-        <ul>
-          {data.events.edges.map((ev) => (
-            <li key={ev.node._id}>
-              <Link to={`/event/${ev.node.slug.current}`}>{ev.node.title}</Link>
-            </li>
-          ))}
-        </ul>
-        <hr />
-        <h2>Latest 4 News</h2>
-        <ul>
-          {data.posts.edges.map((post) => (
-            <li key={post.node._id}>
-              <Link to={`/post/${post.node.slug.current}`}>
-                {post.node.title}
-              </Link>
-              <br />
-              <br />
-              <Link to={`/category/${post.node.category.slug.current}`}>
-                {post.node.category.name}
-              </Link>
-              <p>
-                {DateTime.fromISO(post.node.publishedDate).toFormat(
-                  'kkkk.LL.dd - T'
-                )}
-              </p>
-            </li>
-          ))}
-        </ul>
+        </NewsWrapper>
+        <h2>Equliazer</h2>
       </ContainerStyles>
     </>
   );
@@ -123,6 +175,13 @@ export const query = graphql`
             name
             slug {
               current
+            }
+          }
+          featuredImage {
+            image {
+              asset {
+                url
+              }
             }
           }
         }
