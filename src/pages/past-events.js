@@ -47,6 +47,7 @@ export default function EventsPage({ data }) {
   return (
     <>
       <ContainerStyles>
+        <h1>Past Events</h1>
         {events.map((event) => (
           <EventRow>
             <ImageWrapper bg={event.cover.image.asset.url}>
@@ -73,19 +74,6 @@ export default function EventsPage({ data }) {
             </MoreInfoButton>
           </EventRow>
         ))}
-        <div>
-          <Link to='/past-events'>Past Events</Link>
-        </div>
-        {/* <ul>
-          {data.allSanityEvent.edges.map(({ node }) => (
-            <li key={node._id}>
-              <div>
-                <Link to={`/event/${node.slug.current}`}>{node.title}</Link>
-                <p>{node.date}</p>
-              </div>
-            </li>
-          ))}
-        </ul> */}
       </ContainerStyles>
     </>
   );
@@ -94,8 +82,8 @@ export default function EventsPage({ data }) {
 export const query = graphql`
   query ($rightNow: Date!) {
     events: allSanityEvent(
-      sort: { fields: date, order: ASC }
-      filter: { date: { gte: $rightNow } }
+      sort: { fields: date, order: DESC }
+      filter: { date: { lte: $rightNow } }
     ) {
       nodes {
         _id
