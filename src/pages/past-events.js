@@ -9,6 +9,7 @@ const EventRow = styled.article`
   display: flex;
   gap: 1rem;
   align-items: center;
+  color: #666;
 
   h3 {
     font-family: FormaDJRTextBold;
@@ -44,13 +45,15 @@ const MoreInfoButton = styled(Link)`
 export default function EventsPage({ data }) {
   const events = data.events.nodes;
 
+  console.log(events[0].cover.image.asset.url);
+
   return (
     <>
       <ContainerStyles>
         <h1>Past Events</h1>
         {events.map((event) => (
           <EventRow>
-            <ImageWrapper bg={event.cover.image.asset.url}>
+            <ImageWrapper bg={`${event.cover.image.asset.url}?sat=-100`}>
               {/* <img src={event.cover.image.asset.url} /> */}
             </ImageWrapper>
             <div style={{ width: 450 }}>
