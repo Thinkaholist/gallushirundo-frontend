@@ -31,6 +31,7 @@ const HeaderStyles = styled.header`
   left: 0;
   width: 100%;
   transition: all 400ms ease;
+  z-index: 9999;
 
   /* h1 {
     font-size: ${(p) =>
