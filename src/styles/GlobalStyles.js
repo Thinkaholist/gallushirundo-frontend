@@ -61,6 +61,7 @@ const GlobalStyles = createGlobalStyle`
     --color-red: #ff101e;
     --color-white: #fff;
     --font-family: 'Forma DJR Text', -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    --breakpoint-tablet: 900px;
   }
 
   body {

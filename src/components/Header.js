@@ -18,7 +18,7 @@ function getHeaderTextColor() {
 const HeaderStyles = styled.header`
   background-color: ${(p) => p.styles.backgroundColor};
   /* Fallback until there is no Browser */
-  color: #fff;
+  color: var(--color-black);
   color: ${(p) =>
     p.styles.backgroundColor === 'transparent'
       ? getHeaderTextColor()
@@ -41,17 +41,41 @@ const HeaderStyles = styled.header`
 
   h1 {
     font-weight: 700;
+
+    @media (max-width: 900px) {
+      font-size: ${26 / 16}rem;
+    }
   }
 
   a {
     text-decoration: none;
     color: inherit;
   }
+
+  @media (max-width: 900px) {
+    padding: 5px 0;
+  }
+`;
+
+const HeaderContentWrapper = styled.div`
+  text-transform: uppercase;
+  font-family: var(--font-family);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 900px) {
+    justify-content: center;
+  }
 `;
 
 const MenuItems = styled.ul`
   font-family: var(--font-family);
   font-weight: 400;
+  display: flex;
+  gap: 60px;
+  margin-left: auto;
+
   li {
     padding: 0 2px;
   }
@@ -65,6 +89,10 @@ const MenuItems = styled.ul`
     border-bottom: 2px solid;
     letter-spacing: 0;
     font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
   }
 `;
 
@@ -109,19 +137,11 @@ export default function Header() {
     <>
       <HeaderStyles styles={headerStyles}>
         <ContainerStyles>
-          <div
-            style={{
-              textTransform: 'uppercase',
-              fontFamily: 'var(--font-family)',
-              fontWeight: 700,
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
+          <HeaderContentWrapper>
             <h1>
               <Link to='/'>{siteSettings.title}</Link>
             </h1>
-            <MenuItems style={{ marginLeft: 'auto', display: 'flex', gap: 60 }}>
+            <MenuItems>
               <li>
                 <Link to={`/news`}>News</Link>
               </li>
@@ -135,7 +155,7 @@ export default function Header() {
                 <Link to={`/contact`}>Contact</Link>
               </li>
             </MenuItems>
-          </div>
+          </HeaderContentWrapper>
         </ContainerStyles>
       </HeaderStyles>
     </>
