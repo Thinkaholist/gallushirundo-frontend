@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { graphql, Link } from 'gatsby';
 import getYouTubeID from 'get-youtube-id';
-import YouTube from 'react-youtube';
 import { FaPlay } from 'react-icons/fa';
 import Img from 'gatsby-plugin-sanity-image';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import { ContentStyles } from '../styles/ContentStyles';
+import YouTube from 'react-youtube';
+import ReactPlayer from 'react-player/youtube';
 
 export default function SingleArtist(props) {
   const [isVideoVisible, setIsVideoVisible] = useState(false);
@@ -62,7 +63,7 @@ export default function SingleArtist(props) {
           <ContentStyles margin={`0 auto`}>
             {props.data.artist.bio && (
               <>
-                <div style={{ marginBottom: 40 }}>{bio}</div>
+                <div>{bio}</div>
               </>
             )}
           </ContentStyles>
@@ -111,17 +112,23 @@ export default function SingleArtist(props) {
                   }}
                 />
               )} */}
-              <YouTube
-                videoId={getYouTubeID(props.data.artist.featuredVideo.url)}
-                opts={{
-                  height: '480px',
-                  width: '100%',
-                  playerVars: {
-                    // https://developers.google.com/youtube/player_parameters
-                    autoplay: 0,
-                  },
+              <div
+                style={{
+                  position: 'relative',
+                  paddingTop: '56.25%',
+                  margin: '2rem 0',
                 }}
-              />
+              >
+                <ReactPlayer
+                  url={`https://www.youtube.com/watch?v=${getYouTubeID(
+                    props.data.artist.featuredVideo.url
+                  )}`}
+                  light={true}
+                  width='100%'
+                  pip={true}
+                  style={{ position: 'absolute', top: 0, left: 0 }}
+                />
+              </div>
             </div>
           )}
           {props.data.artist.videoGallery && (
