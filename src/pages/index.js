@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const HeroImage = styled.div`
   width: 100vw;
   height: 100vh;
-  background-image: url('https://static.euronews.com/articles/stories/05/42/38/88/1440x810_cmsv2_6e94f611-cc4a-59b4-a57e-d7b9fe7336c8-5423888.jpg');
+  background-image: ${(p) => `url(${p.bg})`};
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -74,7 +74,8 @@ const NewsPreview = styled.article`
   .date {
     font-size: ${22 / 16}rem;
     -webkit-text-stroke: 1px black;
-    font-family: FormaDJRTextBold;
+    font-family: var(--font-family);
+    font-weight: 700;
   }
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -84,12 +85,13 @@ const NewsPreview = styled.article`
 
 export default function HomePage({ data }) {
   const latestNews = data.posts.edges;
+  const heroImage = data.homePage.heroImage.image.asset.url;
 
   console.log(data);
 
   return (
     <>
-      <HeroImage>
+      <HeroImage bg={heroImage}>
         <ContainerStyles>
           <HeroText>
             <p>{data.homePage.headerText}</p>

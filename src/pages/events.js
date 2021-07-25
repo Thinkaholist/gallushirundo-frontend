@@ -11,7 +11,8 @@ const EventRow = styled.article`
   align-items: center;
 
   h3 {
-    font-family: FormaDJRTextBold;
+    font-family: var(--font-family);
+    font-weight: 700;
   }
 `;
 

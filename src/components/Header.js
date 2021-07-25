@@ -38,6 +38,10 @@ const HeaderStyles = styled.header`
     transition: font-size 500ms ease;
   } */
 
+  h1 {
+    font-weight: 700;
+  }
+
   a {
     text-decoration: none;
     color: inherit;
@@ -45,7 +49,8 @@ const HeaderStyles = styled.header`
 `;
 
 const MenuItems = styled.ul`
-  font-family: FormaDJRTextRegular;
+  font-family: var(--font-family);
+  font-weight: 400;
   li {
     padding: 0 2px;
   }
@@ -55,9 +60,10 @@ const MenuItems = styled.ul`
   }
 
   a[aria-current='page'] {
-    font-family: FormaDJRTextBold;
+    font-family: var(--font-family);
     border-bottom: 2px solid;
     letter-spacing: 0;
+    font-weight: 700;
   }
 `;
 
@@ -105,7 +111,8 @@ export default function Header() {
           <div
             style={{
               textTransform: 'uppercase',
-              fontFamily: 'FormaDJRTextBold',
+              fontFamily: 'var(--font-family)',
+              fontWeight: 700,
               display: 'flex',
               alignItems: 'center',
             }}
