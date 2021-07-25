@@ -41,6 +41,7 @@ export default function NewsPage({ data }) {
         <div style={{ columnCount: 3, columnGap: 18 }}>
           {news.map((post) => (
             <article
+              key={post._id}
               style={{
                 breakInside: 'avoid',
                 marginBottom: '1rem',
@@ -64,6 +65,50 @@ export default function NewsPage({ data }) {
               </p>
               <h3>{post.title}</h3>
               <Link to={`/post/${post.slug.current}`}>Read more</Link>
+            </article>
+          ))}
+        </div>
+        <hr />
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 18 }}>
+          {news.map((post) => (
+            <article
+              key={post._id}
+              style={{
+                flex: 1,
+                minWidth: 250,
+              }}
+            >
+              <div
+                style={{
+                  height: 200,
+                  borderRadius: 28,
+                  background: `url(${post?.featuredImage?.image?.asset?.url})`,
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                }}
+              ></div>
+              <p style={{ marginTop: '0.5rem' }}>
+                <span>
+                  {DateTime.fromISO(post.publishedDate).toFormat('kkkk.LL.dd')}
+                </span>
+                {' // '}
+                <span
+                  style={{
+                    backgroundColor: 'var(--color-red)',
+                    padding: '3px 5px ',
+                    borderRadius: 12,
+                    color: 'var(--color-white)',
+                  }}
+                >
+                  <Link to={`/category/${post.category.slug.current}`}>
+                    #{post.category.name}
+                  </Link>
+                </span>
+              </p>
+              <h3 style={{ marginTop: '1rem' }}>
+                <Link to={`/post/${post.slug.current}`}>{post.title}</Link>
+              </h3>
             </article>
           ))}
         </div>
