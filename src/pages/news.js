@@ -4,12 +4,41 @@ import { DateTime } from 'luxon';
 import { ContainerStyles } from '../styles/ContainerStyles';
 
 export default function NewsPage({ data }) {
+  const news = data.news.nodes;
+
   return (
     <>
       <ContainerStyles>
-        <h1>News</h1>
-        <hr />
-        <ul>
+        <div style={{ columnCount: 3, columnGap: 18 }}>
+          {news.map((post) => (
+            <article
+              style={{
+                breakInside: 'avoid',
+                marginBottom: '1rem',
+                borderRadius: '28px',
+              }}
+            >
+              <div>
+                <img
+                  src={post.featuredImage?.image?.asset?.url}
+                  style={{
+                    width: '100%',
+                    display: 'block',
+                    marginBottom: '1rem',
+                  }}
+                />
+              </div>
+              <p>
+                {DateTime.fromISO(post.publishedDate).toFormat(
+                  'kkkk.LL.dd - T'
+                )}
+              </p>
+              <h3>{post.title}</h3>
+              <Link to={`/post/${post.slug.current}`}>Read more</Link>
+            </article>
+          ))}
+        </div>
+        {/* <ul>
           {data.allSanityPost.edges.map(({ node }) => (
             <li key={node._id}>
               <div>
@@ -27,7 +56,7 @@ export default function NewsPage({ data }) {
               </div>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </ContainerStyles>
     </>
   );
@@ -35,23 +64,28 @@ export default function NewsPage({ data }) {
 
 export const query = graphql`
   query ($rightNow: Date!) {
-    allSanityPost(
+    news: allSanityPost(
       sort: { fields: publishedDate, order: DESC }
       filter: { publishedDate: { lte: $rightNow } }
     ) {
-      edges {
-        node {
+      nodes {
+        _id
+        title
+        publishedDate
+        slug {
+          current
+        }
+        category {
           _id
-          title
-          publishedDate
+          name
           slug {
             current
           }
-          category {
-            _id
-            name
-            slug {
-              current
+        }
+        featuredImage {
+          image {
+            asset {
+              url
             }
           }
         }

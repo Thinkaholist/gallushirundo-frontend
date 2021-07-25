@@ -104,11 +104,11 @@ const GlobalStyles = createGlobalStyle`
     color: #A31C18;
   }
 
-  @media(max-width: 756){
+  /* @media(max-width: 756){
     html {
       font-size: 10px;
     }
-  }
+  } */
 `;
 
 export default GlobalStyles;
