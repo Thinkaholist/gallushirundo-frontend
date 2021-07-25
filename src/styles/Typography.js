@@ -10,24 +10,28 @@ const Typography = createGlobalStyle`
     src: url(${FormaDJRTextRegular}) format('woff2');
     font-weight: 400;
     font-style: normal;
+    font-display: fallback;
   }
   @font-face {
     font-family: 'Forma DJR Text';
     src: url(${FormaDJRTextRegularItalic}) format('woff2');
     font-weight: 400;
     font-style: italic;
+    font-display: fallback;
   }
   @font-face {
     font-family: 'Forma DJR Text';
     src: url(${FormaDJRTextMedium}) format('woff2');
     font-weight: 500;
     font-style: normal;
+    font-display: fallback;
   }
   @font-face {
     font-family: 'Forma DJR Text';
     src: url(${FormaDJRTextBold}) format('woff2');
     font-weight: 700;
     font-style: normal;
+    font-display: fallback;
   }
 `;
 
