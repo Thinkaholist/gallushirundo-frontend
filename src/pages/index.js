@@ -48,6 +48,7 @@ const NewsWrapper = styled.div`
 const NewsPreview = styled.article`
   background-color: darkgoldenrod;
   width: 320px;
+  max-width: 100%;
   border-radius: 28px;
   padding: 34px 26px;
   color: var(--color-white);

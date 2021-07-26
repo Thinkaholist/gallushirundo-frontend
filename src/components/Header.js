@@ -136,6 +136,7 @@ export default function Header({ location }) {
   const [headerStyles, setHeaderStyles] = useState({
     backgroundColor: 'transparent',
     color: 'var(--color-red)',
+    boxShadow: 'none',
   });
 
   useEffect(() => {
@@ -157,6 +158,7 @@ export default function Header({ location }) {
         ...headerStyles,
         backgroundColor: 'transparent',
         color: 'var(--color-red)',
+        boxShadow: 'none',
       });
     }
   }
