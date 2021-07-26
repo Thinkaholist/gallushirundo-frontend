@@ -9,7 +9,6 @@ const LogoStyles = styled.h1`
 
 export default function Logo() {
   const { width } = useWindowSize();
-  console.log(width);
 
   return (
     <>

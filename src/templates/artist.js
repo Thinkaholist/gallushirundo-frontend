@@ -22,19 +22,12 @@ export default function SingleArtist(props) {
 
   const filteredEvents = props.data.events.edges.filter(({ node }) => {
     // const artistsIds = node.artists.map((artist) => artist._id);
-    // console.log('artistsIds', artistsIds);
     return props.data.artist._id === node.artists[0]._id;
   });
-
-  console.log('--events--', props.data.events.edges);
-  console.log('--filteredEvents--', filteredEvents);
 
   function showVideo() {
     setIsVideoVisible(!isVideoVisible);
   }
-
-  console.log(props.data);
-
   return (
     <>
       <ContainerStyles>

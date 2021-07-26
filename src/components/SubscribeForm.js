@@ -24,7 +24,6 @@ export default function SubscribeForm() {
     setSaving(true);
     const result = await addToMailchimp(state.email);
     setSaving(false);
-    console.log(result);
     if (result.result === 'success') {
       setState({
         ...state,

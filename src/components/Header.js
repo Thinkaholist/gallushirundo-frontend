@@ -4,6 +4,7 @@ import { Link, useStaticQuery, graphql } from 'gatsby';
 import { useWindowSize } from 'react-use';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import Logo from './Logo';
+import HamburgerMenu from './HamurgerMenu';
 
 const HeaderStyles = styled.header`
   background-color: ${(p) => p.styles.backgroundColor};
@@ -62,15 +63,27 @@ const MenuItems = styled.ul`
   }
 `;
 
+const MobileMenu = styled.div`
+  background-color: var(--color-red);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 80%;
+  bottom: 0;
+  transform: ${(p) => (!p.isOpen ? 'translateX(-110%)' : 'translateX(0)')};
+  transition: all 0.3s ease-in-out;
+`;
+
 export default function Header({ location }) {
   const { width } = useWindowSize();
-  const { siteSettings } = useStaticQuery(graphql`
-    query {
-      siteSettings: sanitySiteSettings(_id: { eq: "siteSettings" }) {
-        title
-      }
-    }
-  `);
+  const [isOpen, setIsOpen] = useState(false);
+  // const { siteSettings } = useStaticQuery(graphql`
+  //   query {
+  //     siteSettings: sanitySiteSettings(_id: { eq: "siteSettings" }) {
+  //       title
+  //     }
+  //   }
+  // `);
 
   const [headerStyles, setHeaderStyles] = useState({
     backgroundColor: 'transparent',
@@ -124,9 +137,13 @@ export default function Header({ location }) {
                 <Link to={`/contact`}>Contact</Link>
               </li>
             </MenuItems>
+            {width < 917 && (
+              <HamburgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+            )}
           </HeaderContentWrapper>
         </ContainerStyles>
       </HeaderStyles>
+      <MobileMenu isOpen={isOpen} />
     </>
   );
 }

@@ -46,8 +46,6 @@ const MoreInfoButton = styled(Link)`
 export default function EventsPage({ data }) {
   const events = data.events.nodes;
 
-  console.log(events[0].cover.image.asset.url);
-
   return (
     <>
       <ContainerStyles>
