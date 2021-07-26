@@ -79,6 +79,7 @@ const MobileMenu = styled.div`
   bottom: 0;
   transform: ${(p) => (!p.isOpen ? 'translateX(-110%)' : 'translateX(0)')};
   transition: all 0.3s ease-in-out;
+  text-align: center;
   z-index: 9998;
 `;
 
@@ -94,10 +95,30 @@ const MobilMenuBackdrop = styled.div`
   transition: opacity 350ms ease-in-out;
 `;
 
-const MobileMenuItem = styled.li`
+const MobileMenuList = styled.ul`
+  display: flex;
+  flex-direction: column;
+
+  a {
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+  }
+
   a[aria-current='page'] {
+    display: inline-block;
     font-weight: 700;
-    border-bottom: 2px solid;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    color: var(--color-red);
+  }
+
+  li {
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+
+  li:hover {
+    background-color: rgba(255, 255, 255, 0.3);
   }
 `;
 
@@ -120,7 +141,7 @@ export default function Header({ location }) {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   function handleScroll() {
     const currentScroll = window.scrollY;
@@ -173,7 +194,9 @@ export default function Header({ location }) {
       </HeaderStyles>
       <MobilMenuBackdrop isOpen={isOpen} onClick={() => setIsOpen(false)} />
       <MobileMenu isOpen={isOpen}>
-        <div style={{ padding: 30, color: 'var(--color-white)' }}>
+        <div
+          style={{ padding: 30, color: 'var(--color-white)', height: '100%' }}
+        >
           <h3
             style={{
               fontSize: 24,
@@ -189,19 +212,19 @@ export default function Header({ location }) {
             </Link>
           </h3>
           <hr />
-          <ul style={{ marginTop: '2rem', textTransform: 'uppercase' }}>
+          <MobileMenuList
+            style={{ marginTop: '2rem', textTransform: 'uppercase' }}
+          >
             {menuItems.map((item, i) => (
-              <MobileMenuItem key={i} style={{ marginBottom: '2rem' }}>
-                <Link
-                  to={item.path}
-                  style={{ color: 'inherit', textDecoration: 'none' }}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              </MobileMenuItem>
+              <Link
+                to={item.path}
+                style={{ color: 'inherit', textDecoration: 'none' }}
+                onClick={() => setIsOpen(false)}
+              >
+                <li key={i}>{item.name}</li>
+              </Link>
             ))}
-          </ul>
+          </MobileMenuList>
         </div>
       </MobileMenu>
     </>
