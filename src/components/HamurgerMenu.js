@@ -2,17 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  position: absolute;
+  right: 1rem;
   display: flex;
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
   margin-left: auto;
+  z-index: 9999;
 `;
 
 const Bar = styled.div`
   width: 40px;
   height: 5px;
-  background-color: var(--color-white);
+  background-color: ${(p) => p.color};
+  transition: background-color 400ms ease;
 
   &:nth-of-type(1) {
     transform: ${(p) => (p.isOpen ? 'translateY(10px) rotate(-45deg)' : '')};
@@ -30,13 +34,13 @@ const Bar = styled.div`
   }
 `;
 
-export default function HamburgerMenu({ isOpen, setIsOpen }) {
+export default function HamburgerMenu({ isOpen, setIsOpen, color }) {
   return (
     <>
       <Wrapper onClick={() => setIsOpen(!isOpen)}>
-        <Bar isOpen={isOpen} />
-        <Bar isOpen={isOpen} />
-        <Bar isOpen={isOpen} />
+        <Bar isOpen={isOpen} color={color} />
+        <Bar isOpen={isOpen} color={color} />
+        <Bar isOpen={isOpen} color={color} />
       </Wrapper>
     </>
   );
