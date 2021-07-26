@@ -12,10 +12,6 @@ const HeroImage = styled.div`
   background-position: center center;
   background-repeat: no-repeat;
   margin-top: calc(var(--fixed-header-padding) * -1);
-
-  /* @media (max-width: 900px) {
-    margin-top: calc(var(--fixed-header-padding-mobile) * -1);
-  } */
 `;
 
 const HeroText = styled.div`

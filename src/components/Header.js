@@ -1,30 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useStaticQuery, graphql } from 'gatsby';
+import { useWindowSize } from 'react-use';
 import { ContainerStyles } from '../styles/ContainerStyles';
-
-const isBrowser = typeof window !== 'undefined';
-
-function getHeaderTextColor() {
-  if (isBrowser) {
-    if (window.location.pathname === '/') {
-      return 'var(--color-white)';
-    } else {
-      return 'var(--color-red)';
-    }
-  }
-}
+import Logo from './Logo';
 
 const HeaderStyles = styled.header`
   background-color: ${(p) => p.styles.backgroundColor};
-  /* Fallback until there is no Browser */
-  color: var(--color-black);
-  color: ${(p) =>
-    p.styles.backgroundColor === 'transparent'
-      ? getHeaderTextColor()
-      : 'var(--color-white)'};
-  /* padding: ${(p) => p.styles.padding}; */
-  padding: 10px 0;
+  color: ${(p) => (p.pathname === '/' ? 'var(--color-white)' : p.styles.color)};
+  padding: ${(p) => (p.width < 917 ? '15px 0' : '10px 0')};
   box-shadow: ${(p) => p.styles.boxShadow};
   position: fixed;
   top: 0;
@@ -33,27 +17,9 @@ const HeaderStyles = styled.header`
   transition: all 400ms ease;
   z-index: 9999;
 
-  /* h1 {
-    font-size: ${(p) =>
-    p.styles.backgroundColor === 'transparent' ? '40px' : '30px'};
-    transition: font-size 500ms ease;
-  } */
-
-  h1 {
-    font-weight: 700;
-
-    @media (max-width: 900px) {
-      font-size: ${26 / 16}rem;
-    }
-  }
-
   a {
     text-decoration: none;
     color: inherit;
-  }
-
-  @media (max-width: 900px) {
-    padding: 5px 0;
   }
 `;
 
@@ -64,7 +30,7 @@ const HeaderContentWrapper = styled.div`
   display: flex;
   align-items: center;
 
-  @media (max-width: 900px) {
+  @media (max-width: 916px) {
     justify-content: center;
   }
 `;
@@ -91,12 +57,13 @@ const MenuItems = styled.ul`
     font-weight: 700;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 916px) {
     display: none;
   }
 `;
 
-export default function Header() {
+export default function Header({ location }) {
+  const { width } = useWindowSize();
   const { siteSettings } = useStaticQuery(graphql`
     query {
       siteSettings: sanitySiteSettings(_id: { eq: "siteSettings" }) {
@@ -107,7 +74,7 @@ export default function Header() {
 
   const [headerStyles, setHeaderStyles] = useState({
     backgroundColor: 'transparent',
-    padding: '15px 0',
+    color: 'var(--color-red)',
   });
 
   useEffect(() => {
@@ -121,26 +88,28 @@ export default function Header() {
       setHeaderStyles({
         ...headerStyles,
         backgroundColor: 'var(--color-red)',
-        // padding: '5px 0',
+        color: 'var(--color-white)',
         boxShadow: '0 1px 3px rgba(57, 63, 72, 0.2);',
       });
     } else {
       setHeaderStyles({
         ...headerStyles,
         backgroundColor: 'transparent',
-        // padding: '15px 0',
+        color: 'var(--color-red)',
       });
     }
   }
 
   return (
     <>
-      <HeaderStyles styles={headerStyles}>
+      <HeaderStyles
+        styles={headerStyles}
+        pathname={location.pathname}
+        width={width}
+      >
         <ContainerStyles>
           <HeaderContentWrapper>
-            <h1>
-              <Link to='/'>{siteSettings.title}</Link>
-            </h1>
+            <Logo />
             <MenuItems>
               <li>
                 <Link to={`/news`}>News</Link>

@@ -14,19 +14,15 @@ const Wrapper = styled.div`
 const MainContent = styled.main`
   margin-bottom: 40px;
   padding-top: var(--fixed-header-padding);
-
-  /* @media (max-width: 900px) {
-    padding-top: var(--fixed-header-padding-mobile);
-  } */
 `;
 
-export default function Layout({ children }) {
+export default function Layout({ location, children }) {
   return (
     <>
       <Wrapper>
         <Typography />
         <GlobalStyles />
-        <Header />
+        <Header location={location} />
         <MainContent>{children}</MainContent>
         <Footer />
       </Wrapper>

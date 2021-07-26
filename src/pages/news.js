@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { graphql, Link } from 'gatsby';
 import { DateTime } from 'luxon';
 import { ContainerStyles } from '../styles/ContainerStyles';
@@ -33,7 +33,11 @@ export default function NewsPage({ data }) {
     <>
       <ContainerStyles>
         <h2>Normal Column Layout</h2>
-        <Wrapper>{articles.map((article) => article)}</Wrapper>
+        <Wrapper>
+          {articles.map((article, i) => (
+            <Fragment key={i}>{article}</Fragment>
+          ))}
+        </Wrapper>
         <hr />
         <h2>React Masonry Component Layout</h2>
         <Masonry>{articles}</Masonry>
