@@ -62,6 +62,8 @@ const GlobalStyles = createGlobalStyle`
     --color-white: #fff;
     --font-family: 'Forma DJR Text', -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     --breakpoint-tablet: 900px;
+    --fixed-header-padding: 7rem;
+    /* --fixed-header-padding-mobile: 4rem; */
   }
 
   body {

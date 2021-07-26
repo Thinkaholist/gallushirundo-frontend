@@ -5,13 +5,17 @@ import { ContainerStyles } from '../styles/ContainerStyles';
 import styled from 'styled-components';
 
 const HeroImage = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-image: ${(p) => `url(${p.bg})`};
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  margin-top: -8rem;
+  margin-top: calc(var(--fixed-header-padding) * -1);
+
+  /* @media (max-width: 900px) {
+    margin-top: calc(var(--fixed-header-padding-mobile) * -1);
+  } */
 `;
 
 const HeroText = styled.div`
@@ -79,15 +83,13 @@ const NewsPreview = styled.article`
   }
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    /* transform: scale(1.01); */
+    transform: scale(1.01);
   }
 `;
 
 export default function HomePage({ data }) {
   const latestNews = data.posts.edges;
   const heroImage = data.homePage.heroImage.image.asset.url;
-
-  console.log(data);
 
   return (
     <>
@@ -133,28 +135,6 @@ export const query = graphql`
         image {
           asset {
             url
-          }
-        }
-      }
-    }
-    artists: allSanityArtist {
-      edges {
-        node {
-          _id
-          name
-          slug {
-            current
-          }
-        }
-      }
-    }
-    events: allSanityEvent {
-      edges {
-        node {
-          _id
-          title
-          slug {
-            current
           }
         }
       }

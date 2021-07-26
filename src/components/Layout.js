@@ -11,6 +11,15 @@ const Wrapper = styled.div`
   min-height: 100%;
 `;
 
+const MainContent = styled.main`
+  margin-bottom: 40px;
+  padding-top: var(--fixed-header-padding);
+
+  /* @media (max-width: 900px) {
+    padding-top: var(--fixed-header-padding-mobile);
+  } */
+`;
+
 export default function Layout({ children }) {
   return (
     <>
@@ -18,7 +27,7 @@ export default function Layout({ children }) {
         <Typography />
         <GlobalStyles />
         <Header />
-        <div style={{ marginBottom: 40, marginTop: '8rem' }}>{children}</div>
+        <MainContent>{children}</MainContent>
         <Footer />
       </Wrapper>
     </>

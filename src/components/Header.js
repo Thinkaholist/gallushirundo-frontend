@@ -117,7 +117,7 @@ export default function Header() {
 
   function handleScroll() {
     const currentScroll = window.scrollY;
-    if (currentScroll > 40) {
+    if (currentScroll > 24) {
       setHeaderStyles({
         ...headerStyles,
         backgroundColor: 'var(--color-red)',
