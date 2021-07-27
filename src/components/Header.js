@@ -108,17 +108,20 @@ const MobileMenuList = styled.ul`
     display: inline-block;
     font-weight: 700;
     background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 4px;
+    border-radius: 24px;
     color: var(--color-red);
   }
 
   li {
     padding: 5px 10px;
-    border-radius: 4px;
+    border-radius: 24px;
   }
 
-  li:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+  /* Don't show hover state on touch devices */
+  @media (hover: hover) and (pointer: fine) {
+    li:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
   }
 `;
 

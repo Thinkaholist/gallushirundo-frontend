@@ -16,7 +16,7 @@ export default function Logo() {
         {width < 917 ? (
           <Link to='/'>G &amp; H</Link>
         ) : (
-          <Link to='/'>Gallus &amp; Hirando</Link>
+          <Link to='/'>Gallus &amp; Hirundo</Link>
         )}
       </LogoStyles>
     </>
