@@ -1,5 +1,48 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import addToMailchimp from 'gatsby-plugin-mailchimp';
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  text-transform: uppercase;
+
+  button {
+    padding: 0.5em 1em;
+    border: 3px solid var(--color-white);
+    color: var(--color-white);
+    background-color: var(--color-red);
+    font-size: 20px;
+    border-radius: 36px;
+    text-transform: uppercase;
+    cursor: pointer;
+    min-width: 150px;
+
+    &:disabled {
+      background-color: rgba(19, 1, 1, 0.3);
+      border: 3px solid rgba(195, 195, 195, 0.3);
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+`;
+
+const InputField = styled.input`
+  padding: 0.5em 1em;
+  line-height: 1;
+  border-radius: 36px;
+  width: 30%;
+  border: 3px solid var(--color-white);
+  color: var(--color-white);
+  background-color: var(--color-red);
+  font-size: 20px;
+
+  &::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #ddd;
+    opacity: 1; /* Firefox */
+  }
+`;
 
 export default function SubscribeForm() {
   const [saving, setSaving] = useState(false);
@@ -56,13 +99,12 @@ export default function SubscribeForm() {
               color: 'var(--color-white)',
               padding: 10,
               marginBottom: '1.5rem',
-              width: 300,
               borderRadius: 4,
               fontSize: 16,
             }}
             dangerouslySetInnerHTML={{ __html: state.successMessage }}
           />
-          <a href='#0' onClick={resetForm}>
+          <a href='#0' onClick={resetForm} style={{ color: '#fff' }}>
             add more?
           </a>
         </>
@@ -71,8 +113,8 @@ export default function SubscribeForm() {
           {state.errorMessage && (
             <div
               style={{
-                backgroundColor: 'rgba(211,84,0, 0.8)',
-                color: 'var(--color-white)',
+                backgroundColor: 'var(--color-white)',
+                color: 'var(--color-red)',
                 padding: 10,
                 marginBottom: '1.5rem',
                 width: 300,
@@ -88,32 +130,21 @@ export default function SubscribeForm() {
             id='subscribe-form'
             onSubmit={handleSubmit}
           >
-            <div>
-              <label>
-                <span>Newsletter: </span>
-                <input
-                  disabled={saving}
-                  type='email'
-                  name='email'
-                  placeholder='Email...'
-                  value={state.email}
-                  onChange={handleInputChange}
-                  style={{
-                    padding: '0.5em',
-                    lineHeight: 1,
-                    borderRadius: 3,
-                    width: '30%',
-                    border: '0 solid #cad1dc',
-                    backgroundColor: '#f1f3f6',
-                    borderWidth: 1,
-                    fontSize: 18,
-                  }}
-                />
-              </label>
-            </div>
-            <button className='button' type='submit' disabled={saving}>
-              {saving ? `Saving...` : `Subscribe`}
-            </button>
+            <Wrapper>
+              <p>Newsletter</p>
+              <InputField
+                disabled={saving}
+                type='email'
+                name='email'
+                placeholder='Email...'
+                value={state.email}
+                onChange={handleInputChange}
+              />
+
+              <button type='submit' disabled={saving}>
+                {saving ? `Saving...` : `Subscribe`}
+              </button>
+            </Wrapper>
           </form>
         </>
       )}
