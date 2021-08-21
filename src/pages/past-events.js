@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import styled from 'styled-components';
+import Img from 'gatsby-plugin-sanity-image';
 
 const EventRow = styled.article`
   border-top: 1px solid var(--color-red);
@@ -20,15 +21,17 @@ const EventRow = styled.article`
 const ImageWrapper = styled.div`
   width: 100px;
   height: 100px;
-  border: 5px rebeccapurple;
-  background-color: rebeccapurple;
-  background: ${(p) => `url(${p.bg})`};
-  background-position: center;
-  background-size: cover;
-  border-radius: 50%;
 
   img {
     width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+    filter: grayscale(100%);
+
+    @supports not (aspect-ratio: 1 / 1) {
+      height: 100px;
+    }
   }
 `;
 
@@ -43,17 +46,31 @@ const MoreInfoButton = styled(Link)`
   justify-self: flex-end;
 `;
 
+const BackToEventsWrapper = styled.div`
+  margin: 3rem 0;
+  padding: 1rem;
+  display: grid;
+  place-content: center;
+
+  a {
+    display: block;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    padding: 8px 16px;
+    border-radius: 36px;
+  }
+`;
+
 export default function EventsPage({ data }) {
   const events = data.events.nodes;
 
   return (
     <>
       <ContainerStyles>
-        <h1>Past Events</h1>
         {events.map((event) => (
           <EventRow>
-            <ImageWrapper bg={`${event.cover.image.asset.url}?sat=-100`}>
-              {/* <img src={event.cover.image.asset.url} /> */}
+            <ImageWrapper>
+              <Img {...event.cover.image} alt={event.title} />
             </ImageWrapper>
             <div style={{ width: 450 }}>
               <p>{event.date}</p>
@@ -72,10 +89,13 @@ export default function EventsPage({ data }) {
               </p>
             </div>
             <MoreInfoButton to={`/event/${event.slug.current}`}>
-              More info
+              Event
             </MoreInfoButton>
           </EventRow>
         ))}
+        <BackToEventsWrapper>
+          <Link to='/events'>Back to Upcoming Events</Link>
+        </BackToEventsWrapper>
       </ContainerStyles>
     </>
   );
@@ -102,9 +122,7 @@ export const query = graphql`
         cover {
           altText
           image {
-            asset {
-              url
-            }
+            ...ImageWithPreview
           }
         }
       }

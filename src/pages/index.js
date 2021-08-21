@@ -62,18 +62,23 @@ const NewsCard = styled.article`
     object-fit: cover;
 
     @supports not (aspect-ratio: 4 / 3) {
-      height: 300px;
+      height: 350px;
     }
   }
 `;
 
 const NewsCardText = styled.div`
+  font-weight: 500;
   padding: 20px;
   position: absolute;
   top: 0px;
   left: 0px;
-  /* -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: var(--color-black); */
+  -webkit-text-fill-color: var(--color-white);
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--color-black);
+  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000; */
+  letter-spacing: 2px;
 
   p {
     margin-bottom: 2rem;
@@ -81,7 +86,7 @@ const NewsCardText = styled.div`
   h3 {
     font-size: ${28 / 16}rem;
     span {
-      background-color: rgba(255, 16, 29, 0.4);
+      /* background-color: rgba(255, 16, 29, 0.4); */
       /* background-color: rgba(255, 255, 255, 0.9); */
       padding: 4px 0;
     }

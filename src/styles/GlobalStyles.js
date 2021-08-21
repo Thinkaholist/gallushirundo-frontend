@@ -49,6 +49,8 @@ const GlobalStyles = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
+
+
   /* END of CSS reset */
   
   html, body, #___gatsby, #gatsby-focus-wrapper {
@@ -73,9 +75,10 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: var(--font-family);
-    color: var(--font-black);
+    color: var(--color-black);
     line-height: 1.625;
     font-size: ${20 / 16}rem;
+    -webkit-font-smoothing: antialiased;
   }
 
   button, input {

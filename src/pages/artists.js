@@ -18,6 +18,11 @@ export default function ArtistsPage({ data }) {
   return (
     <>
       <ContainerStyles>
+        <GridWrapper gap={gap}>
+          {artists.map((artist) => (
+            <ArtistCard key={artist._id} artist={artist} radius={radius} />
+          ))}
+        </GridWrapper>
         <div
           style={{
             margin: '1rem auto',
@@ -90,11 +95,6 @@ export default function ArtistsPage({ data }) {
             </label>
           </div>
         </div>
-        <GridWrapper gap={gap}>
-          {artists.map((artist) => (
-            <ArtistCard key={artist._id} artist={artist} radius={radius} />
-          ))}
-        </GridWrapper>
       </ContainerStyles>
     </>
   );
