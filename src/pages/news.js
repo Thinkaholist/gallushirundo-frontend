@@ -45,6 +45,10 @@ const BlogImage = styled(Img)`
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 28px;
+
+  @supports not (aspect-ratio: 4 / 3) {
+    height: 300px;
+  }
 `;
 
 export default function NewsPage({ data }) {
