@@ -178,7 +178,6 @@ const ImageStyles = styled(Img)`
 
   @supports not (aspect-ratio: 1 / 1) {
     height: 300px;
-    width: 300px;
   }
 `;
 
