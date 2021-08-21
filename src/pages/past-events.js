@@ -7,7 +7,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const EventRow = styled.article`
   border-top: 1px solid var(--color-red);
-  /* padding: 0.5rem 0%; */
+  padding: 0.5rem 0%;
   display: flex;
   gap: 1rem;
   align-items: center;

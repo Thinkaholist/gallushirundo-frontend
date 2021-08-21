@@ -98,7 +98,6 @@ export default function HomePage({ data }) {
   const artists = data.artists.nodes;
   const heroImage = data.homePage.heroImage.image.asset.url;
 
-  console.log(artists);
   return (
     <>
       <HeroImage bg={heroImage}>

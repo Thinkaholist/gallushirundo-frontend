@@ -7,7 +7,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const EventRow = styled.article`
   border-top: 1px solid var(--color-red);
-  /* padding: 0.5rem 0%; */
+  padding: 0.5rem 0%;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -80,11 +80,57 @@ const PastEventsWrapper = styled.div`
   }
 `;
 
+const EventFilterWrapper = styled.nav`
+  background-color: var(--color-white);
+  margin: 1rem auto 2rem;
+  padding: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  position: sticky;
+  top: ${85 / 16}rem;
+
+  .selected {
+    background-color: var(--color-red);
+    color: var(--color-white);
+  }
+`;
+
+const FilterButton = styled.button`
+  font-size: 1rem;
+  border: 1px solid var(--color-red);
+  background-color: var(--color-white);
+  color: var(--color-red);
+  border-radius: 12px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:disabled {
+    color: #ffcbce;
+    border-color: #ffcbce;
+    cursor: auto;
+    background-color: var(--color-white);
+  }
+`;
+
 export default function EventsPage({ data }) {
   const events = data.events.nodes;
+
+  let allArtists = [];
+  events.forEach((event) => {
+    const artists = event.artists;
+    allArtists = [...allArtists, ...artists];
+  });
+
   const artists = data.artists.nodes;
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [selectedArtist, setSelectedArtist] = useState('');
+
+  function hasEvents(artistId) {
+    return allArtists.map((artist) => artist._id).includes(artistId);
+  }
 
   function filterEvents(artistId) {
     const updatedEvents = events.filter((event) => {
@@ -92,47 +138,33 @@ export default function EventsPage({ data }) {
       return artistsIds.includes(artistId);
     });
     setFilteredEvents(updatedEvents);
-  }
-
-  function filterEventsSelect(e) {
-    const artistId = e.target.value;
-
-    if (artistId === 'ALL') {
-      setFilteredEvents(events);
-      setSelectedArtist('');
-    }
-
-    const updatedEvents = events.filter((event) => {
-      const artistsIds = event.artists.map((artist) => artist._id);
-      return artistsIds.includes(artistId);
-    });
-    setFilteredEvents(updatedEvents);
+    setSelectedArtist(artistId);
   }
 
   return (
     <>
       <ContainerStyles>
-        <nav>
-          <button
+        <EventFilterWrapper>
+          <FilterButton
             onClick={() => {
               setFilteredEvents(events);
               setSelectedArtist('');
             }}
+            className={selectedArtist === '' ? 'selected' : ''}
           >
-            ALL
-          </button>
+            All Artists
+          </FilterButton>
           {artists.map((artist) => (
-            <button key={artist._id} onClick={() => filterEvents(artist._id)}>
+            <FilterButton
+              key={artist._id}
+              onClick={() => filterEvents(artist._id)}
+              className={selectedArtist === artist._id ? 'selected' : ''}
+              disabled={!hasEvents(artist._id)}
+            >
               {artist.name}
-            </button>
+            </FilterButton>
           ))}
-        </nav>
-        <select onChange={filterEventsSelect}>
-          <option value='ALL'>ALL</option>
-          {artists.map((artist) => (
-            <option value={artist._id}>{artist.name}</option>
-          ))}
-        </select>
+        </EventFilterWrapper>
         {!filterEvents.length ||
           (filterEvents.length === 0 && <p>No events</p>)}
         {filteredEvents.length > 0 &&
