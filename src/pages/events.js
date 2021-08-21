@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { graphql, Link } from 'gatsby';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import styled from 'styled-components';
@@ -82,41 +82,91 @@ const PastEventsWrapper = styled.div`
 
 export default function EventsPage({ data }) {
   const events = data.events.nodes;
+  const artists = data.artists.nodes;
+  const [filteredEvents, setFilteredEvents] = useState(events);
+  const [selectedArtist, setSelectedArtist] = useState('');
+
+  function filterEvents(artistId) {
+    const updatedEvents = events.filter((event) => {
+      const artistsIds = event.artists.map((artist) => artist._id);
+      return artistsIds.includes(artistId);
+    });
+    setFilteredEvents(updatedEvents);
+  }
+
+  function filterEventsSelect(e) {
+    const artistId = e.target.value;
+
+    if (artistId === 'ALL') {
+      setFilteredEvents(events);
+      setSelectedArtist('');
+    }
+
+    const updatedEvents = events.filter((event) => {
+      const artistsIds = event.artists.map((artist) => artist._id);
+      return artistsIds.includes(artistId);
+    });
+    setFilteredEvents(updatedEvents);
+  }
 
   return (
     <>
       <ContainerStyles>
-        {events.map((event) => (
-          <EventRow>
-            <ImageWrapper>
-              <Img {...event.cover.image} alt={event.title} />
-            </ImageWrapper>
-            <div style={{ width: 450 }}>
-              <p>{event.date}</p>
-              <h3>{event.title}</h3>
-            </div>
-            <div style={{ width: 300 }}>
-              <p>{event.location}</p>
-              <p>
-                <a
-                  href={event.mainEvent.website}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  {event.mainEvent.name}
-                </a>
-              </p>
-            </div>
-            <MoreInfoButton
-              href={event.eventInfo}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              Event
-              <FaExternalLinkAlt size={12} />
-            </MoreInfoButton>
-          </EventRow>
-        ))}
+        <nav>
+          <button
+            onClick={() => {
+              setFilteredEvents(events);
+              setSelectedArtist('');
+            }}
+          >
+            ALL
+          </button>
+          {artists.map((artist) => (
+            <button key={artist._id} onClick={() => filterEvents(artist._id)}>
+              {artist.name}
+            </button>
+          ))}
+        </nav>
+        <select onChange={filterEventsSelect}>
+          <option value='ALL'>ALL</option>
+          {artists.map((artist) => (
+            <option value={artist._id}>{artist.name}</option>
+          ))}
+        </select>
+        {!filterEvents.length ||
+          (filterEvents.length === 0 && <p>No events</p>)}
+        {filteredEvents.length > 0 &&
+          filteredEvents.map((event) => (
+            <EventRow key={event._id}>
+              <ImageWrapper>
+                <Img {...event.cover.image} alt={event.title} />
+              </ImageWrapper>
+              <div style={{ width: 450 }}>
+                <p>{event.date}</p>
+                <h3>{event.title}</h3>
+              </div>
+              <div style={{ width: 300 }}>
+                <p>{event.location}</p>
+                <p>
+                  <a
+                    href={event.mainEvent.website}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    {event.mainEvent.name}
+                  </a>
+                </p>
+              </div>
+              <MoreInfoButton
+                href={event.eventInfo}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                Event
+                <FaExternalLinkAlt size={12} />
+              </MoreInfoButton>
+            </EventRow>
+          ))}
         <PastEventsWrapper>
           <Link to='/past-events'>Past Events</Link>
         </PastEventsWrapper>
@@ -149,6 +199,22 @@ export const query = graphql`
           image {
             ...ImageWithPreview
           }
+        }
+        artists {
+          _id
+          name
+          slug {
+            current
+          }
+        }
+      }
+    }
+    artists: allSanityArtist {
+      nodes {
+        _id
+        name
+        slug {
+          current
         }
       }
     }
