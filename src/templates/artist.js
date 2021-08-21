@@ -28,6 +28,9 @@ export default function SingleArtist(props) {
   function showVideo() {
     setIsVideoVisible(!isVideoVisible);
   }
+
+  console.log(props.data.artist.socialLinks);
+
   return (
     <>
       <ContainerStyles>
@@ -162,43 +165,53 @@ export default function SingleArtist(props) {
             </>
           )}
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            <a
-              href={props.data.artist.socialLinks.facebook}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              Facebook
-            </a>
-            <a
-              href={props.data.artist.socialLinks.instagram}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              Instagram
-            </a>
-            <a
-              href={props.data.artist.socialLinks.youtube}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              YouTube
-            </a>
-            <a
-              href={props.data.artist.socialLinks.spotify}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              Spotify
-            </a>
-            <a
-              href={props.data.artist.socialLinks.website}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              Website
-            </a>
+            {props.data.artist?.socialLinks?.facebook && (
+              <a
+                href={props.data.artist.socialLinks.facebook}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                Facebook
+              </a>
+            )}
+            {props.data.artist?.socialLinks?.instagram && (
+              <a
+                href={props.data.artist.socialLinks.instagram}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                Instagram
+              </a>
+            )}
+            {props.data.artist?.socialLinks?.youtube && (
+              <a
+                href={props.data.artist.socialLinks.youtube}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                YouTube
+              </a>
+            )}
+            {props.data.artist?.socialLinks?.spotify && (
+              <a
+                href={props.data.artist.socialLinks.spotify}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                Spotify
+              </a>
+            )}
+            {props.data.artist?.socialLinks?.website && (
+              <a
+                href={props.data.artist.socialLinks.website}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                Website
+              </a>
+            )}
           </div>
-          {props.data.artist.socialLinks.spotify && (
+          {props.data.artist.socialLinks?.spotify && (
             <>
               <iframe
                 title='Spotify Album Embed'
