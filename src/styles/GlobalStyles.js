@@ -55,9 +55,12 @@ const GlobalStyles = createGlobalStyle`
     height: 100%;
   }
 
+  *,*::before,*::after {
+    box-sizing: border-box;
+  }
+
   html {
     overflow-y: scroll;
-    box-sizing: border-box;
     --color-red: #ff101e;
     --color-white: #fff;
     --color-black: #2E2E2E;

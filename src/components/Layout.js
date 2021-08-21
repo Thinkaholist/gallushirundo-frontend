@@ -24,7 +24,7 @@ export default function Layout({ location, children }) {
         <GlobalStyles />
         <Header location={location} />
         <MainContent>{children}</MainContent>
-        <Footer />
+        {/* <Footer /> */}
       </Wrapper>
     </>
   );

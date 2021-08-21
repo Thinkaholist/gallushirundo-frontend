@@ -222,6 +222,7 @@ export default function Header({ location }) {
           >
             {menuItems.map((item, i) => (
               <Link
+                key={i}
                 to={item.path}
                 style={{ color: 'inherit', textDecoration: 'none' }}
                 onClick={() => setIsOpen(false)}

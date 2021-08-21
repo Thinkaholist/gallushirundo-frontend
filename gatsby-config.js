@@ -7,6 +7,9 @@ module.exports = {
     siteUrl: 'https://www.yourdomain.tld',
     title: 'Gallus & Hirundo',
   },
+  flags: {
+    DEV_SSR: false,
+  },
   plugins: [
     {
       resolve: 'gatsby-source-sanity',
