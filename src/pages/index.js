@@ -3,6 +3,7 @@ import { graphql, Link } from 'gatsby';
 import { DateTime } from 'luxon';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import styled from 'styled-components';
+import Img from 'gatsby-plugin-sanity-image';
 
 const HeroImage = styled.div`
   width: 100%;
@@ -30,62 +31,65 @@ const HeroText = styled.div`
   }
 `;
 
-const NewsWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+const GridWrapper = styled.div`
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(450px, 100%), 1fr));
   gap: ${23 / 16}rem;
-  margin: ${40 / 16}rem 0;
+`;
 
-  a {
-    text-decoration: none;
-    &:hover {
-      text-decoration: none;
+const NewsCardLink = styled(Link)`
+  color: var(--color-white);
+  /* color: var(--color-red); */
+
+  @media (hover: hover) {
+    &:hover article {
+      transform: translateY(-5px);
     }
   }
 `;
 
-const NewsPreview = styled.article`
-  background-color: darkgoldenrod;
-  width: 320px;
-  max-width: 100%;
+const NewsCard = styled.article`
   border-radius: 28px;
-  padding: 34px 26px;
-  color: var(--color-white);
-  /* -webkit-text-stroke: 1px black; */
-  background: ${(p) => `url(${p.background})`};
-  background-position: center;
-  background-size: cover;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  transition: all 200ms;
-  .title {
-    font-size: ${24 / 16}rem;
-    text-transform: uppercase;
-    max-width: 80%;
-    line-height: 1.3;
+  position: relative;
+  transition: transform 0.2s;
 
-    span {
-      background-color: var(--color-red);
+  img {
+    display: block;
+    width: 100%;
+    border-radius: 28px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+
+    @supports not (aspect-ratio: 4 / 3) {
+      height: 300px;
     }
   }
+`;
 
-  .date {
-    font-size: ${22 / 16}rem;
-    -webkit-text-stroke: 1px black;
-    font-family: var(--font-family);
-    font-weight: 700;
+const NewsCardText = styled.div`
+  padding: 20px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  /* -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: var(--color-black); */
+
+  p {
+    margin-bottom: 2rem;
   }
-  &:hover {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-    transform: scale(1.01);
+  h3 {
+    font-size: ${28 / 16}rem;
+    span {
+      background-color: rgba(255, 16, 29, 0.4);
+      /* background-color: rgba(255, 255, 255, 0.9); */
+      padding: 4px 0;
+    }
   }
 `;
 
 export default function HomePage({ data }) {
-  const latestNews = data.posts.edges;
+  const latestNews = data.posts.nodes;
   const heroImage = data.homePage.heroImage.image.asset.url;
 
   return (
@@ -98,20 +102,25 @@ export default function HomePage({ data }) {
         </ContainerStyles>
       </HeroImage>
       <ContainerStyles>
-        <NewsWrapper>
-          {latestNews.map(({ node }) => (
-            <Link key={node._id} to={`/post/${node.slug.current}`}>
-              <NewsPreview background={node.featuredImage.image.asset.url}>
-                <p className='date'>
-                  {DateTime.fromISO(node.publishedDate).toFormat('kkkk.LL.dd')}
-                </p>
-                <p className='title'>
-                  <span>{node.title}</span>
-                </p>
-              </NewsPreview>
-            </Link>
+        <GridWrapper>
+          {latestNews.map((post) => (
+            <NewsCardLink key={post._id} to={`/post/${post.slug.current}`}>
+              <NewsCard>
+                <Img {...post.featuredImage.image} alt={post.title} />
+                <NewsCardText>
+                  <p>
+                    {DateTime.fromISO(post.publishedDate).toFormat(
+                      'kkkk.LL.dd'
+                    )}
+                  </p>
+                  <h3>
+                    <span>{post.title}</span>
+                  </h3>
+                </NewsCardText>
+              </NewsCard>
+            </NewsCardLink>
           ))}
-        </NewsWrapper>
+        </GridWrapper>
       </ContainerStyles>
     </>
   );
@@ -140,27 +149,23 @@ export const query = graphql`
       filter: { publishedDate: { lte: $rightNow } }
       limit: 4
     ) {
-      edges {
-        node {
+      nodes {
+        _id
+        title
+        publishedDate
+        slug {
+          current
+        }
+        category {
           _id
-          title
-          publishedDate
+          name
           slug {
             current
           }
-          category {
-            _id
-            name
-            slug {
-              current
-            }
-          }
-          featuredImage {
-            image {
-              asset {
-                url
-              }
-            }
+        }
+        featuredImage {
+          image {
+            ...ImageWithPreview
           }
         }
       }
