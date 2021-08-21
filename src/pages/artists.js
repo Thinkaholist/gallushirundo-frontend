@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 import { graphql, Link } from 'gatsby';
+import styled from 'styled-components';
+import Img from 'gatsby-plugin-sanity-image';
 import { ContainerStyles } from '../styles/ContainerStyles';
 
 const GridWrapper = styled.div`
   display: grid;
-  /* gap: 1rem; */
   grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
 `;
 
@@ -36,9 +36,7 @@ export const query = graphql`
         }
         featuredImage {
           image {
-            asset {
-              url
-            }
+            ...ImageWithPreview
           }
         }
       }
@@ -62,9 +60,11 @@ const ArtistCardStyles = styled.article`
 
   h2 {
     color: var(--color-white);
-    font-size: ${36 / 16}rem;
+    padding: 0 1rem;
+    font-size: ${40 / 16}rem;
     font-weight: 700;
     position: absolute;
+    text-align: center;
     left: 0;
     right: 0;
     height: 100%;
@@ -74,26 +74,30 @@ const ArtistCardStyles = styled.article`
     background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.6) 50%,
+      rgba(0, 0, 0, 0.4) 50%,
       rgba(0, 0, 0, 0) 100%
     );
-  }
-
-  img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    object-position: center center;
-    transition: transform 0.35s;
-    opacity: 0.8;
   }
 
   @media (hover: hover) {
     &:hover img {
       opacity: 1;
-      transform: scale(1.15);
+      transform: scale(1.2);
+    }
+    &:hover h2 {
+      text-decoration: underline;
+      text-decoration-color: red;
     }
   }
+`;
+
+const ImageStyles = styled(Img)`
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center center;
+  transition: transform 0.35s ease-out;
+  opacity: 0.9;
 `;
 
 function ArtistCard({ artist }) {
@@ -101,7 +105,7 @@ function ArtistCard({ artist }) {
     <>
       <ArtisLink to={`/artist/${artist.slug.current}`}>
         <ArtistCardStyles>
-          <img src={artist.featuredImage.image.asset.url} alt={artist.name} />
+          <ImageStyles {...artist.featuredImage.image} alt={artist.name} />
           <h2>{artist.name}</h2>
         </ArtistCardStyles>
       </ArtisLink>
