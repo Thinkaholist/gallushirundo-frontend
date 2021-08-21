@@ -112,7 +112,6 @@ export default function HomePage({ data }) {
             </Link>
           ))}
         </NewsWrapper>
-        <h2>Equliazer</h2>
       </ContainerStyles>
     </>
   );

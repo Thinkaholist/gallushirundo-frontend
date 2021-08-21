@@ -124,6 +124,17 @@ const ArtisLink = styled(Link)`
   &:hover {
     text-decoration: none;
   }
+
+  @media (hover: hover) {
+    &:hover img {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+    &:hover h2 {
+      text-decoration: underline;
+      text-decoration-color: var(--color-red, red);
+    }
+  }
 `;
 
 const ArtistCardStyles = styled.article`
@@ -154,17 +165,6 @@ const ArtistCardStyles = styled.article`
       rgba(0, 0, 0, 0.4) 50%,
       rgba(0, 0, 0, 0) 100%
     );
-  }
-
-  @media (hover: hover) {
-    &:hover img {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-    &:hover h2 {
-      text-decoration: underline;
-      text-decoration-color: var(--color-red, red);
-    }
   }
 `;
 
