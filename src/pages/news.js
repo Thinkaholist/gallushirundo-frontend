@@ -13,6 +13,7 @@ const GridWrapper = styled.div`
 
 const ArticleLink = styled(Link)`
   color: inherit;
+
   &:hover {
     text-decoration: none;
   }
@@ -20,6 +21,10 @@ const ArticleLink = styled(Link)`
   @media (hover: hover) {
     &:hover h3 span {
       border-color: var(--color-red);
+    }
+
+    &:hover img {
+      transform: scale(1.2);
     }
   }
 `;
@@ -45,6 +50,7 @@ const BlogImage = styled(Img)`
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 28px;
+  transition: transform 0.35s ease-out;
 
   @supports not (aspect-ratio: 4 / 3) {
     height: 300px;
@@ -61,7 +67,9 @@ export default function NewsPage({ data }) {
           {news.map((post) => (
             <ArticleLink key={post._id} to={`/post/${post.slug.current}`}>
               <ArticleCard>
-                <BlogImage {...post.featuredImage.image} alt={post.title} />
+                <div style={{ overflow: 'hidden', borderRadius: 28 }}>
+                  <BlogImage {...post.featuredImage.image} alt={post.title} />
+                </div>
                 <p>
                   {DateTime.fromISO(post.publishedDate).toFormat('kkkk.LL.dd')}
                 </p>
