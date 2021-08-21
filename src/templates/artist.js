@@ -261,6 +261,15 @@ export default function SingleArtist(props) {
               Download Press kit
             </a>
           )}
+          <div>
+            <h2>Styles</h2>
+            <ul>
+              <li>Acapella: {props.data.artist.styles.acapella}</li>
+              <li>Folk: {props.data.artist.styles.folk}</li>
+              <li>Punk: {props.data.artist.styles.punk}</li>
+              <li>Rock: {props.data.artist.styles.rock}</li>
+            </ul>
+          </div>
         </div>
         <h2 style={{ marginTop: '2rem', textAlign: 'center' }}>Listen more!</h2>
         <nav>
@@ -349,6 +358,12 @@ export const query = graphql`
           originalFilename
           url
         }
+      }
+      styles {
+        acapella
+        folk
+        punk
+        rock
       }
     }
     previous: sanityArtist(slug: { current: { eq: $previousSlug } }) {

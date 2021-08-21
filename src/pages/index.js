@@ -95,8 +95,10 @@ const NewsCardText = styled.div`
 
 export default function HomePage({ data }) {
   const latestNews = data.posts.nodes;
+  const artists = data.artists.nodes;
   const heroImage = data.homePage.heroImage.image.asset.url;
 
+  console.log(artists);
   return (
     <>
       <HeroImage bg={heroImage}>
@@ -172,6 +174,27 @@ export const query = graphql`
           image {
             ...ImageWithPreview
           }
+        }
+      }
+    }
+    artists: allSanityArtist {
+      nodes {
+        name
+        slug {
+          current
+        }
+        featuredImage {
+          image {
+            asset {
+              url
+            }
+          }
+        }
+        styles {
+          acapella
+          folk
+          punk
+          rock
         }
       }
     }

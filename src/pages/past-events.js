@@ -3,6 +3,7 @@ import { graphql, Link } from 'gatsby';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import styled from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const EventRow = styled.article`
   border-top: 1px solid var(--color-red);
@@ -35,7 +36,7 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const MoreInfoButton = styled(Link)`
+const MoreInfoButton = styled.a`
   border: none;
   padding: 10px 20px;
   border-radius: 36px;
@@ -44,6 +45,15 @@ const MoreInfoButton = styled(Link)`
   cursor: pointer;
   font-size: 15px;
   justify-self: flex-end;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--color-red-hover);
+    text-decoration: none;
+  }
 `;
 
 const BackToEventsWrapper = styled.div`
@@ -58,6 +68,12 @@ const BackToEventsWrapper = styled.div`
     color: var(--color-white);
     padding: 8px 16px;
     border-radius: 36px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: var(--color-red-hover);
+      text-decoration: none;
+    }
   }
 `;
 
@@ -88,8 +104,13 @@ export default function EventsPage({ data }) {
                 </a>
               </p>
             </div>
-            <MoreInfoButton to={`/event/${event.slug.current}`}>
+            <MoreInfoButton
+              href={event.eventInfo}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
               Event
+              <FaExternalLinkAlt size={12} />
             </MoreInfoButton>
           </EventRow>
         ))}
@@ -111,6 +132,7 @@ export const query = graphql`
         _id
         title
         date
+        eventInfo
         slug {
           current
         }
