@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-plugin-sanity-image';
@@ -25,7 +25,7 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
 const MainImage = styled(Img)`
   width: 100%;
   display: block;
-  height: 320px;
+  height: 350px;
   object-fit: cover;
   border-radius: 28px;
 `;
@@ -98,6 +98,9 @@ const YoutubeWrapper = styled.div`
 const SpotifyPlayerWrapper = styled.div``;
 
 export default function SingleArtistPage({ data }) {
+  const [selectedVideoUrl, setSelectedVideoUrl] = useState(
+    data.artist.videoGallery[0].url
+  );
   const singleArtist = data.artist;
   const bio = singleArtist.bio?.split('\n').map((p, i) => <p key={i}>{p}</p>);
   const spotifyArtistId = singleArtist.socialLinks?.spotify
@@ -212,7 +215,7 @@ export default function SingleArtistPage({ data }) {
         <YoutubeWrapper>
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${getYouTubeID(
-              singleArtist.featuredVideo.url
+              selectedVideoUrl
             )}`}
             light={true}
             width='100%'
@@ -220,7 +223,7 @@ export default function SingleArtistPage({ data }) {
             height='460px'
             pip={true}
           />
-          {singleArtist.videoGallery.length > 0 && (
+          {singleArtist.videoGallery.length > 1 && (
             <div
               style={{
                 display: 'grid',
@@ -230,16 +233,24 @@ export default function SingleArtistPage({ data }) {
               }}
             >
               {singleArtist.videoGallery.map((video) => (
-                <ReactPlayer
-                  url={`https://www.youtube.com/watch?v=${getYouTubeID(
-                    video.url
-                  )}`}
-                  light={true}
-                  width='100%'
-                  height='150px'
-                  // TODO: Make it responsive
-                  pip={true}
-                />
+                <div
+                  key={video._key}
+                  onClick={() => setSelectedVideoUrl(video.url)}
+                >
+                  <img
+                    style={{
+                      width: '100%',
+                      display: 'block',
+                      height: 150,
+                      objectFit: 'cover',
+                    }}
+                    src={`https://i.ytimg.com/vi/${getYouTubeID(
+                      video.url
+                    )}/hqdefault.jpg`}
+                    alt={video.title}
+                    title={video.title}
+                  />
+                </div>
               ))}
             </div>
           )}
@@ -287,11 +298,8 @@ export const query = graphql`
           ...ImageWithPreview
         }
       }
-      featuredVideo {
-        title
-        url
-      }
       videoGallery {
+        _key
         title
         url
       }
