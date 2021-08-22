@@ -9,20 +9,23 @@ import {
   FaYoutube,
   FaGlobe,
 } from 'react-icons/fa';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper.min.css';
+import 'swiper/components/pagination/pagination.min.css';
+import 'swiper/components/navigation/navigation.min.css';
 import { ContainerStyles } from '../styles/ContainerStyles';
+
+// import Swiper core and required modules
+import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper/core';
+// install Swiper modules
+SwiperCore.use([Pagination, Navigation, Autoplay]);
 
 const MainImage = styled(Img)`
   width: 100%;
   display: block;
-  /* aspect-ratio: 3 / 1; */
-  /* Seems better! */
   height: 320px;
   object-fit: cover;
   border-radius: 28px;
-
-  /* @supports not (aspect-ratio: 3 / 1) {
-    height: 320px;
-  } */
 `;
 
 const ArtistName = styled.h1`
@@ -99,10 +102,41 @@ export default function SingleArtistPage({ data }) {
   return (
     <>
       <ContainerStyles>
-        <MainImage
-          {...singleArtist.featuredImage.image}
-          alt={singleArtist.featuredImage.altText}
-        />
+        {/* If no Image Gallery just show the featured image */}
+        {singleArtist?.imageGallery.length === 0 && (
+          <MainImage
+            {...singleArtist.featuredImage.image}
+            alt={singleArtist.featuredImage.altText}
+          />
+        )}
+        {/* If there is an Image Gallery make a Swiper */}
+        {singleArtist?.imageGallery.length > 0 && (
+          <Swiper
+            spaceBetween={30}
+            centeredSlides={true}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            navigation={true}
+          >
+            <SwiperSlide>
+              <MainImage
+                {...singleArtist.featuredImage.image}
+                alt={singleArtist.featuredImage.altText}
+              />
+            </SwiperSlide>
+            {singleArtist?.imageGallery &&
+              singleArtist.imageGallery.map((image) => (
+                <SwiperSlide key={image._key}>
+                  <MainImage {...image.image} alt={image.altText} />
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        )}
         <ArtistName>{singleArtist.name}</ArtistName>
         <BioWrapper>{bio}</BioWrapper>
         {singleArtist?.socialLinks && (
@@ -201,6 +235,7 @@ export const query = graphql`
         }
       }
       imageGallery {
+        _key
         altText
         image {
           ...ImageWithPreview
