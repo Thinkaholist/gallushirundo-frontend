@@ -77,13 +77,15 @@ const PressKitWrapper = styled.div`
 
 const PressKitLink = styled.a`
   font-size: ${30 / 16}rem;
-  color: var(--color-red);
+  color: ${(p) =>
+    p.pressKit === undefined ? 'lightgrey' : 'var(--color-red)'};
   text-decoration: underline;
   text-transform: uppercase;
   font-weight: 700;
 
   &:hover {
-    color: var(--color-red-hover);
+    color: ${(p) =>
+      p.pressKit === undefined ? 'lightgrey' : 'var(--color-red-hover)'};
   }
 `;
 
@@ -188,16 +190,21 @@ export default function SingleArtistPage({ data }) {
             )}
           </SocialIconsWrapper>
         )}
-        {singleArtist?.pressKit && (
-          <PressKitWrapper>
-            <PressKitLink
-              href={`${singleArtist.pressKit.asset.url}?dl=${singleArtist.slug.current}-pressKit.zip`}
-              download
-            >
-              Press kit
-            </PressKitLink>
-          </PressKitWrapper>
-        )}
+        {/* {singleArtist?.pressKit && ( */}
+        <PressKitWrapper>
+          <PressKitLink
+            href={
+              !singleArtist?.pressKit
+                ? '#0'
+                : `${singleArtist?.pressKit?.asset.url}?dl=${singleArtist.slug.current}-pressKit.zip`
+            }
+            download={!singleArtist?.pressKit ? false : true}
+            pressKit={singleArtist?.pressKit?.asset.url}
+          >
+            Press kit
+          </PressKitLink>
+        </PressKitWrapper>
+        {/* )} */}
         {singleArtist.socialLinks?.spotify && (
           <SpotifyPlayerWrapper>
             <iframe
