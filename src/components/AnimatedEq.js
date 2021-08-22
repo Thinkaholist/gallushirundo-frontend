@@ -3,7 +3,7 @@ import styled, { css, keyframes } from 'styled-components';
 
 const playing = keyframes`
   0% {
-      height: 0px;
+      height: 10px;
     }
     
     50% {
