@@ -16,6 +16,7 @@ const HeroSection = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    will-change: transform;
   }
 `;
 
@@ -26,10 +27,6 @@ const HeroTextWrapper = styled.div`
   top: 0px;
   bottom: 0px;
   width: 100%;
-  /* margin: auto; */
-  /* padding: 0 1rem; */
-  /* bottom: 6rem; */
-  /* max-width: 790px; */
   background: rgb(0, 0, 0);
   background: linear-gradient(
     180deg,
@@ -57,11 +54,11 @@ const GridWrapper = styled.div`
 
 const NewsCardLink = styled(Link)`
   color: var(--color-white);
-  /* color: var(--color-red); */
+  cursor: pointer;
 
-  @media (hover: hover) {
-    &:hover article {
-      transform: translateY(-5px);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover article img {
+      transform: scale(1.1);
     }
   }
 `;
@@ -69,7 +66,7 @@ const NewsCardLink = styled(Link)`
 const NewsCard = styled.article`
   border-radius: 28px;
   position: relative;
-  transition: transform 0.2s;
+  overflow: hidden;
 
   img {
     display: block;
@@ -77,6 +74,7 @@ const NewsCard = styled.article`
     border-radius: 28px;
     aspect-ratio: 4 / 3;
     object-fit: cover;
+    transition: transform 0.35s ease-out;
 
     @supports not (aspect-ratio: 4 / 3) {
       height: 350px;
@@ -90,11 +88,13 @@ const NewsCardText = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
-  -webkit-text-fill-color: var(--color-white);
+  width: 100%;
+  height: 100%;
+  border-radius: 28px;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* -webkit-text-fill-color: var(--color-white);
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: var(--color-black);
-  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-    1px 1px 0 #000; */
+  -webkit-text-stroke-color: var(--color-black); */
   letter-spacing: 2px;
 
   p {
@@ -103,8 +103,6 @@ const NewsCardText = styled.div`
   h3 {
     font-size: ${28 / 16}rem;
     span {
-      /* background-color: rgba(255, 16, 29, 0.4); */
-      /* background-color: rgba(255, 255, 255, 0.9); */
       padding: 4px 0;
     }
   }

@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 import Img from 'gatsby-plugin-sanity-image';
 
 const ArtisLink = styled(Link)`
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     &:hover img {
       transform: scale(1.2);
     }

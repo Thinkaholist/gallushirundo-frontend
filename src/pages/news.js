@@ -19,7 +19,7 @@ const ArticleLink = styled(Link)`
     text-decoration: none;
   }
 
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     &:hover h3 span {
       border-color: var(--color-red);
     }
