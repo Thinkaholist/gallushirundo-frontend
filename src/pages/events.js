@@ -176,7 +176,62 @@ export default function EventsPage({ data }) {
               <div style={{ width: 450 }}>
                 <p>{event.date}</p>
                 <h3>{event.title}</h3>
+                {/* <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
+                  {event.artists.map((artist) => (
+                    <Link
+                      key={artist._id}
+                      to={`/artist/${artist.slug.current}`}
+                      title={artist.name}
+                    >
+                      <Img
+                        style={{
+                          display: 'block',
+                          width: 25,
+                          height: 25,
+                          border: '1px solid lightgray',
+                          borderRadius: '50%',
+                          aspectRatio: '1/1',
+                          objectFit: 'contain',
+                        }}
+                        alt={artist.name}
+                        {...artist.logo}
+                      />
+                    </Link>
+                  ))}
+                </div> */}
               </div>
+              {/* <div
+                style={{
+                  display: 'flex',
+                  gap: 8,
+                  flexWrap: 'wrap',
+                  width: 100,
+                  marginTop: 8,
+                }}
+              >
+                {event.artists.map((artist) => (
+                  <Link
+                    key={artist._id}
+                    to={`/artist/${artist.slug.current}`}
+                    title={artist.name}
+                  >
+                    <Img
+                      style={{
+                        display: 'block',
+                        width: 30,
+                        height: 30,
+                        padding: 1,
+                        border: '1px solid lightgray',
+                        borderRadius: '50%',
+                        aspectRatio: '1/1',
+                        objectFit: 'contain',
+                      }}
+                      alt={artist.name}
+                      {...artist.logo}
+                    />
+                  </Link>
+                ))}
+              </div> */}
               <div style={{ width: 300 }}>
                 <p>{event.location}</p>
                 <p>
@@ -184,6 +239,7 @@ export default function EventsPage({ data }) {
                     href={event.mainEvent.website}
                     target='_blank'
                     rel='noopener noreferrer'
+                    title={`Go to ${event.mainEvent.name}'s webpage`}
                   >
                     {event.mainEvent.name}
                   </a>
@@ -237,6 +293,9 @@ export const query = graphql`
           name
           slug {
             current
+          }
+          logo {
+            ...ImageWithPreview
           }
         }
       }
