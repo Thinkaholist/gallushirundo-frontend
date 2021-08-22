@@ -100,7 +100,7 @@ const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
     &:hover {
-      text-decoration: revert;
+      text-decoration: none;
     }
     color: #A31C18;
   }

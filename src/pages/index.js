@@ -5,31 +5,44 @@ import { ContainerStyles } from '../styles/ContainerStyles';
 import styled from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
 
-const HeroImage = styled.div`
-  width: 100%;
-  height: 100vh;
-  background-image: ${(p) => `url(${p.bg})`};
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+const HeroSection = styled.div`
   margin-top: calc(var(--fixed-header-padding) * -1);
-`;
+  line-height: 0;
+  height: 100vh;
+  position: relative;
 
-const HeroText = styled.div`
-  color: var(--color-white);
-  font-size: ${30 / 16}rem;
-  line-height: 1.5;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding-bottom: ${160 / 16}rem;
-  max-width: 790px;
-
-  p {
-    margin-bottom: ${148 / 16}rem;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
+
+const HeroText = styled.p`
+  font-size: ${30 / 16}rem;
+  color: var(--color-white);
+  line-height: 1.5;
+  position: absolute;
+  bottom: 4rem;
+  left: 0;
+  max-width: 1000px;
+`;
+
+// const HeroText = styled.div`
+//   color: var(--color-white);
+//   font-size: ${30 / 16}rem;
+//   line-height: 1.5;
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-end;
+//   padding-bottom: ${160 / 16}rem;
+//   max-width: 790px;
+
+//   p {
+//     margin-bottom: ${148 / 16}rem;
+//   }
+// `;
 
 const GridWrapper = styled.div`
   margin-top: 2rem;
@@ -100,13 +113,17 @@ export default function HomePage({ data }) {
 
   return (
     <>
-      <HeroImage bg={heroImage}>
+      {/* <HeroImage bg={heroImage}>
         <ContainerStyles>
           <HeroText>
             <p>{data.homePage.headerText}</p>
           </HeroText>
         </ContainerStyles>
-      </HeroImage>
+      </HeroImage> */}
+      <HeroSection>
+        <Img {...data.homePage.heroImage.image} alt='hero' />
+        <HeroText>{data.homePage.headerText}</HeroText>
+      </HeroSection>
       <ContainerStyles>
         <GridWrapper>
           {latestNews.map((post) => (
@@ -144,6 +161,7 @@ export const query = graphql`
       heroImage {
         altText
         image {
+          ...ImageWithPreview
           asset {
             url
           }

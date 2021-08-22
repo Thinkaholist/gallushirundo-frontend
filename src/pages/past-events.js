@@ -7,7 +7,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const EventRow = styled.article`
   border-top: 1px solid var(--color-red);
-  padding: 0.5rem 0%;
+  padding: 0.5rem 0;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -16,6 +16,10 @@ const EventRow = styled.article`
   h3 {
     font-family: var(--font-family);
     font-weight: 700;
+  }
+
+  &:last-of-type {
+    border-bottom: 1px solid var(--color-red);
   }
 `;
 
@@ -115,7 +119,7 @@ export default function EventsPage({ data }) {
           </EventRow>
         ))}
         <BackToEventsWrapper>
-          <Link to='/events'>Back to Upcoming Events</Link>
+          <Link to='/events'>Upcoming Events</Link>
         </BackToEventsWrapper>
       </ContainerStyles>
     </>

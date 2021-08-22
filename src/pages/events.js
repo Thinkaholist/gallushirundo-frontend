@@ -7,14 +7,13 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const EventRow = styled.article`
   border-top: 1px solid var(--color-red);
-  padding: 0.5rem 0%;
+  padding: 0.5rem 0;
   display: flex;
   gap: 1rem;
   align-items: center;
 
-  // TODO: Miért nem működik ez?
-  &:last-child {
-    border-bottom: 2px solid var(--color-red);
+  &:last-of-type {
+    border-bottom: 1px solid var(--color-red);
   }
 
   h3 {
@@ -117,16 +116,15 @@ const FilterButton = styled.button`
 
 export default function EventsPage({ data }) {
   const events = data.events.nodes;
+  const artists = data.artists.nodes;
+  const [filteredEvents, setFilteredEvents] = useState(events);
+  const [selectedArtist, setSelectedArtist] = useState('');
 
   let allArtists = [];
   events.forEach((event) => {
     const artists = event.artists;
     allArtists = [...allArtists, ...artists];
   });
-
-  const artists = data.artists.nodes;
-  const [filteredEvents, setFilteredEvents] = useState(events);
-  const [selectedArtist, setSelectedArtist] = useState('');
 
   function hasEvents(artistId) {
     return allArtists.map((artist) => artist._id).includes(artistId);
