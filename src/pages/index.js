@@ -19,31 +19,34 @@ const HeroSection = styled.div`
   }
 `;
 
-const HeroText = styled.p`
-  font-size: ${30 / 16}rem;
-  color: var(--color-white);
-  line-height: 1.5;
+const HeroTextWrapper = styled.div`
   position: absolute;
-  bottom: 4rem;
-  left: 0;
-  max-width: 1000px;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  /* margin: auto; */
+  /* padding: 0 1rem; */
+  /* bottom: 6rem; */
+  /* max-width: 790px; */
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0.7) 80%
+  );
+
+  p {
+    font-size: ${30 / 16}rem;
+    color: var(--color-white);
+    line-height: 1.5;
+    position: absolute;
+    bottom: 8rem;
+    max-width: 790px;
+  }
 `;
-
-// const HeroText = styled.div`
-//   color: var(--color-white);
-//   font-size: ${30 / 16}rem;
-//   line-height: 1.5;
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-end;
-//   padding-bottom: ${160 / 16}rem;
-//   max-width: 790px;
-
-//   p {
-//     margin-bottom: ${148 / 16}rem;
-//   }
-// `;
 
 const GridWrapper = styled.div`
   margin-top: 2rem;
@@ -115,16 +118,13 @@ export default function HomePage({ data }) {
   return (
     <>
       <Seo title={'Home'} image={heroImage} />
-      {/* <HeroImage bg={heroImage}>
-        <ContainerStyles>
-          <HeroText>
-            <p>{data.homePage.headerText}</p>
-          </HeroText>
-        </ContainerStyles>
-      </HeroImage> */}
       <HeroSection>
         <Img {...data.homePage.heroImage.image} alt='hero' />
-        <HeroText>{data.homePage.headerText}</HeroText>
+        <HeroTextWrapper>
+          <ContainerStyles>
+            <p>{data.homePage.headerText}</p>
+          </ContainerStyles>
+        </HeroTextWrapper>
       </HeroSection>
       <ContainerStyles>
         <GridWrapper>
