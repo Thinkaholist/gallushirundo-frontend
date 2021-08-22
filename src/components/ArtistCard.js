@@ -8,9 +8,8 @@ const ArtisLink = styled(Link)`
     &:hover img {
       transform: scale(1.2);
     }
-    &:hover h2 {
-      text-decoration: underline;
-      text-decoration-color: var(--color-red, red);
+    &:hover h2 span {
+      border-bottom: 3px solid var(--color-red);
     }
   }
 `;
@@ -26,6 +25,10 @@ const Image = styled(Img)`
   aspect-ratio: 1/1;
   object-fit: cover;
   transition: transform 0.35s ease-out;
+
+  @supports not (aspect-ratio: 1/1) {
+    height: 300px;
+  }
 `;
 
 const ArtistNameWrapper = styled.div`
@@ -62,7 +65,9 @@ export default function ArtistCard({ artist }) {
         <ArtistCardStyles>
           <Image {...artist.featuredImage.image} alt={artist.name} />
           <ArtistNameWrapper>
-            <h2>{artist.name}</h2>
+            <h2>
+              <span>{artist.name}</span>
+            </h2>
           </ArtistNameWrapper>
         </ArtistCardStyles>
       </ArtisLink>

@@ -43,8 +43,8 @@ const HeroTextWrapper = styled.div`
     color: var(--color-white);
     line-height: 1.5;
     position: absolute;
-    bottom: 8rem;
-    max-width: 790px;
+    bottom: 5rem;
+    max-width: min(790px, 80%);
   }
 `;
 
