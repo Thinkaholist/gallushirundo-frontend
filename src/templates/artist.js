@@ -9,6 +9,8 @@ import {
   FaYoutube,
   FaGlobe,
 } from 'react-icons/fa';
+import getYouTubeID from 'get-youtube-id';
+import ReactPlayer from 'react-player/youtube';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
@@ -87,6 +89,10 @@ const PressKitLink = styled.a`
     color: ${(p) =>
       p.pressKit === undefined ? 'lightgrey' : 'var(--color-red-hover)'};
   }
+`;
+
+const YoutubeWrapper = styled.div`
+  margin: 4rem 0;
 `;
 
 const SpotifyPlayerWrapper = styled.div``;
@@ -190,7 +196,6 @@ export default function SingleArtistPage({ data }) {
             )}
           </SocialIconsWrapper>
         )}
-        {/* {singleArtist?.pressKit && ( */}
         <PressKitWrapper>
           <PressKitLink
             href={
@@ -204,7 +209,41 @@ export default function SingleArtistPage({ data }) {
             Press kit
           </PressKitLink>
         </PressKitWrapper>
-        {/* )} */}
+        <YoutubeWrapper>
+          <ReactPlayer
+            url={`https://www.youtube.com/watch?v=${getYouTubeID(
+              singleArtist.featuredVideo.url
+            )}`}
+            light={true}
+            width='100%'
+            // TODO: Make it responsive
+            height='460px'
+            pip={true}
+          />
+          {singleArtist.videoGallery.length > 0 && (
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr 1fr',
+                gap: '1rem',
+                marginTop: '1rem',
+              }}
+            >
+              {singleArtist.videoGallery.map((video) => (
+                <ReactPlayer
+                  url={`https://www.youtube.com/watch?v=${getYouTubeID(
+                    video.url
+                  )}`}
+                  light={true}
+                  width='100%'
+                  height='150px'
+                  // TODO: Make it responsive
+                  pip={true}
+                />
+              ))}
+            </div>
+          )}
+        </YoutubeWrapper>
         {singleArtist.socialLinks?.spotify && (
           <SpotifyPlayerWrapper>
             <iframe
