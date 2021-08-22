@@ -4,6 +4,7 @@ import { DateTime } from 'luxon';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import styled from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
+import Seo from '../components/Seo';
 
 const GridWrapper = styled.div`
   display: grid;
@@ -62,6 +63,7 @@ export default function NewsPage({ data }) {
 
   return (
     <>
+      <Seo title={'News'} />
       <ContainerStyles>
         <GridWrapper>
           {news.map((post) => (

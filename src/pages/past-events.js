@@ -4,6 +4,7 @@ import { ContainerStyles } from '../styles/ContainerStyles';
 import styled from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import Seo from '../components/Seo';
 
 const EventRow = styled.article`
   border-top: 1px solid var(--color-red);
@@ -86,6 +87,7 @@ export default function EventsPage({ data }) {
 
   return (
     <>
+      <Seo title={'Past Events'} />
       <ContainerStyles>
         {events.map((event) => (
           <EventRow>

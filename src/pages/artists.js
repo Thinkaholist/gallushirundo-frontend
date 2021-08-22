@@ -3,6 +3,7 @@ import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import ArtistCard from '../components/ArtistCard';
+import Seo from '../components/Seo';
 
 const GridWrapper = styled.div`
   display: grid;
@@ -14,6 +15,7 @@ export default function ArtistsPage({ data }) {
 
   return (
     <>
+      <Seo title={'Artists'} />
       <ContainerStyles>
         <GridWrapper>
           {artists.map((artist) => (

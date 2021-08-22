@@ -4,6 +4,7 @@ import { DateTime } from 'luxon';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import styled from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
+import Seo from '../components/Seo';
 
 const HeroSection = styled.div`
   margin-top: calc(var(--fixed-header-padding) * -1);
@@ -113,6 +114,7 @@ export default function HomePage({ data }) {
 
   return (
     <>
+      <Seo title={'Home'} image={heroImage} />
       {/* <HeroImage bg={heroImage}>
         <ContainerStyles>
           <HeroText>
@@ -190,6 +192,9 @@ export const query = graphql`
         featuredImage {
           image {
             ...ImageWithPreview
+            asset {
+              url
+            }
           }
         }
       }
