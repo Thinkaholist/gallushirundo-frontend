@@ -8,6 +8,7 @@ import {
   FaSpotify,
   FaYoutube,
   FaGlobe,
+  FaPlay,
 } from 'react-icons/fa';
 import getYouTubeID from 'get-youtube-id';
 import ReactPlayer from 'react-player/youtube';
@@ -16,6 +17,7 @@ import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 import { ContainerStyles } from '../styles/ContainerStyles';
+import AnimatedEq from '../components/AnimatedEq';
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper/core';
@@ -58,16 +60,18 @@ const SocialIconsWrapper = styled.div`
     line-height: 0;
   }
 
-  a:hover svg {
-    fill: var(--color-red-hover);
-    transform: scale(1.1);
-  }
-
   svg {
     fill: var(--color-red);
     width: 40px;
     height: 40px;
     transition: transform 0.2s ease-out;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    a:hover svg {
+      fill: var(--color-red-hover);
+      transform: scale(1.2);
+    }
   }
 `;
 
@@ -101,6 +105,7 @@ export default function SingleArtistPage({ data }) {
   const [selectedVideoUrl, setSelectedVideoUrl] = useState(
     data.artist.videoGallery[0].url
   );
+  const [playing, setPlaying] = useState(false);
   const singleArtist = data.artist;
   const bio = singleArtist.bio?.split('\n').map((p, i) => <p key={i}>{p}</p>);
   const spotifyArtistId = singleArtist.socialLinks?.spotify
@@ -109,6 +114,11 @@ export default function SingleArtistPage({ data }) {
   const embedUrl = `https://open.spotify.com/embed/artist/${spotifyArtistId}`;
 
   console.log(singleArtist);
+
+  function changeVideo(videoUrl) {
+    setSelectedVideoUrl(videoUrl);
+    setPlaying(false);
+  }
 
   return (
     <>
@@ -126,13 +136,14 @@ export default function SingleArtistPage({ data }) {
             spaceBetween={30}
             centeredSlides={true}
             autoplay={{
-              delay: 5000,
+              delay: 4000,
               disableOnInteraction: false,
             }}
             pagination={{
               clickable: true,
             }}
             navigation={true}
+            loop={true}
           >
             <SwiperSlide>
               <MainImage
@@ -222,6 +233,11 @@ export default function SingleArtistPage({ data }) {
             // TODO: Make it responsive
             height='460px'
             pip={true}
+            controls={true}
+            onPlay={() => setPlaying(true)}
+            onPause={() => setPlaying(false)}
+            onBuffer={() => setPlaying(false)}
+            onEnded={() => setPlaying(false)}
           />
           {singleArtist.videoGallery.length > 1 && (
             <div
@@ -233,23 +249,73 @@ export default function SingleArtistPage({ data }) {
               }}
             >
               {singleArtist.videoGallery.map((video) => (
-                <div
-                  key={video._key}
-                  onClick={() => setSelectedVideoUrl(video.url)}
-                >
-                  <img
+                <div key={video._key} onClick={() => changeVideo(video.url)}>
+                  <div
                     style={{
-                      width: '100%',
-                      display: 'block',
-                      height: 150,
-                      objectFit: 'cover',
+                      position: 'relative',
+                      cursor: 'pointer',
                     }}
-                    src={`https://i.ytimg.com/vi/${getYouTubeID(
-                      video.url
-                    )}/hqdefault.jpg`}
-                    alt={video.title}
-                    title={video.title}
-                  />
+                  >
+                    <img
+                      style={{
+                        width: '100%',
+                        display: 'block',
+                        objectFit: 'cover',
+                        height: 150,
+                        filter:
+                          video.url === selectedVideoUrl
+                            ? 'grayscale(100%)'
+                            : 'grayscale(0%)',
+                      }}
+                      src={`https://i.ytimg.com/vi/${getYouTubeID(
+                        video.url
+                      )}/hqdefault.jpg`}
+                      alt={video.title}
+                      title={video.title}
+                    />
+                    {video.url === selectedVideoUrl ? (
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          bottom: 0,
+                          right: 0,
+                          margin: 'auto',
+                          display: 'grid',
+                          placeContent: 'center',
+                          placeItems: 'center',
+                          backgroundColor: 'rgba(0,0,0,0.4)',
+                          padding: 10,
+                          textAlign: 'center',
+                        }}
+                      >
+                        <AnimatedEq animated={playing} />
+                        <p
+                          style={{
+                            color: 'var(--color-white)',
+                            fontWeight: 500,
+                          }}
+                        >
+                          {video.title}
+                        </p>
+                      </div>
+                    ) : (
+                      <FaPlay
+                        style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          bottom: 0,
+                          right: 0,
+                          width: 35,
+                          height: 35,
+                          margin: 'auto',
+                        }}
+                        color='var(--color-white)'
+                      />
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

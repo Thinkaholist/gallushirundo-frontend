@@ -18,6 +18,7 @@ const ArtistCardStyles = styled.article`
   line-height: 0;
   position: relative;
   overflow: hidden;
+  border-radius: 28px;
 `;
 
 const Image = styled(Img)`

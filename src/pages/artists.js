@@ -7,6 +7,7 @@ import Seo from '../components/Seo';
 
 const GridWrapper = styled.div`
   display: grid;
+  gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
 `;
 
