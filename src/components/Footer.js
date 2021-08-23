@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SubscribeForm from './SubscribeForm';
 import { ContainerStyles } from '../styles/ContainerStyles';
+import ThinkaholistFooter from './ThinkaholistFooter';
 
 const FooterStyles = styled.footer`
   padding: ${54 / 16}rem 0;
@@ -21,6 +22,7 @@ export default function Footer() {
           <SubscribeForm />
         </ContainerStyles>
       </FooterStyles>
+      <ThinkaholistFooter />
     </>
   );
 }
