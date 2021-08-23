@@ -18,9 +18,7 @@ export default function Footer() {
   return (
     <>
       <FooterStyles>
-        <ContainerStyles>
-          <SubscribeForm />
-        </ContainerStyles>
+        <ContainerStyles>{/* <SubscribeForm /> */}</ContainerStyles>
       </FooterStyles>
       <ThinkaholistFooter />
     </>
