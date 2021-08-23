@@ -8,6 +8,7 @@ export default function Seo({ children, location, description, title, image }) {
       metadata: sanitySiteSettings(_id: { eq: "siteSettings" }) {
         title
         description
+        siteUrl
       }
     }
   `);
@@ -24,7 +25,7 @@ export default function Seo({ children, location, description, title, image }) {
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta charSet='utf-8' />
         <meta name='description' content={metadata.description} />
-        {/* <link rel='canonical' href={metadata.siteUrl} /> */}
+        <link rel='canonical' href={metadata.siteUrl} />
         {/* Open Graph */}
         {location && <meta property='og:url' content={location.href} />}
         {/* <meta property='og:image' content={image || '/FMZ_logo.svg'} /> */}
