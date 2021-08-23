@@ -30,7 +30,7 @@ export default function ArtistsPage({ data }) {
 
 export const query = graphql`
   query {
-    allSanityArtist {
+    allSanityArtist(sort: { fields: name, order: ASC }) {
       nodes {
         _id
         name

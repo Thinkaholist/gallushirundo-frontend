@@ -18,6 +18,7 @@ import 'swiper/components/pagination/pagination.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import AnimatedEq from '../components/AnimatedEq';
+import Seo from '../components/Seo';
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper/core';
@@ -122,6 +123,7 @@ export default function SingleArtistPage({ data }) {
 
   return (
     <>
+      <Seo title={singleArtist.name} />
       <ContainerStyles>
         {/* If no Image Gallery just show the featured image */}
         {singleArtist?.imageGallery.length === 0 && (

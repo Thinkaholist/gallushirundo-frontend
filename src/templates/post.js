@@ -16,6 +16,7 @@ import {
 import Img from 'gatsby-plugin-sanity-image';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import { ContentStyles } from '../styles/ContentStyles';
+import Seo from '../components/Seo';
 
 function urlFor(source) {
   return urlBuilder({
@@ -284,6 +285,10 @@ export default function SinglePost(props) {
 
   return (
     <>
+      <Seo
+        title={props.data.post.title}
+        image={props.data.post.featuredImage.image.asset.url}
+      />
       <ContainerStyles>
         <ContentStyles>
           {props.data.post.featuredImage && (
