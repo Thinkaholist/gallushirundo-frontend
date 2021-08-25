@@ -37,12 +37,12 @@ const ArtistName = styled.h1`
   font-size: ${40 / 16}rem;
   font-weight: 700;
   color: var(--color-red);
-  margin: 2rem 0;
+  margin: 1rem 0;
 `;
 
 const BioWrapper = styled.div`
   max-width: 70ch;
-  margin: 2rem 0;
+  margin: 1rem 0;
 
   p {
     margin-bottom: 1rem;

@@ -77,7 +77,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     font-family: var(--font-family);
     color: var(--color-black);
-    line-height: 1.625;
+    line-height: 1.4;
     font-size: ${20 / 16}rem;
     -webkit-font-smoothing: antialiased;
   }

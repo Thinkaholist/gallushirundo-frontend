@@ -38,7 +38,7 @@ const HeroTextWrapper = styled.div`
   p {
     font-size: ${30 / 16}rem;
     color: var(--color-white);
-    line-height: 1.5;
+    line-height: 1.2;
     position: absolute;
     bottom: 5rem;
     max-width: min(790px, 80%);
@@ -84,27 +84,34 @@ const NewsCard = styled.article`
 
 const NewsCardText = styled.div`
   font-weight: 500;
-  padding: 20px;
+  padding: 2rem;
   position: absolute;
   top: 0px;
   left: 0px;
   width: 100%;
   height: 100%;
   border-radius: 28px;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* -webkit-text-fill-color: var(--color-white);
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: var(--color-black); */
-  letter-spacing: 2px;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(0, 0, 0, 0.7) 80%
+  );
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   p {
     margin-bottom: 2rem;
   }
   h3 {
-    font-size: ${28 / 16}rem;
-    span {
+    font-size: ${24 / 16}rem;
+    max-width: 20ch;
+    /* span {
       padding: 4px 0;
-    }
+    } */
   }
 `;
 

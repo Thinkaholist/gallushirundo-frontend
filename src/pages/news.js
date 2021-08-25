@@ -33,6 +33,7 @@ const ArticleLink = styled(Link)`
 const ArticleCard = styled.article`
   h3 {
     font-size: ${24 / 16}rem;
+    line-height: 1.2;
 
     span {
       border-bottom: 3px solid transparent;
@@ -40,7 +41,7 @@ const ArticleCard = styled.article`
   }
 
   p {
-    font-size: ${20 / 16}rem;
+    font-size: ${16 / 16}rem;
     color: var(--color-light-black);
     margin-bottom: 1rem;
   }
@@ -48,7 +49,7 @@ const ArticleCard = styled.article`
 
 const BlogImage = styled(Img)`
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: 28px;
   transition: transform 0.35s ease-out;
