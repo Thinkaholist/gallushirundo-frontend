@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-plugin-sanity-image';
 import {
   FaFacebookSquare,
@@ -10,6 +10,10 @@ import {
   FaGlobe,
   FaPlay,
 } from 'react-icons/fa';
+import {
+  HiOutlineArrowNarrowLeft as LeftArrow,
+  HiOutlineArrowNarrowRight as RightArrow,
+} from 'react-icons/hi';
 import getYouTubeID from 'get-youtube-id';
 import ReactPlayer from 'react-player/youtube';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -102,6 +106,59 @@ const YoutubeWrapper = styled.div`
 
 const SpotifyPlayerWrapper = styled.div``;
 
+const PaginationWrapper = styled.div`
+  margin: 4rem 0;
+  font-size: ${24 / 16}rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+`;
+
+const PreviousWrapper = styled.div`
+  justify-self: flex-start;
+  a {
+    color: var(--color-red);
+  }
+`;
+
+const PreviousLink = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const CTA = styled(Link)`
+  text-align: center;
+  justify-self: center;
+  background-color: var(--color-red);
+  color: var(--color-white);
+  padding: 8px 16px;
+  border-radius: 28px;
+  &:hover {
+    background-color: var(--color-red-hover);
+  }
+`;
+
+const NextWrapper = styled.div`
+  justify-self: flex-end;
+  a {
+    color: var(--color-red);
+  }
+`;
+
+const NextLink = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+`;
+
 export default function SingleArtistPage({ data }) {
   const [selectedVideoUrl, setSelectedVideoUrl] = useState(
     data.artist.videoGallery[0].url
@@ -113,6 +170,7 @@ export default function SingleArtistPage({ data }) {
     ?.split('/')[4]
     .split('?')[0];
   const embedUrl = `https://open.spotify.com/embed/artist/${spotifyArtistId}`;
+  const { previous, next } = data;
 
   console.log(singleArtist);
 
@@ -336,6 +394,25 @@ export default function SingleArtistPage({ data }) {
             ></iframe>
           </SpotifyPlayerWrapper>
         )}
+        <PaginationWrapper>
+          <PreviousWrapper>
+            {previous && (
+              <PreviousLink to={`/artist/${previous.slug.current}`}>
+                <LeftArrow />
+                <p>{previous.name}</p>
+              </PreviousLink>
+            )}
+          </PreviousWrapper>
+          <CTA to={`/contact`}>Book this band</CTA>
+          <NextWrapper>
+            {next && (
+              <NextLink to={`/artist/${next.slug.current}`}>
+                <RightArrow />
+                <p>{next.name}</p>
+              </NextLink>
+            )}
+          </NextWrapper>
+        </PaginationWrapper>
       </ContainerStyles>
     </>
   );
