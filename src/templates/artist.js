@@ -100,11 +100,19 @@ const PressKitLink = styled.a`
   }
 `;
 
-const YoutubeWrapper = styled.div`
-  margin: 4rem 0;
+const SubHeadline = styled.h2`
+  color: var(--color-red);
+  /* text-align: center; */
+  font-style: italic;
 `;
 
-const SpotifyPlayerWrapper = styled.div``;
+const YoutubeWrapper = styled.div`
+  margin: 2rem 0;
+`;
+
+const SpotifyPlayerWrapper = styled.div`
+  margin: 2rem 0;
+`;
 
 const PaginationWrapper = styled.div`
   margin: 4rem 0;
@@ -283,6 +291,7 @@ export default function SingleArtistPage({ data }) {
             Press kit
           </PressKitLink>
         </PressKitWrapper>
+        <SubHeadline>Up to music videos?</SubHeadline>
         <YoutubeWrapper>
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${getYouTubeID(
@@ -382,17 +391,20 @@ export default function SingleArtistPage({ data }) {
           )}
         </YoutubeWrapper>
         {singleArtist.socialLinks?.spotify && (
-          <SpotifyPlayerWrapper>
-            <iframe
-              title='Spotify Album Embed'
-              src={embedUrl}
-              width='100%'
-              height='380'
-              frameBorder='0'
-              allowtransparency='true'
-              allow='encrypted-media'
-            ></iframe>
-          </SpotifyPlayerWrapper>
+          <>
+            <SubHeadline>Prefer streaming?</SubHeadline>
+            <SpotifyPlayerWrapper>
+              <iframe
+                title='Spotify Album Embed'
+                src={embedUrl}
+                width='100%'
+                height='380'
+                frameBorder='0'
+                allowtransparency='true'
+                allow='encrypted-media'
+              ></iframe>
+            </SpotifyPlayerWrapper>
+          </>
         )}
         <PaginationWrapper>
           <PreviousWrapper>
