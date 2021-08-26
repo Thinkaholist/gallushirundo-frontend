@@ -89,7 +89,7 @@ const EventFilterWrapper = styled.nav`
   gap: 1rem;
   justify-content: center;
   position: sticky;
-  top: ${85 / 16}rem;
+  top: ${76 / 16}rem;
 
   .selected {
     background-color: var(--color-red);
@@ -176,62 +176,7 @@ export default function EventsPage({ data }) {
               <div style={{ width: 450 }}>
                 <p>{event.date}</p>
                 <h3>{event.title}</h3>
-                {/* <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-                  {event.artists.map((artist) => (
-                    <Link
-                      key={artist._id}
-                      to={`/artist/${artist.slug.current}`}
-                      title={artist.name}
-                    >
-                      <Img
-                        style={{
-                          display: 'block',
-                          width: 25,
-                          height: 25,
-                          border: '1px solid lightgray',
-                          borderRadius: '50%',
-                          aspectRatio: '1/1',
-                          objectFit: 'contain',
-                        }}
-                        alt={artist.name}
-                        {...artist.logo}
-                      />
-                    </Link>
-                  ))}
-                </div> */}
               </div>
-              {/* <div
-                style={{
-                  display: 'flex',
-                  gap: 8,
-                  flexWrap: 'wrap',
-                  width: 100,
-                  marginTop: 8,
-                }}
-              >
-                {event.artists.map((artist) => (
-                  <Link
-                    key={artist._id}
-                    to={`/artist/${artist.slug.current}`}
-                    title={artist.name}
-                  >
-                    <Img
-                      style={{
-                        display: 'block',
-                        width: 30,
-                        height: 30,
-                        padding: 1,
-                        border: '1px solid lightgray',
-                        borderRadius: '50%',
-                        aspectRatio: '1/1',
-                        objectFit: 'contain',
-                      }}
-                      alt={artist.name}
-                      {...artist.logo}
-                    />
-                  </Link>
-                ))}
-              </div> */}
               <div style={{ width: 300 }}>
                 <p>{event.location}</p>
                 <p>

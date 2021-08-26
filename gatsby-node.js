@@ -8,7 +8,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
   const categoryTemplate = path.resolve(`./src/templates/category.js`);
   const res = await graphql(`
     query {
-      allSanityArtist {
+      allSanityArtist(sort: { fields: name, order: ASC }) {
         nodes {
           slug {
             current
