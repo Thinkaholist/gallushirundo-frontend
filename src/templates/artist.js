@@ -288,10 +288,10 @@ export default function SingleArtistPage({ data }) {
             download={!singleArtist?.pressKit ? false : true}
             pressKit={singleArtist?.pressKit?.asset.url}
           >
-            Press kit
+            {data.sanitySingleArtistPage.pressKitText}
           </PressKitLink>
         </PressKitWrapper>
-        <SubHeadline>Up to music videos?</SubHeadline>
+        <SubHeadline>{data.sanitySingleArtistPage.youtubeHeadline}</SubHeadline>
         <YoutubeWrapper>
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${getYouTubeID(
@@ -392,7 +392,9 @@ export default function SingleArtistPage({ data }) {
         </YoutubeWrapper>
         {singleArtist.socialLinks?.spotify && (
           <>
-            <SubHeadline>Prefer streaming?</SubHeadline>
+            <SubHeadline>
+              {data.sanitySingleArtistPage.spotifyHeadline}
+            </SubHeadline>
             <SpotifyPlayerWrapper>
               <iframe
                 title='Spotify Album Embed'
@@ -415,7 +417,7 @@ export default function SingleArtistPage({ data }) {
               </PreviousLink>
             )}
           </PreviousWrapper>
-          <CTA to={`/contact`}>Book this band</CTA>
+          <CTA to={`/contact`}>{data.sanitySingleArtistPage.ctaButtonText}</CTA>
           <NextWrapper>
             {next && (
               <NextLink to={`/artist/${next.slug.current}`}>
@@ -516,6 +518,12 @@ export const query = graphql`
           }
         }
       }
+    }
+    sanitySingleArtistPage(_id: { eq: "singleArtistPage" }) {
+      pressKitText
+      youtubeHeadline
+      spotifyHeadline
+      ctaButtonText
     }
   }
 `;

@@ -121,7 +121,7 @@ export default function EventsPage({ data }) {
           </EventRow>
         ))}
         <BackToEventsWrapper>
-          <Link to='/events'>Upcoming Events</Link>
+          <Link to='/events'>{data.sanityEventsPage.upcomingEvents}</Link>
         </BackToEventsWrapper>
       </ContainerStyles>
     </>
@@ -154,6 +154,9 @@ export const query = graphql`
           }
         }
       }
+    }
+    sanityEventsPage(_id: { eq: "eventsPage" }) {
+      upcomingEvents
     }
   }
 `;

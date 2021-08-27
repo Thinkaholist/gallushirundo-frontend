@@ -195,13 +195,13 @@ export default function EventsPage({ data }) {
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                Event
+                {data.sanityEventsPage.eventInfo}
                 <FaExternalLinkAlt size={12} />
               </MoreInfoButton>
             </EventRow>
           ))}
         <PastEventsWrapper>
-          <Link to='/past-events'>Past Events</Link>
+          <Link to='/past-events'>{data.sanityEventsPage.pastEvents}</Link>
         </PastEventsWrapper>
       </ContainerStyles>
     </>
@@ -253,6 +253,10 @@ export const query = graphql`
           current
         }
       }
+    }
+    sanityEventsPage(_id: { eq: "eventsPage" }) {
+      pastEvents
+      eventInfo
     }
   }
 `;
