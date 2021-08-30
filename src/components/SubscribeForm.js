@@ -26,6 +26,17 @@ const Wrapper = styled.div`
       border: 3px solid rgba(195, 195, 195, 0.3);
       color: rgba(255, 255, 255, 0.3);
     }
+
+    @media ${QUERIES.mobileAndDown} {
+      border-radius: 16px;
+    }
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    flex-direction: column;
+    align-items: revert;
+    gap: 1rem;
+    text-align: center;
   }
 `;
 
@@ -43,6 +54,11 @@ const InputField = styled.input`
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #ddd;
     opacity: 1; /* Firefox */
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    width: 100%;
+    border-radius: 16px;
   }
 `;
 
