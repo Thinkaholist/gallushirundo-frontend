@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  --position-right: 1rem;
   position: absolute;
-  right: 1rem;
+  right: var(--position-right);
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -25,8 +26,12 @@ const Bar = styled.div`
     transition: transform 250ms;
   }
   &:nth-of-type(2) {
+    transform: ${(p) =>
+      p.isOpen
+        ? 'translateX(calc(100% + var(--position-right)))'
+        : 'translateX(0%)'};
     opacity: ${(p) => (p.isOpen ? 0 : 1)};
-    transition: opacity 250ms;
+    transition: transform 250ms, opacity 450ms;
   }
   &:nth-of-type(3) {
     transform: ${(p) => (p.isOpen ? 'translateY(-10px) rotate(45deg)' : '')};
