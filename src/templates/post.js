@@ -17,6 +17,7 @@ import Img from 'gatsby-plugin-sanity-image';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import { ContentStyles } from '../styles/ContentStyles';
 import Seo from '../components/Seo';
+import { QUERIES } from '../constants';
 
 function urlFor(source) {
   return urlBuilder({
@@ -33,21 +34,44 @@ const Headline = styled.h1`
   hyphens: auto;
   /* Prefix for Safari */
   -webkit-hyphens: auto;
+
+  @media ${QUERIES.mobileAndDown} {
+    font-weight: 500;
+    font-size: ${30 / 16}rem;
+    margin-bottom: ${32 / 16}rem;
+  }
 `;
 
 const SubHeadline = styled.h2`
   font-size: ${30 / 16}rem;
   margin-bottom: ${40 / 16}rem;
   line-height: 1.4;
+
+  @media ${QUERIES.mobileAndDown} {
+    font-size: ${24 / 16}rem;
+    margin-bottom: ${32 / 16}rem;
+  }
 `;
 
 const InternalLink = styled(Link)`
   background-color: var(--color-red);
   color: var(--color-white);
-  padding: 1px 2px;
+  padding: 3px 6px;
+  border-radius: 8px;
+`;
+
+const ExternalLink = styled.a`
+  color: var(--color-red);
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const CategoryLink = styled(Link)`
+  display: block;
   color: var(--color-red);
 
   span a {
@@ -55,20 +79,29 @@ const CategoryLink = styled(Link)`
     text-decoration: none;
   }
 
-  span:hover {
-    background-color: var(--color-red);
-    color: var(--color-white);
+  @media (hover: hover) and (pointer: fine) {
+    span:hover {
+      background-color: var(--color-red);
+      color: var(--color-white);
+    }
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    span {
+      font-weight: 500;
+      text-decoration: underline;
+      background-color: var(--color-red);
+      color: var(--color-white);
+    }
   }
 `;
 
 const PortableTextStyles = styled.div`
   line-height: 1.625;
-  p:not(:last-child) {
+
+  p:not(:last-of-type) {
     margin-bottom: 1rem;
   }
-  /* a[href^='http'] {
-    color: rebeccapurple;
-  } */
 `;
 
 export default function SinglePost(props) {
@@ -84,12 +117,16 @@ export default function SinglePost(props) {
       externalLink: ({ children, mark }) => {
         return (
           <>
-            <a href={mark.url} target='_blank' rel='noopener noreferrer'>
+            <ExternalLink
+              href={mark.url}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
               {children}{' '}
               <span>
                 <FaExternalLinkAlt size={12} />
               </span>
-            </a>
+            </ExternalLink>
           </>
         );
       },
