@@ -1,26 +1,33 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { QUERIES } from '../constants';
 
 const playing = keyframes`
   0% {
-      height: 10px;
+      height: 0.5em;
     }
     
     50% {
-        height: 30px;
+        height: 1.5em;
     }
     
     100% {
-        height: 40px;
+        height: 1em;
     }
     `;
 
 const Wrapper = styled.div`
+  font-size: 20px;
   display: flex;
   gap: 4px;
   width: fit-content;
-  height: 40px;
+  height: 2em;
   transform: rotate(180deg);
+
+  @media ${QUERIES.mobileAndDown} {
+    font-size: 14px;
+    gap: 2px;
+  }
 `;
 
 const Column = styled.div`
@@ -28,27 +35,25 @@ const Column = styled.div`
   border-bottom-right-radius: 4px;
   width: 10px;
   background-color: var(--color-red);
-  /* animation: ${(p) =>
-    p.animated
-      ? css`
-          ${playing} 350ms infinite alternate ease-in-out
-        `
-      : ''}; */
-  animation: ${playing} 350ms infinite alternate ease-in-out;
+  animation: ${playing} 500ms infinite alternate ease-in-out;
   animation-play-state: ${(p) => (p.animated ? 'running' : 'paused')};
 
   &:nth-of-type(1) {
-    height: 20px;
+    height: 1em;
   }
 
   &:nth-of-type(2) {
     animation-delay: 200ms;
-    height: 40px;
+    height: 2em;
   }
 
   &:nth-of-type(3) {
     animation-delay: 156ms;
-    height: 30px;
+    height: 1.5em;
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    width: 5px;
   }
 `;
 

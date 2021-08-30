@@ -23,6 +23,7 @@ import 'swiper/components/navigation/navigation.min.css';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import AnimatedEq from '../components/AnimatedEq';
 import Seo from '../components/Seo';
+import { QUERIES } from '../constants';
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper/core';
@@ -78,12 +79,25 @@ const SocialIconsWrapper = styled.div`
       transform: scale(1.2);
     }
   }
+
+  @media ${QUERIES.mobileAndDown} {
+    gap: 2rem;
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
 `;
 
 const PressKitWrapper = styled.div`
   margin: 2rem 0;
   display: grid;
   place-content: center;
+
+  @media ${QUERIES.mobileAndDown} {
+    display: none;
+  }
 `;
 
 const PressKitLink = styled.a`
@@ -102,12 +116,94 @@ const PressKitLink = styled.a`
 
 const SubHeadline = styled.h2`
   color: var(--color-red);
-  /* text-align: center; */
   font-style: italic;
+
+  @media ${QUERIES.mobileAndDown} {
+    text-align: center;
+    font-size: ${24 / 16}rem;
+  }
 `;
 
 const YoutubeWrapper = styled.div`
   margin: 2rem 0;
+`;
+
+const ThumbnailGrid = styled.div`
+  --spacing: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacing);
+  margin-top: var(--spacing);
+
+  @media ${QUERIES.mobileAndDown} {
+    --spacing: 0.5rem;
+  }
+`;
+
+const ThumbnailWrapper = styled.div`
+  position: relative;
+  cursor: pointer;
+`;
+
+const ThumbnailImage = styled.img`
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  height: 150px;
+  filter: ${(p) =>
+    p.videoUrl === p.selectedVideoUrl ? 'grayscale(100%)' : 'grayscale(0%)'};
+
+  @media ${QUERIES.mobileAndDown} {
+    height: 60px;
+  }
+`;
+
+const SelectedThumbnailOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  text-align: center;
+`;
+
+const ThumbnailTitle = styled.p`
+  color: var(--color-white);
+  font-weight: 500;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+
+  @media ${QUERIES.mobileAndDown} {
+    font-weight: 400;
+    font-size: ${14 / 16}rem;
+    -webkit-line-clamp: 1;
+  }
+`;
+
+const PlayIcon = styled(FaPlay)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 35px;
+  height: 35px;
+  margin: auto;
+  color: var(--color-white);
+
+  @media ${QUERIES.mobileAndDown} {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const SpotifyPlayerWrapper = styled.div`
@@ -126,6 +222,12 @@ const PaginationWrapper = styled.div`
     width: 30px;
     height: 30px;
   }
+
+  @media ${QUERIES.mobileAndDown} {
+    margin: 2rem 0 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
 `;
 
 const PreviousWrapper = styled.div`
@@ -139,6 +241,10 @@ const PreviousLink = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  @media ${QUERIES.mobileAndDown} {
+    font-size: 14px;
+  }
 `;
 
 const CTA = styled(Link)`
@@ -148,8 +254,16 @@ const CTA = styled(Link)`
   color: var(--color-white);
   padding: 8px 16px;
   border-radius: 28px;
-  &:hover {
-    background-color: var(--color-red-hover);
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: var(--color-red-hover);
+    }
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    padding: 4px 8px;
+    font-size: ${16 / 16}rem;
   }
 `;
 
@@ -165,6 +279,10 @@ const NextLink = styled(Link)`
   flex-direction: column;
   align-items: flex-end;
   text-align: right;
+
+  @media ${QUERIES.mobileAndDown} {
+    font-size: 14px;
+  }
 `;
 
 export default function SingleArtistPage({ data }) {
@@ -179,8 +297,6 @@ export default function SingleArtistPage({ data }) {
     .split('?')[0];
   const embedUrl = `https://open.spotify.com/embed/artist/${spotifyArtistId}`;
   const { previous, next } = data;
-
-  console.log(singleArtist);
 
   function changeVideo(videoUrl) {
     setSelectedVideoUrl(videoUrl);
@@ -299,8 +415,8 @@ export default function SingleArtistPage({ data }) {
             )}`}
             light={true}
             width='100%'
-            // TODO: Make it responsive
             height='460px'
+            // TODO: Make it responsive
             pip={true}
             controls={true}
             onPlay={() => setPlaying(true)}
@@ -309,33 +425,13 @@ export default function SingleArtistPage({ data }) {
             onEnded={() => setPlaying(false)}
           />
           {singleArtist.videoGallery.length > 1 && (
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr 1fr',
-                gap: '1rem',
-                marginTop: '1rem',
-              }}
-            >
+            <ThumbnailGrid>
               {singleArtist.videoGallery.map((video) => (
                 <div key={video._key} onClick={() => changeVideo(video.url)}>
-                  <div
-                    style={{
-                      position: 'relative',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <img
-                      style={{
-                        width: '100%',
-                        display: 'block',
-                        objectFit: 'cover',
-                        height: 150,
-                        filter:
-                          video.url === selectedVideoUrl
-                            ? 'grayscale(100%)'
-                            : 'grayscale(0%)',
-                      }}
+                  <ThumbnailWrapper>
+                    <ThumbnailImage
+                      videoUrl={video.url}
+                      selectedVideoUrl={selectedVideoUrl}
                       src={`https://i.ytimg.com/vi/${getYouTubeID(
                         video.url
                       )}/hqdefault.jpg`}
@@ -343,51 +439,17 @@ export default function SingleArtistPage({ data }) {
                       title={video.title}
                     />
                     {video.url === selectedVideoUrl ? (
-                      <div
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          bottom: 0,
-                          right: 0,
-                          margin: 'auto',
-                          display: 'grid',
-                          placeContent: 'center',
-                          placeItems: 'center',
-                          backgroundColor: 'rgba(0,0,0,0.4)',
-                          padding: 10,
-                          textAlign: 'center',
-                        }}
-                      >
+                      <SelectedThumbnailOverlay>
                         <AnimatedEq animated={playing} />
-                        <p
-                          style={{
-                            color: 'var(--color-white)',
-                            fontWeight: 500,
-                          }}
-                        >
-                          {video.title}
-                        </p>
-                      </div>
+                        <ThumbnailTitle>{video.title}</ThumbnailTitle>
+                      </SelectedThumbnailOverlay>
                     ) : (
-                      <FaPlay
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          bottom: 0,
-                          right: 0,
-                          width: 35,
-                          height: 35,
-                          margin: 'auto',
-                        }}
-                        color='var(--color-white)'
-                      />
+                      <PlayIcon />
                     )}
-                  </div>
+                  </ThumbnailWrapper>
                 </div>
               ))}
-            </div>
+            </ThumbnailGrid>
           )}
         </YoutubeWrapper>
         {singleArtist.socialLinks?.spotify && (

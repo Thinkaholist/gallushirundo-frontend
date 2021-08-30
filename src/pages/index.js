@@ -45,6 +45,7 @@ const HeroTextWrapper = styled.div`
     max-width: min(790px, 80%);
 
     @media ${QUERIES.mobileAndDown} {
+      bottom: 8rem;
       font-size: ${24 / 16}rem;
       max-width: 100%;
       text-align: center;
