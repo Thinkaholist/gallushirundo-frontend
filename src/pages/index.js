@@ -5,6 +5,7 @@ import { ContainerStyles } from '../styles/ContainerStyles';
 import styled from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
 import Seo from '../components/Seo';
+import { QUERIES } from '../constants';
 
 const HeroSection = styled.div`
   margin-top: calc(var(--fixed-header-padding) * -1);
@@ -42,6 +43,15 @@ const HeroTextWrapper = styled.div`
     position: absolute;
     bottom: 5rem;
     max-width: min(790px, 80%);
+
+    @media ${QUERIES.mobileAndDown} {
+      font-size: ${24 / 16}rem;
+      max-width: 100%;
+      text-align: center;
+      left: 1rem;
+      right: 1rem;
+      line-height: 1.4;
+    }
   }
 `;
 

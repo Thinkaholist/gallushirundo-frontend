@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import addToMailchimp from 'gatsby-plugin-mailchimp';
+import { QUERIES } from '../constants';
 
 const Wrapper = styled.div`
   display: flex;
@@ -59,6 +60,10 @@ const FeedbackBox = styled.div`
     p.feedback ? 'translateY(0%)' : 'translateY(calc(100% + 2rem))'};
   transition: 0.35s ease-out;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+
+  @media ${QUERIES.mobileAndDown} {
+    text-align: center;
+  }
 `;
 
 const FeedbackButton = styled.button`
