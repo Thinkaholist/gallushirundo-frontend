@@ -27,6 +27,12 @@ const Wrapper = styled.div`
       color: rgba(255, 255, 255, 0.3);
     }
 
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: var(--color-red-hover);
+      }
+    }
+
     @media ${QUERIES.mobileAndDown} {
       border-radius: 16px;
     }
@@ -92,8 +98,10 @@ const FeedbackButton = styled.button`
   cursor: pointer;
   margin-top: 2rem;
 
-  &:hover {
-    background-color: var(--color-red-hover);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: var(--color-red-hover);
+    }
   }
 `;
 

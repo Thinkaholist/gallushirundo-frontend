@@ -14,6 +14,7 @@ import {
   HiOutlineArrowNarrowLeft as LeftArrow,
   HiOutlineArrowNarrowRight as RightArrow,
 } from 'react-icons/hi';
+import { FiDownload } from 'react-icons/fi';
 import getYouTubeID from 'get-youtube-id';
 import ReactPlayer from 'react-player/youtube';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -104,13 +105,15 @@ const PressKitLink = styled.a`
   font-size: ${30 / 16}rem;
   color: ${(p) =>
     p.pressKit === undefined ? 'lightgrey' : 'var(--color-red)'};
-  text-decoration: underline;
+  text-decoration: none;
   text-transform: uppercase;
   font-weight: 700;
 
-  &:hover {
-    color: ${(p) =>
-      p.pressKit === undefined ? 'lightgrey' : 'var(--color-red-hover)'};
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--color-red-hover);
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -394,19 +397,24 @@ export default function SingleArtistPage({ data }) {
             )}
           </SocialIconsWrapper>
         )}
-        <PressKitWrapper>
-          <PressKitLink
-            href={
-              !singleArtist?.pressKit
-                ? '#0'
-                : `${singleArtist?.pressKit?.asset.url}?dl=${singleArtist.slug.current}-pressKit.zip`
-            }
-            download={!singleArtist?.pressKit ? false : true}
-            pressKit={singleArtist?.pressKit?.asset.url}
-          >
-            {data.sanitySingleArtistPage.pressKitText}
-          </PressKitLink>
-        </PressKitWrapper>
+        {singleArtist?.pressKit && (
+          <PressKitWrapper>
+            <PressKitLink
+              href={
+                !singleArtist?.pressKit
+                  ? '#0'
+                  : `${singleArtist?.pressKit?.asset.url}?dl=${singleArtist.slug.current}-pressKit.zip`
+              }
+              download={!singleArtist?.pressKit ? false : true}
+              pressKit={singleArtist?.pressKit?.asset.url}
+            >
+              <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                {data.sanitySingleArtistPage.pressKitText}
+                <FiDownload size={30} />
+              </span>
+            </PressKitLink>
+          </PressKitWrapper>
+        )}
         <SubHeadline>{data.sanitySingleArtistPage.youtubeHeadline}</SubHeadline>
         <YoutubeWrapper>
           <ReactPlayer
