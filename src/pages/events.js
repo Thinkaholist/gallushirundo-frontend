@@ -26,7 +26,7 @@ const EventRow = styled.article`
   @media ${QUERIES.mobileAndDown} {
     padding: 1rem 0;
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 4fr;
     gap: 1rem;
     grid-template-areas:
       'title title'
@@ -65,7 +65,9 @@ const TitleWrapper = styled.div`
   @media ${QUERIES.mobileAndDown} {
     width: revert;
     grid-area: title;
-    text-align: center;
+    h3 {
+      font-size: ${24 / 16}rem;
+    }
   }
 `;
 
@@ -82,7 +84,7 @@ const LocationWrapper = styled.div`
   }
 `;
 
-const MoreInfoButton = styled.a`
+const EventInfoButton = styled.a`
   border: none;
   padding: 10px 20px;
   border-radius: 36px;
@@ -91,10 +93,13 @@ const MoreInfoButton = styled.a`
   cursor: pointer;
   font-size: 15px;
   justify-self: flex-end;
+  transition: background-color 0.2s;
+`;
+
+const DesktopEventInfoButton = styled(EventInfoButton)`
   display: flex;
   gap: 8px;
   align-items: center;
-  transition: background-color 0.2s;
 
   &:hover {
     background-color: var(--color-red-hover);
@@ -102,8 +107,18 @@ const MoreInfoButton = styled.a`
   }
 
   @media ${QUERIES.mobileAndDown} {
+    display: none;
+  }
+`;
+
+const MobileEventInfoButton = styled(EventInfoButton)`
+  display: none;
+
+  @media ${QUERIES.mobileAndDown} {
+    display: block;
     grid-area: button;
     justify-self: start;
+    padding: 4px 14px;
   }
 `;
 
@@ -142,6 +157,10 @@ const EventFilterWrapper = styled.nav`
   .selected {
     background-color: var(--color-red);
     color: var(--color-white);
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    position: revert;
   }
 `;
 
@@ -238,14 +257,21 @@ export default function EventsPage({ data }) {
                   </a>
                 </p>
               </LocationWrapper>
-              <MoreInfoButton
+              <DesktopEventInfoButton
                 href={event.eventInfo}
                 target='_blank'
                 rel='noopener noreferrer'
               >
                 {data.sanityEventsPage.eventInfo}
                 <FaExternalLinkAlt size={12} />
-              </MoreInfoButton>
+              </DesktopEventInfoButton>
+              <MobileEventInfoButton
+                href={event.eventInfo}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <FaExternalLinkAlt size={14} />
+              </MobileEventInfoButton>
             </EventRow>
           ))}
         <PastEventsWrapper>
