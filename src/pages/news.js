@@ -50,11 +50,11 @@ const BlogImage = styled(Img)`
   transition: transform 0.35s ease-out;
 
   @media ${QUERIES.mobileAndDown} {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
   }
 
   @supports not (aspect-ratio: 4 / 3) {
-    height: 260px;
+    height: 280px;
   }
 `;
 
@@ -63,18 +63,19 @@ const TextWrapper = styled.div`
     color: var(--color-white);
     position: absolute;
     top: 0;
-    padding: 1.5rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    width: 100%;
     border-radius: 28px;
 
     background: rgb(0, 0, 0);
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.5) 0%,
-      rgba(0, 0, 0, 0) 30%,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0) 40%,
       rgba(0, 0, 0, 0.7) 80%
     );
   }
@@ -87,20 +88,22 @@ const PublishedDate = styled.p`
 
   @media ${QUERIES.mobileAndDown} {
     color: var(--color-white);
+    margin: 0;
   }
 `;
 
 const Title = styled.h3`
   font-size: ${24 / 16}rem;
-  line-height: 1.2;
+  font-weight: 500;
+  line-height: 1.3;
 
   span {
     border-bottom: 3px solid transparent;
   }
 
-  @media ${QUERIES.mobileAndDown} {
+  /* @media ${QUERIES.mobileAndDown} {
     font-size: ${20 / 16}rem;
-  }
+  } */
 `;
 
 export default function NewsPage({ data }) {
