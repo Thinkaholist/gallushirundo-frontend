@@ -5,6 +5,7 @@ import { ContainerStyles } from '../styles/ContainerStyles';
 import styled from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
 import Seo from '../components/Seo';
+import { QUERIES } from '../constants';
 
 const GridWrapper = styled.div`
   display: grid;
@@ -31,20 +32,14 @@ const ArticleLink = styled(Link)`
 `;
 
 const ArticleCard = styled.article`
-  h3 {
-    font-size: ${24 / 16}rem;
-    line-height: 1.2;
+  position: relative;
+`;
 
-    span {
-      border-bottom: 3px solid transparent;
-    }
-  }
-
-  p {
-    font-size: ${16 / 16}rem;
-    color: var(--color-light-black);
-    margin-bottom: 1rem;
-  }
+const ImageWrapper = styled.div`
+  /* Image zoom on hover */
+  overflow: hidden;
+  border-radius: 28px;
+  line-height: 0;
 `;
 
 const BlogImage = styled(Img)`
@@ -54,8 +49,57 @@ const BlogImage = styled(Img)`
   border-radius: 28px;
   transition: transform 0.35s ease-out;
 
+  @media ${QUERIES.mobileAndDown} {
+    aspect-ratio: 4 / 3;
+  }
+
   @supports not (aspect-ratio: 4 / 3) {
-    height: 300px;
+    height: 260px;
+  }
+`;
+
+const TextWrapper = styled.div`
+  @media ${QUERIES.mobileAndDown} {
+    color: var(--color-white);
+    position: absolute;
+    top: 0;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    border-radius: 28px;
+
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0) 30%,
+      rgba(0, 0, 0, 0.7) 80%
+    );
+  }
+`;
+
+const PublishedDate = styled.p`
+  font-size: ${16 / 16}rem;
+  color: var(--color-light-black);
+  margin: 1rem 0;
+
+  @media ${QUERIES.mobileAndDown} {
+    color: var(--color-white);
+  }
+`;
+
+const Title = styled.h3`
+  font-size: ${24 / 16}rem;
+  line-height: 1.2;
+
+  span {
+    border-bottom: 3px solid transparent;
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    font-size: ${20 / 16}rem;
   }
 `;
 
@@ -70,15 +114,19 @@ export default function NewsPage({ data }) {
           {news.map((post) => (
             <ArticleLink key={post._id} to={`/post/${post.slug.current}`}>
               <ArticleCard>
-                <div style={{ overflow: 'hidden', borderRadius: 28 }}>
+                <ImageWrapper>
                   <BlogImage {...post.featuredImage.image} alt={post.title} />
-                </div>
-                <p>
-                  {DateTime.fromISO(post.publishedDate).toFormat('kkkk.LL.dd')}
-                </p>
-                <h3>
-                  <span>{post.title}</span>
-                </h3>
+                </ImageWrapper>
+                <TextWrapper>
+                  <PublishedDate>
+                    {DateTime.fromISO(post.publishedDate).toFormat(
+                      'kkkk.LL.dd'
+                    )}
+                  </PublishedDate>
+                  <Title>
+                    <span>{post.title}</span>
+                  </Title>
+                </TextWrapper>
               </ArticleCard>
             </ArticleLink>
           ))}
