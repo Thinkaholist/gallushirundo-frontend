@@ -45,6 +45,14 @@ const ImageWrapper = styled.div`
   }
 `;
 
+const TitleWrapper = styled.div`
+  width: 450px;
+
+  @media ${QUERIES.mobileAndDown} {
+    width: revert;
+  }
+`;
+
 const MoreInfoButton = styled.a`
   border: none;
   padding: 10px 20px;
@@ -179,10 +187,10 @@ export default function EventsPage({ data }) {
               <ImageWrapper>
                 <Img {...event.cover.image} alt={event.title} />
               </ImageWrapper>
-              <div style={{ width: 450 }}>
+              <TitleWrapper>
                 <p>{event.date}</p>
                 <h3>{event.title}</h3>
-              </div>
+              </TitleWrapper>
               <div style={{ width: 300 }}>
                 <p>{event.location}</p>
                 <p>
