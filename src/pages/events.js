@@ -24,8 +24,14 @@ const EventRow = styled.article`
   }
 
   @media ${QUERIES.mobileAndDown} {
-    flex-direction: column;
-    text-align: center;
+    padding: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1rem;
+    grid-template-areas:
+      'title title'
+      'cover location'
+      'cover button';
   }
 `;
 
@@ -43,6 +49,14 @@ const ImageWrapper = styled.div`
       height: 100px;
     }
   }
+
+  @media ${QUERIES.mobileAndDown} {
+    grid-area: cover;
+
+    img {
+      border-radius: 10px;
+    }
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -50,6 +64,21 @@ const TitleWrapper = styled.div`
 
   @media ${QUERIES.mobileAndDown} {
     width: revert;
+    grid-area: title;
+    text-align: center;
+  }
+`;
+
+const Title = styled.h3``;
+
+const Date = styled.p``;
+
+const LocationWrapper = styled.div`
+  width: 300px;
+
+  @media ${QUERIES.mobileAndDown} {
+    width: revert;
+    grid-area: location;
   }
 `;
 
@@ -70,6 +99,11 @@ const MoreInfoButton = styled.a`
   &:hover {
     background-color: var(--color-red-hover);
     text-decoration: none;
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    grid-area: button;
+    justify-self: start;
   }
 `;
 
@@ -188,10 +222,10 @@ export default function EventsPage({ data }) {
                 <Img {...event.cover.image} alt={event.title} />
               </ImageWrapper>
               <TitleWrapper>
-                <p>{event.date}</p>
-                <h3>{event.title}</h3>
+                <Date>{event.date}</Date>
+                <Title>{event.title}</Title>
               </TitleWrapper>
-              <div style={{ width: 300 }}>
+              <LocationWrapper>
                 <p>{event.location}</p>
                 <p>
                   <a
@@ -203,7 +237,7 @@ export default function EventsPage({ data }) {
                     {event.mainEvent.name}
                   </a>
                 </p>
-              </div>
+              </LocationWrapper>
               <MoreInfoButton
                 href={event.eventInfo}
                 target='_blank'
