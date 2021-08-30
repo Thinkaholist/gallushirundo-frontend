@@ -4,6 +4,7 @@ import addToMailchimp from 'gatsby-plugin-mailchimp';
 
 const Wrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 2rem;
   text-transform: uppercase;
@@ -44,6 +45,37 @@ const InputField = styled.input`
   }
 `;
 
+const FeedbackBox = styled.div`
+  border: 4px dashed var(--color-red-hover);
+  padding: 2rem;
+  background-color: var(--color-red-light);
+  color: var(--color-black);
+  border-radius: 28px;
+  position: fixed;
+  bottom: 2rem;
+  left: 1rem;
+  right: 1rem;
+  transform: ${(p) =>
+    p.feedback ? 'translateY(0%)' : 'translateY(calc(100% + 2rem))'};
+  transition: 0.35s ease-out;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+`;
+
+const FeedbackButton = styled.button`
+  border: none;
+  font-size: 18px;
+  padding: 12px 24px;
+  background-color: var(--color-red);
+  border-radius: 12px;
+  color: var(--color-white);
+  cursor: pointer;
+  margin-top: 2rem;
+
+  &:hover {
+    background-color: var(--color-red-hover);
+  }
+`;
+
 export default function SubscribeForm() {
   const [saving, setSaving] = useState(false);
   const [state, setState] = useState({
@@ -51,6 +83,7 @@ export default function SubscribeForm() {
     errorMessage: '',
     successMessage: '',
   });
+  const isFeedback = state.errorMessage || state.successMessage;
 
   function handleInputChange(event) {
     const {
@@ -64,6 +97,7 @@ export default function SubscribeForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    resetForm();
     setSaving(true);
     const result = await addToMailchimp(state.email);
     setSaving(false);
@@ -76,7 +110,6 @@ export default function SubscribeForm() {
       });
     } else {
       setState({ ...state, errorMessage: result.msg });
-      setTimeout(() => setState({ ...state, errorMessage: '' }), 6000);
     }
   }
 
@@ -91,63 +124,36 @@ export default function SubscribeForm() {
 
   return (
     <>
-      {state.successMessage ? (
-        <>
-          <div
-            style={{
-              backgroundColor: '#16a085',
-              color: 'var(--color-white)',
-              padding: 10,
-              marginBottom: '1.5rem',
-              borderRadius: 4,
-              fontSize: 16,
-            }}
-            dangerouslySetInnerHTML={{ __html: state.successMessage }}
+      <form
+        name='subscribeForm'
+        method='POST'
+        id='subscribe-form'
+        onSubmit={handleSubmit}
+      >
+        <Wrapper>
+          <p>Newsletter</p>
+          <InputField
+            disabled={saving}
+            type='email'
+            name='email'
+            placeholder='Email...'
+            value={state.email}
+            onChange={handleInputChange}
           />
-          <a href='#0' onClick={resetForm} style={{ color: '#fff' }}>
-            add more?
-          </a>
-        </>
-      ) : (
-        <>
-          {state.errorMessage && (
-            <div
-              style={{
-                backgroundColor: 'var(--color-white)',
-                color: 'var(--color-red)',
-                padding: 10,
-                marginBottom: '1.5rem',
-                width: 300,
-                borderRadius: 4,
-                fontSize: 16,
-              }}
-              dangerouslySetInnerHTML={{ __html: state.errorMessage }}
-            />
-          )}
-          <form
-            name='subscribeForm'
-            method='POST'
-            id='subscribe-form'
-            onSubmit={handleSubmit}
-          >
-            <Wrapper>
-              <p>Newsletter</p>
-              <InputField
-                disabled={saving}
-                type='email'
-                name='email'
-                placeholder='Email...'
-                value={state.email}
-                onChange={handleInputChange}
-              />
 
-              <button type='submit' disabled={saving}>
-                {saving ? `Saving...` : `Subscribe`}
-              </button>
-            </Wrapper>
-          </form>
-        </>
-      )}
+          <button type='submit' disabled={saving}>
+            {saving ? `Saving...` : `Subscribe`}
+          </button>
+        </Wrapper>
+      </form>
+      <FeedbackBox feedback={isFeedback}>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: state.errorMessage || state.successMessage,
+          }}
+        />
+        <FeedbackButton onClick={resetForm}>OK</FeedbackButton>
+      </FeedbackBox>
     </>
   );
 }

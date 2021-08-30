@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 const Bar = styled.div`
   width: 40px;
   height: 5px;
+  border-radius: 4px;
   background-color: ${(p) => p.color};
   transition: background-color 400ms ease;
 
