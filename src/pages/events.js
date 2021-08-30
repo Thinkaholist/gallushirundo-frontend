@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import Seo from '../components/Seo';
+import { QUERIES } from '../constants';
 
 const EventRow = styled.article`
   border-top: 1px solid var(--color-red);
@@ -20,6 +21,11 @@ const EventRow = styled.article`
   h3 {
     font-family: var(--font-family);
     font-weight: 700;
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    flex-direction: column;
+    text-align: center;
   }
 `;
 

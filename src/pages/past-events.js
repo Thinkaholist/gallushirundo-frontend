@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import Seo from '../components/Seo';
+import { QUERIES } from '../constants';
 
 const EventRow = styled.article`
   border-top: 1px solid var(--color-red);
@@ -22,6 +23,11 @@ const EventRow = styled.article`
   &:last-of-type {
     border-bottom: 1px solid var(--color-red);
   }
+
+  @media ${QUERIES.mobileAndDown} {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -38,6 +44,14 @@ const ImageWrapper = styled.div`
     @supports not (aspect-ratio: 1 / 1) {
       height: 100px;
     }
+  }
+`;
+
+const TitleWrapper = styled.div`
+  width: 450px;
+
+  @media ${QUERIES.mobileAndDown} {
+    width: revert;
   }
 `;
 
@@ -94,10 +108,10 @@ export default function EventsPage({ data }) {
             <ImageWrapper>
               <Img {...event.cover.image} alt={event.title} />
             </ImageWrapper>
-            <div style={{ width: 450 }}>
+            <TitleWrapper>
               <p>{event.date}</p>
               <h3>{event.title}</h3>
-            </div>
+            </TitleWrapper>
             <div style={{ width: 300 }}>
               <p>{event.location}</p>
               <p>
@@ -115,7 +129,7 @@ export default function EventsPage({ data }) {
               target='_blank'
               rel='noopener noreferrer'
             >
-              Event
+              {data.sanityEventsPage.eventInfo}
               <FaExternalLinkAlt size={12} />
             </MoreInfoButton>
           </EventRow>
@@ -157,6 +171,7 @@ export const query = graphql`
     }
     sanityEventsPage(_id: { eq: "eventsPage" }) {
       upcomingEvents
+      eventInfo
     }
   }
 `;
