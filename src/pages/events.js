@@ -94,6 +94,10 @@ const EventInfoButton = styled.a`
   font-size: 15px;
   justify-self: flex-end;
   transition: background-color 0.2s;
+
+  svg {
+    display: block;
+  }
 `;
 
 const DesktopEventInfoButton = styled(EventInfoButton)`
@@ -118,7 +122,7 @@ const MobileEventInfoButton = styled(EventInfoButton)`
     display: block;
     grid-area: button;
     justify-self: start;
-    padding: 4px 14px;
+    padding: 8px 14px;
   }
 `;
 
