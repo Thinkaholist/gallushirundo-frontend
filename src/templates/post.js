@@ -30,10 +30,10 @@ const Headline = styled.h1`
   font-weight: 400;
   line-height: 1.2;
   margin-bottom: ${40 / 16}rem;
-  overflow-wrap: break-word;
-  hyphens: auto;
+  /* overflow-wrap: break-word; */
+  /* hyphens: auto; */
   /* Prefix for Safari */
-  -webkit-hyphens: auto;
+  /* -webkit-hyphens: auto; */
 
   @media ${QUERIES.mobileAndDown} {
     font-weight: 500;

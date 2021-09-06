@@ -34,9 +34,13 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
 const MainImage = styled(Img)`
   width: 100%;
   display: block;
-  height: 350px;
+  height: 450px;
   object-fit: cover;
   border-radius: 28px;
+
+  @media ${QUERIES.mobileAndDown} {
+    height: 300px;
+  }
 `;
 
 const ArtistName = styled.h1`
@@ -69,15 +73,23 @@ const SocialIconsWrapper = styled.div`
 
   svg {
     fill: var(--color-red);
+    fill: var(--color-black);
     width: 40px;
     height: 40px;
-    transition: transform 0.2s ease-out;
+    transition: transform 0.35s ease-in-out;
   }
 
   @media (hover: hover) and (pointer: fine) {
     a:hover svg {
-      fill: var(--color-red-hover);
-      transform: scale(1.2);
+      fill: var(--color-red);
+    }
+
+    a:nth-of-type(odd):hover svg {
+      transform: scale(1.4) rotate(10deg);
+    }
+
+    a:nth-of-type(even):hover svg {
+      transform: scale(1.4) rotate(-10deg);
     }
   }
 
@@ -102,16 +114,19 @@ const PressKitWrapper = styled.div`
 `;
 
 const PressKitLink = styled.a`
-  font-size: ${30 / 16}rem;
-  color: ${(p) =>
-    p.pressKit === undefined ? 'lightgrey' : 'var(--color-red)'};
+  font-size: ${24 / 16}rem;
+  background-color: var(--color-red);
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: 6px 12px;
+  border-radius: 28px;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 700;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      color: var(--color-red-hover);
+      background-color: var(--color-red);
       text-decoration: underline;
     }
   }
@@ -410,7 +425,7 @@ export default function SingleArtistPage({ data }) {
             >
               <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                 {data.sanitySingleArtistPage.pressKitText}
-                <FiDownload size={30} />
+                <FiDownload size={24} />
               </span>
             </PressKitLink>
           </PressKitWrapper>

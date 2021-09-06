@@ -148,7 +148,7 @@ const PastEventsWrapper = styled.div`
 `;
 
 const EventFilterWrapper = styled.nav`
-  background-color: var(--color-white);
+  background-color: var(--color-background);
   margin: 1rem auto 2rem;
   padding: 1rem 0;
   display: flex;
@@ -236,8 +236,7 @@ export default function EventsPage({ data }) {
             </FilterButton>
           ))}
         </EventFilterWrapper>
-        {!filterEvents.length ||
-          (filterEvents.length === 0 && <p>No events</p>)}
+        {events.length < 1 && <h1>No upcoming events was found.</h1>}
         {filteredEvents.length > 0 &&
           filteredEvents.map((event) => (
             <EventRow key={event._id}>

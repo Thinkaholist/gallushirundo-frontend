@@ -69,6 +69,7 @@ const GlobalStyles = createGlobalStyle`
     --color-white: #fff;
     --color-black: #2E2E2E;
     --color-light-black: #616161;
+    --color-background: #ededed;
     --font-family: 'Forma DJR Text', -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     --breakpoint-tablet: 916px;
     --fixed-header-padding: 7rem;
@@ -78,6 +79,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     font-family: var(--font-family);
     color: var(--color-black);
+    background-color: var(--color-background);
     line-height: 1.4;
     font-size: ${20 / 16}rem;
     -webkit-font-smoothing: antialiased;

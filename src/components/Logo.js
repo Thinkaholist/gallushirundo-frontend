@@ -3,6 +3,8 @@ import { Link } from 'gatsby';
 import { useWindowSize } from 'react-use';
 import styled from 'styled-components';
 import { QUERIES } from '../constants';
+// import MobileLogo from '../assets/images/H&G_logo-01.svg';
+// import DesktopLogo from '../assets/images/H&G_logo-02.svg';
 
 const LogoStyles = styled.h1`
   font-weight: 700;

@@ -103,6 +103,7 @@ export default function EventsPage({ data }) {
     <>
       <Seo title={'Past Events'} />
       <ContainerStyles>
+        {events.length < 1 && <h1>No past events was found.</h1>}
         {events.map((event) => (
           <EventRow>
             <ImageWrapper>
