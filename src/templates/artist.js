@@ -46,7 +46,7 @@ const MainImage = styled(Img)`
 const ArtistName = styled.h1`
   font-size: ${40 / 16}rem;
   font-weight: 700;
-  color: var(--color-red);
+  color: hsl(var(--color-red));
   margin: 1rem 0;
 `;
 
@@ -72,7 +72,7 @@ const SocialIconsWrapper = styled.div`
   }
 
   svg {
-    fill: var(--color-red);
+    fill: hsl(var(--color-red));
     fill: var(--color-black);
     width: 40px;
     height: 40px;
@@ -81,7 +81,7 @@ const SocialIconsWrapper = styled.div`
 
   @media (hover: hover) and (pointer: fine) {
     a:hover svg {
-      fill: var(--color-red);
+      fill: hsl(var(--color-red));
     }
 
     a:nth-of-type(odd):hover svg {
@@ -115,7 +115,7 @@ const PressKitWrapper = styled.div`
 
 const PressKitLink = styled.a`
   font-size: ${24 / 16}rem;
-  background-color: var(--color-red);
+  background-color: hsl(var(--color-red));
   background-color: var(--color-black);
   color: var(--color-white);
   padding: 6px 12px;
@@ -126,14 +126,14 @@ const PressKitLink = styled.a`
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      background-color: var(--color-red);
+      background-color: hsl(var(--color-red));
       text-decoration: underline;
     }
   }
 `;
 
 const SubHeadline = styled.h2`
-  color: var(--color-red);
+  color: hsl(var(--color-red));
   font-style: italic;
 
   @media ${QUERIES.mobileAndDown} {
@@ -251,7 +251,7 @@ const PaginationWrapper = styled.div`
 const PreviousWrapper = styled.div`
   justify-self: flex-start;
   a {
-    color: var(--color-red);
+    color: hsl(var(--color-red));
   }
 `;
 
@@ -268,7 +268,7 @@ const PreviousLink = styled(Link)`
 const CTA = styled(Link)`
   text-align: center;
   justify-self: center;
-  background-color: var(--color-red);
+  background-color: hsl(var(--color-red));
   color: var(--color-white);
   padding: 8px 16px;
   border-radius: 28px;
@@ -288,7 +288,7 @@ const CTA = styled(Link)`
 const NextWrapper = styled.div`
   justify-self: flex-end;
   a {
-    color: var(--color-red);
+    color: hsl(var(--color-red));
   }
 `;
 

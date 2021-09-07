@@ -10,7 +10,7 @@ const FooterStyles = styled.footer`
   border-top: 1px solid;
   /* margin-left: 1rem;
   margin-right: 1rem; */
-  background-color: var(--color-red);
+  background-color: hsl(var(--color-red));
   color: var(--color-white);
 `;
 

@@ -8,14 +8,14 @@ import Seo from '../components/Seo';
 import { QUERIES } from '../constants';
 
 const EventRow = styled.article`
-  border-top: 1px solid var(--color-red);
+  border-top: 1px solid hsl(var(--color-red));
   padding: 0.5rem 0;
   display: flex;
   gap: 1rem;
   align-items: center;
 
   &:last-of-type {
-    border-bottom: 1px solid var(--color-red);
+    border-bottom: 1px solid hsl(var(--color-red));
   }
 
   h3 {
@@ -88,7 +88,7 @@ const EventInfoButton = styled.a`
   border: none;
   padding: 10px 20px;
   border-radius: 36px;
-  background-color: var(--color-red);
+  background-color: hsl(var(--color-red));
   color: var(--color-white);
   cursor: pointer;
   font-size: 15px;
@@ -134,7 +134,7 @@ const PastEventsWrapper = styled.div`
 
   a {
     display: block;
-    background-color: var(--color-red);
+    background-color: hsl(var(--color-red));
     color: var(--color-white);
     padding: 8px 16px;
     border-radius: 36px;
@@ -159,7 +159,7 @@ const EventFilterWrapper = styled.nav`
   top: ${76 / 16}rem;
 
   .selected {
-    background-color: var(--color-red);
+    background-color: hsl(var(--color-red));
     color: var(--color-white);
   }
 
@@ -170,9 +170,9 @@ const EventFilterWrapper = styled.nav`
 
 const FilterButton = styled.button`
   font-size: 1rem;
-  border: 1px solid var(--color-red);
+  border: 1px solid hsl(var(--color-red));
   background-color: var(--color-white);
-  color: var(--color-red);
+  color: hsl(var(--color-red));
   border-radius: 12px;
   padding: 4px 8px;
   cursor: pointer;

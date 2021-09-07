@@ -21,7 +21,7 @@ export default function ThinkaholistFooter() {
     <>
       <Wrapper>
         <p>
-          Made with <FaHeart color='var(--color-red)' /> by the{' '}
+          Made with <FaHeart color='hsl(var(--color-red))' /> by the{' '}
           <a
             href='https://thinkaholist.com'
             target='_blank'

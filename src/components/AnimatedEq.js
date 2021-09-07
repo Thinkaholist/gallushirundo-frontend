@@ -34,7 +34,7 @@ const Column = styled.div`
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   width: 10px;
-  background-color: var(--color-red);
+  background-color: hsl(var(--color-red));
   animation: ${playing} 500ms infinite alternate ease-in-out;
   animation-play-state: ${(p) => (p.animated ? 'running' : 'paused')};
 

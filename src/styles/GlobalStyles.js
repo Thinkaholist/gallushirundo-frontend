@@ -63,7 +63,7 @@ const GlobalStyles = createGlobalStyle`
 
   html {
     overflow-y: scroll;
-    --color-red: hsl(356 100% 53%);
+    --color-red: 356 100% 53%;
     --color-red-light: hsl(356 100% 93%);
     --color-red-hover: hsl(356 50% 50%);
     --color-white: #fff;

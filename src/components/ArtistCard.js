@@ -9,7 +9,7 @@ const ArtisLink = styled(Link)`
       transform: scale(1.2);
     }
     &:hover h2 span {
-      border-bottom: 3px solid var(--color-red);
+      border-bottom: 3px solid hsl(var(--color-red));
     }
   }
 `;

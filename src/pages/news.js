@@ -22,7 +22,7 @@ const ArticleLink = styled(Link)`
 
   @media (hover: hover) and (pointer: fine) {
     &:hover h3 span {
-      border-color: var(--color-red);
+      border-color: hsl(var(--color-red));
     }
 
     &:hover img {
@@ -114,6 +114,7 @@ export default function NewsPage({ data }) {
       <Seo title={'News'} />
       <ContainerStyles>
         <GridWrapper>
+          {news.length < 1 && <h1>No news was found.</h1>}
           {news.map((post) => (
             <ArticleLink key={post._id} to={`/post/${post.slug.current}`}>
               <ArticleCard>

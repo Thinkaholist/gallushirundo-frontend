@@ -8,7 +8,7 @@ import Seo from '../components/Seo';
 import { QUERIES } from '../constants';
 
 const EventRow = styled.article`
-  border-top: 1px solid var(--color-red);
+  border-top: 1px solid hsl(var(--color-red));
   padding: 0.5rem 0;
   display: flex;
   gap: 1rem;
@@ -21,7 +21,7 @@ const EventRow = styled.article`
   }
 
   &:last-of-type {
-    border-bottom: 1px solid var(--color-red);
+    border-bottom: 1px solid hsl(var(--color-red));
   }
 
   @media ${QUERIES.mobileAndDown} {
@@ -59,7 +59,7 @@ const MoreInfoButton = styled.a`
   border: none;
   padding: 10px 20px;
   border-radius: 36px;
-  background-color: var(--color-red);
+  background-color: hsl(var(--color-red));
   color: var(--color-white);
   cursor: pointer;
   font-size: 15px;
@@ -83,7 +83,7 @@ const BackToEventsWrapper = styled.div`
 
   a {
     display: block;
-    background-color: var(--color-red);
+    background-color: hsl(var(--color-red));
     color: var(--color-white);
     padding: 8px 16px;
     border-radius: 36px;

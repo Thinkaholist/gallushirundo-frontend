@@ -14,7 +14,7 @@ const Wrapper = styled.div`
     padding: 0.5em 1em;
     border: 3px solid var(--color-white);
     color: var(--color-white);
-    background-color: var(--color-red);
+    background-color: hsl(var(--color-red));
     font-size: 20px;
     border-radius: 36px;
     text-transform: uppercase;
@@ -53,7 +53,7 @@ const InputField = styled.input`
   width: 30%;
   border: 3px solid var(--color-white);
   color: var(--color-white);
-  background-color: var(--color-red);
+  background-color: hsl(var(--color-red));
   font-size: 20px;
 
   &::placeholder {
@@ -92,7 +92,7 @@ const FeedbackButton = styled.button`
   border: none;
   font-size: 18px;
   padding: 12px 24px;
-  background-color: var(--color-red);
+  background-color: hsl(var(--color-red));
   border-radius: 12px;
   color: var(--color-white);
   cursor: pointer;

@@ -54,14 +54,24 @@ const SubHeadline = styled.h2`
 `;
 
 const InternalLink = styled(Link)`
-  background-color: var(--color-red);
-  color: var(--color-white);
-  padding: 3px 6px;
-  border-radius: 8px;
+  color: var(--color-black);
+  padding: 0 2px;
+  border-bottom: 2px solid;
+  border-color: hsl(var(--color-red) / 80%);
+  background-color: hsl(var(--color-red) / 10%);
+  transition: background-color 0.1s ease-in-out;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: hsl(var(--color-red) / 70%);
+      border-color: hsl(var(--color-red));
+      color: var(--color-white);
+    }
+  }
 `;
 
 const ExternalLink = styled.a`
-  color: var(--color-red);
+  color: hsl(var(--color-red));
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
@@ -72,7 +82,7 @@ const ExternalLink = styled.a`
 
 const CategoryLink = styled(Link)`
   display: block;
-  color: var(--color-red);
+  color: hsl(var(--color-red));
 
   span a {
     color: inherit;
@@ -81,7 +91,7 @@ const CategoryLink = styled(Link)`
 
   @media (hover: hover) and (pointer: fine) {
     span:hover {
-      background-color: var(--color-red);
+      background-color: hsl(var(--color-red));
       color: var(--color-white);
     }
   }
@@ -90,18 +100,43 @@ const CategoryLink = styled(Link)`
     span {
       font-weight: 500;
       text-decoration: underline;
-      background-color: var(--color-red);
+      background-color: hsl(var(--color-red));
       color: var(--color-white);
     }
   }
 `;
 
 const PortableTextStyles = styled.div`
-  line-height: 1.625;
+  line-height: 1.5;
 
   p:not(:last-of-type) {
     margin-bottom: 1rem;
   }
+
+  strong {
+    font-weight: 700;
+  }
+`;
+
+const EmbedImageWrapper = styled.div`
+  margin: 1rem 0;
+`;
+
+const EmbedImage = styled(Img)`
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+`;
+
+const CaptionWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+`;
+
+const Caption = styled.small`
+  color: darkgray;
+  font-size: 16px;
 `;
 
 export default function SinglePost(props) {
@@ -187,23 +222,17 @@ export default function SinglePost(props) {
         );
       },
       imageEmbed: ({ node: { imageEmbed } }) => {
+        console.log({ imageEmbed });
         return (
           <>
-            <div>
-              <Img
-                {...imageEmbed}
-                alt={imageEmbed.altText}
-                width={500}
-                style={{ width: '100%' }}
-              />
-            </div>
-            {imageEmbed.caption && (
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <small style={{ color: 'darkgray' }}>
-                  {imageEmbed.caption}
-                </small>
-              </div>
-            )}
+            <EmbedImageWrapper>
+              <EmbedImage {...imageEmbed.image} alt={imageEmbed.altText} />
+              {imageEmbed.caption && (
+                <CaptionWrapper>
+                  <Caption>{imageEmbed.caption}</Caption>
+                </CaptionWrapper>
+              )}
+            </EmbedImageWrapper>
           </>
         );
       },
@@ -273,7 +302,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FacebookIcon color='var(--color-red)' size={30} />
+                    <FacebookIcon color='hsl(var(--color-red))' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.instagram && (
@@ -282,7 +311,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaInstagram color='var(--color-red)' size={30} />
+                    <FaInstagram color='hsl(var(--color-red))' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.spotify && (
@@ -291,7 +320,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaSpotify color='var(--color-red)' size={30} />
+                    <FaSpotify color='hsl(var(--color-red))' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.youtube && (
@@ -300,7 +329,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaYoutube color='var(--color-red)' size={30} />
+                    <FaYoutube color='hsl(var(--color-red))' size={30} />
                   </a>
                 )}
                 {artist.socialLinks.website && (
@@ -309,7 +338,7 @@ export default function SinglePost(props) {
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    <FaGlobe color='var(--color-red)' size={30} />
+                    <FaGlobe color='hsl(var(--color-red))' size={30} />
                   </a>
                 )}
               </div>
@@ -362,6 +391,12 @@ export default function SinglePost(props) {
               serializers={serializers}
             />
           </PortableTextStyles>
+          <hr />
+          {props.data.post?.artists.map((artist) => (
+            <Link to={`/artist/${artist.slug.current}`} key={artist._id}>
+              {artist.name}
+            </Link>
+          ))}
         </ContentStyles>
       </ContainerStyles>
     </>
@@ -390,6 +425,16 @@ export const query = graphql`
         name
         slug {
           current
+        }
+      }
+      artists {
+        _id
+        name
+        slug {
+          current
+        }
+        logo {
+          ...ImageWithPreview
         }
       }
     }

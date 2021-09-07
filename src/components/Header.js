@@ -71,7 +71,7 @@ const MenuItems = styled.ul`
 `;
 
 const MobileMenu = styled.div`
-  background-color: var(--color-red);
+  background-color: hsl(var(--color-red));
   position: fixed;
   left: 0;
   top: 0;
@@ -109,7 +109,7 @@ const MobileMenuList = styled.ul`
     font-weight: 700;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 24px;
-    color: var(--color-red);
+    color: hsl(var(--color-red));
   }
 
   li {
@@ -138,7 +138,7 @@ export default function Header({ location }) {
 
   const [headerStyles, setHeaderStyles] = useState({
     backgroundColor: 'transparent',
-    color: 'var(--color-red)',
+    color: 'hsl(var(--color-red))',
     boxShadow: 'none',
   });
 
@@ -152,7 +152,7 @@ export default function Header({ location }) {
     if (currentScroll > 24) {
       setHeaderStyles({
         ...headerStyles,
-        backgroundColor: 'var(--color-red)',
+        backgroundColor: 'hsl(var(--color-red))',
         color: 'var(--color-white)',
         boxShadow: '0 1px 3px rgba(57, 63, 72, 0.2);',
       });
@@ -160,7 +160,7 @@ export default function Header({ location }) {
       setHeaderStyles({
         ...headerStyles,
         backgroundColor: 'transparent',
-        color: 'var(--color-red)',
+        color: 'hsl(var(--color-red))',
         boxShadow: 'none',
       });
     }
