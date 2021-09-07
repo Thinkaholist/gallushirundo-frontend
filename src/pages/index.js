@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { graphql, Link } from 'gatsby';
 import { DateTime } from 'luxon';
 import { ContainerStyles } from '../styles/ContainerStyles';
+import {
+  HiOutlineArrowNarrowLeft as LeftArrow,
+  HiOutlineArrowNarrowRight as RightArrow,
+} from 'react-icons/hi';
 import styled from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
 import Seo from '../components/Seo';
@@ -126,10 +130,129 @@ const NewsCardText = styled.div`
   }
 `;
 
+const StyleBubblesSection = styled.section`
+  background-color: hsl(var(--color-red));
+  color: var(--color-white);
+  margin-top: 2rem;
+  margin-bottom: -40px;
+  border-bottom: 1px solid var(--color-white);
+  padding: 70px;
+`;
+
+const InnerContainer = styled(ContainerStyles)``;
+
+const ArrowWrapper = styled.button`
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  border-radius: 12px;
+
+  svg {
+    width: 70px;
+    height: 70px;
+    color: var(--color-white);
+  }
+
+  &:hover {
+    background-color: #ff6670;
+  }
+`;
+
+const Swiper = styled.div`
+  display: grid;
+  grid-template-columns: 150px auto 150px;
+
+  @media ${QUERIES.mobileAndDown} {
+    grid-template-columns: 1fr 4fr 1fr;
+  }
+`;
+
+const ArtistImageWrapper = styled.div`
+  /* border: 2px solid rebeccapurple; */
+  width: min(${380 / 16}rem, 100%);
+  margin: 0 auto 1rem;
+`;
+
+const ArtistImage = styled(Img)`
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+
+  @media ${QUERIES.mobileAndDown} {
+    width: 100%;
+    height: auto;
+  }
+`;
+
+const InfoBox = styled.div`
+  text-align: center;
+`;
+
+const Tagline = styled.h2`
+  font-size: ${24 / 16}rem;
+  max-width: 600px;
+  min-height: 100px;
+  margin: 0.5rem auto;
+`;
+
+const CtaButton = styled(Link)`
+  color: inherit;
+  display: inline-block;
+  border: 1px solid;
+  border-radius: 28px;
+  padding: 6px 18px;
+  letter-spacing: 1px;
+  background-color: var(--color-white);
+  color: hsl(var(--color-red));
+  transition: background-color 0.2s, color 0.2s;
+  min-width: min(100%, 450px);
+
+  &:hover {
+    background-color: hsl(var(--color-red));
+    color: var(--color-white);
+  }
+`;
+
 export default function HomePage({ data }) {
   const latestNews = data.posts.nodes;
   const artists = data.artists.nodes;
   const heroImage = data.homePage.heroImage.image.asset.url;
+  const [selectedArtist, setSelectedArtist] = useState(artists[0]);
+  const indexOfSelected = artists.indexOf(selectedArtist);
+
+  useEffect(() => {
+    function handleKey(e) {
+      if (e.key === 'ArrowRight') {
+        goRight();
+      }
+      if (e.key === 'ArrowLeft') {
+        goLeft();
+      }
+    }
+
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [goLeft, goRight]);
+
+  function goRight() {
+    if (indexOfSelected === artists.length - 1) {
+      setSelectedArtist(artists[0]);
+    } else {
+      setSelectedArtist(artists[indexOfSelected + 1]);
+    }
+  }
+
+  function goLeft() {
+    if (indexOfSelected === 0) {
+      setSelectedArtist(artists[artists.length - 1]);
+    } else {
+      setSelectedArtist(artists[indexOfSelected - 1]);
+    }
+  }
 
   return (
     <>
@@ -163,6 +286,33 @@ export default function HomePage({ data }) {
           ))}
         </GridWrapper>
       </ContainerStyles>
+      <StyleBubblesSection>
+        <InnerContainer>
+          <Swiper>
+            <ArrowWrapper onClick={goLeft}>
+              <LeftArrow />
+            </ArrowWrapper>
+            <ArtistImageWrapper>
+              <ArtistImage
+                {...selectedArtist.featuredImage.image}
+                alt={selectedArtist.featuredImage.altText}
+              />
+            </ArtistImageWrapper>
+            <ArrowWrapper onClick={goRight}>
+              <RightArrow />
+            </ArrowWrapper>
+          </Swiper>
+          <InfoBox>
+            <Tagline>{selectedArtist.tagline}</Tagline>
+            <CtaButton to={`/artist/${selectedArtist.slug.current}`}>
+              Listen{' '}
+              <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>
+                {selectedArtist.name}
+              </span>
+            </CtaButton>
+          </InfoBox>
+        </InnerContainer>
+      </StyleBubblesSection>
     </>
   );
 }
@@ -215,19 +365,19 @@ export const query = graphql`
         }
       }
     }
-    artists: allSanityArtist {
+    artists: allSanityArtist(sort: { fields: name, order: ASC }) {
       nodes {
         name
         slug {
           current
         }
         featuredImage {
+          altText
           image {
-            asset {
-              url
-            }
+            ...ImageWithPreview
           }
         }
+        tagline
         styles {
           acapella
           folk
