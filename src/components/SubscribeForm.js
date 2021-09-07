@@ -79,7 +79,7 @@ const FeedbackBox = styled.div`
   left: 1rem;
   right: 1rem;
   transform: ${(p) =>
-    p.feedback ? 'translateY(0%)' : 'translateY(calc(100% + 4rem))'};
+    p.feedback ? 'translateY(0%)' : 'translateY(calc(100% + 10rem))'};
   transition: 0.35s ease-out;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 
