@@ -159,6 +159,7 @@ const RelatedArtistLink = styled(Link)`
   padding: var(--padding);
   border-radius: calc(var(--inner-radius) + var(--padding));
   background-color: var(--color-white);
+  min-width: 220px;
 `;
 
 const ArtistThumbail = styled(Img)`
