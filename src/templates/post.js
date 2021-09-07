@@ -29,11 +29,11 @@ function urlFor(source) {
 const Headline = styled.h1`
   font-weight: 400;
   line-height: 1.2;
-  margin-bottom: ${40 / 16}rem;
   /* overflow-wrap: break-word; */
   /* hyphens: auto; */
   /* Prefix for Safari */
   /* -webkit-hyphens: auto; */
+  margin-bottom: 0.5rem;
 
   @media ${QUERIES.mobileAndDown} {
     font-weight: 500;
@@ -81,8 +81,8 @@ const ExternalLink = styled.a`
 `;
 
 const CategoryLink = styled(Link)`
-  display: block;
   color: hsl(var(--color-red));
+  margin-top: -4px;
 
   span a {
     color: inherit;
@@ -399,8 +399,16 @@ export default function SinglePost(props) {
               />
             </div>
           )}
-          <Headline>
-            {props.data.post.title}{' '}
+          <Headline>{props.data.post.title} </Headline>
+          <div
+            style={{
+              // border: '1px solid rebeccapurple',
+              marginBottom: '2.5rem',
+              display: 'flex',
+              gap: '1rem',
+              alignItems: 'center',
+            }}
+          >
             <CategoryLink
               to={`/category/${props.data.post.category.slug.current}`}
             >
@@ -414,7 +422,37 @@ export default function SinglePost(props) {
                 #{props.data.post.category.name}
               </span>
             </CategoryLink>
-          </Headline>
+
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '1rem',
+                borderLeft: '1px groove',
+                paddingLeft: '1rem',
+              }}
+            >
+              {props.data.post?.artists.map((artist) => (
+                <Link
+                  key={artist._id}
+                  to={`/artist/${artist.slug.current}`}
+                  title={artist.name}
+                >
+                  <Img
+                    {...artist.featuredImage.image}
+                    alt={artist.featuredImage.altText}
+                    style={{
+                      display: 'block',
+                      width: 35,
+                      height: 35,
+                      borderRadius: '50%',
+                      objectFit: 'cover',
+                    }}
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
 
           <SubHeadline>{props.data.post.excerpt}</SubHeadline>
 
@@ -424,7 +462,7 @@ export default function SinglePost(props) {
               serializers={serializers}
             />
           </PortableTextStyles>
-          <RelatedArtistsWrapper>
+          {/* <RelatedArtistsWrapper>
             {props.data.post?.artists.map((artist) => (
               <RelatedArtistLink
                 to={`/artist/${artist.slug.current}`}
@@ -439,7 +477,7 @@ export default function SinglePost(props) {
                 </RelatedArtistName>
               </RelatedArtistLink>
             ))}
-          </RelatedArtistsWrapper>
+          </RelatedArtistsWrapper> */}
         </ContentStyles>
       </ContainerStyles>
     </>
