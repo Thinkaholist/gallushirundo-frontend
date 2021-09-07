@@ -34,7 +34,7 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
 const MainImage = styled(Img)`
   width: 100%;
   display: block;
-  height: 450px;
+  height: 460px;
   object-fit: cover;
   border-radius: 28px;
 

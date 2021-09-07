@@ -108,6 +108,7 @@ const CategoryLink = styled(Link)`
 
 const PortableTextStyles = styled.div`
   line-height: 1.5;
+  margin: 2rem 0;
 
   p:not(:last-of-type) {
     margin-bottom: 1rem;
@@ -125,7 +126,7 @@ const EmbedImageWrapper = styled.div`
 const EmbedImage = styled(Img)`
   display: block;
   width: 100%;
-  border-radius: 6px;
+  border-radius: 28px;
 `;
 
 const CaptionWrapper = styled.div`
@@ -138,6 +139,37 @@ const Caption = styled.small`
   color: darkgray;
   font-size: 16px;
 `;
+
+const RelatedArtistsWrapper = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+`;
+
+const RelatedArtistLink = styled(Link)`
+  --inner-radius: 12px;
+  --padding: 8px;
+  color: inherit;
+  font-weight: 500;
+  border: 2px solid hsl(var(--color-red));
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  padding: var(--padding);
+  border-radius: calc(var(--inner-radius) + var(--padding));
+  background-color: var(--color-white);
+`;
+
+const ArtistThumbail = styled(Img)`
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: var(--inner-radius);
+`;
+
+const RelatedArtistName = styled.h3``;
 
 export default function SinglePost(props) {
   const serializers = {
@@ -391,12 +423,22 @@ export default function SinglePost(props) {
               serializers={serializers}
             />
           </PortableTextStyles>
-          <hr />
-          {props.data.post?.artists.map((artist) => (
-            <Link to={`/artist/${artist.slug.current}`} key={artist._id}>
-              {artist.name}
-            </Link>
-          ))}
+          <RelatedArtistsWrapper>
+            {props.data.post?.artists.map((artist) => (
+              <RelatedArtistLink
+                to={`/artist/${artist.slug.current}`}
+                key={artist._id}
+              >
+                <ArtistThumbail
+                  {...artist.featuredImage.image}
+                  alt={artist.featuredImage.altText}
+                />
+                <RelatedArtistName key={artist._id}>
+                  {artist.name}
+                </RelatedArtistName>
+              </RelatedArtistLink>
+            ))}
+          </RelatedArtistsWrapper>
         </ContentStyles>
       </ContainerStyles>
     </>
@@ -435,6 +477,11 @@ export const query = graphql`
         }
         logo {
           ...ImageWithPreview
+        }
+        featuredImage {
+          image {
+            ...ImageWithPreview
+          }
         }
       }
     }
