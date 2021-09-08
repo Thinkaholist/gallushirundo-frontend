@@ -40,22 +40,28 @@ export default function ContactPage({ data }) {
       <ContainerStyles>
         <GridWrapper>
           <AboutUsWrapper>{text}</AboutUsWrapper>
-          <Image
-            {...pageDetails.contactImage.image}
-            alt={pageDetails.contactImage.altText}
-          />
+          <div>
+            <Image
+              {...pageDetails.contactImage.image}
+              alt={pageDetails.contactImage.altText}
+            />
+            <div
+              style={{
+                margin: '4rem 0',
+                display: 'grid',
+                placeContent: 'center',
+              }}
+            >
+              <a
+                href={`mailto:${pageDetails.contactEmail}`}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                {pageDetails.contactEmail}
+              </a>
+            </div>
+          </div>
         </GridWrapper>
-        <div
-          style={{ margin: '4rem 0', display: 'grid', placeContent: 'center' }}
-        >
-          <a
-            href={`mailto:${pageDetails.contactEmail}`}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            {pageDetails.contactEmail}
-          </a>
-        </div>
       </ContainerStyles>
     </>
   );
