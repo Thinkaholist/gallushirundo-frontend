@@ -63,13 +63,25 @@ const GlobalStyles = createGlobalStyle`
 
   html {
     overflow-y: scroll;
-    --color-red: 356 100% 53%;
+    /* --color-red: 356 100% 53%; */
+    /* --color-red: 356 100% 35%; */
+    /* --color-red: 356 100% 31%; */
+    --color-red: 356 100% 42%;
     --color-red-light: hsl(356 100% 93%);
     --color-red-hover: hsl(356 50% 50%);
     --color-white: #fff;
     --color-black: #2E2E2E;
     --color-light-black: #616161;
     --color-background: #ededed;
+    --color-matyo-orange: #FF6634;
+    --color-matyo-orange: #942500;
+    --color-matyo-orange: #C73200;
+    --color-matyo-purple: #D098FD;
+    --color-matyo-purple: #7003C9;
+    --color-matyo-purple: #971CFD;
+    --color-matyo-blue: #6698FA;
+    --color-matyo-blue: #0743BB;
+    --color-matyo-blue: #0F5DFA;
     --font-family: 'Forma DJR Text', -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
     --breakpoint-tablet: 916px;
     --fixed-header-padding: 7rem;

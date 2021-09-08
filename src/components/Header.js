@@ -7,10 +7,10 @@ import Logo from './Logo';
 import HamburgerMenu from './HamurgerMenu';
 
 const menuItems = [
-  { name: 'News', path: '/news' },
-  { name: 'Events', path: '/events' },
-  { name: 'Artists', path: '/artists' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'News', path: '/news', color: 'hsl(var(--color-red))' },
+  { name: 'Events', path: '/events', color: 'var(--color-matyo-orange)' },
+  { name: 'Artists', path: '/artists', color: 'var(--color-matyo-purple)' },
+  { name: 'Contact', path: '/contact', color: 'var(--color-matyo-blue)' },
 ];
 
 const HeaderStyles = styled.header`
@@ -50,10 +50,6 @@ const MenuItems = styled.ul`
   gap: 60px;
   margin-left: auto;
 
-  li {
-    padding: 0 2px;
-  }
-
   a {
     letter-spacing: 1px;
   }
@@ -68,6 +64,13 @@ const MenuItems = styled.ul`
   @media (max-width: 916px) {
     display: none;
   }
+`;
+
+const MenuItem = styled.li`
+  padding: 0 2px;
+  /* test */
+  color: ${(p) =>
+    p.scrolled || p.pathname === '/' ? `var(--color-white)` : p.color};
 `;
 
 const MobileMenu = styled.div`
@@ -128,18 +131,11 @@ const MobileMenuList = styled.ul`
 export default function Header({ location }) {
   const { width } = useWindowSize();
   const [isOpen, setIsOpen] = useState(false);
-  // const { siteSettings } = useStaticQuery(graphql`
-  //   query {
-  //     siteSettings: sanitySiteSettings(_id: { eq: "siteSettings" }) {
-  //       title
-  //     }
-  //   }
-  // `);
-
   const [headerStyles, setHeaderStyles] = useState({
     backgroundColor: 'transparent',
-    color: 'hsl(var(--color-red))',
+    color: 'hsl(var(--color-black))',
     boxShadow: 'none',
+    scrolled: false,
   });
 
   useEffect(() => {
@@ -155,13 +151,15 @@ export default function Header({ location }) {
         backgroundColor: 'hsl(var(--color-red))',
         color: 'var(--color-white)',
         boxShadow: '0 1px 3px rgba(57, 63, 72, 0.2);',
+        scrolled: true,
       });
     } else {
       setHeaderStyles({
         ...headerStyles,
         backgroundColor: 'transparent',
-        color: 'hsl(var(--color-red))',
+        color: 'var(--color-black)',
         boxShadow: 'none',
+        scrolled: false,
       });
     }
   }
@@ -178,9 +176,14 @@ export default function Header({ location }) {
             <Logo />
             <MenuItems>
               {menuItems.map((item, i) => (
-                <li key={i}>
+                <MenuItem
+                  key={i}
+                  pathname={location.pathname}
+                  scrolled={headerStyles.scrolled}
+                  color={item.color}
+                >
                   <Link to={item.path}>{item.name}</Link>
-                </li>
+                </MenuItem>
               ))}
             </MenuItems>
             {width < 917 && (
