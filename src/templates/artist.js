@@ -72,17 +72,17 @@ const SocialIconsWrapper = styled.div`
   }
 
   svg {
-    fill: hsl(var(--color-red));
-    fill: var(--color-black);
+    /* fill: hsl(var(--color-red));
+    fill: var(--color-black); */
     width: 40px;
     height: 40px;
     transition: transform 0.35s ease-in-out;
   }
 
   @media (hover: hover) and (pointer: fine) {
-    a:hover svg {
+    /* a:hover svg {
       fill: hsl(var(--color-red));
-    }
+    } */
 
     a:nth-of-type(odd):hover svg {
       transform: scale(1.4) rotate(10deg);
@@ -101,6 +101,26 @@ const SocialIconsWrapper = styled.div`
       height: 30px;
     }
   }
+`;
+
+const FacebookIcon = styled(FaFacebookSquare)`
+  color: var(--color-matyo-orange);
+`;
+
+const InstaIcon = styled(FaInstagram)`
+  color: var(--color-matyo-blue);
+`;
+
+const SpotifyIcon = styled(FaSpotify)`
+  color: hsl(var(--color-red));
+`;
+
+const YoutubeIcon = styled(FaYoutube)`
+  color: var(--color-matyo-purple);
+`;
+
+const WebIcon = styled(FaGlobe)`
+  color: var(--color-black);
 `;
 
 const PressKitWrapper = styled.div`
@@ -365,31 +385,22 @@ export default function SingleArtistPage({ data }) {
         <BioWrapper>{bio}</BioWrapper>
         {singleArtist?.socialLinks && (
           <SocialIconsWrapper>
-            {singleArtist?.socialLinks?.facebook && (
-              <a
-                href={singleArtist.socialLinks.facebook}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <FaFacebookSquare />
-              </a>
-            )}
-            {singleArtist?.socialLinks?.instagram && (
-              <a
-                href={singleArtist.socialLinks.instagram}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <FaInstagram />
-              </a>
-            )}
             {singleArtist?.socialLinks?.spotify && (
               <a
                 href={singleArtist.socialLinks.spotify}
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                <FaSpotify />
+                <SpotifyIcon />
+              </a>
+            )}
+            {singleArtist?.socialLinks?.facebook && (
+              <a
+                href={singleArtist.socialLinks.facebook}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <FacebookIcon />
               </a>
             )}
             {singleArtist?.socialLinks?.youtube && (
@@ -398,7 +409,16 @@ export default function SingleArtistPage({ data }) {
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                <FaYoutube />
+                <YoutubeIcon />
+              </a>
+            )}
+            {singleArtist?.socialLinks?.instagram && (
+              <a
+                href={singleArtist.socialLinks.instagram}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <InstaIcon />
               </a>
             )}
             {singleArtist?.socialLinks?.website && (
@@ -407,7 +427,7 @@ export default function SingleArtistPage({ data }) {
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                <FaGlobe />
+                <WebIcon />
               </a>
             )}
           </SocialIconsWrapper>

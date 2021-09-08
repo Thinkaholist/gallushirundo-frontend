@@ -66,7 +66,7 @@ const GlobalStyles = createGlobalStyle`
     /* --color-red: 356 100% 53%; */
     /* --color-red: 356 100% 35%; */
     /* --color-red: 356 100% 31%; */
-    --color-red: 356 100% 42%;
+    --color-red: 358 100% 46%;
     --color-red-light: hsl(356 100% 93%);
     --color-red-hover: hsl(356 50% 50%);
     --color-white: #fff;
@@ -74,8 +74,8 @@ const GlobalStyles = createGlobalStyle`
     --color-light-black: #616161;
     --color-background: #ededed;
     --color-matyo-orange: #FF6634;
-    --color-matyo-orange: #942500;
-    --color-matyo-orange: #C73200;
+    /* --color-matyo-orange: #942500;
+    --color-matyo-orange: #C73200; */
     --color-matyo-purple: #D098FD;
     --color-matyo-purple: #7003C9;
     --color-matyo-purple: #971CFD;
