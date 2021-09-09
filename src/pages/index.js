@@ -10,6 +10,9 @@ import styled from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
 import Seo from '../components/Seo';
 import { QUERIES } from '../constants';
+import Slide from 'react-reveal/Slide';
+import Zoom from 'react-reveal/Zoom';
+import Pulse from 'react-reveal/Pulse';
 
 const HeroSection = styled.div`
   margin-top: calc(var(--fixed-header-padding) * -1);
@@ -267,22 +270,24 @@ export default function HomePage({ data }) {
       </HeroSection>
       <ContainerStyles>
         <GridWrapper>
-          {latestNews.map((post) => (
-            <NewsCardLink key={post._id} to={`/post/${post.slug.current}`}>
-              <NewsCard>
-                <Img {...post.featuredImage.image} alt={post.title} />
-                <NewsCardText>
-                  <p>
-                    {DateTime.fromISO(post.publishedDate).toFormat(
-                      'kkkk.LL.dd'
-                    )}
-                  </p>
-                  <h3>
-                    <span>{post.title}</span>
-                  </h3>
-                </NewsCardText>
-              </NewsCard>
-            </NewsCardLink>
+          {latestNews.map((post, i) => (
+            <Slide left={i % 2 === 0} right={i % 2 !== 0} key={post._id}>
+              <NewsCardLink to={`/post/${post.slug.current}`}>
+                <NewsCard>
+                  <Img {...post.featuredImage.image} alt={post.title} />
+                  <NewsCardText>
+                    <p>
+                      {DateTime.fromISO(post.publishedDate).toFormat(
+                        'kkkk.LL.dd'
+                      )}
+                    </p>
+                    <h3>
+                      <span>{post.title}</span>
+                    </h3>
+                  </NewsCardText>
+                </NewsCard>
+              </NewsCardLink>
+            </Slide>
           ))}
         </GridWrapper>
       </ContainerStyles>
@@ -292,24 +297,28 @@ export default function HomePage({ data }) {
             <ArrowWrapper onClick={goLeft}>
               <LeftArrow />
             </ArrowWrapper>
-            <ArtistImageWrapper>
-              <ArtistImage
-                {...selectedArtist.featuredImage.image}
-                alt={selectedArtist.featuredImage.altText}
-              />
-            </ArtistImageWrapper>
+            <Zoom>
+              <ArtistImageWrapper>
+                <ArtistImage
+                  {...selectedArtist.featuredImage.image}
+                  alt={selectedArtist.featuredImage.altText}
+                />
+              </ArtistImageWrapper>
+            </Zoom>
             <ArrowWrapper onClick={goRight}>
               <RightArrow />
             </ArrowWrapper>
           </Swiper>
           <InfoBox>
             <Tagline>{selectedArtist.tagline}</Tagline>
-            <CtaButton to={`/artist/${selectedArtist.slug.current}`}>
-              Listen{' '}
-              <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>
-                {selectedArtist.name}
-              </span>
-            </CtaButton>
+            <Pulse>
+              <CtaButton to={`/artist/${selectedArtist.slug.current}`}>
+                Listen{' '}
+                <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>
+                  {selectedArtist.name}
+                </span>
+              </CtaButton>
+            </Pulse>
           </InfoBox>
         </InnerContainer>
       </StyleBubblesSection>

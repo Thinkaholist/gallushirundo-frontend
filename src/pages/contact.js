@@ -4,6 +4,7 @@ import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-plugin-sanity-image';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import Seo from '../components/Seo';
+import Pulse from 'react-reveal/Pulse';
 
 const GridWrapper = styled.div`
   display: grid;
@@ -45,21 +46,23 @@ export default function ContactPage({ data }) {
               {...pageDetails.contactImage.image}
               alt={pageDetails.contactImage.altText}
             />
-            <div
-              style={{
-                margin: '4rem 0',
-                display: 'grid',
-                placeContent: 'center',
-              }}
-            >
-              <a
-                href={`mailto:${pageDetails.contactEmail}`}
-                target='_blank'
-                rel='noopener noreferrer'
+            <Pulse>
+              <div
+                style={{
+                  margin: '4rem 0',
+                  display: 'grid',
+                  placeContent: 'center',
+                }}
               >
-                {pageDetails.contactEmail}
-              </a>
-            </div>
+                <a
+                  href={`mailto:${pageDetails.contactEmail}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  {pageDetails.contactEmail}
+                </a>
+              </div>
+            </Pulse>
           </div>
         </GridWrapper>
       </ContainerStyles>

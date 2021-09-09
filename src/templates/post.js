@@ -18,6 +18,7 @@ import { ContainerStyles } from '../styles/ContainerStyles';
 import { ContentStyles } from '../styles/ContentStyles';
 import Seo from '../components/Seo';
 import { QUERIES } from '../constants';
+import Flip from 'react-reveal/Flip';
 
 function urlFor(source) {
   return urlBuilder({
@@ -433,23 +434,24 @@ export default function SinglePost(props) {
               }}
             >
               {props.data.post?.artists.map((artist) => (
-                <Link
-                  key={artist._id}
-                  to={`/artist/${artist.slug.current}`}
-                  title={artist.name}
-                >
-                  <Img
-                    {...artist.featuredImage.image}
-                    alt={artist.featuredImage.altText}
-                    style={{
-                      display: 'block',
-                      width: 35,
-                      height: 35,
-                      borderRadius: '50%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                </Link>
+                <Flip key={artist._id}>
+                  <Link
+                    to={`/artist/${artist.slug.current}`}
+                    title={artist.name}
+                  >
+                    <Img
+                      {...artist.featuredImage.image}
+                      alt={artist.featuredImage.altText}
+                      style={{
+                        display: 'block',
+                        width: 35,
+                        height: 35,
+                        borderRadius: '50%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </Link>
+                </Flip>
               ))}
             </div>
           </div>
