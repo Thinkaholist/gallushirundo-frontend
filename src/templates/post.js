@@ -111,12 +111,56 @@ const PortableTextStyles = styled.div`
   line-height: 1.5;
   margin: 2rem 0;
 
+  h3,
+  h4 {
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: ${26 / 16}rem;
+  }
+
+  h4 {
+    font-size: ${22 / 16}rem;
+  }
+
   p:not(:last-of-type) {
     margin-bottom: 1rem;
   }
 
   strong {
     font-weight: 700;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  code {
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  ul,
+  ol {
+    list-style-type: revert;
+    padding-left: revert;
+
+    & li::marker {
+      color: hsl(var(--color-red));
+    }
+  }
+
+  blockquote {
+    background: linear-gradient(to right, #fff, var(--color-background) 99%);
+    border-left: 10px solid hsl(var(--color-red));
+    margin: 1.5em 0;
+    padding: 0.5em 10px;
+    /* font-style: italic; */
+    border-radius: 6px;
+
+    p {
+      display: inline;
+    }
   }
 `;
 
@@ -391,7 +435,7 @@ export default function SinglePost(props) {
       />
       <ContainerStyles>
         <ContentStyles>
-          {props.data.post.featuredImage && (
+          {props.data.post?.featuredImage && (
             <div>
               <img
                 src={props.data.post?.featuredImage?.asset?.url}
