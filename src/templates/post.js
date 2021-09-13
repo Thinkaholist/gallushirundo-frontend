@@ -434,7 +434,7 @@ export default function SinglePost(props) {
               }}
             >
               {props.data.post?.artists.map((artist) => (
-                <Flip key={artist._id}>
+                <Flip left key={artist._id}>
                   <Link
                     to={`/artist/${artist.slug.current}`}
                     title={artist.name}

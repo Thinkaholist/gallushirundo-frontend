@@ -388,6 +388,7 @@ export default function SingleArtistPage({ data }) {
             {singleArtist?.socialLinks?.spotify && (
               <a
                 href={singleArtist.socialLinks.spotify}
+                title={singleArtist.socialLinks.spotify}
                 target='_blank'
                 rel='noopener noreferrer'
               >
@@ -397,6 +398,7 @@ export default function SingleArtistPage({ data }) {
             {singleArtist?.socialLinks?.facebook && (
               <a
                 href={singleArtist.socialLinks.facebook}
+                title={singleArtist.socialLinks.facebook}
                 target='_blank'
                 rel='noopener noreferrer'
               >
@@ -406,6 +408,7 @@ export default function SingleArtistPage({ data }) {
             {singleArtist?.socialLinks?.youtube && (
               <a
                 href={singleArtist.socialLinks.youtube}
+                title={singleArtist.socialLinks.youtube}
                 target='_blank'
                 rel='noopener noreferrer'
               >
@@ -415,6 +418,7 @@ export default function SingleArtistPage({ data }) {
             {singleArtist?.socialLinks?.instagram && (
               <a
                 href={singleArtist.socialLinks.instagram}
+                title={singleArtist.socialLinks.instagram}
                 target='_blank'
                 rel='noopener noreferrer'
               >
@@ -424,6 +428,7 @@ export default function SingleArtistPage({ data }) {
             {singleArtist?.socialLinks?.website && (
               <a
                 href={singleArtist.socialLinks.website}
+                title={singleArtist.socialLinks.website}
                 target='_blank'
                 rel='noopener noreferrer'
               >
@@ -477,7 +482,7 @@ export default function SingleArtistPage({ data }) {
                       selectedVideoUrl={selectedVideoUrl}
                       src={`https://i.ytimg.com/vi/${getYouTubeID(
                         video.url
-                      )}/hqdefault.jpg`}
+                      )}/maxresdefault.jpg`}
                       alt={video.title}
                       title={video.title}
                     />
