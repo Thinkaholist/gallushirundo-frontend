@@ -155,7 +155,7 @@ const PortableTextStyles = styled.div`
     border-left: 10px solid hsl(var(--color-red));
     margin: 1.5em 0;
     padding: 0.5em 10px;
-    /* font-style: italic; */
+    font-style: italic;
     border-radius: 6px;
 
     p {
