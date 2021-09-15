@@ -13,6 +13,7 @@ import { QUERIES } from '../constants';
 import Slide from 'react-reveal/Slide';
 import Zoom from 'react-reveal/Zoom';
 import Pulse from 'react-reveal/Pulse';
+import Fade from 'react-reveal/Fade';
 
 const HeroSection = styled.div`
   margin-top: calc(var(--fixed-header-padding) * -1);
@@ -173,7 +174,6 @@ const Swiper = styled.div`
 `;
 
 const ArtistImageWrapper = styled.div`
-  /* border: 2px solid rebeccapurple; */
   width: min(${380 / 16}rem, 100%);
   margin: 0 auto 1rem;
 `;
@@ -264,30 +264,41 @@ export default function HomePage({ data }) {
         <Img {...data.homePage.heroImage.image} alt='hero' />
         <HeroTextWrapper>
           <ContainerStyles>
-            <p>{data.homePage.headerText}</p>
+            <Fade bottom distance='20px' delay={350}>
+              <p>{data.homePage.headerText}</p>
+            </Fade>
           </ContainerStyles>
         </HeroTextWrapper>
       </HeroSection>
       <ContainerStyles>
         <GridWrapper>
           {latestNews.map((post, i) => (
-            <Slide left={i % 2 === 0} right={i % 2 !== 0} key={post._id}>
+            <Fade
+              distance='50px'
+              left={i % 2 === 0}
+              right={i % 2 !== 0}
+              key={post._id}
+            >
               <NewsCardLink to={`/post/${post.slug.current}`}>
                 <NewsCard>
                   <Img {...post.featuredImage.image} alt={post.title} />
                   <NewsCardText>
-                    <p>
-                      {DateTime.fromISO(post.publishedDate).toFormat(
-                        'kkkk.LL.dd'
-                      )}
-                    </p>
-                    <h3>
-                      <span>{post.title}</span>
-                    </h3>
+                    <Fade delay={100}>
+                      <p>
+                        {DateTime.fromISO(post.publishedDate).toFormat(
+                          'kkkk.LL.dd'
+                        )}
+                      </p>
+                    </Fade>
+                    <Fade bottom delay={250}>
+                      <h3>
+                        <span>{post.title}</span>
+                      </h3>
+                    </Fade>
                   </NewsCardText>
                 </NewsCard>
               </NewsCardLink>
-            </Slide>
+            </Fade>
           ))}
         </GridWrapper>
       </ContainerStyles>
@@ -297,7 +308,7 @@ export default function HomePage({ data }) {
             <ArrowWrapper onClick={goLeft}>
               <LeftArrow />
             </ArrowWrapper>
-            <Zoom>
+            <Zoom delay={150}>
               <ArtistImageWrapper>
                 <ArtistImage
                   {...selectedArtist.featuredImage.image}
@@ -311,7 +322,7 @@ export default function HomePage({ data }) {
           </Swiper>
           <InfoBox>
             <Tagline>{selectedArtist.tagline}</Tagline>
-            <Pulse>
+            <Pulse delay={200}>
               <CtaButton to={`/artist/${selectedArtist.slug.current}`}>
                 Listen{' '}
                 <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>
@@ -388,7 +399,6 @@ export const query = graphql`
         }
         tagline
         styles {
-          acapella
           folk
           punk
           rock

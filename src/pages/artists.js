@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
+import Fade from 'react-reveal/Fade';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import ArtistCard from '../components/ArtistCard';
 import Seo from '../components/Seo';
@@ -20,7 +21,9 @@ export default function ArtistsPage({ data }) {
       <ContainerStyles>
         <GridWrapper>
           {artists.map((artist) => (
-            <ArtistCard key={artist._id} artist={artist} />
+            <Fade key={artist._id} bottom delay={150} distance='20px'>
+              <ArtistCard artist={artist} />
+            </Fade>
           ))}
         </GridWrapper>
       </ContainerStyles>
