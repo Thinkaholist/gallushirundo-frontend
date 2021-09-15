@@ -125,7 +125,7 @@ const NewsCardText = styled.div`
   p {
     margin-bottom: 2rem;
   }
-  h3 {
+  h2 {
     font-size: ${24 / 16}rem;
     max-width: 20ch;
     /* span {
@@ -291,9 +291,9 @@ export default function HomePage({ data }) {
                       </p>
                     </Fade>
                     <Fade bottom delay={250}>
-                      <h3>
+                      <h2>
                         <span>{post.title}</span>
-                      </h3>
+                      </h2>
                     </Fade>
                   </NewsCardText>
                 </NewsCard>
@@ -305,7 +305,7 @@ export default function HomePage({ data }) {
       <StyleBubblesSection>
         <InnerContainer>
           <Swiper>
-            <ArrowWrapper onClick={goLeft}>
+            <ArrowWrapper onClick={goLeft} aria-label='go left'>
               <LeftArrow />
             </ArrowWrapper>
             <Zoom delay={150}>
@@ -316,7 +316,7 @@ export default function HomePage({ data }) {
                 />
               </ArtistImageWrapper>
             </Zoom>
-            <ArrowWrapper onClick={goRight}>
+            <ArrowWrapper onClick={goRight} aria-label='go right'>
               <RightArrow />
             </ArrowWrapper>
           </Swiper>

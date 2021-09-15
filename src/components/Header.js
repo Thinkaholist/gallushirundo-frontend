@@ -213,6 +213,7 @@ export default function Header({ location }) {
           style={{ padding: 30, color: 'var(--color-white)', height: '100%' }}
         >
           <LogoLink
+            aria-label='link to homepage'
             to={`/`}
             style={{ color: 'inherit', textDecoration: 'none' }}
             onClick={() => setIsOpen(false)}
