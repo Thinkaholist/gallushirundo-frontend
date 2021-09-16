@@ -50,7 +50,7 @@ const InnerContainer = styled(ContainerStyles)`
   --color-blues: #6698fa;
   --color-pop: #f4df89;
   --color-disco: #ff6634;
-  --transition: all 0.45s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+  --transition: all 0.5s cubic-bezier(0.31, -0.105, 0.43, 1.4);
   margin-top: -3rem;
 `;
 
@@ -84,7 +84,10 @@ const ArrowWrapper = styled.button`
   }
 
   @media ${QUERIES.mobileAndDown} {
-    padding: 1rem 0;
+    svg {
+      width: 50px;
+      height: 50px;
+    }
   }
 `;
 
@@ -166,18 +169,18 @@ const FolkCircle = styled(StyleCircle)`
 const RockCircle = styled(StyleCircle)`
   background-color: var(--color-rock);
   top: 20%;
-  right: -3%;
+  right: 6%;
 `;
 const PunkCircle = styled(StyleCircle)`
   background-color: var(--color-punk);
   color: #2e2e2e;
-  bottom: 10%;
+  bottom: 5%;
   right: 5%;
 `;
 const RootsCircle = styled(StyleCircle)`
   background-color: var(--color-roots);
   top: 40%;
-  left: -1%;
+  left: 6%;
 `;
 const GipsyCircle = styled(StyleCircle)`
   background-color: var(--color-gipsy);
@@ -210,6 +213,10 @@ const Tagline = styled.h2`
   max-width: 600px;
   min-height: 100px;
   margin: 1rem auto;
+
+  @media ${QUERIES.mobileAndDown} {
+    font-size: ${20 / 16}rem;
+  }
 `;
 
 const CtaButton = styled(Link)`
@@ -224,9 +231,15 @@ const CtaButton = styled(Link)`
   transition: background-color 0.2s linear, color 0.2s linear;
   min-width: min(100%, 450px);
 
-  &:hover {
-    background-color: hsl(var(--color-red));
-    color: var(--color-white);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: hsl(var(--color-red));
+      color: var(--color-white);
+    }
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    font-size: ${16 / 16}rem;
   }
 `;
 
