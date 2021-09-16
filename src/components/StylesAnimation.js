@@ -142,7 +142,12 @@ const ArtistImage = styled.img`
   border-radius: 50%;
 
   @supports not (aspect-ratio: 1 / 1) {
-    height: 343px;
+    height: 400px;
+
+    @media ${QUERIES.mobileAndDown} {
+      width: 288px
+      height: 288px;
+    }
   }
 `;
 
