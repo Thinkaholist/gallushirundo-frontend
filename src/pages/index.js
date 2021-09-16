@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { DateTime } from 'luxon';
-import { ContainerStyles } from '../styles/ContainerStyles';
-import {
-  HiOutlineArrowNarrowLeft as LeftArrow,
-  HiOutlineArrowNarrowRight as RightArrow,
-} from 'react-icons/hi';
-import styled, { keyframes } from 'styled-components';
-import Img from 'gatsby-plugin-sanity-image';
-import Seo from '../components/Seo';
-import { QUERIES } from '../constants';
-import Zoom from 'react-reveal/Zoom';
-import Pulse from 'react-reveal/Pulse';
+import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
+import Img from 'gatsby-plugin-sanity-image';
+import { ContainerStyles } from '../styles/ContainerStyles';
+import { QUERIES } from '../constants';
+import Seo from '../components/Seo';
+import StlyesAnimation from '../components/StylesAnimation';
 
 const HeroSection = styled.div`
   margin-top: calc(var(--fixed-header-padding) * -1);
@@ -139,159 +134,13 @@ const StyleBubblesSection = styled.section`
   margin-top: 2rem;
   margin-bottom: -40px;
   border-bottom: 1px solid var(--color-white);
-  padding: 70px;
-`;
-
-const InnerContainer = styled(ContainerStyles)``;
-
-const arrowBounceLeft = keyframes`
-	from {
-		transform: translateX(0);
-	}
-
-	50% {
-		transform: translateX(-30%);
-
-	}
-
-	to {
-		transform: translateX(0);
-	}
-`;
-
-const arrowBounceRight = keyframes`
-	from {
-		transform: translateX(0);
-	}
-
-	50% {
-		transform: translateX(30%);
-
-	}
-
-	to {
-		transform: translateX(0);
-	}
-`;
-
-const ArrowWrapper = styled.button`
-  background-color: inherit;
-  border: none;
-  cursor: pointer;
-  display: grid;
-  place-content: center;
-  border-radius: 12px;
-  transition: background-color 0.2s linear;
-
-  svg {
-    width: 70px;
-    height: 70px;
-    color: var(--color-white);
-  }
-
-  &.left:hover svg {
-    animation: ${arrowBounceLeft} 0.35s;
-  }
-
-  &.right:hover svg {
-    animation: ${arrowBounceRight} 0.35s;
-  }
-`;
-
-const Swiper = styled.div`
-  display: grid;
-  grid-template-columns: 150px auto 150px;
-
-  @media ${QUERIES.mobileAndDown} {
-    grid-template-columns: 1fr 4fr 1fr;
-  }
-`;
-
-const ArtistImageWrapper = styled.div`
-  width: min(${380 / 16}rem, 100%);
-  margin: 0 auto 1rem;
-`;
-
-const ArtistImage = styled(Img)`
-  display: block;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  border-radius: 50%;
-
-  @media ${QUERIES.mobileAndDown} {
-    width: 100%;
-    height: auto;
-  }
-`;
-
-const InfoBox = styled.div`
-  text-align: center;
-`;
-
-const Tagline = styled.h2`
-  font-size: ${24 / 16}rem;
-  max-width: 600px;
-  min-height: 100px;
-  margin: 0.5rem auto;
-`;
-
-const CtaButton = styled(Link)`
-  color: inherit;
-  display: inline-block;
-  border: 1px solid;
-  border-radius: 28px;
-  padding: 6px 18px;
-  letter-spacing: 1px;
-  background-color: var(--color-white);
-  color: hsl(var(--color-red));
-  transition: background-color 0.2s, color 0.2s;
-  min-width: min(100%, 450px);
-
-  &:hover {
-    background-color: hsl(var(--color-red));
-    color: var(--color-white);
-  }
+  padding: 2rem 0;
 `;
 
 export default function HomePage({ data }) {
   const latestNews = data.posts.nodes;
   const artists = data.artists.nodes;
   const heroImage = data.homePage.heroImage.image.asset.url;
-  const [selectedArtist, setSelectedArtist] = useState(artists[0]);
-  const indexOfSelected = artists.indexOf(selectedArtist);
-
-  useEffect(() => {
-    function handleKey(e) {
-      if (e.key === 'ArrowRight') {
-        goRight();
-      }
-      if (e.key === 'ArrowLeft') {
-        goLeft();
-      }
-    }
-
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [goLeft, goRight]);
-
-  function goRight() {
-    if (indexOfSelected === artists.length - 1) {
-      setSelectedArtist(artists[0]);
-    } else {
-      setSelectedArtist(artists[indexOfSelected + 1]);
-    }
-  }
-
-  function goLeft() {
-    if (indexOfSelected === 0) {
-      setSelectedArtist(artists[artists.length - 1]);
-    } else {
-      setSelectedArtist(artists[indexOfSelected - 1]);
-    }
-  }
-
-  console.log({ artists });
 
   return (
     <>
@@ -339,43 +188,7 @@ export default function HomePage({ data }) {
         </GridWrapper>
       </ContainerStyles>
       <StyleBubblesSection>
-        <InnerContainer>
-          <Swiper>
-            <ArrowWrapper
-              onClick={goLeft}
-              aria-label='go left'
-              className='left'
-            >
-              <LeftArrow />
-            </ArrowWrapper>
-            <Zoom delay={150}>
-              <ArtistImageWrapper>
-                <ArtistImage
-                  {...selectedArtist.featuredImage.image}
-                  alt={selectedArtist.featuredImage.altText}
-                />
-              </ArtistImageWrapper>
-            </Zoom>
-            <ArrowWrapper
-              onClick={goRight}
-              aria-label='go right'
-              className='right'
-            >
-              <RightArrow />
-            </ArrowWrapper>
-          </Swiper>
-          <InfoBox>
-            <Tagline>{selectedArtist.tagline}</Tagline>
-            <Pulse delay={200}>
-              <CtaButton to={`/artist/${selectedArtist.slug.current}`}>
-                Listen{' '}
-                <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>
-                  {selectedArtist.name}
-                </span>
-              </CtaButton>
-            </Pulse>
-          </InfoBox>
-        </InnerContainer>
+        <StlyesAnimation artists={artists} />
       </StyleBubblesSection>
     </>
   );
@@ -439,6 +252,9 @@ export const query = graphql`
           altText
           image {
             ...ImageWithPreview
+            asset {
+              url
+            }
           }
         }
         tagline
