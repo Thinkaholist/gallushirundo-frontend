@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link, useStaticQuery, graphql } from 'gatsby';
+import { Link } from 'gatsby';
 import { useWindowSize } from 'react-use';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import Logo from './Logo';

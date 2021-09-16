@@ -23,7 +23,7 @@ import 'swiper/components/navigation/navigation.min.css';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import AnimatedEq from '../components/AnimatedEq';
 import Seo from '../components/Seo';
-import PressKitLink from '../components/PressKitLink';
+import ButtonLinkWithIcon from '../components/ButtonLinkWithIcon';
 import { QUERIES } from '../constants';
 
 // import Swiper core and required modules
@@ -331,7 +331,7 @@ export default function SingleArtistPage({ data }) {
 
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [changeVideo]);
+  }, []);
 
   return (
     <>
@@ -431,11 +431,12 @@ export default function SingleArtistPage({ data }) {
         )}
         {singleArtist?.pressKit && (
           <PressKitWrapper>
-            <PressKitLink
+            <ButtonLinkWithIcon
               href={`${singleArtist?.pressKit?.asset.url}?dl=${singleArtist.slug.current}-pressKit.zip`}
               download={!singleArtist?.pressKit ? false : true}
               // pressKit={singleArtist?.pressKit?.asset.url}
               text={data.sanitySingleArtistPage.pressKitText}
+              fontSize='24px'
             />
           </PressKitWrapper>
         )}

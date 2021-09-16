@@ -8,7 +8,7 @@ const LinkButton = styled.a`
   width: 200px;
   height: 50px;
   line-height: 50px;
-  font-size: ${24 / 16}rem;
+  font-size: ${(p) => p.fontSize};
   background-color: hsl(var(--color-red));
   background-color: var(--color-black);
   color: var(--color-white);
@@ -77,23 +77,23 @@ const IconWrapper = styled.div`
   width: 28%;
   right: 0;
   transition: var(--transition);
+
+  svg {
+    width: 26px;
+    height: 26px;
+    opacity: 0.6;
+    display: block;
+    transition: var(--transition), height 0.25s ease;
+  }
 `;
 
-const Icon = styled(FiDownload)`
-  width: 26px;
-  height: 26px;
-  opacity: 0.6;
-  display: block;
-  transition: var(--transition), height 0.25s ease;
-`;
-
-export default function PressKitLink(props) {
+export default function ButtonLinkWithIcon(props) {
   return (
     <>
       <LinkButton {...props}>
         <ButtonText>{props.text}</ButtonText>
         <IconWrapper>
-          <Icon />
+          <FiDownload />
         </IconWrapper>
       </LinkButton>
     </>
