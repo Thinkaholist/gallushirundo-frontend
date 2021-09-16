@@ -117,7 +117,7 @@ const RightArrowWrapper = styled(ArrowWrapper)`
 
 const CenterBox = styled.div`
   /* border: 2px solid blue; */
-  padding: 1.5rem 0;
+  padding: 2rem 0;
 
   @media ${QUERIES.mobileAndDown} {
     grid-row-start: 1;
@@ -158,7 +158,12 @@ const StyleCircle = styled.div`
   will-change: transform;
   transition: var(--transition);
   transform: ${(p) =>
-    p.scale === 0 ? 'scale(0)' : `scale(${p.scale / 100 + 0.6})`};
+    p.scale === 0 ? 'scale(0)' : `scale(${p.scale / 100 + 0.9})`};
+
+  @media ${QUERIES.mobileAndDown} {
+    transform: ${(p) =>
+      p.scale === 0 ? 'scale(0)' : `scale(${p.scale / 100 + 0.6})`};
+  }
 `;
 
 const FolkCircle = styled(StyleCircle)`

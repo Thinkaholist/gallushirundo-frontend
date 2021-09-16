@@ -403,7 +403,8 @@ export default function SinglePost(props) {
       />
       <ContainerStyles>
         <ContentStyles>
-          {props.data.post?.featuredImage && (
+          {/* TODO: Featured image in blog post? */}
+          {/* {props.data.post?.featuredImage && (
             <div>
               <img
                 src={props.data.post?.featuredImage?.asset?.url}
@@ -411,7 +412,7 @@ export default function SinglePost(props) {
                 style={{ width: '100%' }}
               />
             </div>
-          )}
+          )} */}
           <Headline>{props.data.post.title} </Headline>
           <div
             style={{

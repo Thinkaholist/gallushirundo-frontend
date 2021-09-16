@@ -5,6 +5,7 @@ import { useWindowSize } from 'react-use';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import Logo from './Logo';
 import HamburgerMenu from './HamurgerMenu';
+import { QUERIES } from '../constants';
 
 const menuItems = [
   { name: 'News', path: '/news', color: 'hsl(var(--color-red))' },
@@ -29,6 +30,12 @@ const HeaderStyles = styled.header`
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    background-color: ${(p) =>
+      p.pathname === '/' ? p.styles.backgroundColor : 'hsl(var(--color-red))'};
+    color: var(--color-white);
   }
 `;
 
@@ -199,9 +206,7 @@ export default function Header({ location }) {
               <HamburgerMenu
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
-                color={
-                  pathname === '/' ? 'var(--color-white)' : headerStyles.color
-                }
+                color={'var(--color-white)'}
               />
             )}
           </HeaderContentWrapper>
