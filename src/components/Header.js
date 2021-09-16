@@ -142,7 +142,7 @@ export default function Header({ location }) {
   const [isOpen, setIsOpen] = useState(false);
   const [headerStyles, setHeaderStyles] = useState({
     backgroundColor: 'transparent',
-    color: 'hsl(var(--color-black))',
+    color: 'hsl(var(--color-red))',
     boxShadow: 'none',
     scrolled: false,
   });
@@ -166,7 +166,7 @@ export default function Header({ location }) {
       setHeaderStyles({
         ...headerStyles,
         backgroundColor: 'transparent',
-        color: 'var(--color-black)',
+        color: 'hsl(var(--color-red))',
         boxShadow: 'none',
         scrolled: false,
       });
@@ -189,7 +189,7 @@ export default function Header({ location }) {
                   key={i}
                   pathname={pathname}
                   scrolled={headerStyles.scrolled}
-                  color={item.color}
+                  color='hsl(var(--color-red))'
                 >
                   <Link to={item.path}>{item.name}</Link>
                 </MenuItem>
