@@ -9,6 +9,8 @@ import Img from 'gatsby-plugin-image';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import { QUERIES } from '../constants';
 import Pulse from 'react-reveal/Pulse';
+import Zoom from 'react-reveal/Zoom';
+import Fade from 'react-reveal/Fade';
 
 const arrowBounceLeft = keyframes`
 	from {
@@ -297,36 +299,40 @@ export default function StylesAnimation({ artists }) {
             <LeftIcon />
           </LeftArrowWrapper>
           <CenterBox>
-            <ArtistImageWrapper>
-              <ArtistImage
-                src={selectedArtist.featuredImage.image.asset.url}
-                alt={selectedArtist.featuredImage.altText}
-              />
-              <FolkCircle scale={selectedArtist.styles.folk}>Folk</FolkCircle>
-              <RockCircle scale={selectedArtist.styles.rock}>Rock</RockCircle>
-              <PunkCircle scale={selectedArtist.styles.punk}>Punk</PunkCircle>
-              <RootsCircle scale={selectedArtist.styles.roots}>
-                Roots
-              </RootsCircle>
-              <GipsyCircle scale={selectedArtist.styles.gipsy}>
-                Gipsy
-              </GipsyCircle>
-              <BluesCircle scale={selectedArtist.styles.blues}>
-                Blues
-              </BluesCircle>
-              <PopCircle scale={selectedArtist.styles.pop}>Pop</PopCircle>
-              <DiscoCircle scale={selectedArtist.styles.disco}>
-                Disco
-              </DiscoCircle>
-            </ArtistImageWrapper>
+            <Zoom delay={350}>
+              <ArtistImageWrapper>
+                <ArtistImage
+                  src={selectedArtist.featuredImage.image.asset.url}
+                  alt={selectedArtist.featuredImage.altText}
+                />
+                <FolkCircle scale={selectedArtist.styles.folk}>Folk</FolkCircle>
+                <RockCircle scale={selectedArtist.styles.rock}>Rock</RockCircle>
+                <PunkCircle scale={selectedArtist.styles.punk}>Punk</PunkCircle>
+                <RootsCircle scale={selectedArtist.styles.roots}>
+                  Roots
+                </RootsCircle>
+                <GipsyCircle scale={selectedArtist.styles.gipsy}>
+                  Gipsy
+                </GipsyCircle>
+                <BluesCircle scale={selectedArtist.styles.blues}>
+                  Blues
+                </BluesCircle>
+                <PopCircle scale={selectedArtist.styles.pop}>Pop</PopCircle>
+                <DiscoCircle scale={selectedArtist.styles.disco}>
+                  Disco
+                </DiscoCircle>
+              </ArtistImageWrapper>
+            </Zoom>
           </CenterBox>
           <RightArrowWrapper onClick={goRight}>
             <RightIcon />
           </RightArrowWrapper>
         </SetsWrapper>
         <InfoBox>
-          <Tagline>{selectedArtist.tagline}</Tagline>
-          <Pulse delay={200}>
+          <Fade bottom distance='40px' delay={250}>
+            <Tagline>{selectedArtist.tagline}</Tagline>
+          </Fade>
+          <Pulse delay={350}>
             <CtaButton to={`/artist/${selectedArtist.slug.current}`}>
               Listen{' '}
               <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>

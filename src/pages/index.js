@@ -192,6 +192,7 @@ export default function HomePage({ data }) {
           {latestNews.map((post, i) => (
             <Fade
               distance='50px'
+              delay={350}
               left={i % 2 === 0}
               right={i % 2 !== 0}
               key={post._id}
