@@ -143,11 +143,21 @@ const PressKitLink = styled.a`
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 700;
+  transition: transform 0.35s, background-color 0.2s linear;
+
+  svg {
+    display: none;
+    transition: all 0.3s;
+  }
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       background-color: hsl(var(--color-red));
-      text-decoration: underline;
+      transform: scale(1.1);
+
+      svg {
+        display: block;
+      }
     }
   }
 `;
