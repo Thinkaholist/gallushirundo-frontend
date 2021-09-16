@@ -137,6 +137,10 @@ const ArtistImage = styled.img`
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 50%;
+
+  @supports not (aspect-ratio: 1 / 1) {
+    height: 343px;
+  }
 `;
 
 const StyleCircle = styled.div`
