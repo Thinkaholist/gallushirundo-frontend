@@ -185,38 +185,6 @@ const Caption = styled.small`
   font-size: 16px;
 `;
 
-const RelatedArtistsWrapper = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-`;
-
-const RelatedArtistLink = styled(Link)`
-  --inner-radius: 12px;
-  --padding: 8px;
-  color: inherit;
-  font-weight: 500;
-  border: 2px solid hsl(var(--color-red));
-  display: flex;
-  width: fit-content;
-  align-items: center;
-  gap: 8px;
-  padding: var(--padding);
-  border-radius: calc(var(--inner-radius) + var(--padding));
-  background-color: var(--color-white);
-  min-width: 220px;
-`;
-
-const ArtistThumbail = styled(Img)`
-  display: block;
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: var(--inner-radius);
-`;
-
-const RelatedArtistName = styled.h3``;
-
 export default function SinglePost(props) {
   const serializers = {
     marks: {

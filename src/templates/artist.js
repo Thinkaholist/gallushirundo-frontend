@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-plugin-sanity-image';
@@ -14,7 +14,6 @@ import {
   HiOutlineArrowNarrowLeft as LeftArrow,
   HiOutlineArrowNarrowRight as RightArrow,
 } from 'react-icons/hi';
-import { FiDownload } from 'react-icons/fi';
 import getYouTubeID from 'get-youtube-id';
 import ReactPlayer from 'react-player/youtube';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -24,6 +23,7 @@ import 'swiper/components/navigation/navigation.min.css';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import AnimatedEq from '../components/AnimatedEq';
 import Seo from '../components/Seo';
+import PressKitLink from '../components/PressKitLink';
 import { QUERIES } from '../constants';
 
 // import Swiper core and required modules
@@ -130,35 +130,6 @@ const PressKitWrapper = styled.div`
 
   @media ${QUERIES.mobileAndDown} {
     display: none;
-  }
-`;
-
-const PressKitLink = styled.a`
-  font-size: ${24 / 16}rem;
-  background-color: hsl(var(--color-red));
-  background-color: var(--color-black);
-  color: var(--color-white);
-  padding: 6px 12px;
-  border-radius: 28px;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: 700;
-  transition: transform 0.35s, background-color 0.2s linear;
-
-  svg {
-    display: none;
-    transition: all 0.3s;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      background-color: hsl(var(--color-red));
-      transform: scale(1.1);
-
-      svg {
-        display: block;
-      }
-    }
   }
 `;
 
@@ -295,7 +266,7 @@ const PreviousLink = styled(Link)`
   }
 `;
 
-const CTA = styled(Link)`
+const Cta = styled(Link)`
   text-align: center;
   justify-self: center;
   background-color: hsl(var(--color-red));
@@ -350,6 +321,17 @@ export default function SingleArtistPage({ data }) {
     setSelectedVideoUrl(videoUrl);
     setPlaying(false);
   }
+
+  useEffect(() => {
+    function handleKey(e) {
+      if (e.key === 's') {
+        changeVideo(e.target.dataset.videourl);
+      }
+    }
+
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [changeVideo]);
 
   return (
     <>
@@ -450,19 +432,11 @@ export default function SingleArtistPage({ data }) {
         {singleArtist?.pressKit && (
           <PressKitWrapper>
             <PressKitLink
-              href={
-                !singleArtist?.pressKit
-                  ? '#0'
-                  : `${singleArtist?.pressKit?.asset.url}?dl=${singleArtist.slug.current}-pressKit.zip`
-              }
+              href={`${singleArtist?.pressKit?.asset.url}?dl=${singleArtist.slug.current}-pressKit.zip`}
               download={!singleArtist?.pressKit ? false : true}
-              pressKit={singleArtist?.pressKit?.asset.url}
-            >
-              <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                {data.sanitySingleArtistPage.pressKitText}
-                <FiDownload size={24} />
-              </span>
-            </PressKitLink>
+              // pressKit={singleArtist?.pressKit?.asset.url}
+              text={data.sanitySingleArtistPage.pressKitText}
+            />
           </PressKitWrapper>
         )}
         <SubHeadline>{data.sanitySingleArtistPage.youtubeHeadline}</SubHeadline>
@@ -485,7 +459,13 @@ export default function SingleArtistPage({ data }) {
           {singleArtist.videoGallery.length > 1 && (
             <ThumbnailGrid>
               {singleArtist.videoGallery.map((video) => (
-                <div key={video._key} onClick={() => changeVideo(video.url)}>
+                <div
+                  key={video._key}
+                  onClick={() => changeVideo(video.url)}
+                  role='button'
+                  tabIndex={0}
+                  data-videourl={video.url}
+                >
                   <ThumbnailWrapper>
                     <ThumbnailImage
                       videoUrl={video.url}
@@ -537,7 +517,7 @@ export default function SingleArtistPage({ data }) {
               </PreviousLink>
             )}
           </PreviousWrapper>
-          <CTA to={`/contact`}>{data.sanitySingleArtistPage.ctaButtonText}</CTA>
+          <Cta to={`/contact`}>{data.sanitySingleArtistPage.ctaButtonText}</Cta>
           <NextWrapper>
             {next && (
               <NextLink to={`/artist/${next.slug.current}`}>
