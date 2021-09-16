@@ -8,6 +8,7 @@ import { ContainerStyles } from '../styles/ContainerStyles';
 import { QUERIES } from '../constants';
 import Seo from '../components/Seo';
 import StlyesAnimation from '../components/StylesAnimation';
+import FolkDivider from '../components/FolkDivider';
 
 const HeroSection = styled.div`
   margin-top: calc(var(--fixed-header-padding) * -1);
@@ -55,6 +56,14 @@ const HeroTextWrapper = styled.div`
       right: 1rem;
       line-height: 1.4;
     }
+  }
+`;
+
+const InnerContainer = styled(ContainerStyles)`
+  padding-bottom: ${300 / 16}rem;
+
+  @media ${QUERIES.mobileAndDown} {
+    padding-bottom: ${80 / 16}rem;
   }
 `;
 
@@ -134,7 +143,30 @@ const StyleBubblesSection = styled.section`
   margin-top: 2rem;
   margin-bottom: -40px;
   border-bottom: 1px solid var(--color-white);
-  padding: 2rem 0;
+  padding: 3rem 0;
+  position: relative;
+`;
+
+const Divider = styled.div`
+  transform: translateY(calc(-100% + 1.3px));
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  /* border: 2px solid blue; */
+  z-index: 1;
+`;
+
+const Svg = styled.svg`
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+`;
+
+const Path = styled.path`
+  fill: hsl(var(--color-red));
 `;
 
 export default function HomePage({ data }) {
@@ -155,7 +187,7 @@ export default function HomePage({ data }) {
           </ContainerStyles>
         </HeroTextWrapper>
       </HeroSection>
-      <ContainerStyles>
+      <InnerContainer>
         <GridWrapper>
           {latestNews.map((post, i) => (
             <Fade
@@ -186,8 +218,9 @@ export default function HomePage({ data }) {
             </Fade>
           ))}
         </GridWrapper>
-      </ContainerStyles>
+      </InnerContainer>
       <StyleBubblesSection>
+        <FolkDivider />
         <StlyesAnimation artists={artists} />
       </StyleBubblesSection>
     </>

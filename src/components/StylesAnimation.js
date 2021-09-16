@@ -51,6 +51,7 @@ const InnerContainer = styled(ContainerStyles)`
   --color-pop: #f4df89;
   --color-disco: #ff6634;
   --transition: all 0.45s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+  margin-top: -3rem;
 `;
 
 const SetsWrapper = styled.div`
