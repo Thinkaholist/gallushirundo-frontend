@@ -6,11 +6,10 @@ import {
   HiOutlineArrowNarrowLeft as LeftArrow,
   HiOutlineArrowNarrowRight as RightArrow,
 } from 'react-icons/hi';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Img from 'gatsby-plugin-sanity-image';
 import Seo from '../components/Seo';
 import { QUERIES } from '../constants';
-import Slide from 'react-reveal/Slide';
 import Zoom from 'react-reveal/Zoom';
 import Pulse from 'react-reveal/Pulse';
 import Fade from 'react-reveal/Fade';
@@ -145,6 +144,36 @@ const StyleBubblesSection = styled.section`
 
 const InnerContainer = styled(ContainerStyles)``;
 
+const arrowBounceLeft = keyframes`
+	from {
+		transform: translateX(0);
+	}
+
+	50% {
+		transform: translateX(-30%);
+
+	}
+
+	to {
+		transform: translateX(0);
+	}
+`;
+
+const arrowBounceRight = keyframes`
+	from {
+		transform: translateX(0);
+	}
+
+	50% {
+		transform: translateX(30%);
+
+	}
+
+	to {
+		transform: translateX(0);
+	}
+`;
+
 const ArrowWrapper = styled.button`
   background-color: inherit;
   border: none;
@@ -152,6 +181,7 @@ const ArrowWrapper = styled.button`
   display: grid;
   place-content: center;
   border-radius: 12px;
+  transition: background-color 0.2s linear;
 
   svg {
     width: 70px;
@@ -159,8 +189,12 @@ const ArrowWrapper = styled.button`
     color: var(--color-white);
   }
 
-  &:hover {
-    background-color: #ff6670;
+  &.left:hover svg {
+    animation: ${arrowBounceLeft} 0.35s;
+  }
+
+  &.right:hover svg {
+    animation: ${arrowBounceRight} 0.35s;
   }
 `;
 
@@ -257,6 +291,8 @@ export default function HomePage({ data }) {
     }
   }
 
+  console.log({ artists });
+
   return (
     <>
       <Seo title={'Home'} image={heroImage} />
@@ -305,7 +341,11 @@ export default function HomePage({ data }) {
       <StyleBubblesSection>
         <InnerContainer>
           <Swiper>
-            <ArrowWrapper onClick={goLeft} aria-label='go left'>
+            <ArrowWrapper
+              onClick={goLeft}
+              aria-label='go left'
+              className='left'
+            >
               <LeftArrow />
             </ArrowWrapper>
             <Zoom delay={150}>
@@ -316,7 +356,11 @@ export default function HomePage({ data }) {
                 />
               </ArtistImageWrapper>
             </Zoom>
-            <ArrowWrapper onClick={goRight} aria-label='go right'>
+            <ArrowWrapper
+              onClick={goRight}
+              aria-label='go right'
+              className='right'
+            >
               <RightArrow />
             </ArrowWrapper>
           </Swiper>
@@ -402,6 +446,11 @@ export const query = graphql`
           folk
           punk
           rock
+          roots
+          gipsy
+          blues
+          pop
+          disco
         }
       }
     }

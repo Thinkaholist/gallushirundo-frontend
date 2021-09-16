@@ -492,7 +492,7 @@ export default function SingleArtistPage({ data }) {
                       selectedVideoUrl={selectedVideoUrl}
                       src={`https://i.ytimg.com/vi/${getYouTubeID(
                         video.url
-                      )}/maxresdefault.jpg`}
+                      )}/hqdefault.jpg`}
                       alt={video.title}
                       title={video.title}
                     />
@@ -604,12 +604,6 @@ export const query = graphql`
           originalFilename
           url
         }
-      }
-      styles {
-        acapella
-        folk
-        punk
-        rock
       }
     }
     previous: sanityArtist(slug: { current: { eq: $previousSlug } }) {
