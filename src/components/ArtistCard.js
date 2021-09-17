@@ -17,7 +17,7 @@ const ArtisLink = styled(Link)`
 const ArtistCardStyles = styled.article`
   line-height: 0;
   position: relative;
-  /* overflow: hidden; */
+  overflow: hidden;
   border-radius: 28px;
 `;
 
@@ -65,7 +65,11 @@ export default function ArtistCard({ artist }) {
     <>
       <ArtisLink to={`/artist/${artist.slug.current}`}>
         <ArtistCardStyles>
-          <Image {...artist.featuredImage.image} alt={artist.name} />
+          <Image
+            {...artist.featuredImage.image}
+            alt={artist.name}
+            style={{ position: 'static' }}
+          />
           <ArtistNameWrapper>
             <h2>
               <span>{artist.name}</span>

@@ -78,7 +78,6 @@ const NewsCardLink = styled(Link)`
   color: var(--color-white);
   cursor: pointer;
 
-  /* Does not work with gatsby-image */
   @media (hover: hover) and (pointer: fine) {
     &:hover article img {
       transform: scale(1.1);
@@ -89,8 +88,8 @@ const NewsCardLink = styled(Link)`
 const NewsCard = styled.article`
   border-radius: 28px;
   position: relative;
-  /* Does not work with gatsby-image */
-  /* overflow: hidden; */
+  /* Image does not load if that's outside of the viewable area. Image position should be in the viewable area */
+  overflow: hidden;
 
   img {
     display: block;
@@ -179,7 +178,11 @@ export default function HomePage({ data }) {
             >
               <NewsCardLink to={`/post/${post.slug.current}`}>
                 <NewsCard>
-                  <Img {...post.featuredImage.image} alt={post.title} />
+                  <Img
+                    {...post.featuredImage.image}
+                    alt={post.title}
+                    style={{ position: 'static' }}
+                  />
                   <NewsCardText>
                     <Fade delay={100}>
                       <p>

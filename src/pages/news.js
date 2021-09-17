@@ -119,7 +119,11 @@ export default function NewsPage({ data }) {
             <ArticleLink key={post._id} to={`/post/${post.slug.current}`}>
               <ArticleCard>
                 <ImageWrapper>
-                  <BlogImage {...post.featuredImage.image} alt={post.title} />
+                  <BlogImage
+                    {...post.featuredImage.image}
+                    alt={post.title}
+                    style={{ position: 'static' }}
+                  />
                 </ImageWrapper>
                 <TextWrapper>
                   <PublishedDate>
