@@ -17,11 +17,12 @@ const ArtisLink = styled(Link)`
 const ArtistCardStyles = styled.article`
   line-height: 0;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
   border-radius: 28px;
 `;
 
 const Image = styled(Img)`
+  border-radius: 28px;
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;

@@ -78,6 +78,7 @@ const NewsCardLink = styled(Link)`
   color: var(--color-white);
   cursor: pointer;
 
+  /* Does not work with gatsby-image */
   @media (hover: hover) and (pointer: fine) {
     &:hover article img {
       transform: scale(1.1);
@@ -88,7 +89,8 @@ const NewsCardLink = styled(Link)`
 const NewsCard = styled.article`
   border-radius: 28px;
   position: relative;
-  overflow: hidden;
+  /* Does not work with gatsby-image */
+  /* overflow: hidden; */
 
   img {
     display: block;
