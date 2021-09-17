@@ -25,6 +25,8 @@ import AnimatedEq from '../components/AnimatedEq';
 import Seo from '../components/Seo';
 import ButtonLinkWithIcon from '../components/ButtonLinkWithIcon';
 import { QUERIES } from '../constants';
+import Fade from 'react-reveal/Fade';
+import Flip from 'react-reveal/Flip';
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper/core';
@@ -373,61 +375,67 @@ export default function SingleArtistPage({ data }) {
               ))}
           </Swiper>
         )}
-        <ArtistName>{singleArtist.name}</ArtistName>
-        <BioWrapper>{bio}</BioWrapper>
+        <Fade delay={100} bottom distance='10px'>
+          <ArtistName>{singleArtist.name}</ArtistName>
+        </Fade>
+        <Fade bottom distance='5px'>
+          <BioWrapper>{bio}</BioWrapper>
+        </Fade>
         {singleArtist?.socialLinks && (
-          <SocialIconsWrapper>
-            {singleArtist?.socialLinks?.spotify && (
-              <a
-                href={singleArtist.socialLinks.spotify}
-                title={singleArtist.socialLinks.spotify}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <SpotifyIcon />
-              </a>
-            )}
-            {singleArtist?.socialLinks?.facebook && (
-              <a
-                href={singleArtist.socialLinks.facebook}
-                title={singleArtist.socialLinks.facebook}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <FacebookIcon />
-              </a>
-            )}
-            {singleArtist?.socialLinks?.youtube && (
-              <a
-                href={singleArtist.socialLinks.youtube}
-                title={singleArtist.socialLinks.youtube}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <YoutubeIcon />
-              </a>
-            )}
-            {singleArtist?.socialLinks?.instagram && (
-              <a
-                href={singleArtist.socialLinks.instagram}
-                title={singleArtist.socialLinks.instagram}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <InstaIcon />
-              </a>
-            )}
-            {singleArtist?.socialLinks?.website && (
-              <a
-                href={singleArtist.socialLinks.website}
-                title={singleArtist.socialLinks.website}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <WebIcon />
-              </a>
-            )}
-          </SocialIconsWrapper>
+          <Fade delay={0} top distance='8px'>
+            <SocialIconsWrapper>
+              {singleArtist?.socialLinks?.spotify && (
+                <a
+                  href={singleArtist.socialLinks.spotify}
+                  title={singleArtist.socialLinks.spotify}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <SpotifyIcon />
+                </a>
+              )}
+              {singleArtist?.socialLinks?.facebook && (
+                <a
+                  href={singleArtist.socialLinks.facebook}
+                  title={singleArtist.socialLinks.facebook}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <FacebookIcon />
+                </a>
+              )}
+              {singleArtist?.socialLinks?.youtube && (
+                <a
+                  href={singleArtist.socialLinks.youtube}
+                  title={singleArtist.socialLinks.youtube}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <YoutubeIcon />
+                </a>
+              )}
+              {singleArtist?.socialLinks?.instagram && (
+                <a
+                  href={singleArtist.socialLinks.instagram}
+                  title={singleArtist.socialLinks.instagram}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <InstaIcon />
+                </a>
+              )}
+              {singleArtist?.socialLinks?.website && (
+                <a
+                  href={singleArtist.socialLinks.website}
+                  title={singleArtist.socialLinks.website}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <WebIcon />
+                </a>
+              )}
+            </SocialIconsWrapper>
+          </Fade>
         )}
         {singleArtist?.pressKit && (
           <PressKitWrapper>

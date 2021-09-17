@@ -88,6 +88,8 @@ const CategoryLink = styled(Link)`
   span a {
     color: inherit;
     text-decoration: none;
+    /* TODO: Why is this not working? */
+    transition: background-color 0.5s linear;
   }
 
   @media (hover: hover) and (pointer: fine) {
