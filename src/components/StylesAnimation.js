@@ -119,7 +119,7 @@ const RightArrowWrapper = styled(ArrowWrapper)`
 
 const CenterBox = styled.div`
   /* border: 2px solid blue; */
-  padding: 2rem 0;
+  padding: 2.5rem 0;
 
   @media ${QUERIES.mobileAndDown} {
     grid-row-start: 1;
@@ -147,13 +147,14 @@ const ArtistImage = styled.img`
     height: 400px;
 
     @media ${QUERIES.mobileAndDown} {
-      width: 288px
+      width: 288px;
       height: 288px;
     }
   }
 `;
 
 const StyleCircle = styled.div`
+  text-transform: uppercase;
   border-radius: 50%;
   color: #fff;
   width: 70px;
@@ -166,6 +167,8 @@ const StyleCircle = styled.div`
   transition: var(--transition);
   transform: ${(p) =>
     p.scale === 0 ? 'scale(0)' : `scale(${p.scale / 100 + 0.9})`};
+  opacity: ${(p) => p.scale / 1000 + 0.9};
+  /* filter: ${(p) => `grayscale(${(100 - p.scale) / 2}%)`}; */
 
   @media ${QUERIES.mobileAndDown} {
     transform: ${(p) =>
@@ -299,7 +302,7 @@ export default function StylesAnimation({ artists }) {
             <LeftIcon />
           </LeftArrowWrapper>
           <CenterBox>
-            <Zoom delay={350}>
+            <Zoom delay={250}>
               <ArtistImageWrapper>
                 <ArtistImage
                   src={selectedArtist.featuredImage.image.asset.url}
@@ -329,7 +332,7 @@ export default function StylesAnimation({ artists }) {
           </RightArrowWrapper>
         </SetsWrapper>
         <InfoBox>
-          <Fade bottom distance='40px' delay={250}>
+          <Fade bottom distance='40px' delay={150}>
             <Tagline>{selectedArtist.tagline}</Tagline>
           </Fade>
           <Pulse delay={350}>
