@@ -32,7 +32,8 @@ const LogoWrapperSmall = styled.div`
   width: 100px;
 
   svg {
-    fill: ${(p) => p.fill};
+    fill: var(--color-white);
+    /* fill: ${(p) => p.fill}; */
     /* display: block; */
   }
 `;
