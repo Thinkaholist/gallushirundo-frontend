@@ -84,6 +84,18 @@ const LocationWrapper = styled.div`
   }
 `;
 
+const MainEventLink = styled.a`
+  display: block;
+  color: hsl(var(--color-red));
+  span {
+    border-bottom: 1px solid;
+  }
+
+  &:hover span {
+    border-bottom: none;
+  }
+`;
+
 const EventInfoButton = styled.a`
   border: none;
   padding: 10px 20px;
@@ -249,16 +261,15 @@ export default function EventsPage({ data }) {
               </TitleWrapper>
               <LocationWrapper>
                 <p>{event.location}</p>
-                <p>
-                  <a
-                    href={event.mainEvent.website}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    title={`Go to ${event.mainEvent.name}'s webpage`}
-                  >
-                    {event.mainEvent.name}
-                  </a>
-                </p>
+
+                <MainEventLink
+                  href={event.mainEvent.website}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  title={`Go to ${event.mainEvent.name}'s webpage`}
+                >
+                  <span>{event.mainEvent.name}</span>
+                </MainEventLink>
               </LocationWrapper>
               <DesktopEventInfoButton
                 href={event.eventInfo}

@@ -1,7 +1,18 @@
 import React from 'react';
-import { graphql, Link } from 'gatsby';
+import styled from 'styled-components';
+import { graphql } from 'gatsby';
 import { DateTime } from 'luxon';
 import { ContainerStyles } from '../styles/ContainerStyles';
+import {
+  GridWrapper,
+  ArticleLink,
+  ArticleCard,
+  ImageWrapper,
+  BlogImage,
+  TextWrapper,
+  PublishedDate,
+  Title,
+} from '../pages/news';
 
 export const query = graphql`
   query ($slug: String!, $rightNow: Date!) {
@@ -16,40 +27,79 @@ export const query = graphql`
       }
       sort: { fields: publishedDate, order: DESC }
     ) {
-      edges {
-        node {
+      nodes {
+        _id
+        title
+        publishedDate
+        slug {
+          current
+        }
+        category {
           _id
-          title
+          name
           slug {
             current
           }
-          publishedDate
+        }
+        featuredImage {
+          image {
+            ...ImageWithPreview
+          }
         }
       }
     }
   }
 `;
 
+const Wrapper = styled.div`
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+`;
+
+const CategoryTitle = styled.h1`
+  span {
+    color: hsl(var(--color-red));
+  }
+`;
+
+const Description = styled.p``;
+
 export default function SingleCategory(props) {
+  const categoryPosts = props.data.posts.nodes;
+
   return (
     <>
       <ContainerStyles>
-        <h1>Category: {props.data.category.name}</h1>
-        <p>{props.data.category.description}</p>
-        <hr />
-        <h2>Articles in this category</h2>
-        {props.data.posts.edges.map((post) => (
-          <article key={post.node._id}>
-            <Link to={`/post/${post.node.slug.current}`}>
-              <h3>{post.node.title}</h3>
-            </Link>
-            <p>
-              {DateTime.fromISO(post.node.publishedDate).toFormat(
-                'kkkk.LL.dd - T'
-              )}
-            </p>
-          </article>
-        ))}
+        <Wrapper>
+          <CategoryTitle>
+            Category: <span>{props.data.category.name}</span>
+          </CategoryTitle>
+          <Description>{props.data.category.description}</Description>
+        </Wrapper>
+        <GridWrapper>
+          {categoryPosts.length < 1 && (
+            <h1>No news in this category was found.</h1>
+          )}
+          {categoryPosts.map((post) => (
+            <ArticleLink key={post._id} to={`/post/${post.slug.current}`}>
+              <ArticleCard>
+                <ImageWrapper>
+                  <BlogImage {...post.featuredImage.image} alt={post.title} />
+                </ImageWrapper>
+                <TextWrapper>
+                  <PublishedDate>
+                    {DateTime.fromISO(post.publishedDate).toFormat(
+                      'kkkk.LL.dd'
+                    )}
+                  </PublishedDate>
+                  <Title>
+                    <span>{post.title}</span>
+                  </Title>
+                </TextWrapper>
+              </ArticleCard>
+            </ArticleLink>
+          ))}
+        </GridWrapper>
       </ContainerStyles>
     </>
   );

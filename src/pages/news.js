@@ -7,13 +7,13 @@ import Img from 'gatsby-plugin-sanity-image';
 import Seo from '../components/Seo';
 import { QUERIES } from '../constants';
 
-const GridWrapper = styled.div`
+export const GridWrapper = styled.div`
   display: grid;
   gap: 2rem 1rem;
   grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
 `;
 
-const ArticleLink = styled(Link)`
+export const ArticleLink = styled(Link)`
   color: inherit;
 
   &:hover {
@@ -31,18 +31,18 @@ const ArticleLink = styled(Link)`
   }
 `;
 
-const ArticleCard = styled.article`
+export const ArticleCard = styled.article`
   position: relative;
 `;
 
-const ImageWrapper = styled.div`
+export const ImageWrapper = styled.div`
   /* Image zoom on hover */
   overflow: hidden;
   border-radius: 28px;
   line-height: 0;
 `;
 
-const BlogImage = styled(Img)`
+export const BlogImage = styled(Img)`
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
@@ -58,7 +58,7 @@ const BlogImage = styled(Img)`
   }
 `;
 
-const TextWrapper = styled.div`
+export const TextWrapper = styled.div`
   @media ${QUERIES.mobileAndDown} {
     color: var(--color-white);
     position: absolute;
@@ -81,7 +81,7 @@ const TextWrapper = styled.div`
   }
 `;
 
-const PublishedDate = styled.p`
+export const PublishedDate = styled.p`
   font-size: ${16 / 16}rem;
   color: var(--color-light-black);
   margin: 1rem 0;
@@ -92,7 +92,7 @@ const PublishedDate = styled.p`
   }
 `;
 
-const Title = styled.h3`
+export const Title = styled.h3`
   font-size: ${24 / 16}rem;
   font-weight: 500;
   line-height: 1.3;
