@@ -45,14 +45,16 @@ const HeroTextWrapper = styled.div`
     color: var(--color-white);
     line-height: 1.2;
     position: absolute;
-    bottom: 10rem;
+    bottom: 5vw;
     max-width: min(790px, 80%);
 
     @media ${QUERIES.mobileAndDown} {
-      bottom: 8rem;
+      /* bottom: 8rem; */
+      bottom: 20vw;
       font-size: ${24 / 16}rem;
-      max-width: 100%;
-      text-align: center;
+      /* max-width: 100%; */
+      max-width: 90%;
+      /* text-align: center; */
       left: 1rem;
       right: 1rem;
       line-height: 1.4;
@@ -161,7 +163,7 @@ export default function HomePage({ data }) {
         <Img {...data.homePage.heroImage.image} alt='hero' />
         <HeroTextWrapper>
           <ContainerStyles>
-            <Fade bottom distance='20px' delay={350}>
+            <Fade bottom distance='20px' delay={350} duration={2000}>
               <p>{data.homePage.headerText}</p>
             </Fade>
           </ContainerStyles>
@@ -176,6 +178,7 @@ export default function HomePage({ data }) {
               left={i % 2 === 0}
               right={i % 2 !== 0}
               key={post._id}
+              duration={700}
             >
               <NewsCardLink to={`/post/${post.slug.current}`}>
                 <NewsCard>
@@ -192,7 +195,7 @@ export default function HomePage({ data }) {
                         )}
                       </p>
                     </Fade>
-                    <Fade bottom delay={250}>
+                    <Fade bottom delay={200}>
                       <h2>
                         <span>{post.title}</span>
                       </h2>
