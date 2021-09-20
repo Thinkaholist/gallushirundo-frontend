@@ -4,7 +4,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://www.yourdomain.tld',
+    siteUrl: 'https://gallushirundo.hu',
     title: 'Gallus & Hirundo',
   },
   flags: {
@@ -67,6 +67,19 @@ module.exports = {
           rel: 'stylesheet preload prefetch',
           as: 'style',
         },
+      },
+    },
+    'gatsby-plugin-sitemap',
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'Gallus & Hirundo',
+        short_name: 'G&H',
+        start_url: '/',
+        background_color: '#ededed',
+        theme_color: '#EB0008',
+        display: 'standalone',
+        icon: 'src/images/icon.svg',
       },
     },
   ],
