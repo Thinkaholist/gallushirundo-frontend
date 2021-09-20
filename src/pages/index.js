@@ -36,15 +36,16 @@ const HeroTextWrapper = styled.div`
     180deg,
     rgba(0, 0, 0, 0.5) 0%,
     rgba(0, 0, 0, 0) 30%,
-    rgba(0, 0, 0, 0.7) 80%
+    rgba(0, 0, 0, 0.8) 80%
   );
 
   p {
-    font-size: ${30 / 16}rem;
+    font-size: ${60 / 16}rem;
+    font-weight: 500;
     color: var(--color-white);
     line-height: 1.2;
     position: absolute;
-    bottom: 5rem;
+    bottom: 10rem;
     max-width: min(790px, 80%);
 
     @media ${QUERIES.mobileAndDown} {
