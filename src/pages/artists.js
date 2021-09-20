@@ -21,7 +21,7 @@ export default function ArtistsPage({ data }) {
       <ContainerStyles>
         <GridWrapper>
           {artists.map((artist) => (
-            <Fade key={artist._id} bottom delay={150} distance='20px'>
+            <Fade key={artist._id} bottom delay={150} distance='10px'>
               <ArtistCard artist={artist} />
             </Fade>
           ))}
