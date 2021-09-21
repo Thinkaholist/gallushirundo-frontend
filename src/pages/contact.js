@@ -137,10 +137,6 @@ const CtaWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-
-  @media ${QUERIES.mobileAndDown} {
-    text-align: revert;
-  } ;
 `;
 
 const CtaText = styled.h2`
