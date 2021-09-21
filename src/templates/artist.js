@@ -19,6 +19,7 @@ import Seo from '../components/Seo';
 import SocialBox from '../components/SocialBox';
 import { QUERIES } from '../constants';
 import Fade from 'react-reveal/Fade';
+import { arrowBounceLeft, arrowBounceRight } from '../styles/animations';
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper/core';
@@ -166,26 +167,35 @@ const PaginationWrapper = styled.div`
   margin: 4rem 0;
   font-size: ${24 / 16}rem;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  gap: 2rem;
+  grid-template-columns: 2fr 3fr 2fr;
   align-items: center;
-  justify-content: space-between;
-
+  grid-template-areas: 'left-arrow cta right-arrow';
   svg {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
   }
 
   @media ${QUERIES.mobileAndDown} {
     margin: 2rem 0 0;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'left-arrow right-arrow'
+      'cta cta';
   }
 `;
 
 const PreviousWrapper = styled.div`
-  justify-self: flex-start;
+  grid-area: left-arrow;
+  align-self: stretch;
   a {
     color: hsl(var(--color-red));
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover svg {
+      animation: ${arrowBounceLeft} 0.35s;
+    }
   }
 `;
 
@@ -195,13 +205,14 @@ const PreviousLink = styled(Link)`
   align-items: flex-start;
 
   @media ${QUERIES.mobileAndDown} {
-    font-size: 14px;
+    font-size: 18px;
   }
 `;
 
 const Cta = styled(Link)`
+  display: block;
   text-align: center;
-  justify-self: center;
+  grid-area: cta;
   background-color: hsl(var(--color-red));
   color: var(--color-white);
   padding: 8px 16px;
@@ -214,15 +225,21 @@ const Cta = styled(Link)`
   }
 
   @media ${QUERIES.mobileAndDown} {
-    padding: 4px 8px;
-    font-size: ${16 / 16}rem;
+    font-size: ${20 / 16}rem;
   }
 `;
 
 const NextWrapper = styled.div`
-  justify-self: flex-end;
+  grid-area: right-arrow;
+  align-self: stretch;
   a {
     color: hsl(var(--color-red));
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover svg {
+      animation: ${arrowBounceRight} 0.35s;
+    }
   }
 `;
 
@@ -233,7 +250,7 @@ const NextLink = styled(Link)`
   text-align: right;
 
   @media ${QUERIES.mobileAndDown} {
-    font-size: 14px;
+    font-size: 18px;
   }
 `;
 
@@ -399,7 +416,9 @@ export default function SingleArtistPage({ data }) {
               </PreviousLink>
             )}
           </PreviousWrapper>
-          <Cta to={`/contact`}>{data.sanitySingleArtistPage.ctaButtonText}</Cta>
+          <Cta to={`/contact#contact-cta`}>
+            {data.sanitySingleArtistPage.ctaButtonText}
+          </Cta>
           <NextWrapper>
             {next && (
               <NextLink to={`/artist/${next.slug.current}`}>

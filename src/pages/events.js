@@ -8,14 +8,14 @@ import Seo from '../components/Seo';
 import { QUERIES } from '../constants';
 
 const EventRow = styled.article`
-  border-top: 1px solid hsl(var(--color-red));
+  border-bottom: 1px solid hsl(var(--color-red));
   padding: 0.5rem 0;
   display: flex;
   gap: 1rem;
   align-items: center;
 
-  &:last-of-type {
-    border-bottom: 1px solid hsl(var(--color-red));
+  &:first-of-type {
+    border-top: 1px solid hsl(var(--color-red));
   }
 
   h3 {
@@ -138,27 +138,6 @@ const MobileEventInfoButton = styled(EventInfoButton)`
   }
 `;
 
-const PastEventsWrapper = styled.div`
-  margin: 3rem 0;
-  padding: 1rem;
-  display: grid;
-  place-content: center;
-
-  a {
-    display: block;
-    background-color: hsl(var(--color-red));
-    color: var(--color-white);
-    padding: 8px 16px;
-    border-radius: 36px;
-    transition: background-color 0.2s;
-
-    &:hover {
-      background-color: var(--color-red-hover);
-      text-decoration: none;
-    }
-  }
-`;
-
 const EventFilterWrapper = styled.nav`
   background-color: var(--color-background);
   margin: 1rem auto 2rem;
@@ -177,6 +156,7 @@ const EventFilterWrapper = styled.nav`
 
   @media ${QUERIES.mobileAndDown} {
     position: revert;
+    gap: 0.5rem;
   }
 `;
 
@@ -193,16 +173,42 @@ const FilterButton = styled.button`
   &:disabled {
     color: #ffcbce;
     border-color: #ffcbce;
-    cursor: auto;
+    cursor: not-allowed;
     background-color: var(--color-white);
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    padding: 8px 16px;
   }
 `;
 
+const PastEventsText = styled.h2`
+  text-align: center;
+  margin: 3rem 0 1rem 0;
+  font-weight: 700;
+  font-size: ${24 / 16}rem;
+  text-transform: uppercase;
+`;
+
+const NoEventText = styled.h3`
+  text-align: center;
+  color: darkgray;
+`;
+
 export default function EventsPage({ data }) {
+  const now = new window.Date();
   const events = data.events.nodes;
+  const pastEvents = events.filter(
+    (event) => new window.Date(event.date) < now
+  );
+  const upcomingEvents = events.filter(
+    (event) => new window.Date(event.date) >= now
+  );
   const artists = data.artists.nodes;
-  const [filteredEvents, setFilteredEvents] = useState(events);
   const [selectedArtist, setSelectedArtist] = useState('');
+  const [filteredUpcomingEvents, setFilteredUpcomingEvents] =
+    useState(upcomingEvents);
+  const [filteredPastEvents, setFilteredPastEvents] = useState(pastEvents);
 
   let allArtists = [];
   events.forEach((event) => {
@@ -215,11 +221,17 @@ export default function EventsPage({ data }) {
   }
 
   function filterEvents(artistId) {
-    const updatedEvents = events.filter((event) => {
+    const updatedUpcomingEvents = upcomingEvents.filter((event) => {
       const artistsIds = event.artists.map((artist) => artist._id);
       return artistsIds.includes(artistId);
     });
-    setFilteredEvents(updatedEvents);
+
+    const updatedPastEvents = pastEvents.filter((event) => {
+      const artistsIds = event.artists.map((artist) => artist._id);
+      return artistsIds.includes(artistId);
+    });
+    setFilteredUpcomingEvents(updatedUpcomingEvents);
+    setFilteredPastEvents(updatedPastEvents);
     setSelectedArtist(artistId);
   }
 
@@ -230,7 +242,8 @@ export default function EventsPage({ data }) {
         <EventFilterWrapper>
           <FilterButton
             onClick={() => {
-              setFilteredEvents(events);
+              setFilteredUpcomingEvents(upcomingEvents);
+              setFilteredPastEvents(pastEvents);
               setSelectedArtist('');
             }}
             className={selectedArtist === '' ? 'selected' : ''}
@@ -248,9 +261,11 @@ export default function EventsPage({ data }) {
             </FilterButton>
           ))}
         </EventFilterWrapper>
-        {events.length < 1 && <h1>No upcoming events was found.</h1>}
-        {filteredEvents.length > 0 &&
-          filteredEvents.map((event) => (
+        {filteredUpcomingEvents.length < 1 && (
+          <NoEventText>No upcoming events was found.</NoEventText>
+        )}
+        {filteredUpcomingEvents.length > 0 &&
+          filteredUpcomingEvents.map((event) => (
             <EventRow key={event._id}>
               <ImageWrapper>
                 <Img {...event.cover.image} alt={event.title} />
@@ -288,20 +303,66 @@ export default function EventsPage({ data }) {
               </MobileEventInfoButton>
             </EventRow>
           ))}
-        <PastEventsWrapper>
-          <Link to='/past-events'>{data.sanityEventsPage.pastEvents}</Link>
-        </PastEventsWrapper>
+        {filteredPastEvents.length > 0 && (
+          <PastEventsText>{data.sanityEventsPage.pastEvents}</PastEventsText>
+        )}
+        {filteredPastEvents.length > 0 &&
+          filteredPastEvents.map((event) => (
+            <EventRow
+              key={event._id}
+              style={{ color: 'var(--color-light-black)' }}
+            >
+              <ImageWrapper>
+                <Img
+                  {...event.cover.image}
+                  alt={event.title}
+                  style={{ filter: 'grayscale(100%)' }}
+                />
+              </ImageWrapper>
+              <TitleWrapper>
+                <Date>{event.date}</Date>
+                <Title>{event.title}</Title>
+              </TitleWrapper>
+              <LocationWrapper>
+                <p>{event.location}</p>
+
+                <MainEventLink
+                  href={event.mainEvent.website}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  title={`Go to ${event.mainEvent.name}'s webpage`}
+                  style={{ color: 'var(--color-light-black)' }}
+                >
+                  <span>{event.mainEvent.name}</span>
+                </MainEventLink>
+              </LocationWrapper>
+              <DesktopEventInfoButton
+                href={event.eventInfo}
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ backgroundColor: 'var(--color-light-black)' }}
+              >
+                {data.sanityEventsPage.eventInfo}
+                <FaExternalLinkAlt size={12} />
+              </DesktopEventInfoButton>
+              <MobileEventInfoButton
+                href={event.eventInfo}
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ backgroundColor: 'var(--color-light-black)' }}
+              >
+                <FaExternalLinkAlt size={14} />
+              </MobileEventInfoButton>
+            </EventRow>
+          ))}
       </ContainerStyles>
     </>
   );
 }
 
 export const query = graphql`
-  query ($rightNow: Date!) {
-    events: allSanityEvent(
-      sort: { fields: date, order: ASC }
-      filter: { date: { gte: $rightNow } }
-    ) {
+  query {
+    events: allSanityEvent(sort: { fields: date, order: ASC }) {
       nodes {
         _id
         title

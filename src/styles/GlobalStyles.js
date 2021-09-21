@@ -66,10 +66,10 @@ const GlobalStyles = createGlobalStyle`
     /* #EB0008 */
     --color-red: 358 100% 46%;
     --color-red-light: hsl(356 100% 93%);
-    --color-red-hover: hsl(356 50% 50%);
+    --color-red-hover: hsl(358 100% 53%);
     --color-white: #fff;
     --color-black: #2E2E2E;
-    --color-light-black: #616161;
+    --color-light-black: #696969;
     --color-background: #ededed;
     --color-matyo-orange: #FF6634;
     --color-matyo-purple: #D098FD;

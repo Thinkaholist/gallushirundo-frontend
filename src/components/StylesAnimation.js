@@ -11,39 +11,9 @@ import { QUERIES } from '../constants';
 import Pulse from 'react-reveal/Pulse';
 import Zoom from 'react-reveal/Zoom';
 import Fade from 'react-reveal/Fade';
-
-const arrowBounceLeft = keyframes`
-	from {
-		transform: translateX(0);
-	}
-
-	50% {
-		transform: translateX(-30%);
-
-	}
-
-	to {
-		transform: translateX(0);
-	}
-`;
-
-const arrowBounceRight = keyframes`
-	from {
-		transform: translateX(0);
-	}
-
-	50% {
-		transform: translateX(30%);
-
-	}
-
-	to {
-		transform: translateX(0);
-	}
-`;
+import { arrowBounceLeft, arrowBounceRight } from '../styles/animations';
 
 const InnerContainer = styled(ContainerStyles)`
-  /* border: 2px solid rebeccapurple; */
   --color-folk: #cf180b;
   --color-rock: #7eaac2;
   --color-punk: #f1a8dd;
@@ -57,7 +27,6 @@ const InnerContainer = styled(ContainerStyles)`
 `;
 
 const SetsWrapper = styled.div`
-  /* border: 2px solid rebeccapurple; */
   display: grid;
   grid-template-columns: 150px auto 150px;
   /* if style circle is too big just don't show the whole thing */
@@ -118,7 +87,6 @@ const RightArrowWrapper = styled(ArrowWrapper)`
 `;
 
 const CenterBox = styled.div`
-  /* border: 2px solid blue; */
   padding: 2.5rem 0;
 
   @media ${QUERIES.mobileAndDown} {
@@ -128,7 +96,6 @@ const CenterBox = styled.div`
 `;
 
 const ArtistImageWrapper = styled.div`
-  /* border: 2px solid green; */
   position: relative;
   display: flex;
   justify-content: center;
