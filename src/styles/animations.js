@@ -29,3 +29,23 @@ export const arrowBounceRight = keyframes`
 		transform: translateX(0);
 	}
 `;
+
+export const rotateInfinite = keyframes`
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+`;
+
+export const bimbam = keyframes`
+	from {
+		transform: rotate(-10deg)
+	}
+	
+	to {
+		transform: rotate(10deg)
+	}
+`;
