@@ -7,6 +7,8 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 import Seo from '../components/Seo';
 import { QUERIES } from '../constants';
 
+const isBrowser = typeof window !== 'undefined';
+
 const EventRow = styled.article`
   border-bottom: 1px solid hsl(var(--color-red));
   padding: 0.5rem 0;
@@ -196,13 +198,13 @@ const NoEventText = styled.h3`
 `;
 
 export default function EventsPage({ data }) {
-  const now = new window.Date();
+  const now = isBrowser && new window.Date();
   const events = data.events.nodes;
   const pastEvents = events.filter(
-    (event) => new window.Date(event.date) < now
+    (event) => isBrowser && new window.Date(event.date) < now
   );
   const upcomingEvents = events.filter(
-    (event) => new window.Date(event.date) >= now
+    (event) => isBrowser && new window.Date(event.date) >= now
   );
   const artists = data.artists.nodes;
   const [selectedArtist, setSelectedArtist] = useState('');

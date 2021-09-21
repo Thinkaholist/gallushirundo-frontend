@@ -148,11 +148,11 @@ const NewsCardText = styled.div`
 const StyleBubblesSection = styled.section`
   background-color: var(--color-background);
   margin-bottom: -40px;
-  padding: 10rem 0;
+  padding: 10rem 0 2rem 0;
   position: relative;
 
   @media ${QUERIES.mobileAndDown} {
-    padding: 5rem 0;
+    padding: 5rem 0 2rem 0;
   }
 `;
 
@@ -218,7 +218,7 @@ export default function HomePage({ data }) {
         <FolkDivider
           fill='var(--color-white)'
           rotate='180deg'
-          translate='translateY(0%)'
+          translate='translateY(20%)'
         />
         <StlyesAnimation artists={artists} />
       </StyleBubblesSection>

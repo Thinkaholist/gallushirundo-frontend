@@ -4,10 +4,16 @@ import SubscribeForm from './SubscribeForm';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import ThinkaholistFooter from './ThinkaholistFooter';
 import FolkDivider from './FolkDivider';
+import FlowerDivider from './FlowerDivider';
+import { QUERIES } from '../constants';
 
 const Wrapper = styled.div`
   position: relative;
-  margin-top: 1rem;
+  margin-top: 6rem;
+
+  @media ${QUERIES.mobileAndDown} {
+    margin-top: 3rem;
+  }
 `;
 
 const FooterStyles = styled.footer`
@@ -23,10 +29,10 @@ export default function Footer() {
   return (
     <>
       <Wrapper>
-        <FolkDivider
+        <FlowerDivider
           fill='hsl(var(--color-red))'
           rotate='0deg'
-          translate='translateY(calc(-100% + 1.3px ))'
+          translate='translateY(calc(-40% + 1.3px ))'
         />
         <FooterStyles>
           <ContainerStyles>
