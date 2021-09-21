@@ -184,39 +184,39 @@ const FolkCircle = styled(StyleCircle)`
 const RockCircle = styled(StyleCircle)`
   background-color: var(--color-rock);
   top: 20%;
-  right: 6%;
+  right: 8%;
 `;
 const PunkCircle = styled(StyleCircle)`
   background-color: var(--color-punk);
   color: #2e2e2e;
   bottom: 5%;
-  right: 5%;
+  right: 10%;
 `;
 const RootsCircle = styled(StyleCircle)`
   background-color: var(--color-roots);
   top: 40%;
-  left: 6%;
+  left: 8%;
 `;
 const GipsyCircle = styled(StyleCircle)`
   background-color: var(--color-gipsy);
   top: 0;
-  right: 20%;
+  right: 30%;
 `;
 const BluesCircle = styled(StyleCircle)`
   background-color: var(--color-blues);
   bottom: 10%;
-  left: 0%;
+  left: 7%;
 `;
 const PopCircle = styled(StyleCircle)`
   background-color: var(--color-pop);
   color: #2e2e2e;
   bottom: 0;
-  left: 50%;
+  left: 40%;
 `;
 const DiscoCircle = styled(StyleCircle)`
   background-color: var(--color-disco);
-  bottom: 35%;
-  right: -2%;
+  bottom: 30%;
+  right: 7%;
 `;
 
 const InfoBox = styled.div`
