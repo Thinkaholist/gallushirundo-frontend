@@ -50,7 +50,7 @@ const HeroTextWrapper = styled.div`
 
     @media ${QUERIES.mobileAndDown} {
       /* bottom: 8rem; */
-      bottom: 30vw;
+      bottom: 40vw;
       font-size: ${24 / 16}rem;
       /* max-width: 100%; */
       max-width: 90%;
