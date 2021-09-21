@@ -292,8 +292,6 @@ export default function StylesAnimation({ artists }) {
     }
   }
 
-  console.log(selectedArtist);
-
   return (
     <>
       <InnerContainer>

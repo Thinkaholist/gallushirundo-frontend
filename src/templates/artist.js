@@ -14,6 +14,7 @@ import {
   HiOutlineArrowNarrowLeft as LeftArrow,
   HiOutlineArrowNarrowRight as RightArrow,
 } from 'react-icons/hi';
+import { FiDownload } from 'react-icons/fi';
 import getYouTubeID from 'get-youtube-id';
 import ReactPlayer from 'react-player/youtube';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -445,6 +446,7 @@ export default function SingleArtistPage({ data }) {
               // pressKit={singleArtist?.pressKit?.asset.url}
               text={data.sanitySingleArtistPage.pressKitText}
               fontSize='24px'
+              icon={FiDownload}
             />
           </PressKitWrapper>
         )}

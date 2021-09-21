@@ -6,6 +6,11 @@ import { ContainerStyles } from '../styles/ContainerStyles';
 import Seo from '../components/Seo';
 import Pulse from 'react-reveal/Pulse';
 import { QUERIES } from '../constants';
+import ButtonLinkWithIcon from '../components/ButtonLinkWithIcon';
+// import { HiOutlineMail } from 'react-icons/hi';
+import { BiMailSend } from 'react-icons/bi';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 const GridWrapper = styled.div`
   display: grid;
@@ -15,8 +20,17 @@ const GridWrapper = styled.div`
     'text photo'
     'references references'
     'cta cta';
-  gap: 28px;
-  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  grid-template-columns: 5fr 4fr;
+
+  @media ${QUERIES.tabletAndDown} {
+    grid-template-columns: 5fr 4fr;
+    grid-template-areas:
+      'title title'
+      'text photo'
+      'references references'
+      'cta cta';
+  }
 
   @media ${QUERIES.mobileAndDown} {
     grid-template-columns: 1fr;
@@ -34,22 +48,40 @@ const Title = styled.h1`
   font-size: ${30 / 16}rem;
   text-transform: uppercase;
   font-weight: 700;
+
+  @media ${QUERIES.mobileAndDown} {
+    font-size: ${24 / 16}rem;
+    text-transform: revert;
+  }
 `;
 
 const Image = styled(Img)`
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 6/7;
   object-fit: cover;
   border-radius: 28px;
   grid-area: photo;
+
+  @media ${QUERIES.mobileAndDown} {
+    aspect-ratio: 5/4;
+  }
 `;
 
 const TextWrapper = styled.div`
   grid-area: text;
+
+  p:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const ReferencesWrapper = styled.div`
   grid-area: references;
+  margin: 3rem 0;
+
+  @media ${QUERIES.mobileAndDown} {
+    margin: 1rem 0;
+  }
 `;
 
 const ReferencesHeadline = styled.h2`
@@ -65,21 +97,20 @@ const ReferencesHeadline = styled.h2`
 
   @media ${QUERIES.mobileAndDown} {
     text-align: revert;
+    font-size: ${20 / 16}rem;
   } ;
 `;
 
 const RefernceList = styled.ul`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 0.5rem;
 
   li:not(:last-of-type)::after {
-    /* border-right: 2px solid;
-    padding: 2px 1rem 2px 0; */
     color: hsl(var(--color-red));
     font-family: 'Font Awesome 5 Free';
-    font-weight: 400;
-    content: '\f35b';
+    content: '\f274';
     margin-left: 0.5rem;
   }
 
@@ -89,12 +120,23 @@ const RefernceList = styled.ul`
     li:not(:last-of-type)::after {
       content: '';
     }
+
+    li::before {
+      content: '\f274';
+      color: hsl(var(--color-red));
+      font-family: 'Font Awesome 5 Free';
+      margin-right: 0.5rem;
+    }
   } ;
 `;
 
 const CtaWrapper = styled.div`
   grid-area: cta;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 
   @media ${QUERIES.mobileAndDown} {
     text-align: revert;
@@ -104,12 +146,28 @@ const CtaWrapper = styled.div`
 const CtaText = styled.h2`
   font-size: ${28 / 16}rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+
+  @media ${QUERIES.mobileAndDown} {
+    font-size: ${24 / 16}rem;
+  }
 `;
 
-const CtaEmail = styled.a`
-  font-size: ${24 / 16}rem;
-  color: inherit;
+const CtaButton = styled(ButtonLinkWithIcon)`
+  width: 320px;
+  font-size: 22px;
+
+  @media ${QUERIES.mobileAndDown} {
+    width: 260px;
+    font-size: 18px;
+  }
+`;
+
+const CopyButton = styled.button`
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 export default function ContactPage({ data }) {
@@ -121,6 +179,13 @@ export default function ContactPage({ data }) {
     }
     return <p key={i}>{p}</p>;
   });
+
+  function copyEmailToClipboard() {
+    navigator.clipboard
+      .writeText(pageDetails.contactEmail)
+      .then(() => console.log(`copied: ${pageDetails.contactEmail}!`))
+      .catch((err) => console.error(err));
+  }
 
   return (
     <>
@@ -139,19 +204,30 @@ export default function ContactPage({ data }) {
             </ReferencesHeadline>
             <RefernceList>
               {pageDetails.references.map((reference) => (
-                <li>{reference}</li>
+                <li key={reference}>{reference}</li>
               ))}
             </RefernceList>
           </ReferencesWrapper>
           <CtaWrapper>
             <CtaText>{pageDetails.ctaText}</CtaText>
-            <CtaEmail
-              href={`mailto:${pageDetails.contactEmail}`}
-              target='_blank'
-              rel='noopener noreferrer'
+            <Pulse delay={500}>
+              <CtaButton
+                href={`mailto:${pageDetails.contactEmail}`}
+                target='_blank'
+                rel='noopener noreferrer'
+                text={pageDetails.contactEmail}
+                icon={BiMailSend}
+              />
+            </Pulse>
+            <Tippy
+              content={`Copied: ${pageDetails.contactEmail}`}
+              placement='bottom'
+              trigger='click'
             >
-              {pageDetails.contactEmail}
-            </CtaEmail>
+              <CopyButton onClick={copyEmailToClipboard}>
+                Copy to clipboard
+              </CopyButton>
+            </Tippy>
           </CtaWrapper>
         </GridWrapper>
       </ContainerStyles>

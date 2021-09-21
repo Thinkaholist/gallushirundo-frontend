@@ -1,22 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FiDownload } from 'react-icons/fi';
 
 const LinkButton = styled.a`
   --transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4);
   display: block;
-  width: 200px;
+  /* width: ${(p) => `${p.width}px`}; */
   height: 50px;
   line-height: 50px;
-  font-size: ${(p) => p.fontSize};
+  /* font-size: ${(p) => p.fontSize}; */
   background-color: hsl(var(--color-red));
   background-color: var(--color-black);
   color: var(--color-white);
   padding: 6px 12px;
   border-radius: 28px;
   text-decoration: none;
-  text-transform: uppercase;
-  font-weight: 700;
+  /* text-transform: uppercase; */
+  font-weight: 400;
+  letter-spacing: 1px;
   cursor: pointer;
   overflow: hidden;
   transition: var(--transition), background-color 0.25s linear;
@@ -50,7 +50,7 @@ const ButtonText = styled.span`
   text-align: center;
   position: absolute;
   top: 0;
-  width: 72%;
+  width: 80%;
   line-height: inherit;
   left: 0;
   transition: var(--transition);
@@ -63,7 +63,7 @@ const ButtonText = styled.span`
     height: 70%;
     position: absolute;
     top: 15%;
-    right: -1px;
+    right: -8px;
   }
 `;
 
@@ -74,13 +74,13 @@ const IconWrapper = styled.div`
   text-align: center;
   position: absolute;
   top: 0;
-  width: 28%;
+  width: 20%;
   right: 0;
   transition: var(--transition);
 
   svg {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     opacity: 0.6;
     display: block;
     transition: var(--transition), height 0.25s ease;
@@ -88,12 +88,14 @@ const IconWrapper = styled.div`
 `;
 
 export default function ButtonLinkWithIcon(props) {
+  const Icon = props.icon;
+
   return (
     <>
       <LinkButton {...props}>
         <ButtonText>{props.text}</ButtonText>
         <IconWrapper>
-          <FiDownload />
+          <Icon />
         </IconWrapper>
       </LinkButton>
     </>
