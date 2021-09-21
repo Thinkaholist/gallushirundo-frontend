@@ -24,7 +24,7 @@ const HeaderStyles = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  transition: all 400ms ease;
+  transition: all 450ms ease-in-out;
   z-index: 9997;
 
   a {
