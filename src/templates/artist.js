@@ -2,19 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { graphql, Link } from 'gatsby';
 import Img from 'gatsby-plugin-sanity-image';
-import {
-  FaFacebookSquare,
-  FaInstagram,
-  FaSpotify,
-  FaYoutube,
-  FaGlobe,
-  FaPlay,
-} from 'react-icons/fa';
+import { FaPlay } from 'react-icons/fa';
 import {
   HiOutlineArrowNarrowLeft as LeftArrow,
   HiOutlineArrowNarrowRight as RightArrow,
 } from 'react-icons/hi';
-import { FiDownload } from 'react-icons/fi';
 import getYouTubeID from 'get-youtube-id';
 import ReactPlayer from 'react-player/youtube';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -24,10 +16,9 @@ import 'swiper/components/navigation/navigation.min.css';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import AnimatedEq from '../components/AnimatedEq';
 import Seo from '../components/Seo';
-import ButtonLinkWithIcon from '../components/ButtonLinkWithIcon';
+import SocialBox from '../components/SocialBox';
 import { QUERIES } from '../constants';
 import Fade from 'react-reveal/Fade';
-import Flip from 'react-reveal/Flip';
 
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper/core';
@@ -53,86 +44,25 @@ const ArtistName = styled.h1`
   margin: 1rem 0;
 `;
 
-const BioWrapper = styled.div`
-  max-width: 70ch;
+const BodyGridWrapper = styled.div`
   margin: 1rem 0;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+
+  @media ${QUERIES.tabletAndDown} {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media ${QUERIES.mobileAndDown} {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const BioWrapper = styled.div`
+  /* max-width: 70ch; */
 
   p {
     margin-bottom: 1rem;
-  }
-`;
-
-const SocialIconsWrapper = styled.div`
-  margin: 3rem 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3rem;
-  justify-content: center;
-  align-items: center;
-
-  a {
-    line-height: 0;
-  }
-
-  svg {
-    /* fill: hsl(var(--color-red));
-    fill: var(--color-black); */
-    width: 40px;
-    height: 40px;
-    transition: transform 0.35s ease-in-out;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    /* a:hover svg {
-      fill: hsl(var(--color-red));
-    } */
-
-    a:nth-of-type(odd):hover svg {
-      transform: scale(1.4) rotate(10deg);
-    }
-
-    a:nth-of-type(even):hover svg {
-      transform: scale(1.4) rotate(-10deg);
-    }
-  }
-
-  @media ${QUERIES.mobileAndDown} {
-    gap: 2rem;
-
-    svg {
-      width: 30px;
-      height: 30px;
-    }
-  }
-`;
-
-const FacebookIcon = styled(FaFacebookSquare)`
-  color: var(--color-matyo-orange);
-`;
-
-const InstaIcon = styled(FaInstagram)`
-  color: var(--color-matyo-blue);
-`;
-
-const SpotifyIcon = styled(FaSpotify)`
-  color: hsl(var(--color-red));
-`;
-
-const YoutubeIcon = styled(FaYoutube)`
-  color: var(--color-matyo-purple);
-`;
-
-const WebIcon = styled(FaGlobe)`
-  color: var(--color-black);
-`;
-
-const PressKitWrapper = styled.div`
-  margin: 2rem 0;
-  display: grid;
-  place-content: center;
-
-  @media ${QUERIES.mobileAndDown} {
-    display: none;
   }
 `;
 
@@ -314,6 +244,7 @@ export default function SingleArtistPage({ data }) {
   const [playing, setPlaying] = useState(false);
   const singleArtist = data.artist;
   const bio = singleArtist.bio?.split('\n').map((p, i) => <p key={i}>{p}</p>);
+  const pressKitText = data.sanitySingleArtistPage.pressKitText;
   const spotifyArtistId = singleArtist.socialLinks?.spotify
     ?.split('/')[4]
     .split('?')[0];
@@ -379,77 +310,17 @@ export default function SingleArtistPage({ data }) {
         <Fade delay={100} bottom distance='10px'>
           <ArtistName>{singleArtist.name}</ArtistName>
         </Fade>
-        <Fade bottom distance='5px'>
-          <BioWrapper>{bio}</BioWrapper>
-        </Fade>
-        {singleArtist?.socialLinks && (
-          <Fade delay={0} top distance='8px'>
-            <SocialIconsWrapper>
-              {singleArtist?.socialLinks?.spotify && (
-                <a
-                  href={singleArtist.socialLinks.spotify}
-                  title={singleArtist.socialLinks.spotify}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <SpotifyIcon />
-                </a>
-              )}
-              {singleArtist?.socialLinks?.facebook && (
-                <a
-                  href={singleArtist.socialLinks.facebook}
-                  title={singleArtist.socialLinks.facebook}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <FacebookIcon />
-                </a>
-              )}
-              {singleArtist?.socialLinks?.youtube && (
-                <a
-                  href={singleArtist.socialLinks.youtube}
-                  title={singleArtist.socialLinks.youtube}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <YoutubeIcon />
-                </a>
-              )}
-              {singleArtist?.socialLinks?.instagram && (
-                <a
-                  href={singleArtist.socialLinks.instagram}
-                  title={singleArtist.socialLinks.instagram}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <InstaIcon />
-                </a>
-              )}
-              {singleArtist?.socialLinks?.website && (
-                <a
-                  href={singleArtist.socialLinks.website}
-                  title={singleArtist.socialLinks.website}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <WebIcon />
-                </a>
-              )}
-            </SocialIconsWrapper>
+        <BodyGridWrapper>
+          <Fade bottom distance='5px'>
+            <BioWrapper>{bio}</BioWrapper>
           </Fade>
-        )}
-        {singleArtist?.pressKit && (
-          <PressKitWrapper>
-            <ButtonLinkWithIcon
-              href={`${singleArtist?.pressKit?.asset.url}?dl=${singleArtist.slug.current}-pressKit.zip`}
-              download={!singleArtist?.pressKit ? false : true}
-              // pressKit={singleArtist?.pressKit?.asset.url}
-              text={data.sanitySingleArtistPage.pressKitText}
-              fontSize='24px'
-              icon={FiDownload}
+          <Fade delay={100} right distance='10px'>
+            <SocialBox
+              singleArtist={singleArtist}
+              pressKitText={pressKitText}
             />
-          </PressKitWrapper>
-        )}
+          </Fade>
+        </BodyGridWrapper>
         <SubHeadline>{data.sanitySingleArtistPage.youtubeHeadline}</SubHeadline>
         <YoutubeWrapper>
           <ReactPlayer
