@@ -69,9 +69,9 @@ const InputField = styled.input`
 `;
 
 const FeedbackBox = styled.div`
-  border: 4px dashed var(--color-red-hover);
+  border: 4px solid;
   padding: 2rem;
-  background-color: var(--color-red-light);
+  background-color: var(--color-background);
   color: var(--color-black);
   border-radius: 28px;
   position: fixed;
@@ -82,6 +82,10 @@ const FeedbackBox = styled.div`
     p.feedback ? 'translateY(0%)' : 'translateY(calc(100% + 10rem))'};
   transition: 0.35s ease-out;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  z-index: 9999;
+  max-width: 600px;
 
   @media ${QUERIES.mobileAndDown} {
     text-align: center;
@@ -175,14 +179,14 @@ export default function SubscribeForm() {
           </button>
         </Wrapper>
       </form>
-      <FeedbackBox feedback={isFeedback}>
+      {/* <FeedbackBox feedback={isFeedback}>
         <div
           dangerouslySetInnerHTML={{
             __html: state.errorMessage || state.successMessage,
           }}
         />
         <FeedbackButton onClick={resetForm}>OK</FeedbackButton>
-      </FeedbackBox>
+      </FeedbackBox> */}
     </>
   );
 }

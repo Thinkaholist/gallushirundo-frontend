@@ -66,7 +66,7 @@ const GlobalStyles = createGlobalStyle`
     /* #EB0008 */
     --color-red: 358 100% 46%;
     --color-red-light: hsl(356 100% 93%);
-    --color-red-hover: hsl(358 100% 53%);
+    --color-red-hover: hsl(358 100% 56%);
     --color-white: #fff;
     --color-black: #2E2E2E;
     --color-light-black: #696969;

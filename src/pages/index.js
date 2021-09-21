@@ -62,16 +62,20 @@ const HeroTextWrapper = styled.div`
   }
 `;
 
+const LatestNewsSection = styled.section`
+  background-color: var(--color-white);
+`;
+
 const InnerContainer = styled(ContainerStyles)`
-  padding-bottom: ${160 / 16}rem;
+  padding-bottom: 1rem;
 
   @media ${QUERIES.mobileAndDown} {
-    padding-bottom: ${40 / 16}rem;
+    padding-bottom: 1rem;
   }
 `;
 
 const GridWrapper = styled.div`
-  margin-top: 2rem;
+  padding-top: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(450px, 100%), 1fr));
   gap: ${23 / 16}rem;
@@ -142,13 +146,14 @@ const NewsCardText = styled.div`
 `;
 
 const StyleBubblesSection = styled.section`
-  background-color: hsl(var(--color-red));
-  color: var(--color-white);
-  margin-top: 2rem;
+  background-color: var(--color-background);
   margin-bottom: -40px;
-  border-bottom: 1px solid var(--color-white);
-  padding: 3rem 0;
+  padding: 10rem 0;
   position: relative;
+
+  @media ${QUERIES.mobileAndDown} {
+    padding: 5rem 0;
+  }
 `;
 
 export default function HomePage({ data }) {
@@ -169,46 +174,52 @@ export default function HomePage({ data }) {
           </ContainerStyles>
         </HeroTextWrapper>
       </HeroSection>
-      <InnerContainer>
-        <GridWrapper>
-          {latestNews.map((post, i) => (
-            <Fade
-              distance='50px'
-              delay={350}
-              left={i % 2 === 0}
-              right={i % 2 !== 0}
-              key={post._id}
-              duration={700}
-            >
-              <NewsCardLink to={`/post/${post.slug.current}`}>
-                <NewsCard>
-                  <Img
-                    {...post.featuredImage.image}
-                    alt={post.title}
-                    style={{ position: 'static' }}
-                  />
-                  <NewsCardText>
-                    <Fade delay={100}>
-                      <p>
-                        {DateTime.fromISO(post.publishedDate).toFormat(
-                          'kkkk.LL.dd'
-                        )}
-                      </p>
-                    </Fade>
-                    <Fade bottom delay={200}>
-                      <h2>
-                        <span>{post.title}</span>
-                      </h2>
-                    </Fade>
-                  </NewsCardText>
-                </NewsCard>
-              </NewsCardLink>
-            </Fade>
-          ))}
-        </GridWrapper>
-      </InnerContainer>
+      <LatestNewsSection>
+        <InnerContainer>
+          <GridWrapper>
+            {latestNews.map((post, i) => (
+              <Fade
+                distance='50px'
+                delay={350}
+                left={i % 2 === 0}
+                right={i % 2 !== 0}
+                key={post._id}
+                duration={700}
+              >
+                <NewsCardLink to={`/post/${post.slug.current}`}>
+                  <NewsCard>
+                    <Img
+                      {...post.featuredImage.image}
+                      alt={post.title}
+                      style={{ position: 'static' }}
+                    />
+                    <NewsCardText>
+                      <Fade delay={100}>
+                        <p>
+                          {DateTime.fromISO(post.publishedDate).toFormat(
+                            'kkkk.LL.dd'
+                          )}
+                        </p>
+                      </Fade>
+                      <Fade bottom delay={200}>
+                        <h2>
+                          <span>{post.title}</span>
+                        </h2>
+                      </Fade>
+                    </NewsCardText>
+                  </NewsCard>
+                </NewsCardLink>
+              </Fade>
+            ))}
+          </GridWrapper>
+        </InnerContainer>
+      </LatestNewsSection>
       <StyleBubblesSection>
-        <FolkDivider />
+        <FolkDivider
+          fill='var(--color-white)'
+          rotate='180deg'
+          translate='translateY(0%)'
+        />
         <StlyesAnimation artists={artists} />
       </StyleBubblesSection>
     </>
@@ -273,9 +284,6 @@ export const query = graphql`
           altText
           image {
             ...ImageWithPreview
-            asset {
-              url
-            }
           }
         }
         tagline

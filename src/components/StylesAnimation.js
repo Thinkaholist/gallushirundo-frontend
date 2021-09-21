@@ -5,7 +5,7 @@ import {
   HiOutlineArrowNarrowLeft as LeftIcon,
   HiOutlineArrowNarrowRight as RightIcon,
 } from 'react-icons/hi';
-import Img from 'gatsby-plugin-image';
+import Img from 'gatsby-plugin-sanity-image';
 import { ContainerStyles } from '../styles/ContainerStyles';
 import { QUERIES } from '../constants';
 import Pulse from 'react-reveal/Pulse';
@@ -23,7 +23,6 @@ const InnerContainer = styled(ContainerStyles)`
   --color-pop: #f4df89;
   --color-disco: #ff6634;
   --transition: all 0.5s cubic-bezier(0.31, -0.105, 0.43, 1.4);
-  margin-top: -3rem;
 `;
 
 const SetsWrapper = styled.div`
@@ -49,7 +48,7 @@ const ArrowWrapper = styled.button`
   }
 
   svg {
-    color: var(--color-white);
+    color: var(--color-black);
     width: 70px;
     height: 70px;
   }
@@ -104,11 +103,14 @@ const ArtistImageWrapper = styled.div`
   width: min(400px, 100%);
 `;
 
-const ArtistImage = styled.img`
+const ArtistImage = styled(Img)`
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 50%;
+  filter: grayscale(100%);
+  border: 3px solid var(--color-white);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 
   @supports not (aspect-ratio: 1 / 1) {
     height: 400px;
@@ -123,7 +125,7 @@ const ArtistImage = styled.img`
 const StyleCircle = styled.div`
   text-transform: uppercase;
   border-radius: 50%;
-  color: #fff;
+  color: var(--color-white);
   width: 70px;
   height: 70px;
   position: absolute;
@@ -208,15 +210,14 @@ const CtaButton = styled(Link)`
   border-radius: 28px;
   padding: 6px 18px;
   letter-spacing: 1px;
-  background-color: var(--color-white);
-  color: hsl(var(--color-red));
+  background-color: hsl(var(--color-red));
+  color: var(--color-white);
   transition: background-color 0.2s linear, color 0.2s linear;
   min-width: min(100%, 450px);
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      background-color: hsl(var(--color-red));
-      color: var(--color-white);
+      background-color: var(--color-red-hover);
     }
   }
 
@@ -270,7 +271,7 @@ export default function StylesAnimation({ artists }) {
             <Zoom delay={250}>
               <ArtistImageWrapper>
                 <ArtistImage
-                  src={selectedArtist.featuredImage.image.asset.url}
+                  {...selectedArtist.featuredImage.image}
                   alt={selectedArtist.featuredImage.altText}
                 />
                 <FolkCircle scale={selectedArtist.styles.folk}>Folk</FolkCircle>
