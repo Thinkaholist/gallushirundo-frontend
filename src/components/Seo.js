@@ -23,7 +23,7 @@ export default function Seo({ children, location, description, title, image }) {
         <link rel='alternate icon' href='/favicon.ico' />
         {/* Font Awesome */}
         <script
-          src={`https://kit.fontawesome.com/${process.env.FA_KIT_ID}.js`}
+          src={`https://kit.fontawesome.com/611d9689cc.js`}
           crossorigin='anonymous'
         ></script>
         {/* Meta Tags */}
