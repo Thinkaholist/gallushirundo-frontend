@@ -21,6 +21,11 @@ export default function Seo({ children, location, description, title, image }) {
         {/* Fav Icons */}
         <link rel='icon' type='image/png' href='/favicon.png' />
         <link rel='alternate icon' href='/favicon.ico' />
+        {/* Font Awesome */}
+        <script
+          src={`https://kit.fontawesome.com/${process.env.FA_KIT_ID}.js`}
+          crossorigin='anonymous'
+        ></script>
         {/* Meta Tags */}
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta charSet='utf-8' />
