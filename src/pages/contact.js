@@ -39,7 +39,27 @@ export default function ContactPage({ data }) {
     <>
       <Seo title={'Contact'} />
       <ContainerStyles>
-        <GridWrapper>
+        <h1>{pageDetails.title}</h1>
+        <Image
+          {...pageDetails.contactImage.image}
+          alt={pageDetails.contactImage.altText}
+        />
+        <div>{text}</div>
+        <h2>{pageDetails.referencesHeadline}</h2>
+        <ul>
+          {pageDetails.references.map((reference) => (
+            <li>{reference}</li>
+          ))}
+        </ul>
+        <h2>{pageDetails.ctaText}</h2>
+        <a
+          href={`mailto:${pageDetails.contactEmail}`}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {pageDetails.contactEmail}
+        </a>
+        {/* <GridWrapper>
           <AboutUsWrapper>{text}</AboutUsWrapper>
           <div>
             <Image
@@ -64,7 +84,7 @@ export default function ContactPage({ data }) {
               </div>
             </Pulse>
           </div>
-        </GridWrapper>
+        </GridWrapper> */}
       </ContainerStyles>
     </>
   );
@@ -73,14 +93,19 @@ export default function ContactPage({ data }) {
 export const query = graphql`
   query {
     pageDetails: sanityContactPage(_id: { eq: "contactPage" }) {
-      contactEmail
-      contactText
+      title
       contactImage {
         altText
+
         image {
           ...ImageWithPreview
         }
       }
+      contactText
+      referencesHeadline
+      references
+      ctaText
+      contactEmail
     }
   }
 `;
