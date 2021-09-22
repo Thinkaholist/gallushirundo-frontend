@@ -11,6 +11,11 @@ import ButtonLinkWithIcon from '../components/ButtonLinkWithIcon';
 import { BiMailSend } from 'react-icons/bi';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import Flower2 from '../images/virag_patternhez-02.svg';
+import Flower3 from '../images/virag_patternhez-03.svg';
+import Flower4 from '../images/virag_patternhez-04.svg';
+import Flower5 from '../images/virag_patternhez-05.svg';
+import Flower6 from '../images/virag_patternhez-06.svg';
 
 const GridWrapper = styled.div`
   display: grid;
@@ -19,6 +24,7 @@ const GridWrapper = styled.div`
     'title photo'
     'text photo'
     'references references'
+    'flowers flowers'
     'cta cta';
   gap: 1.5rem;
   grid-template-columns: 5fr 4fr;
@@ -29,6 +35,7 @@ const GridWrapper = styled.div`
       'title title'
       'text photo'
       'references references'
+      'flowers flowers'
       'cta cta';
   }
 
@@ -39,6 +46,7 @@ const GridWrapper = styled.div`
       'photo'
       'text'
       'references'
+      'flowers'
       'cta';
   }
 `;
@@ -77,7 +85,7 @@ const TextWrapper = styled.div`
 
 const ReferencesWrapper = styled.div`
   grid-area: references;
-  margin: 3rem 0;
+  margin: 2rem 0;
 
   @media ${QUERIES.mobileAndDown} {
     margin: 1rem 0;
@@ -101,21 +109,23 @@ const ReferencesHeadline = styled.h2`
   } ;
 `;
 
-const RefernceList = styled.ul`
+const ReferenceList = styled.ul`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 1rem;
 
   li:not(:last-of-type)::after {
     color: hsl(var(--color-red));
     font-family: 'Font Awesome 5 Free';
     content: '\f274';
-    margin-left: 0.5rem;
+    margin-left: 1rem;
   }
 
   @media ${QUERIES.mobileAndDown} {
     flex-direction: column;
+    font-size: ${18 / 16}rem;
+    gap: 0.5rem;
 
     li:not(:last-of-type)::after {
       content: '';
@@ -128,6 +138,30 @@ const RefernceList = styled.ul`
       margin-right: 0.5rem;
     }
   } ;
+`;
+
+const FlowersContainer = styled.div`
+  grid-area: flowers;
+  display: flex;
+  justify-content: space-evenly;
+
+  img {
+    width: 80px;
+
+    &:nth-of-type(even) {
+      width: 50px;
+    }
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    img {
+      width: 50px;
+
+      &:nth-of-type(even) {
+        width: 20px;
+      }
+    }
+  }
 `;
 
 const CtaWrapper = styled.div`
@@ -198,12 +232,19 @@ export default function ContactPage({ data }) {
             <ReferencesHeadline>
               <span>{pageDetails.referencesHeadline}</span>
             </ReferencesHeadline>
-            <RefernceList>
+            <ReferenceList>
               {pageDetails.references.map((reference) => (
                 <li key={reference}>{reference}</li>
               ))}
-            </RefernceList>
+            </ReferenceList>
           </ReferencesWrapper>
+          <FlowersContainer>
+            <img src={Flower2} alt='colorful flower drawing' />
+            <img src={Flower4} alt='colorful flower drawing' />
+            <img src={Flower3} alt='colorful flower drawing' />
+            <img src={Flower6} alt='colorful flower drawing' />
+            <img src={Flower5} alt='colorful flower drawing' />
+          </FlowersContainer>
           <CtaWrapper id='contact-cta'>
             <CtaText>{pageDetails.ctaText}</CtaText>
             <Pulse delay={500}>
