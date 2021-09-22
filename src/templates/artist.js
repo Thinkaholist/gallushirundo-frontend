@@ -69,6 +69,8 @@ const BioWrapper = styled.div`
 
 const SubHeadline = styled.h2`
   color: hsl(var(--color-red));
+  margin-bottom: 1rem;
+  font-weight: 700;
 
   @media ${QUERIES.mobileAndDown} {
     text-align: center;
@@ -164,6 +166,7 @@ const PlayIcon = styled(FaPlay)`
 
 const SpotifyPlayerWrapper = styled.div`
   margin: 2rem 0;
+  padding: 1rem 0;
 
   @media ${QUERIES.mobileAndDown} {
     margin: 1rem 0 2rem;
@@ -345,8 +348,10 @@ export default function SingleArtistPage({ data }) {
             />
           </Fade>
         </BodyGridWrapper>
-        <SubHeadline>{data.sanitySingleArtistPage.youtubeHeadline}</SubHeadline>
         <YoutubeWrapper>
+          <SubHeadline>
+            {data.sanitySingleArtistPage.youtubeHeadline}
+          </SubHeadline>
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${getYouTubeID(
               selectedVideoUrl
@@ -398,10 +403,10 @@ export default function SingleArtistPage({ data }) {
         </YoutubeWrapper>
         {singleArtist.socialLinks?.spotify && (
           <>
-            <SubHeadline>
-              {data.sanitySingleArtistPage.spotifyHeadline}
-            </SubHeadline>
             <SpotifyPlayerWrapper>
+              <SubHeadline>
+                {data.sanitySingleArtistPage.spotifyHeadline}
+              </SubHeadline>
               <iframe
                 title='Spotify Album Embed'
                 src={embedUrl}
