@@ -10,34 +10,6 @@ const Wrapper = styled.div`
   gap: 2rem;
   text-transform: uppercase;
 
-  button {
-    padding: 0.5em 1em;
-    border: 3px solid var(--color-white);
-    color: var(--color-white);
-    background-color: hsl(var(--color-red));
-    font-size: 20px;
-    border-radius: 36px;
-    text-transform: uppercase;
-    cursor: pointer;
-    min-width: 150px;
-
-    &:disabled {
-      background-color: rgba(19, 1, 1, 0.3);
-      border: 3px solid rgba(195, 195, 195, 0.3);
-      color: rgba(255, 255, 255, 0.3);
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        background-color: var(--color-red-hover);
-      }
-    }
-
-    @media ${QUERIES.mobileAndDown} {
-      border-radius: 16px;
-    }
-  }
-
   @media ${QUERIES.mobileAndDown} {
     flex-direction: column;
     align-items: revert;
@@ -49,21 +21,53 @@ const Wrapper = styled.div`
 const InputField = styled.input`
   padding: 0.5em 1em;
   line-height: 1;
-  border-radius: 36px;
+  border-radius: 18px;
   width: 30%;
-  border: 3px solid var(--color-white);
-  color: var(--color-white);
-  background-color: hsl(var(--color-red));
+  border: none;
+  color: var(--color-black);
+  background-color: var(--color-white);
   font-size: 20px;
 
   &::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #ddd;
+    color: gray;
     opacity: 1; /* Firefox */
   }
 
   @media ${QUERIES.mobileAndDown} {
     width: 100%;
+    border-radius: 16px;
+  }
+`;
+
+const SubscribeButton = styled.button`
+  padding: 0.5em 1em;
+  border: 1px solid transparent;
+  color: hsl(var(--color-red));
+  background-color: var(--color-white);
+  font-size: 20px;
+  border-radius: 18px;
+  text-transform: uppercase;
+  cursor: pointer;
+  min-width: 150px;
+  transition: all 0.2s linear;
+
+  &:disabled {
+    background-color: rgba(19, 1, 1, 0.3);
+    border: 3px solid rgba(195, 195, 195, 0.3);
+    color: rgba(255, 255, 255, 0.3);
+    cursor: not-allowed;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: hsl(var(--color-red));
+      color: var(--color-white);
+      border-color: var(--color-white);
+    }
+  }
+
+  @media ${QUERIES.mobileAndDown} {
     border-radius: 16px;
   }
 `;
@@ -174,9 +178,9 @@ export default function SubscribeForm() {
             onChange={handleInputChange}
           />
 
-          <button type='submit' disabled={saving}>
+          <SubscribeButton type='submit' disabled={saving}>
             {saving ? `Saving...` : `Subscribe`}
-          </button>
+          </SubscribeButton>
         </Wrapper>
       </form>
       <FeedbackBox feedback={isFeedback}>
