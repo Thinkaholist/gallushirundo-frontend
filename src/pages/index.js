@@ -8,7 +8,7 @@ import { ContainerStyles } from '../styles/ContainerStyles';
 import { QUERIES } from '../constants';
 import Seo from '../components/Seo';
 import StlyesAnimation from '../components/StylesAnimation';
-import FolkDivider from '../components/FolkDivider';
+import CurveDivider from '../components/CurveDivider';
 
 const HeroSection = styled.div`
   margin-top: calc(var(--fixed-header-padding) * -1);
@@ -67,15 +67,15 @@ const LatestNewsSection = styled.section`
 `;
 
 const InnerContainer = styled(ContainerStyles)`
-  padding-bottom: 1rem;
+  /* padding-bottom: 1rem; */
 
-  @media ${QUERIES.mobileAndDown} {
+  /* @media ${QUERIES.mobileAndDown} {
     padding-bottom: 1rem;
-  }
+  } */
 `;
 
 const GridWrapper = styled.div`
-  padding-top: 2rem;
+  padding: 2rem 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(450px, 100%), 1fr));
   gap: ${23 / 16}rem;
@@ -148,11 +148,11 @@ const NewsCardText = styled.div`
 const StyleBubblesSection = styled.section`
   background-color: var(--color-background);
   margin-bottom: -40px;
-  padding: 10rem 0 2rem 0;
+  padding: 4rem 0;
   position: relative;
 
   @media ${QUERIES.mobileAndDown} {
-    padding: 5rem 0 2rem 0;
+    padding: 2rem 0;
   }
 `;
 
@@ -215,11 +215,7 @@ export default function HomePage({ data }) {
         </InnerContainer>
       </LatestNewsSection>
       <StyleBubblesSection>
-        <FolkDivider
-          fill='var(--color-white)'
-          rotate='180deg'
-          translate='translateY(20%)'
-        />
+        <CurveDivider />
         <StlyesAnimation artists={artists} />
       </StyleBubblesSection>
     </>

@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const MainContent = styled.main`
-  margin-bottom: 40px;
+  margin-bottom: 8rem;
   padding-top: var(--fixed-header-padding);
 `;
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import {
   HiOutlineArrowNarrowLeft as LeftIcon,
   HiOutlineArrowNarrowRight as RightIcon,
@@ -86,7 +86,7 @@ const RightArrowWrapper = styled(ArrowWrapper)`
 `;
 
 const CenterBox = styled.div`
-  padding: 2.5rem 0;
+  padding: 2rem 0;
 
   @media ${QUERIES.mobileAndDown} {
     grid-row-start: 1;

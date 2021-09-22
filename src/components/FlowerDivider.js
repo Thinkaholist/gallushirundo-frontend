@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Divider = styled.div`
-  transform: ${(p) => `rotate(${p.rotate}) ${p.translate}`};
+const FlowerDividerWrapper = styled.div`
+  transform: translateY(-45%);
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   overflow: hidden;
   line-height: 0;
-  z-index: -100;
+  z-index: -1;
 `;
 
 const Svg = styled.svg`
@@ -18,12 +18,14 @@ const Svg = styled.svg`
   width: calc(100% + 1.3px);
 `;
 
-const Path = styled.path``;
+const Path = styled.path`
+  fill: hsl(var(--color-red));
+`;
 
 export default function FlowerDivider({ fill, rotate, translate }) {
   return (
     <>
-      <Divider rotate={rotate} translate={translate}>
+      <FlowerDividerWrapper rotate={rotate} translate={translate}>
         <Svg
           version='1.1'
           id='Layer_1'
@@ -31,8 +33,7 @@ export default function FlowerDivider({ fill, rotate, translate }) {
           viewBox='0 0 1215.09 173.59'
         >
           <Path
-            fill={fill}
-            class='st1'
+            fillColor={fill}
             d='M1215.09,81.26c0-0.3-0.25-0.55-0.55-0.55c0,0-61.18,1.87-81.45-0.08c-15.83-1.52-20.03-4.68-20.03-4.68
 	c-0.57-0.32-0.97-0.87-0.99-1.52c0,0,0-0.01,0-0.01c-0.24-8.1-0.69-23.19-16.99-35.86c-8.9-6.92-22.19-9.18-33.86-5.77
 	c-4.26,1.25-8.24,3.17-11.88,5.74c-0.28,0.2-0.67,0.1-0.82-0.22c-2.35-5.07-5.68-9.55-9.81-13.14c-8.03-6.98-19.06-10.47-28.78-9.1
@@ -104,7 +105,7 @@ export default function FlowerDivider({ fill, rotate, translate }) {
 	C298.78,68.38,299.2,68.39,299.42,68.67z'
           />
         </Svg>
-      </Divider>
+      </FlowerDividerWrapper>
     </>
   );
 }

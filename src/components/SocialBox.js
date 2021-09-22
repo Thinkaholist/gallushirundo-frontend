@@ -187,7 +187,7 @@ export default function SocialBox({ singleArtist, pressKitText }) {
             </AgenciesText>
             <AgenciesList>
               {singleArtist.agencies.map((agency) => (
-                <Agency>
+                <Agency key={agency._id}>
                   <a
                     href={agency.website}
                     target='_blank'

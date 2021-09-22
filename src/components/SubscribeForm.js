@@ -179,14 +179,14 @@ export default function SubscribeForm() {
           </button>
         </Wrapper>
       </form>
-      {/* <FeedbackBox feedback={isFeedback}>
+      <FeedbackBox feedback={isFeedback}>
         <div
           dangerouslySetInnerHTML={{
             __html: state.errorMessage || state.successMessage,
           }}
         />
         <FeedbackButton onClick={resetForm}>OK</FeedbackButton>
-      </FeedbackBox> */}
+      </FeedbackBox>
     </>
   );
 }
