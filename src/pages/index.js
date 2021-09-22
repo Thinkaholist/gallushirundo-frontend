@@ -148,7 +148,7 @@ const NewsCardText = styled.div`
 const StyleBubblesSection = styled.section`
   background-color: var(--color-background);
   margin-bottom: 0px;
-  padding: 4rem 0;
+  padding: 4.5rem 0;
   position: relative;
 
   @media ${QUERIES.mobileAndDown} {
