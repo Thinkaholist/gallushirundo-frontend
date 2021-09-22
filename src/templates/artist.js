@@ -46,7 +46,7 @@ const ArtistName = styled.h1`
 `;
 
 const BodyGridWrapper = styled.div`
-  margin: 2rem 0;
+  margin: 1rem 0 2rem;
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
@@ -338,7 +338,7 @@ export default function SingleArtistPage({ data }) {
           <Fade bottom distance='5px'>
             <BioWrapper>{bio}</BioWrapper>
           </Fade>
-          <Fade delay={100} right distance='10px'>
+          <Fade delay={100} right distance='20px'>
             <SocialBox
               singleArtist={singleArtist}
               pressKitText={pressKitText}

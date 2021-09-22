@@ -168,7 +168,7 @@ export default function HomePage({ data }) {
         <Img {...data.homePage.heroImage.image} alt='hero' />
         <HeroTextWrapper>
           <ContainerStyles>
-            <Fade bottom distance='20px' delay={350} duration={2000}>
+            <Fade bottom distance='20px' delay={300} duration={2000}>
               <p>{data.homePage.headerText}</p>
             </Fade>
           </ContainerStyles>
@@ -179,12 +179,12 @@ export default function HomePage({ data }) {
           <GridWrapper>
             {latestNews.map((post, i) => (
               <Fade
-                distance='50px'
                 delay={350}
                 left={i % 2 === 0}
                 right={i % 2 !== 0}
                 key={post._id}
                 duration={700}
+                distance='30px'
               >
                 <NewsCardLink to={`/post/${post.slug.current}`}>
                   <NewsCard>
