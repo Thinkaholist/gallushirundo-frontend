@@ -19,7 +19,7 @@ const SocialBoxWrapper = styled.div`
   background: linear-gradient(to bottom, #fff, var(--color-background) 99%);
 
   @media ${QUERIES.mobileAndDown} {
-    background: revert;
+    /* background: revert; */
     gap: 3rem;
   }
 `;
@@ -30,13 +30,53 @@ const SocialIcons = styled.div`
   gap: 2rem;
 
   svg {
-    color: hsl(var(--color-red));
     width: 30px;
     height: 30px;
   }
 
   @media ${QUERIES.mobileAndDown} {
     align-self: center;
+  }
+`;
+
+const SpotifyIcon = styled(FaSpotify)`
+  color: #e02013;
+  transition: color 0.3s linear;
+
+  &:hover {
+    color: #c11c10;
+  }
+`;
+const FacebookIcon = styled(FaFacebookF)`
+  color: #ff6634;
+  transition: color 0.3s linear;
+
+  &:hover {
+    color: #ff4c12;
+  }
+`;
+const YoutubeIcon = styled(FaYoutube)`
+  color: #d098fd;
+  transition: color 0.3s linear;
+
+  &:hover {
+    color: #c177fc;
+  }
+`;
+const InstagramIcon = styled(FaInstagram)`
+  color: #6698fa;
+  transition: color 0.3s linear;
+
+  &:hover {
+    color: #4582f9;
+  }
+`;
+const WebIcon = styled(FaGlobe)`
+  color: #0d6e23;
+  transition: color 0.3s linear;
+
+  &:hover {
+    color: #095019;
   }
 `;
 
@@ -157,19 +197,19 @@ export default function SocialBox({ singleArtist, pressKitText }) {
       <SocialBoxWrapper>
         <SocialIcons>
           {socialLinks?.spotify && (
-            <SocialIconLink href={socialLinks.spotify} Icon={FaSpotify} />
+            <SocialIconLink href={socialLinks.spotify} Icon={SpotifyIcon} />
           )}
           {socialLinks?.facebook && (
-            <SocialIconLink href={socialLinks.facebook} Icon={FaFacebookF} />
+            <SocialIconLink href={socialLinks.facebook} Icon={FacebookIcon} />
           )}
           {socialLinks?.youtube && (
-            <SocialIconLink href={socialLinks.youtube} Icon={FaYoutube} />
+            <SocialIconLink href={socialLinks.youtube} Icon={YoutubeIcon} />
           )}
           {socialLinks?.instagram && (
-            <SocialIconLink href={socialLinks.instagram} Icon={FaInstagram} />
+            <SocialIconLink href={socialLinks.instagram} Icon={InstagramIcon} />
           )}
           {socialLinks?.website && (
-            <SocialIconLink href={socialLinks.website} Icon={FaGlobe} />
+            <SocialIconLink href={socialLinks.website} Icon={WebIcon} />
           )}
         </SocialIcons>
         {singleArtist?.pressKit && (

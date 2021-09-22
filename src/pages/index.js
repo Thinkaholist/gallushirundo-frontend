@@ -147,7 +147,7 @@ const NewsCardText = styled.div`
 
 const StyleBubblesSection = styled.section`
   background-color: var(--color-background);
-  margin-bottom: -40px;
+  margin-bottom: 0px;
   padding: 4rem 0;
   position: relative;
 
