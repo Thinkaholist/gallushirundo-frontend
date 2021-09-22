@@ -159,6 +159,7 @@ const EventFilterWrapper = styled.nav`
   @media ${QUERIES.mobileAndDown} {
     position: revert;
     gap: 0.5rem;
+    margin: 0 auto;
   }
 `;
 
@@ -185,11 +186,15 @@ const FilterButton = styled.button`
 `;
 
 const PastEventsText = styled.h2`
-  text-align: center;
-  margin: 3rem 0 1rem 0;
-  font-weight: 700;
   font-size: ${24 / 16}rem;
   text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  margin: 3rem 0 1rem 0;
+  color: var(--color-black);
+  span {
+    border-bottom: 2px solid;
+  }
 `;
 
 const NoEventText = styled.h3`
@@ -306,7 +311,9 @@ export default function EventsPage({ data }) {
             </EventRow>
           ))}
         {filteredPastEvents.length > 0 && (
-          <PastEventsText>{data.sanityEventsPage.pastEvents}</PastEventsText>
+          <PastEventsText>
+            <span>{data.sanityEventsPage.pastEvents}</span>
+          </PastEventsText>
         )}
         {filteredPastEvents.length > 0 &&
           filteredPastEvents.map((event) => (

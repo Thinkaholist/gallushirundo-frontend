@@ -46,7 +46,7 @@ const ArtistName = styled.h1`
 `;
 
 const BodyGridWrapper = styled.div`
-  margin: 1rem 0;
+  margin: 2rem 0;
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
@@ -69,7 +69,6 @@ const BioWrapper = styled.div`
 
 const SubHeadline = styled.h2`
   color: hsl(var(--color-red));
-  font-style: italic;
 
   @media ${QUERIES.mobileAndDown} {
     text-align: center;
@@ -79,6 +78,10 @@ const SubHeadline = styled.h2`
 
 const YoutubeWrapper = styled.div`
   margin: 2rem 0;
+
+  /* @media ${QUERIES.mobileAndDown} {
+    margin: 1rem 0 2rem;
+  } */
 `;
 
 const ThumbnailGrid = styled.div`
@@ -161,6 +164,10 @@ const PlayIcon = styled(FaPlay)`
 
 const SpotifyPlayerWrapper = styled.div`
   margin: 2rem 0;
+
+  @media ${QUERIES.mobileAndDown} {
+    margin: 1rem 0 2rem;
+  }
 `;
 
 const PaginationWrapper = styled.div`
