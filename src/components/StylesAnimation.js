@@ -264,7 +264,7 @@ export default function StylesAnimation({ artists }) {
     <>
       <InnerContainer>
         <SetsWrapper>
-          <LeftArrowWrapper onClick={goLeft}>
+          <LeftArrowWrapper onClick={goLeft} aria-label='go left'>
             <LeftIcon />
           </LeftArrowWrapper>
           <CenterBox>
@@ -293,7 +293,7 @@ export default function StylesAnimation({ artists }) {
               </ArtistImageWrapper>
             </Zoom>
           </CenterBox>
-          <RightArrowWrapper onClick={goRight}>
+          <RightArrowWrapper onClick={goRight} aria-label='go right'>
             <RightIcon />
           </RightArrowWrapper>
         </SetsWrapper>
