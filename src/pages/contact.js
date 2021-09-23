@@ -186,11 +186,11 @@ const CtaText = styled.h2`
 `;
 
 const CtaButton = styled(ButtonLinkWithIcon)`
-  width: 320px;
+  width: 340px;
   font-size: 22px;
 
   @media ${QUERIES.mobileAndDown} {
-    width: 260px;
+    width: 280px;
     font-size: 18px;
   }
 `;
