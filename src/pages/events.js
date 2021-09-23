@@ -75,7 +75,23 @@ const TitleWrapper = styled.div`
 
 const Title = styled.h3``;
 
-const Date = styled.p``;
+const Date = styled.p`
+  display: flex;
+  align-items: center;
+`;
+
+const TodayTag = styled.span`
+  margin-right: 0.5rem;
+  background-color: #6698fa;
+  color: var(--color-white);
+  padding: 4px 4px 2px 4px;
+  border-radius: 8px;
+  font-size: ${18 / 16}rem;
+
+  @media ${QUERIES.mobileAndDown} {
+    font-size: ${16 / 16}rem;
+  }
+`;
 
 const LocationWrapper = styled.div`
   width: 300px;
@@ -245,6 +261,11 @@ export default function EventsPage({ data }) {
     setSelectedArtist(artistId);
   }
 
+  function isToday(date) {
+    const today = isBrowser && new window.Date().toISOString().substr(0, 10);
+    return date === today;
+  }
+
   return (
     <>
       <Seo title={'Events'} />
@@ -281,7 +302,10 @@ export default function EventsPage({ data }) {
                 <Img {...event.cover.image} alt={event.title} />
               </ImageWrapper>
               <TitleWrapper>
-                <Date>{event.date}</Date>
+                <Date>
+                  {isToday(event.date) && <TodayTag>TODAY!</TodayTag>}
+                  {event.date}
+                </Date>
                 <Title>{event.title}</Title>
               </TitleWrapper>
               <LocationWrapper>
