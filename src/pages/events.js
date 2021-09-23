@@ -86,10 +86,10 @@ const TodayTag = styled.span`
   color: var(--color-white);
   padding: 4px 4px 2px 4px;
   border-radius: 8px;
-  font-size: ${18 / 16}rem;
+  font-size: ${16 / 16}rem;
 
   @media ${QUERIES.mobileAndDown} {
-    font-size: ${16 / 16}rem;
+    font-size: ${14 / 16}rem;
   }
 `;
 
