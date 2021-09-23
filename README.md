@@ -2,6 +2,6 @@
 
 ## Stack:
 
-### Frontend (Gatsby):
+### Frontend (Gatsby): https://gallus.netlify.app/
 
 ### Backend (Sanity): https://gallushirundo.sanity.studio

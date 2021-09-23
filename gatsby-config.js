@@ -1,7 +1,14 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://www.yourdomain.tld',
+    siteUrl: 'https://gallushirundo.hu',
     title: 'Gallus & Hirundo',
+  },
+  flags: {
+    DEV_SSR: false,
   },
   plugins: [
     {
@@ -16,6 +23,7 @@ module.exports = {
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
+    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -23,6 +31,56 @@ module.exports = {
         path: './src/images/',
       },
       __key: 'images',
+    },
+    {
+      resolve: 'gatsby-plugin-global-context',
+      options: {
+        context: {
+          rightNow: new Date().toISOString(),
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mailchimp',
+      options: {
+        endpoint: process.env.MAILCHIMP_ENDPOINT,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sanity-image',
+      options: {
+        // Sanity project info (required)
+        projectId: 'q7xlgfk0',
+        dataset: 'production',
+      },
+    },
+    {
+      resolve: `@slixites/gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `IBM Plex Sans\:300,400,400i,500,600,700`,
+          `IBM Plex Mono\:300,400,400i,500,600,700`,
+        ],
+        display: 'swap',
+        preconnect: true,
+        attributes: {
+          rel: 'stylesheet preload prefetch',
+          as: 'style',
+        },
+      },
+    },
+    'gatsby-plugin-sitemap',
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'Gallus & Hirundo',
+        short_name: 'G&H',
+        start_url: '/',
+        background_color: '#ededed',
+        theme_color: '#EB0008',
+        display: 'standalone',
+        icon: 'src/images/icon.svg',
+      },
     },
   ],
 };
