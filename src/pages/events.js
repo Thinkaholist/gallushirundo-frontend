@@ -203,13 +203,16 @@ const NoEventText = styled.h3`
 `;
 
 export default function EventsPage({ data }) {
-  const now = isBrowser && new window.Date();
+  const yesterday =
+    isBrowser &&
+    new window.Date(new window.Date().setDate(new window.Date().getDate() - 1));
+
   const events = data.events.nodes;
   const pastEvents = events.filter(
-    (event) => isBrowser && new window.Date(event.date) < now
+    (event) => isBrowser && new window.Date(event.date) < yesterday
   );
   const upcomingEvents = events.filter(
-    (event) => isBrowser && new window.Date(event.date) >= now
+    (event) => isBrowser && new window.Date(event.date) >= yesterday
   );
   const artists = data.artists.nodes;
   const [selectedArtist, setSelectedArtist] = useState('');

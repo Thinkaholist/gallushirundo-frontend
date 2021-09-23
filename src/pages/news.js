@@ -106,6 +106,10 @@ export const Title = styled.h3`
   } */
 `;
 
+const NoNewsText = styled.h3`
+  color: darkgray;
+`;
+
 export default function NewsPage({ data }) {
   const news = data.news.nodes;
 
@@ -114,7 +118,7 @@ export default function NewsPage({ data }) {
       <Seo title={'News'} />
       <ContainerStyles>
         <GridWrapper>
-          {news.length < 1 && <h1>No news was found.</h1>}
+          {news.length < 1 && <NoNewsText>No news was found.</NoNewsText>}
           {news.map((post) => (
             <ArticleLink key={post._id} to={`/post/${post.slug.current}`}>
               <ArticleCard>

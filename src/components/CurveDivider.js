@@ -26,7 +26,7 @@ const CurveDividerWrapper = styled.div`
   @media ${QUERIES.mobileAndDown} {
     svg {
       width: calc(100% + 1.3px);
-      height: 20px;
+      height: 30px;
     }
   }
 `;
