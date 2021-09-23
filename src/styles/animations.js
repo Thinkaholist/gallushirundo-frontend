@@ -30,7 +30,7 @@ export const arrowBounceRight = keyframes`
 	}
 `;
 
-export const rotateInfinite = keyframes`
+export const rotate = keyframes`
 	from {
 		transform: rotate(0deg);
 	}
@@ -40,12 +40,26 @@ export const rotateInfinite = keyframes`
 	}
 `;
 
+export const windblow = keyframes`
+	from {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+
+  to {
+    transform: rotate(10deg);
+  }
+`;
+
 export const bimbam = keyframes`
 	from {
-		transform: rotate(-10deg)
-	}
-	
-	to {
-		transform: rotate(10deg)
-	}
+    transform: rotate(-10deg);
+  }
+
+  to {
+    transform: rotate(10deg);
+  }
 `;

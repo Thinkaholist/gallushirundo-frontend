@@ -16,6 +16,7 @@ import Flower3 from '../images/virag_patternhez-03.svg';
 import Flower4 from '../images/virag_patternhez-04.svg';
 import Flower5 from '../images/virag_patternhez-05.svg';
 import Flower6 from '../images/virag_patternhez-06.svg';
+import { windblow, rotate, bimbam } from '../styles/animations';
 
 const GridWrapper = styled.div`
   display: grid;
@@ -201,6 +202,30 @@ const CopyButton = styled.button`
   cursor: pointer;
 `;
 
+const FlowerTwo = styled.img`
+  animation: ${bimbam} 2500ms infinite alternate linear;
+`;
+
+const FlowerFour = styled.img`
+  animation: ${rotate} 10s infinite linear;
+`;
+
+const FlowerThree = styled.img`
+  animation: ${windblow} 3s infinite alternate;
+  transform-origin: 50% 100%;
+`;
+
+const FlowerSix = styled.img`
+  animation: ${windblow} 2s infinite alternate;
+  transform-origin: 50% 100%;
+  animation-delay: 350ms;
+`;
+
+const FlowerFive = styled.img`
+  animation: ${bimbam} 2500ms infinite alternate linear;
+  animation-delay: 1000ms;
+`;
+
 export default function ContactPage({ data }) {
   const { pageDetails } = data;
 
@@ -240,11 +265,11 @@ export default function ContactPage({ data }) {
             </ReferenceList>
           </ReferencesWrapper>
           <FlowersContainer>
-            <img src={Flower2} alt='colorful flower drawing' />
-            <img src={Flower4} alt='colorful flower drawing' />
-            <img src={Flower3} alt='colorful flower drawing' />
-            <img src={Flower6} alt='colorful flower drawing' />
-            <img src={Flower5} alt='colorful flower drawing' />
+            <FlowerTwo src={Flower2} alt='colorful flower drawing' />
+            <FlowerFour src={Flower4} alt='colorful flower drawing' />
+            <FlowerThree src={Flower3} alt='colorful flower drawing' />
+            <FlowerSix src={Flower6} alt='colorful flower drawing' />
+            <FlowerFive src={Flower5} alt='colorful flower drawing' />
           </FlowersContainer>
           <CtaWrapper id='contact-cta'>
             <CtaText>{pageDetails.ctaText}</CtaText>
