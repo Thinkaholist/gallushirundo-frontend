@@ -107,18 +107,6 @@ module.exports = {
         icon: 'src/images/icon.svg',
       },
     },
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {
-        precachePages: [
-          `/events/`,
-          `/artists/`,
-          `/contact/`,
-          `/news/`,
-          `/artist/*`,
-          `/post/*`,
-        ],
-      },
-    },
+    `gatsby-plugin-offline`,
   ],
 };
