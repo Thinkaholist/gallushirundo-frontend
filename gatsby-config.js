@@ -2,9 +2,11 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+const siteUrl = 'https://gallushirundo.hu';
+
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://gallushirundo.hu',
+    siteUrl,
     title: 'Gallus & Hirundo',
   },
   flags: {
@@ -69,7 +71,30 @@ module.exports = {
         },
       },
     },
-    'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        query: `
+          {
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+          }
+        `,
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({ allSitePage: { nodes: allPages } }) => {
+          return allPages;
+        },
+        serialize: ({ path, modifiedGmt }) => {
+          return {
+            url: path,
+            lastmod: modifiedGmt,
+          };
+        },
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -80,6 +105,19 @@ module.exports = {
         theme_color: '#EB0008',
         display: 'standalone',
         icon: 'src/images/icon.svg',
+      },
+    },
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        precachePages: [
+          `/events/`,
+          `/artists/`,
+          `/contact/`,
+          `/news/`,
+          `/artist/*`,
+          `/post/*`,
+        ],
       },
     },
   ],
