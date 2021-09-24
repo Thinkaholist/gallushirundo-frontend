@@ -107,6 +107,9 @@ module.exports = {
         icon: 'src/images/icon.svg',
       },
     },
+    /*
+    Switching off because it causes problem with window.location.pathname
     `gatsby-plugin-offline`,
+    */
   ],
 };
