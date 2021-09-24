@@ -41,10 +41,10 @@ export default function Seo({ children, location, description, title, image }) {
           key='ogsitename'
         />
         <meta property='og:description' content={description} key='ogdesc' />
-        {/* <meta
+        <meta
           name='google-site-verification'
-          content=''
-        /> */}
+          content='YHk2yLW0OuWli2SSfklavb-vOslLw_Zp0EqoTiErSAY'
+        />
         {children}
       </Helmet>
     </>
