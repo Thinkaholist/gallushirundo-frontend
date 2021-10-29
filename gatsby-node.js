@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
   const artistTemplate = path.resolve(`./src/templates/artist.js`);
   const eventTemplate = path.resolve(`./src/templates/event.js`);
   const postTemplate = path.resolve(`./src/templates/post.js`);
@@ -91,5 +91,11 @@ module.exports.createPages = async ({ graphql, actions }) => {
         slug: cat.slug.current,
       },
     });
+  });
+
+  createRedirect({
+    fromPath: '/test-artists-redirect',
+    toPath: '/artists',
+    isPermanent: true,
   });
 };

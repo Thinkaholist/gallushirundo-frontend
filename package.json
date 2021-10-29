@@ -23,6 +23,7 @@
     "babel-plugin-styled-components": "^1.13.1",
     "dotenv": "^10.0.0",
     "gatsby": "^3.8.1",
+    "gatsby-plugin-client-side-redirect": "^1.1.0",
     "gatsby-plugin-global-context": "^1.0.0",
     "gatsby-plugin-image": "^1.8.0",
     "gatsby-plugin-mailchimp": "^5.2.2",

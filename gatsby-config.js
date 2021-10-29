@@ -108,5 +108,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-remove-serviceworker`,
+    `gatsby-plugin-client-side-redirect`,
   ],
 };
