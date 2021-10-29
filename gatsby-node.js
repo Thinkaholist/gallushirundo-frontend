@@ -94,8 +94,8 @@ module.exports.createPages = async ({ graphql, actions }) => {
   });
 
   createRedirect({
-    fromPath: '/test-artists-redirect',
-    toPath: '/artists',
+    fromPath: '/qr',
+    toPath: '/post/bohemian-betyars-release',
     isPermanent: true,
   });
 };
