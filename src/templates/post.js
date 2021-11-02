@@ -254,6 +254,34 @@ export default function SinglePost(props) {
           </>
         );
       },
+      bandcampAlbum: ({ node: { embedCode } }) => {
+        const albumId = getBandcampAlbumId(embedCode);
+        function getBandcampAlbumId(embedCode) {
+          const albumIdLength = 10;
+          const term = 'album=';
+          const regex = new RegExp(`${term}`);
+          return embedCode?.substr(
+            embedCode?.search(regex) + term.length,
+            albumIdLength
+          );
+        }
+        return (
+          <>
+            <iframe
+              title='embed-bandcamp'
+              style={{
+                border: 0,
+                width: '100%',
+                height: 520,
+                display: 'block',
+                margin: '1rem 0',
+              }}
+              src={`https://bandcamp.com/EmbeddedPlayer/album=${albumId}/size=large/bgcol=ffffff/linkcol=EB0008/artwork=small/transparent=true/`}
+              seamless
+            ></iframe>
+          </>
+        );
+      },
       youtubeVideo: (props) => {
         const id = getYoutubeId(props.node.url);
         if (!id) return '';
