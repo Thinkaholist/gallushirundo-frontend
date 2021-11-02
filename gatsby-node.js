@@ -42,10 +42,22 @@ module.exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allSanityRedirect {
+        nodes {
+          name
+          fromPath
+          toPath
+          isPermanent
+        }
+      }
     }
   `);
 
   const artists = res.data.allSanityArtist.nodes;
+  const events = res.data.allSanityEvent.edges;
+  const posts = res.data.allSanityPost.edges;
+  const categories = res.data.allSanityCategory.nodes;
+  const redirects = res.data.allSanityRedirect.nodes;
 
   artists.forEach((artist, index) => {
     const previousSlug = index === 0 ? null : artists[index - 1].slug.current;
@@ -63,7 +75,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  res.data.allSanityEvent.edges.forEach((edge) => {
+  events.forEach((edge) => {
     createPage({
       component: eventTemplate,
       path: `/event/${edge.node.slug.current}`,
@@ -73,7 +85,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  res.data.allSanityPost.edges.forEach((edge) => {
+  posts.forEach((edge) => {
     createPage({
       component: postTemplate,
       path: `/post/${edge.node.slug.current}`,
@@ -83,7 +95,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  res.data.allSanityCategory.nodes.forEach((cat) => {
+  categories.forEach((cat) => {
     createPage({
       component: categoryTemplate,
       path: `/category/${cat.slug.current}`,
@@ -93,9 +105,11 @@ module.exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
-  createRedirect({
-    fromPath: '/qr',
-    toPath: '/post/bohemian-betyars-release',
-    isPermanent: true,
+  redirects.forEach(({ fromPath, toPath, isPermanent }) => {
+    createRedirect({
+      fromPath,
+      toPath,
+      isPermanent,
+    });
   });
 };
