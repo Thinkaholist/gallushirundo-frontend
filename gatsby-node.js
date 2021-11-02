@@ -47,7 +47,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
           name
           fromPath
           toPath
-          permanent
+          isPermanent
         }
       }
     }
