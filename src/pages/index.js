@@ -9,6 +9,7 @@ import { QUERIES } from '../constants';
 import Seo from '../components/Seo';
 import StlyesAnimation from '../components/StylesAnimation';
 import CurveDivider from '../components/CurveDivider';
+import logo from '../assets/images/ME_BGA-removebg.png';
 
 const HeroSection = styled.div`
   margin-top: calc(var(--fixed-header-padding) * -1);
@@ -217,6 +218,16 @@ export default function HomePage({ data }) {
       <StyleBubblesSection>
         <CurveDivider />
         <StlyesAnimation artists={artists} />
+        <div
+          style={{
+            display: 'grid',
+            placeContent: 'center',
+            margin: '1rem 0',
+            width: '100%',
+          }}
+        >
+          <img src={logo} alt='logo' style={{ width: '33%' }} />
+        </div>
       </StyleBubblesSection>
     </>
   );
