@@ -1,15 +1,15 @@
-import React from 'react';
-import { graphql, Link } from 'gatsby';
-import { DateTime } from 'luxon';
-import styled from 'styled-components';
-import Fade from 'react-reveal/Fade';
-import Img from 'gatsby-plugin-sanity-image';
-import { ContainerStyles } from '../styles/ContainerStyles';
-import { QUERIES } from '../constants';
-import Seo from '../components/Seo';
-import StlyesAnimation from '../components/StylesAnimation';
-import CurveDivider from '../components/CurveDivider';
-import logo from '../assets/images/ME_BGA-removebg.png';
+import React from "react";
+import { graphql, Link } from "gatsby";
+import { DateTime } from "luxon";
+import styled from "styled-components";
+import Fade from "react-reveal/Fade";
+import Img from "gatsby-plugin-sanity-image";
+import { ContainerStyles } from "../styles/ContainerStyles";
+import { QUERIES } from "../constants";
+import Seo from "../components/Seo";
+import StlyesAnimation from "../components/StylesAnimation";
+import CurveDivider from "../components/CurveDivider";
+import logo from "../assets/images/ME_BGA-removebg.png";
 
 const HeroSection = styled.div`
   margin-top: calc(var(--fixed-header-padding) * -1);
@@ -33,12 +33,7 @@ const HeroTextWrapper = styled.div`
   bottom: 0px;
   width: 100%;
   background: rgb(0, 0, 0);
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(0, 0, 0, 0) 30%,
-    rgba(0, 0, 0, 0.8) 80%
-  );
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.8) 80%);
 
   p {
     font-size: ${60 / 16}rem;
@@ -123,12 +118,7 @@ const NewsCardText = styled.div`
   height: 100%;
   border-radius: 28px;
   background: rgb(0, 0, 0);
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0) 30%,
-    rgba(0, 0, 0, 0.7) 80%
-  );
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.7) 80%);
   line-height: 1.2;
   display: flex;
   flex-direction: column;
@@ -164,12 +154,12 @@ export default function HomePage({ data }) {
 
   return (
     <>
-      <Seo title={'Home'} image={heroImage} />
+      <Seo title={"Home"} image={heroImage} />
       <HeroSection>
-        <Img {...data.homePage.heroImage.image} alt='hero' />
+        <Img {...data.homePage.heroImage.image} alt="hero" />
         <HeroTextWrapper>
           <ContainerStyles>
-            <Fade bottom distance='20px' delay={300} duration={2000}>
+            <Fade bottom distance="20px" delay={300} duration={2000}>
               <p>{data.homePage.headerText}</p>
             </Fade>
           </ContainerStyles>
@@ -179,28 +169,13 @@ export default function HomePage({ data }) {
         <InnerContainer>
           <GridWrapper>
             {latestNews.map((post, i) => (
-              <Fade
-                delay={350}
-                left={i % 2 === 0}
-                right={i % 2 !== 0}
-                key={post._id}
-                duration={700}
-                distance='30px'
-              >
+              <Fade delay={350} left={i % 2 === 0} right={i % 2 !== 0} key={post._id} duration={700} distance="30px">
                 <NewsCardLink to={`/post/${post.slug.current}`}>
                   <NewsCard>
-                    <Img
-                      {...post.featuredImage.image}
-                      alt={post.title}
-                      style={{ position: 'static' }}
-                    />
+                    <Img {...post.featuredImage.image} alt={post.title} style={{ position: "static" }} />
                     <NewsCardText>
                       <Fade delay={100}>
-                        <p>
-                          {DateTime.fromISO(post.publishedDate).toFormat(
-                            'kkkk.LL.dd'
-                          )}
-                        </p>
+                        <p>{DateTime.fromISO(post.publishedDate).toFormat("kkkk.LL.dd")}</p>
                       </Fade>
                       <Fade bottom delay={200}>
                         <h2>
@@ -220,13 +195,14 @@ export default function HomePage({ data }) {
         <StlyesAnimation artists={artists} />
         <div
           style={{
-            display: 'grid',
-            placeContent: 'center',
-            margin: '1rem 0',
-            width: '100%',
+            display: "flex",
+            justifyContent: "center",
+            margin: "3rem auto 1rem",
+            width: "100%",
+            maxWidth: 400,
           }}
         >
-          <img src={logo} alt='logo' style={{ width: '33%' }} />
+          <img src={logo} alt="logo" style={{ width: "100%", textAlign:"center" }} />
         </div>
       </StyleBubblesSection>
     </>
