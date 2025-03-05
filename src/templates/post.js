@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { graphql, Link } from 'gatsby';
-import PortableText from '@sanity/block-content-to-react';
-import YouTube from 'react-youtube';
-import getYoutubeId from 'get-youtube-id';
-import urlBuilder from '@sanity/image-url';
+import React from "react";
+import styled from "styled-components";
+import { graphql, Link } from "gatsby";
+import PortableText from "@sanity/block-content-to-react";
+import YouTube from "react-youtube";
+import getYoutubeId from "get-youtube-id";
+import urlBuilder from "@sanity/image-url";
 import {
   FaFacebookSquare as FacebookIcon,
   FaInstagram,
@@ -12,18 +12,18 @@ import {
   FaYoutube,
   FaGlobe,
   FaExternalLinkAlt,
-} from 'react-icons/fa';
-import Img from 'gatsby-plugin-sanity-image';
-import { ContainerStyles } from '../styles/ContainerStyles';
-import { ContentStyles } from '../styles/ContentStyles';
-import Seo from '../components/Seo';
-import { QUERIES } from '../constants';
-import Flip from 'react-reveal/Flip';
+} from "react-icons/fa";
+import Img from "gatsby-plugin-sanity-image";
+import { ContainerStyles } from "../styles/ContainerStyles";
+import { ContentStyles } from "../styles/ContentStyles";
+import Seo from "../components/Seo";
+import { QUERIES } from "../constants";
+import { Flip } from "react-swift-reveal";
 
 function urlFor(source) {
   return urlBuilder({
-    projectId: 'q7xlgfk0',
-    dataset: 'production',
+    projectId: "q7xlgfk0",
+    dataset: "production",
   }).image(source);
 }
 
@@ -139,7 +139,7 @@ const PortableTextStyles = styled.div`
   }
 
   code {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Courier New", Courier, monospace;
   }
 
   ul,
@@ -202,10 +202,10 @@ export default function SinglePost(props) {
           <>
             <ExternalLink
               href={mark.url}
-              target='_blank'
-              rel='noopener noreferrer'
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              {children}{' '}
+              {children}{" "}
               <span>
                 <FaExternalLinkAlt size={12} />
               </span>
@@ -217,39 +217,39 @@ export default function SinglePost(props) {
     types: {
       spotifyAlbum: (props) => {
         const albumLink = props.node.albumLink;
-        const albumId = albumLink.split('/')[4].split('?')[0];
+        const albumId = albumLink.split("/")[4].split("?")[0];
         if (!albumId || albumId.length !== 22) return null;
         const embedUrl = `https://open.spotify.com/embed/album/${albumId}`;
         return (
           <>
             <iframe
-              title='Spotify Album Embed'
+              title="Spotify Album Embed"
               src={embedUrl}
-              width='100%'
-              height={props.node.compactView ? '80' : '380'}
-              frameBorder='0'
-              allowtransparency='true'
-              allow='encrypted-media'
+              width="100%"
+              height={props.node.compactView ? "80" : "380"}
+              frameBorder="0"
+              allowtransparency="true"
+              allow="encrypted-media"
             ></iframe>
           </>
         );
       },
       spotifyTrack: (props) => {
         const trackLink = props.node.trackLink;
-        const trackId = trackLink.split('/')[4].split('?')[0];
+        const trackId = trackLink.split("/")[4].split("?")[0];
         if (!trackId || trackId.length !== 22) return null;
         const embedUrl = `https://open.spotify.com/embed/track/${trackId}`;
 
         return (
           <>
             <iframe
-              title='Spotify Track Preview'
+              title="Spotify Track Preview"
               src={embedUrl}
-              width='100%'
-              height={props.node.compactView ? '80' : '380'}
-              frameBorder='0'
-              allowtransparency='true'
-              allow='encrypted-media'
+              width="100%"
+              height={props.node.compactView ? "80" : "380"}
+              frameBorder="0"
+              allowtransparency="true"
+              allow="encrypted-media"
             ></iframe>
           </>
         );
@@ -258,7 +258,7 @@ export default function SinglePost(props) {
         const albumId = getBandcampAlbumId(embedCode);
         function getBandcampAlbumId(embedCode) {
           const albumIdLength = 10;
-          const term = 'album=';
+          const term = "album=";
           const regex = new RegExp(`${term}`);
           return embedCode?.substr(
             embedCode?.search(regex) + term.length,
@@ -268,13 +268,13 @@ export default function SinglePost(props) {
         return (
           <>
             <iframe
-              title='embed-bandcamp'
+              title="embed-bandcamp"
               style={{
                 border: 0,
-                width: '100%',
+                width: "100%",
                 height: 520,
-                display: 'block',
-                margin: '1rem 0',
+                display: "block",
+                margin: "1rem 0",
               }}
               src={`https://bandcamp.com/EmbeddedPlayer/album=${albumId}/size=large/bgcol=ffffff/linkcol=EB0008/artwork=small/transparent=true/`}
               seamless
@@ -284,11 +284,11 @@ export default function SinglePost(props) {
       },
       youtubeVideo: (props) => {
         const id = getYoutubeId(props.node.url);
-        if (!id) return '';
+        if (!id) return "";
 
         const opts = {
           // height: '450',
-          width: '100%',
+          width: "100%",
         };
 
         return (
@@ -315,7 +315,7 @@ export default function SinglePost(props) {
       eventEmbed: (props) => {
         return (
           <>
-            <article style={{ border: '1px solid', padding: 15 }}>
+            <article style={{ border: "1px solid", padding: 15 }}>
               <Link to={`/event/${props.node.event.slug.current}`}>
                 <h3>{props.node.event.title}</h3>
               </Link>
@@ -323,8 +323,8 @@ export default function SinglePost(props) {
               <p>{props.node.event.date}</p>
               <a
                 href={props.node.event.mainEvent.website}
-                target='_blank'
-                rel='noopener noreferrer'
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {props.node.event.mainEvent.name}
               </a>
@@ -337,7 +337,7 @@ export default function SinglePost(props) {
           <>
             <article
               style={{
-                backgroundColor: '#F0F2F5',
+                backgroundColor: "#F0F2F5",
                 padding: 15,
                 borderRadius: 4,
               }}
@@ -355,9 +355,9 @@ export default function SinglePost(props) {
           <>
             <article
               style={{
-                display: 'flex',
-                gap: '2rem',
-                border: '1px solid',
+                display: "flex",
+                gap: "2rem",
+                border: "1px solid",
                 padding: 15,
               }}
             >
@@ -365,7 +365,7 @@ export default function SinglePost(props) {
                 <img
                   src={urlFor(artist.logo.asset)}
                   alt={`Logo of ${artist.name}`}
-                  style={{ width: '100%' }}
+                  style={{ width: "100%" }}
                 />
               </div>
               <div>
@@ -375,46 +375,46 @@ export default function SinglePost(props) {
                 {artist.socialLinks.facebook && (
                   <a
                     href={artist.socialLinks.facebook}
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <FacebookIcon color='hsl(var(--color-red))' size={30} />
+                    <FacebookIcon color="hsl(var(--color-red))" size={30} />
                   </a>
                 )}
                 {artist.socialLinks.instagram && (
                   <a
                     href={artist.socialLinks.instagram}
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <FaInstagram color='hsl(var(--color-red))' size={30} />
+                    <FaInstagram color="hsl(var(--color-red))" size={30} />
                   </a>
                 )}
                 {artist.socialLinks.spotify && (
                   <a
                     href={artist.socialLinks.spotify}
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <FaSpotify color='hsl(var(--color-red))' size={30} />
+                    <FaSpotify color="hsl(var(--color-red))" size={30} />
                   </a>
                 )}
                 {artist.socialLinks.youtube && (
                   <a
                     href={artist.socialLinks.youtube}
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <FaYoutube color='hsl(var(--color-red))' size={30} />
+                    <FaYoutube color="hsl(var(--color-red))" size={30} />
                   </a>
                 )}
                 {artist.socialLinks.website && (
                   <a
                     href={artist.socialLinks.website}
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <FaGlobe color='hsl(var(--color-red))' size={30} />
+                    <FaGlobe color="hsl(var(--color-red))" size={30} />
                   </a>
                 )}
               </div>
@@ -447,10 +447,10 @@ export default function SinglePost(props) {
           <div
             style={{
               // border: '1px solid rebeccapurple',
-              marginBottom: '2.5rem',
-              display: 'flex',
-              gap: '1rem',
-              alignItems: 'center',
+              marginBottom: "2.5rem",
+              display: "flex",
+              gap: "1rem",
+              alignItems: "center",
             }}
           >
             <CategoryLink
@@ -469,11 +469,11 @@ export default function SinglePost(props) {
 
             <div
               style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '1rem',
-                borderLeft: '1px groove',
-                paddingLeft: '1rem',
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "1rem",
+                borderLeft: "1px groove",
+                paddingLeft: "1rem",
               }}
             >
               {props.data.post?.artists.map((artist) => (
@@ -486,11 +486,11 @@ export default function SinglePost(props) {
                       {...artist.featuredImage.image}
                       alt={artist.featuredImage.altText}
                       style={{
-                        display: 'block',
+                        display: "block",
                         width: 35,
                         height: 35,
-                        borderRadius: '50%',
-                        objectFit: 'cover',
+                        borderRadius: "50%",
+                        objectFit: "cover",
                       }}
                     />
                   </Link>
