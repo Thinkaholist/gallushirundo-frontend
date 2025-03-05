@@ -1,10 +1,10 @@
-import React from 'react';
-import { graphql } from 'gatsby';
-import styled from 'styled-components';
-import Fade from 'react-reveal/Fade';
-import { ContainerStyles } from '../styles/ContainerStyles';
-import ArtistCard from '../components/ArtistCard';
-import Seo from '../components/Seo';
+import React from "react";
+import { graphql } from "gatsby";
+import styled from "styled-components";
+import { Fade } from "react-swift-reveal";
+import { ContainerStyles } from "../styles/ContainerStyles";
+import ArtistCard from "../components/ArtistCard";
+import Seo from "../components/Seo";
 
 const GridWrapper = styled.div`
   display: grid;
@@ -17,11 +17,11 @@ export default function ArtistsPage({ data }) {
 
   return (
     <>
-      <Seo title={'Artists'} />
+      <Seo title={"Artists"} />
       <ContainerStyles>
         <GridWrapper>
           {artists.map((artist) => (
-            <Fade key={artist._id} bottom delay={150} distance='10px'>
+            <Fade key={artist._id} bottom delay={150} distance="10px">
               <ArtistCard artist={artist} />
             </Fade>
           ))}

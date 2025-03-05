@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'gatsby';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import { Link } from "gatsby";
+import styled from "styled-components";
 import {
   HiOutlineArrowNarrowLeft as LeftIcon,
   HiOutlineArrowNarrowRight as RightIcon,
-} from 'react-icons/hi';
-import Img from 'gatsby-plugin-sanity-image';
-import { ContainerStyles } from '../styles/ContainerStyles';
-import { QUERIES } from '../constants';
-import Pulse from 'react-reveal/Pulse';
-import Zoom from 'react-reveal/Zoom';
-import Fade from 'react-reveal/Fade';
-import { arrowBounceLeft, arrowBounceRight } from '../styles/animations';
+} from "react-icons/hi";
+import Img from "gatsby-plugin-sanity-image";
+import { ContainerStyles } from "../styles/ContainerStyles";
+import { QUERIES } from "../constants";
+import { Fade, Pulse, Zoom } from "react-swift-reveal";
+import { arrowBounceLeft, arrowBounceRight } from "../styles/animations";
 
 const InnerContainer = styled(ContainerStyles)`
   --color-folk: #cf180b;
@@ -135,13 +133,13 @@ const StyleCircle = styled.div`
   will-change: transform;
   transition: var(--transition);
   transform: ${(p) =>
-    p.scale === 0 ? 'scale(0)' : `scale(${p.scale / 100 + 0.9})`};
+    p.scale === 0 ? "scale(0)" : `scale(${p.scale / 100 + 0.9})`};
   opacity: ${(p) => p.scale / 1000 + 0.9};
   /* filter: ${(p) => `grayscale(${(100 - p.scale) / 2}%)`}; */
 
   @media ${QUERIES.mobileAndDown} {
     transform: ${(p) =>
-      p.scale === 0 ? 'scale(0)' : `scale(${p.scale / 100 + 0.6})`};
+      p.scale === 0 ? "scale(0)" : `scale(${p.scale / 100 + 0.6})`};
   }
 `;
 
@@ -232,16 +230,16 @@ export default function StylesAnimation({ artists }) {
 
   useEffect(() => {
     function handleKey(e) {
-      if (e.key === 'ArrowRight') {
+      if (e.key === "ArrowRight") {
         goRight();
       }
-      if (e.key === 'ArrowLeft') {
+      if (e.key === "ArrowLeft") {
         goLeft();
       }
     }
 
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
   }, [goLeft, goRight]);
 
   function goRight() {
@@ -264,7 +262,7 @@ export default function StylesAnimation({ artists }) {
     <>
       <InnerContainer>
         <SetsWrapper>
-          <LeftArrowWrapper onClick={goLeft} aria-label='go left'>
+          <LeftArrowWrapper onClick={goLeft} aria-label="go left">
             <LeftIcon />
           </LeftArrowWrapper>
           <CenterBox>
@@ -293,18 +291,18 @@ export default function StylesAnimation({ artists }) {
               </ArtistImageWrapper>
             </Zoom>
           </CenterBox>
-          <RightArrowWrapper onClick={goRight} aria-label='go right'>
+          <RightArrowWrapper onClick={goRight} aria-label="go right">
             <RightIcon />
           </RightArrowWrapper>
         </SetsWrapper>
         <InfoBox>
-          <Fade bottom distance='40px' delay={150}>
+          <Fade bottom distance="40px" delay={150}>
             <Tagline>{selectedArtist.tagline}</Tagline>
           </Fade>
           <Pulse delay={350}>
             <CtaButton to={`/artist/${selectedArtist.slug.current}`}>
-              Listen{' '}
-              <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>
+              Listen{" "}
+              <span style={{ fontWeight: 700, textTransform: "uppercase" }}>
                 {selectedArtist.name}
               </span>
             </CtaButton>

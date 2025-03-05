@@ -1,54 +1,54 @@
-import React from 'react';
-import styled from 'styled-components';
-import { graphql } from 'gatsby';
-import Img from 'gatsby-plugin-sanity-image';
-import { ContainerStyles } from '../styles/ContainerStyles';
-import Seo from '../components/Seo';
-import Pulse from 'react-reveal/Pulse';
-import { QUERIES } from '../constants';
-import ButtonLinkWithIcon from '../components/ButtonLinkWithIcon';
+import React from "react";
+import styled from "styled-components";
+import { graphql } from "gatsby";
+import Img from "gatsby-plugin-sanity-image";
+import { ContainerStyles } from "../styles/ContainerStyles";
+import Seo from "../components/Seo";
+import { Pulse } from "react-swift-reveal";
+import { QUERIES } from "../constants";
+import ButtonLinkWithIcon from "../components/ButtonLinkWithIcon";
 // import { HiOutlineMail } from 'react-icons/hi';
-import { BiMailSend } from 'react-icons/bi';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import Flower2 from '../images/virag_patternhez-02.svg';
-import Flower3 from '../images/virag_patternhez-03.svg';
-import Flower4 from '../images/virag_patternhez-04.svg';
-import Flower5 from '../images/virag_patternhez-05.svg';
-import Flower6 from '../images/virag_patternhez-06.svg';
-import { windblow, rotate, bimbam } from '../styles/animations';
+import { BiMailSend } from "react-icons/bi";
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css";
+import Flower2 from "../images/virag_patternhez-02.svg";
+import Flower3 from "../images/virag_patternhez-03.svg";
+import Flower4 from "../images/virag_patternhez-04.svg";
+import Flower5 from "../images/virag_patternhez-05.svg";
+import Flower6 from "../images/virag_patternhez-06.svg";
+import { windblow, rotate, bimbam } from "../styles/animations";
 
 const GridWrapper = styled.div`
   display: grid;
   /* grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr)); */
   grid-template-areas:
-    'title photo'
-    'text photo'
-    'references references'
-    'flowers flowers'
-    'cta cta';
+    "title photo"
+    "text photo"
+    "references references"
+    "flowers flowers"
+    "cta cta";
   gap: 1.5rem;
   grid-template-columns: 5fr 4fr;
 
   @media ${QUERIES.tabletAndDown} {
     grid-template-columns: 5fr 4fr;
     grid-template-areas:
-      'title title'
-      'text photo'
-      'references references'
-      'flowers flowers'
-      'cta cta';
+      "title title"
+      "text photo"
+      "references references"
+      "flowers flowers"
+      "cta cta";
   }
 
   @media ${QUERIES.mobileAndDown} {
     grid-template-columns: 1fr;
     grid-template-areas:
-      'title'
-      'photo'
-      'text'
-      'references'
-      'flowers'
-      'cta';
+      "title"
+      "photo"
+      "text"
+      "references"
+      "flowers"
+      "cta";
   }
 `;
 
@@ -118,8 +118,8 @@ const ReferenceList = styled.ul`
 
   li:not(:last-of-type)::after {
     color: hsl(var(--color-red));
-    font-family: 'Font Awesome 5 Free';
-    content: '\f274';
+    font-family: "Font Awesome 5 Free";
+    content: "\f274";
     margin-left: 1rem;
   }
 
@@ -129,13 +129,13 @@ const ReferenceList = styled.ul`
     gap: 0.5rem;
 
     li:not(:last-of-type)::after {
-      content: '';
+      content: "";
     }
 
     li::before {
-      content: '\f274';
+      content: "\f274";
       color: hsl(var(--color-red));
-      font-family: 'Font Awesome 5 Free';
+      font-family: "Font Awesome 5 Free";
       margin-right: 0.5rem;
     }
   } ;
@@ -229,8 +229,8 @@ const FlowerFive = styled.img`
 export default function ContactPage({ data }) {
   const { pageDetails } = data;
 
-  const text = pageDetails.contactText?.split('\n').map((p, i) => {
-    if (p === '') {
+  const text = pageDetails.contactText?.split("\n").map((p, i) => {
+    if (p === "") {
       return <br key={i} />;
     }
     return <p key={i}>{p}</p>;
@@ -245,7 +245,7 @@ export default function ContactPage({ data }) {
 
   return (
     <>
-      <Seo title={'Contact'} />
+      <Seo title={"Contact"} />
       <ContainerStyles>
         <GridWrapper>
           <Title>{pageDetails.title}</Title>
@@ -265,27 +265,27 @@ export default function ContactPage({ data }) {
             </ReferenceList>
           </ReferencesWrapper>
           <FlowersContainer>
-            <FlowerTwo src={Flower2} alt='colorful flower drawing' />
-            <FlowerFour src={Flower4} alt='colorful flower drawing' />
-            <FlowerThree src={Flower3} alt='colorful flower drawing' />
-            <FlowerSix src={Flower6} alt='colorful flower drawing' />
-            <FlowerFive src={Flower5} alt='colorful flower drawing' />
+            <FlowerTwo src={Flower2} alt="colorful flower drawing" />
+            <FlowerFour src={Flower4} alt="colorful flower drawing" />
+            <FlowerThree src={Flower3} alt="colorful flower drawing" />
+            <FlowerSix src={Flower6} alt="colorful flower drawing" />
+            <FlowerFive src={Flower5} alt="colorful flower drawing" />
           </FlowersContainer>
-          <CtaWrapper id='contact-cta'>
+          <CtaWrapper id="contact-cta">
             <CtaText>{pageDetails.ctaText}</CtaText>
             <Pulse delay={500}>
               <CtaButton
                 href={`mailto:${pageDetails.contactEmail}`}
-                target='_blank'
-                rel='noopener noreferrer'
+                target="_blank"
+                rel="noopener noreferrer"
                 text={pageDetails.contactEmail}
                 icon={BiMailSend}
               />
             </Pulse>
             <Tippy
               content={`Copied: ${pageDetails.contactEmail}`}
-              placement='bottom'
-              trigger='click'
+              placement="bottom"
+              trigger="click"
             >
               <CopyButton onClick={copyEmailToClipboard}>
                 Copy to clipboard

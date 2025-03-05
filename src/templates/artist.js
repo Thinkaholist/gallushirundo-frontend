@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { graphql, Link } from 'gatsby';
-import Img from 'gatsby-plugin-sanity-image';
-import { FaPlay } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { graphql, Link } from "gatsby";
+import Img from "gatsby-plugin-sanity-image";
+import { FaPlay } from "react-icons/fa";
 import {
   HiOutlineArrowNarrowLeft as LeftArrow,
   HiOutlineArrowNarrowRight as RightArrow,
-} from 'react-icons/hi';
-import getYouTubeID from 'get-youtube-id';
-import ReactPlayer from 'react-player/youtube';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper.min.css';
-import 'swiper/components/pagination/pagination.min.css';
-import 'swiper/components/navigation/navigation.min.css';
-import { ContainerStyles } from '../styles/ContainerStyles';
-import AnimatedEq from '../components/AnimatedEq';
-import Seo from '../components/Seo';
-import SocialBox from '../components/SocialBox';
-import { QUERIES } from '../constants';
-import Fade from 'react-reveal/Fade';
-import { arrowBounceLeft, arrowBounceRight } from '../styles/animations';
+} from "react-icons/hi";
+import getYouTubeID from "get-youtube-id";
+import ReactPlayer from "react-player/youtube";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper.min.css";
+import "swiper/components/pagination/pagination.min.css";
+import "swiper/components/navigation/navigation.min.css";
+import { ContainerStyles } from "../styles/ContainerStyles";
+import AnimatedEq from "../components/AnimatedEq";
+import Seo from "../components/Seo";
+import SocialBox from "../components/SocialBox";
+import { QUERIES } from "../constants";
+import { Fade } from "react-swift-reveal";
+import { arrowBounceLeft, arrowBounceRight } from "../styles/animations";
 
 // import Swiper core and required modules
-import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper/core';
+import SwiperCore, { Pagination, Navigation, Autoplay } from "swiper/core";
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
@@ -109,7 +109,7 @@ const ThumbnailImage = styled.img`
   object-fit: cover;
   height: 150px;
   filter: ${(p) =>
-    p.videoUrl === p.selectedVideoUrl ? 'grayscale(100%)' : 'grayscale(0%)'};
+    p.videoUrl === p.selectedVideoUrl ? "grayscale(100%)" : "grayscale(0%)"};
 
   @media ${QUERIES.mobileAndDown} {
     height: 60px;
@@ -180,7 +180,7 @@ const PaginationWrapper = styled.div`
   gap: 2rem;
   grid-template-columns: 2fr 3fr 2fr;
   align-items: center;
-  grid-template-areas: 'left-arrow cta right-arrow';
+  grid-template-areas: "left-arrow cta right-arrow";
   svg {
     width: 40px;
     height: 40px;
@@ -190,8 +190,8 @@ const PaginationWrapper = styled.div`
     margin: 2rem 0 0;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
-      'left-arrow right-arrow'
-      'cta cta';
+      "left-arrow right-arrow"
+      "cta cta";
   }
 `;
 
@@ -270,11 +270,11 @@ export default function SingleArtistPage({ data }) {
   );
   const [playing, setPlaying] = useState(false);
   const singleArtist = data.artist;
-  const bio = singleArtist.bio?.split('\n').map((p, i) => <p key={i}>{p}</p>);
+  const bio = singleArtist.bio?.split("\n").map((p, i) => <p key={i}>{p}</p>);
   const pressKitText = data.sanitySingleArtistPage.pressKitText;
   const spotifyArtistId = singleArtist.socialLinks?.spotify
-    ?.split('/')[4]
-    .split('?')[0];
+    ?.split("/")[4]
+    .split("?")[0];
   const embedUrl = `https://open.spotify.com/embed/artist/${spotifyArtistId}`;
   const { previous, next } = data;
 
@@ -285,13 +285,13 @@ export default function SingleArtistPage({ data }) {
 
   useEffect(() => {
     function handleKey(e) {
-      if (e.key === 's') {
+      if (e.key === "s") {
         changeVideo(e.target.dataset.videourl);
       }
     }
 
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
   return (
@@ -334,14 +334,14 @@ export default function SingleArtistPage({ data }) {
               ))}
           </Swiper>
         )}
-        <Fade delay={100} bottom distance='10px'>
+        <Fade delay={100} bottom distance="10px">
           <ArtistName>{singleArtist.name}</ArtistName>
         </Fade>
         <BodyGridWrapper>
-          <Fade bottom distance='5px'>
+          <Fade bottom distance="5px">
             <BioWrapper>{bio}</BioWrapper>
           </Fade>
-          <Fade delay={100} right distance='20px'>
+          <Fade delay={100} right distance="20px">
             <SocialBox
               singleArtist={singleArtist}
               pressKitText={pressKitText}
@@ -357,8 +357,8 @@ export default function SingleArtistPage({ data }) {
               selectedVideoUrl
             )}`}
             light={true}
-            width='100%'
-            height='460px'
+            width="100%"
+            height="460px"
             // TODO: Make it responsive
             pip={true}
             controls={true}
@@ -373,7 +373,7 @@ export default function SingleArtistPage({ data }) {
                 <div
                   key={video._key}
                   onClick={() => changeVideo(video.url)}
-                  role='button'
+                  role="button"
                   tabIndex={0}
                   data-videourl={video.url}
                 >
@@ -408,13 +408,13 @@ export default function SingleArtistPage({ data }) {
                 {data.sanitySingleArtistPage.spotifyHeadline}
               </SubHeadline>
               <iframe
-                title='Spotify Album Embed'
+                title="Spotify Album Embed"
                 src={embedUrl}
-                width='100%'
-                height='380'
-                frameBorder='0'
-                allowtransparency='true'
-                allow='encrypted-media'
+                width="100%"
+                height="380"
+                frameBorder="0"
+                allowtransparency="true"
+                allow="encrypted-media"
               ></iframe>
             </SpotifyPlayerWrapper>
           </>
